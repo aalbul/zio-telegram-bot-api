@@ -1,7 +1,7 @@
 package com.github.aalbul.zio.telegram.domain.command
 
-import com.github.aalbul.zio.telegram.domain.MessageEntity
 import com.github.aalbul.zio.telegram.domain.ParseModes.ParseMode
+import com.github.aalbul.zio.telegram.domain.{Markup, MessageEntity}
 import io.circe.generic.extras.ConfiguredJsonCodec
 
 object SendMessageRequest {
@@ -14,7 +14,8 @@ object SendMessageRequest {
     disableNotification = None,
     protectContent = None,
     replyToMessageId = None,
-    allowSendingWithoutReply = None
+    allowSendingWithoutReply = None,
+    replyMarkup = None
   )
 }
 
@@ -28,8 +29,8 @@ case class SendMessageRequest(
   disableNotification: Option[Boolean],
   protectContent: Option[Boolean],
   replyToMessageId: Option[Long],
-  allowSendingWithoutReply: Option[Boolean]
-  // replyMarkup: Option[] TODO: Solve
+  allowSendingWithoutReply: Option[Boolean],
+  replyMarkup: Option[Markup]
 ) {
   def withParseMode(parseMode: ParseMode): SendMessageRequest = copy(parseMode = Some(parseMode))
   def withEntities(entities: Seq[MessageEntity]): SendMessageRequest = copy(entities = Some(entities))
@@ -38,4 +39,5 @@ case class SendMessageRequest(
   def withProtectContent(protect: Boolean): SendMessageRequest = copy(protectContent = Some(protect))
   def withReplyToMessageId(id: Long): SendMessageRequest = copy(replyToMessageId = Some(id))
   def withAllowSendingWithoutReply(allow: Boolean): SendMessageRequest = copy(allowSendingWithoutReply = Some(allow))
+  def withReplyMarkup(markup: Markup): SendMessageRequest = copy(replyMarkup = Some(markup))
 }
