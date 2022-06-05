@@ -1,3 +1,6 @@
 package com.github.aalbul.zio.telegram.domain
 
-object VideoChatStarted
+import io.circe.generic.extras.ConfiguredJsonCodec
+
+@ConfiguredJsonCodec(decodeOnly = true)
+case class VideoChatStarted()

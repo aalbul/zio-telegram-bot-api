@@ -1,20 +1,8 @@
 package com.github.aalbul.zio.telegram.domain
 
-import com.pengrad.telegrambot.model.Location as LibLocation
+import io.circe.generic.extras.ConfiguredJsonCodec
 
-object Location {
-  implicit class LocationOps(location: LibLocation) {
-    def asScala: Location = Location(
-      longitude = location.longitude(),
-      latitude = location.latitude(),
-      horizontalAccuracy = Option(location.horizontalAccuracy()),
-      livePeriod = Option(location.livePeriod()),
-      heading = Option(location.heading()),
-      proximityAlertRadius = Option(location.proximityAlertRadius())
-    )
-  }
-}
-
+@ConfiguredJsonCodec(decodeOnly = true)
 case class Location(
   longitude: Float,
   latitude: Float,

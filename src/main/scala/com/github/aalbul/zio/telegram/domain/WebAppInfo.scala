@@ -1,11 +1,6 @@
 package com.github.aalbul.zio.telegram.domain
 
-import com.pengrad.telegrambot.model.WebAppInfo as LibWebAppInfo
+import io.circe.generic.extras.ConfiguredJsonCodec
 
-object WebAppInfo {
-  implicit class WebAppInfoOps(info: LibWebAppInfo) {
-    def asScala: WebAppInfo = WebAppInfo(url = info.url())
-  }
-}
-
+@ConfiguredJsonCodec
 case class WebAppInfo(url: String)

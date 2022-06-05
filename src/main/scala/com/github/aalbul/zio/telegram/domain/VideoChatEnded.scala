@@ -1,13 +1,8 @@
 package com.github.aalbul.zio.telegram.domain
 
-import com.pengrad.telegrambot.model.VideoChatEnded as LibVideoChatEnded
+import io.circe.generic.extras.ConfiguredJsonCodec
 
 import java.time.Duration
 
-object VideoChatEnded {
-  implicit class VideoChatEndedOps(ended: LibVideoChatEnded) {
-    def asScala: VideoChatEnded = VideoChatEnded(Duration.ofSeconds(ended.duration().toLong))
-  }
-}
-
+@ConfiguredJsonCodec(decodeOnly = true)
 case class VideoChatEnded(duration: Duration)

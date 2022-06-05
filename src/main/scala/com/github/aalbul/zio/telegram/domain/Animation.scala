@@ -1,24 +1,8 @@
 package com.github.aalbul.zio.telegram.domain
 
-import com.pengrad.telegrambot.model.Animation as LibAnimation
-import PhotoSize.PhotoSizeOps
+import io.circe.generic.extras.ConfiguredJsonCodec
 
-object Animation {
-  implicit class AnimationOps(animation: LibAnimation) {
-    def asScala: Animation = Animation(
-      fileId = animation.fileId(),
-      fileUniqueId = animation.fileUniqueId(),
-      width = animation.width(),
-      height = animation.height(),
-      duration = animation.duration(),
-      thumb = Option(animation.thumb()).map(_.asScala),
-      fileName = Option(animation.fileName()),
-      mimeType = Option(animation.mimeType()),
-      fileSize = Option(animation.fileSize())
-    )
-  }
-}
-
+@ConfiguredJsonCodec(decodeOnly = true)
 case class Animation(
   fileId: String,
   fileUniqueId: String,

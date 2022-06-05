@@ -1,11 +1,6 @@
 package com.github.aalbul.zio.telegram.domain
 
-import com.pengrad.telegrambot.model.WebAppData as LibWebAppData
+import io.circe.generic.extras.ConfiguredJsonCodec
 
-object WebAppData {
-  implicit class WebAppDataOps(data: LibWebAppData) {
-    def asScala: WebAppData = WebAppData(data = data.data(), buttonText = data.buttonText())
-  }
-}
-
+@ConfiguredJsonCodec(decodeOnly = true)
 case class WebAppData(data: String, buttonText: String)

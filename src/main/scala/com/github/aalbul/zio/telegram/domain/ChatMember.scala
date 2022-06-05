@@ -1,53 +1,26 @@
 package com.github.aalbul.zio.telegram.domain
 
-import com.github.aalbul.zio.telegram.domain.User.UserOps
-import com.pengrad.telegrambot.model.ChatMember as LibChatMember
+import cats.syntax.functor.*
+import io.circe.{Decoder, DecodingFailure, HCursor}
 
 object ChatMember {
-  implicit class ChatMemberOps(member: LibChatMember) {
-    def asScala: ChatMember = member.status() match {
-      case LibChatMember.Status.creator =>
-        ChatMemberOwner(
-          user = member.user().asScala,
-          isAnonymous = member.isAnonymous,
-          customTitle = Option(member.customTitle())
-        )
-      case LibChatMember.Status.administrator =>
-        ChatMemberAdministrator(
-          user = member.user().asScala,
-          canBeEdited = member.canBeEdited,
-          isAnonymous = member.isAnonymous,
-          canManageChat = member.canManageChat,
-          canDeleteMessages = member.canManageChat,
-          canManageVideoChats = member.canManageVideoChats,
-          canRestrictMembers = member.canRestrictMembers,
-          canPromoteMembers = member.canPromoteMembers,
-          canChangeInfo = member.canChangeInfo,
-          canInviteUsers = member.canInviteUsers,
-          canPostMessages = Option(member.canPostMessages),
-          canEditMessages = Option(member.canEditMessages),
-          canPinMessages = Option(member.canPinMessages),
-          customerTitle = Option(member.customTitle())
-        )
-      case LibChatMember.Status.member => ChatMemberMember(user = member.user().asScala)
-      case LibChatMember.Status.restricted =>
-        ChatMemberRestricted(
-          user = member.user().asScala,
-          isMember = member.isMember,
-          canChangeInfo = member.canChangeInfo,
-          canInviteUsers = member.canInviteUsers,
-          canPinMembers = member.canPinMessages,
-          canSendMessages = member.canSendMessages,
-          canSendMediaMessages = member.canSendMediaMessages,
-          canSendPolls = member.canSendPolls,
-          canSendOtherMessages = member.canSendOtherMessages,
-          canAddWebPagePreviews = member.canAddWebPagePreviews,
-          untilDate = member.untilDate()
-        )
-      case LibChatMember.Status.left   => ChatMemberLeft(user = member.user().asScala)
-      case LibChatMember.Status.kicked => ChatMemberBanned(user = member.user().asScala, untilDate = member.untilDate())
-    }
-  }
+  private val decoders: Map[String, Decoder[ChatMember]] = Map(
+    "creator" -> implicitly[Decoder[ChatMemberOwner]].widen,
+    "administrator" -> implicitly[Decoder[ChatMemberAdministrator]].widen,
+    "member" -> implicitly[Decoder[ChatMemberMember]].widen,
+    "restricted" -> implicitly[Decoder[ChatMemberRestricted]].widen,
+    "left" -> implicitly[Decoder[ChatMemberLeft]].widen,
+    "kicked" -> implicitly[Decoder[ChatMemberBanned]].widen
+  )
+
+  implicit val chatMemberDecoder: Decoder[ChatMember] = (cursor: HCursor) =>
+    for {
+      status <- cursor.downField("status").as[String]
+      decoder <- decoders
+        .get(status)
+        .toRight(DecodingFailure(s"No decoder for ChatMember with status `$status`", Nil))
+      result <- decoder.apply(cursor)
+    } yield result
 }
 
 trait ChatMember

@@ -1,23 +1,17 @@
 package com.github.aalbul.zio.telegram
 
-import com.github.aalbul.zio.telegram.domain.Update
-import com.pengrad.telegrambot.request.{AbstractSendRequest, SendMessage}
+import com.github.aalbul.zio.telegram.domain.command.{GetUpdatesRequest, SendMessageRequest}
+import com.github.aalbul.zio.telegram.domain.{Message, Update, User}
+import zio.Task
 import zio.stream.ZStream
-import zio.{Scope, Task, URLayer, ZIO, ZLayer}
 
 object Bot {
-  case class BotConfig(token: String, chunkSize: Int = 100, timeoutSeconds: Int = 180)
-
-  def forConfig(config: BotConfig): URLayer[Scope, Bot] =
-    ZLayer.fromZIO(ZIO.acquireRelease(ZIO.succeed(new JavaApiPoweredBot(config)))(_.shutdown.orDie))
+  case class BotConfig(token: String, chunkSize: Int = 100, timeoutSeconds: Int = 10)
 }
 
 trait Bot {
+  def getMe: Task[User]
+  def getUpdates(request: GetUpdatesRequest): Task[Seq[Update]]
   def stream: ZStream[Any, Throwable, Update]
-  def send[T <: AbstractSendRequest[T]](request: T): Task[Unit]
-  def sendMessageWith(chatId: Long, message: String)(customizer: SendMessage => SendMessage): Task[Unit] = send(
-    customizer(new SendMessage(chatId, message))
-  )
-  def sendMessage(chatId: Long, message: String): Task[Unit] = sendMessageWith(chatId, message)(identity)
-  def shutdown: Task[Unit]
+  def sendMessage(request: SendMessageRequest): Task[Message]
 }

@@ -1,23 +1,8 @@
 package com.github.aalbul.zio.telegram.domain
 
-import com.pengrad.telegrambot.model.User as LibUser
+import io.circe.generic.extras.ConfiguredJsonCodec
 
-object User {
-  implicit class UserOps(user: LibUser) {
-    def asScala: User = User(
-      id = user.id(),
-      isBot = user.isBot,
-      firstName = user.firstName(),
-      lastName = Option(user.lastName()),
-      username = Option(user.username()),
-      languageCode = Option(user.languageCode()),
-      canJoinGroups = Option(user.canJoinGroups()),
-      canReadAllGroupMessages = Option(user.canReadAllGroupMessages()),
-      supportsInlineQueries = Option(user.supportsInlineQueries())
-    )
-  }
-}
-
+@ConfiguredJsonCodec
 case class User(
   id: Long,
   isBot: Boolean,

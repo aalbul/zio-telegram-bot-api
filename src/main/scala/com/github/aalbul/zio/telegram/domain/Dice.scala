@@ -1,11 +1,6 @@
 package com.github.aalbul.zio.telegram.domain
 
-import com.pengrad.telegrambot.model.Dice as LibDice
+import io.circe.generic.extras.ConfiguredJsonCodec
 
-object Dice {
-  implicit class DiceOps(dice: LibDice) {
-    def asScala: Dice = Dice(emoji = dice.emoji(), value = dice.value())
-  }
-}
-
+@ConfiguredJsonCodec(decodeOnly = true)
 case class Dice(emoji: String, value: Int)

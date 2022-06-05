@@ -1,19 +1,8 @@
 package com.github.aalbul.zio.telegram.domain
 
-import com.pengrad.telegrambot.model.Contact as LibContact
+import io.circe.generic.extras.ConfiguredJsonCodec
 
-object Contact {
-  implicit class ContactOps(contact: LibContact) {
-    def asScala: Contact = Contact(
-      phoneNumber = contact.phoneNumber(),
-      firstName = contact.firstName(),
-      lastName = Option(contact.lastName()),
-      userId = Option(contact.userId()),
-      vcard = Option(contact.vcard())
-    )
-  }
-}
-
+@ConfiguredJsonCodec(decodeOnly = true)
 case class Contact(
   phoneNumber: String,
   firstName: String,

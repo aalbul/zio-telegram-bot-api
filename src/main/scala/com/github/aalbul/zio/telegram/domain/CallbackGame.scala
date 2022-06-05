@@ -1,3 +1,6 @@
 package com.github.aalbul.zio.telegram.domain
 
-object CallbackGame
+import io.circe.generic.extras.ConfiguredJsonCodec
+
+@ConfiguredJsonCodec
+case class CallbackGame()

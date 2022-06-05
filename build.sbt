@@ -2,8 +2,10 @@ import Dependencies._
 
 ThisBuild / scalaVersion     := "2.13.8"
 ThisBuild / version          := "0.1.0-SNAPSHOT"
-ThisBuild / organization     := "com.example"
-ThisBuild / organizationName := "example"
+ThisBuild / organization     := "org.nemesis"
+ThisBuild / organizationName := "zio-telegram-bot-api"
+
+ThisBuild / scalacOptions ++= Seq("-Ymacro-annotations")
 
 lazy val root = (project in file("."))
   .settings(
@@ -11,7 +13,10 @@ lazy val root = (project in file("."))
     libraryDependencies ++= Seq(
       zio,
       zioStreams,
-      telegramBotApi
+      circeGeneric,
+      circeParser,
+      circeGenericExtras,
+      sttpAsyncHttpZio
     ),
     scalacOptions ++= Seq("-Xsource:3")
   )

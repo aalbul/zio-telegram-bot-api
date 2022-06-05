@@ -1,19 +1,8 @@
 package com.github.aalbul.zio.telegram.domain
 
-import com.github.aalbul.zio.telegram.domain.ShippingAddress.ShippingAddressOps
-import com.pengrad.telegrambot.model.OrderInfo as LibOrderInfo
+import io.circe.generic.extras.ConfiguredJsonCodec
 
-object OrderInfo {
-  implicit class OrderInfoOps(orderInfo: LibOrderInfo) {
-    def asScala: OrderInfo = OrderInfo(
-      name = Option(orderInfo.name()),
-      phoneNumber = Option(orderInfo.phoneNumber()),
-      email = Option(orderInfo.email()),
-      shippingAddress = Option(orderInfo.shippingAddress()).map(_.asScala)
-    )
-  }
-}
-
+@ConfiguredJsonCodec(decodeOnly = true)
 case class OrderInfo(
   name: Option[String],
   phoneNumber: Option[String],

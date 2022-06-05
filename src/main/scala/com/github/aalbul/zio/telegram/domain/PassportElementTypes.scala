@@ -1,6 +1,10 @@
 package com.github.aalbul.zio.telegram.domain
 
+import io.circe.Decoder
+
 object PassportElementTypes extends Enumeration {
+  implicit val passportElementDecoder: Decoder[PassportElementType] = Decoder.decodeString.map(byName)
+
   type PassportElementType = Value
 
   private lazy val indexed = values

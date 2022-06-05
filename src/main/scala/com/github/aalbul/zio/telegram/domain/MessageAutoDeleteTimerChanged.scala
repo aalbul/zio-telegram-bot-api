@@ -1,11 +1,6 @@
 package com.github.aalbul.zio.telegram.domain
 
-import com.pengrad.telegrambot.model.MessageAutoDeleteTimerChanged as LibMessageAutoDeleteTimerChanged
+import io.circe.generic.extras.ConfiguredJsonCodec
 
-object MessageAutoDeleteTimerChanged {
-  implicit class MessageAutoDeleteTimerChangedOps(changed: LibMessageAutoDeleteTimerChanged) {
-    def asScala: MessageAutoDeleteTimerChanged = MessageAutoDeleteTimerChanged(changed.messageAutoDeleteTime())
-  }
-}
-
+@ConfiguredJsonCodec(decodeOnly = true)
 case class MessageAutoDeleteTimerChanged(messageAutoDeleteTime: Int)
