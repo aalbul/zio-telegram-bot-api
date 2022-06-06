@@ -2,17 +2,18 @@ package com.github.aalbul.zio.telegram.domain.command
 
 import cats.syntax.functor.*
 import io.circe.Decoder
-import io.circe.generic.semiauto.deriveDecoder
+import io.circe.generic.extras.ConfiguredJsonCodec
 
 object ApiResponse {
-  private val failureApiResponseDecoder: Decoder[ApiResponse[Nothing]] = deriveDecoder[FailureApiResponse].widen
-  private def successDecoder[T: Decoder]: Decoder[ApiResponse[T]] = deriveDecoder[SuccessApiResponse[T]].widen
 
   implicit def apiResponseDecoder[T: Decoder]: Decoder[ApiResponse[? <: T]] =
-    failureApiResponseDecoder.widen or successDecoder[T].widen
+    implicitly[Decoder[FailureApiResponse]].widen or implicitly[Decoder[SuccessApiResponse[T]]].widen
 }
 
 sealed trait ApiResponse[T]
 
+@ConfiguredJsonCodec(decodeOnly = true)
 case class FailureApiResponse(ok: Boolean, errorCode: Int, description: String) extends ApiResponse[Nothing]
+
+@ConfiguredJsonCodec(decodeOnly = true)
 case class SuccessApiResponse[T](result: T) extends ApiResponse[T]

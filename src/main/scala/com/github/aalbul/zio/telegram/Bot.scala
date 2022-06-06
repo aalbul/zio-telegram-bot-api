@@ -1,6 +1,6 @@
 package com.github.aalbul.zio.telegram
 
-import com.github.aalbul.zio.telegram.domain.command.{CopyMessageRequest, ForwardMessageRequest, GetUpdatesRequest, SendMessageRequest}
+import com.github.aalbul.zio.telegram.domain.command.{CopyMessageRequest, ForwardMessageRequest, GetUpdatesRequest, SendMessageRequest, SendPhotoRequest}
 import com.github.aalbul.zio.telegram.domain.{Message, MessageId, Update, User}
 import zio.Task
 import zio.stream.ZStream
@@ -16,4 +16,5 @@ trait Bot {
   def sendMessage(request: SendMessageRequest): Task[Message]
   def forwardMessage(request: ForwardMessageRequest): Task[Message]
   def copyMessage(request: CopyMessageRequest): Task[MessageId]
+  def sendPhoto(request: SendPhotoRequest): Task[Message]
 }
