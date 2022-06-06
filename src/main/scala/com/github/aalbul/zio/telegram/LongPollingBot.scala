@@ -1,8 +1,8 @@
 package com.github.aalbul.zio.telegram
 
 import com.github.aalbul.zio.telegram.Bot.BotConfig
-import com.github.aalbul.zio.telegram.LongPollingBot.{ApiCommandExecutionException, BotException, ToJsonOps}
-import com.github.aalbul.zio.telegram.domain.command.{ApiResponse, CopyMessageRequest, CopyMessageResponse, ForwardMessageRequest, GetMeResponse, GetUpdatesRequest, GetUpdatesResponse, MessageProductionResponse, SendMessageRequest}
+import com.github.aalbul.zio.telegram.LongPollingBot.{ApiCommandExecutionException, ToJsonOps}
+import com.github.aalbul.zio.telegram.domain.command.{ApiResponse, CopyMessageRequest, FailureApiResponse, ForwardMessageRequest, GetUpdatesRequest, SendMessageRequest, SuccessApiResponse}
 import com.github.aalbul.zio.telegram.domain.{Message, MessageId, Update, User}
 import io.circe.parser.*
 import io.circe.syntax.EncoderOps
@@ -27,7 +27,7 @@ object LongPollingBot {
 }
 
 class LongPollingBot(backend: SttpBackend[Task, ZioStreams], botConfig: BotConfig) extends Bot {
-  private def callApi[Response <: ApiResponse: Decoder](
+  private def callApi[Response: Decoder](
     command: String,
     bodyJson: Option[String] = None
   ): Task[Response] = for {
@@ -38,21 +38,26 @@ class LongPollingBot(backend: SttpBackend[Task, ZioStreams], botConfig: BotConfi
     )
     response <- backend.send(bodyJson.map(body => request.body(body)).getOrElse(request))
     bodyJson <- ZIO.succeed(response.body.fold(identity, identity))
-    response <- ZIO.fromEither(parse(bodyJson).flatMap(_.as[Response]))
-    _ <- ZIO
-      .fail(ApiCommandExecutionException(command, s"API returned NOK. Reason: ${response.description}"))
-      .unless(response.ok)
-  } yield response
+    response <- ZIO.fromEither(parse(bodyJson).flatMap(_.as[ApiResponse[? <: Response]]))
+    result <- response match {
+      case failure: FailureApiResponse =>
+        ZIO
+          .fail(
+            ApiCommandExecutionException(
+              command = command,
+              error = s"API returned NOK. Code: ${failure.errorCode}, reason: ${failure.description}"
+            )
+          )
+      case SuccessApiResponse(result) => ZIO.succeed(result)
+    }
+  } yield result
 
-  override def getMe: Task[User] = for {
-    response <- callApi[GetMeResponse](command = "getMe")
-    user <- ZIO.fromOption(response.result).orElseFail(BotException("Error getting information about the bot"))
-  } yield user
+  override def getMe: Task[User] = callApi[User](command = "getMe")
 
-  override def getUpdates(request: GetUpdatesRequest): Task[Seq[Update]] = callApi[GetUpdatesResponse](
+  override def getUpdates(request: GetUpdatesRequest): Task[Seq[Update]] = callApi[Seq[Update]](
     command = "getUpdates",
     bodyJson = Some(request.toJson)
-  ).map(_.result)
+  )
 
   override def stream: ZStream[Any, Throwable, Update] = ZStream.unfoldChunkZIO(0) { offset =>
     for {
@@ -61,27 +66,18 @@ class LongPollingBot(backend: SttpBackend[Task, ZioStreams], botConfig: BotConfi
     } yield Some(Chunk.fromIterable(updates), newOffset)
   }
 
-  override def sendMessage(request: SendMessageRequest): Task[Message] = for {
-    response <- callApi[MessageProductionResponse](
-      command = "sendMessage",
-      bodyJson = Some(request.toJson)
-    )
-    message <- ZIO.fromOption(response.result).orElseFail(BotException("Error sending message"))
-  } yield message
+  override def sendMessage(request: SendMessageRequest): Task[Message] = callApi[Message](
+    command = "sendMessage",
+    bodyJson = Some(request.toJson)
+  )
 
-  override def forwardMessage(request: ForwardMessageRequest): Task[Message] = for {
-    response <- callApi[MessageProductionResponse](
-      command = "forwardMessage",
-      bodyJson = Some(request.toJson)
-    )
-    message <- ZIO.fromOption(response.result).orElseFail(BotException("Error forwarding message"))
-  } yield message
+  override def forwardMessage(request: ForwardMessageRequest): Task[Message] = callApi[Message](
+    command = "forwardMessage",
+    bodyJson = Some(request.toJson)
+  )
 
-  override def copyMessage(request: CopyMessageRequest): Task[MessageId] = for {
-    response <- callApi[CopyMessageResponse](
-      command = "copyMessage",
-      bodyJson = Some(request.toJson)
-    )
-    messageId <- ZIO.fromOption(response.result).orElseFail(BotException("Error forwarding message"))
-  } yield messageId
+  override def copyMessage(request: CopyMessageRequest): Task[MessageId] = callApi[MessageId](
+    command = "copyMessage",
+    bodyJson = Some(request.toJson)
+  )
 }
