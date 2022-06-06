@@ -2,7 +2,7 @@ package com.github.aalbul.zio.telegram
 
 import com.github.aalbul.zio.telegram.Bot.BotConfig
 import com.github.aalbul.zio.telegram.LongPollingBot.*
-import com.github.aalbul.zio.telegram.domain.command.{ApiResponse, CopyMessageRequest, FailureApiResponse, FileDescriptor, ForwardMessageRequest, GetUpdatesRequest, IdFileDescriptor, PathBasedFileDescriptor, SendMessageRequest, SendPhotoRequest, SuccessApiResponse, UrlFileDescriptor}
+import com.github.aalbul.zio.telegram.domain.command.{ApiResponse, CopyMessageRequest, FailureApiResponse, FileDescriptor, ForwardMessageRequest, GetUpdatesRequest, IdFileDescriptor, PathBasedFileDescriptor, SendAudioRequest, SendMessageRequest, SendPhotoRequest, SuccessApiResponse, UrlFileDescriptor}
 import com.github.aalbul.zio.telegram.domain.{Message, MessageId, Update, User}
 import io.circe.parser.*
 import io.circe.syntax.EncoderOps
@@ -106,6 +106,26 @@ class LongPollingBot(backend: SttpBackend[Task, ZioStreams], botConfig: BotConfi
       request.caption.map(multipart("caption", _)),
       request.parseMode.map(mode => multipart("parse_mode", mode.toString)),
       request.captionEntities.map(entities => multipart("caption_entities", JsonBody(entities).toJson)),
+      request.disableNotification.map(disable => multipart("disable_notification", disable.toString)),
+      request.protectContent.map(protect => multipart("protect_content", protect.toString)),
+      request.replyToMessageId.map(id => multipart("reply_to_message_id", id.toString)),
+      request.allowSendingWithoutReply.map(allow => multipart("allow_sending_without_reply", allow.toString)),
+      request.replyMarkup.map(markup => multipart("reply_markup", JsonBody(markup).toJson))
+    )
+  )
+
+  override def sendAudio(request: SendAudioRequest): Task[Message] = callApi[Message](
+    command = "sendAudio",
+    body = MultipartBody.of(
+      Some(multipart("chat_id", request.chatId)),
+      request.audio.asMultipart("audio"),
+      request.caption.map(multipart("caption", _)),
+      request.parseMode.map(mode => multipart("parse_mode", mode.toString)),
+      request.captionEntities.map(entities => multipart("caption_entities", JsonBody(entities).toJson)),
+      request.duration.map(duration => multipart("duration", duration.toString)),
+      request.performer.map(performer => multipart("performer", performer)),
+      request.title.map(title => multipart("title", title)),
+      request.thumb.flatMap(_.asMultipart("thumb")),
       request.disableNotification.map(disable => multipart("disable_notification", disable.toString)),
       request.protectContent.map(protect => multipart("protect_content", protect.toString)),
       request.replyToMessageId.map(id => multipart("reply_to_message_id", id.toString)),
