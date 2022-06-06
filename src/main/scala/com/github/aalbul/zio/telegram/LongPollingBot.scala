@@ -2,7 +2,7 @@ package com.github.aalbul.zio.telegram
 
 import com.github.aalbul.zio.telegram.Bot.BotConfig
 import com.github.aalbul.zio.telegram.LongPollingBot.{ApiCommandExecutionException, BotException, ToJsonOps}
-import com.github.aalbul.zio.telegram.domain.command.{ApiResponse, CopyMessageResponse, ForwardMessageRequest, GetMeResponse, GetUpdatesRequest, GetUpdatesResponse, MessageProductionResponse, SendMessageRequest}
+import com.github.aalbul.zio.telegram.domain.command.{ApiResponse, CopyMessageRequest, CopyMessageResponse, ForwardMessageRequest, GetMeResponse, GetUpdatesRequest, GetUpdatesResponse, MessageProductionResponse, SendMessageRequest}
 import com.github.aalbul.zio.telegram.domain.{Message, MessageId, Update, User}
 import io.circe.parser.*
 import io.circe.syntax.EncoderOps
@@ -77,7 +77,7 @@ class LongPollingBot(backend: SttpBackend[Task, ZioStreams], botConfig: BotConfi
     message <- ZIO.fromOption(response.result).orElseFail(BotException("Error forwarding message"))
   } yield message
 
-  override def copyMessage(request: ForwardMessageRequest): Task[MessageId] = for {
+  override def copyMessage(request: CopyMessageRequest): Task[MessageId] = for {
     response <- callApi[CopyMessageResponse](
       command = "copyMessage",
       bodyJson = Some(request.toJson)
