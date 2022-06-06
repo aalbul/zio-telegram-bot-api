@@ -2,8 +2,8 @@ package com.github.aalbul.zio.telegram
 
 import com.github.aalbul.zio.telegram.Bot.BotConfig
 import com.github.aalbul.zio.telegram.LongPollingBot.{ApiCommandExecutionException, BotException, ToJsonOps}
-import com.github.aalbul.zio.telegram.domain.command.{GetMeResponse, GetUpdatesRequest, GetUpdatesResponse, SendMessageRequest, SendMessageResponse}
-import com.github.aalbul.zio.telegram.domain.{ApiResponse, Message, Update, User}
+import com.github.aalbul.zio.telegram.domain.command.{ApiResponse, CopyMessageResponse, ForwardMessageRequest, GetMeResponse, GetUpdatesRequest, GetUpdatesResponse, MessageProductionResponse, SendMessageRequest}
+import com.github.aalbul.zio.telegram.domain.{Message, MessageId, Update, User}
 import io.circe.parser.*
 import io.circe.syntax.EncoderOps
 import io.circe.{Decoder, Encoder, Printer}
@@ -62,10 +62,26 @@ class LongPollingBot(backend: SttpBackend[Task, ZioStreams], botConfig: BotConfi
   }
 
   override def sendMessage(request: SendMessageRequest): Task[Message] = for {
-    response <- callApi[SendMessageResponse](
+    response <- callApi[MessageProductionResponse](
       command = "sendMessage",
       bodyJson = Some(request.toJson)
     )
     message <- ZIO.fromOption(response.result).orElseFail(BotException("Error sending message"))
   } yield message
+
+  override def forwardMessage(request: ForwardMessageRequest): Task[Message] = for {
+    response <- callApi[MessageProductionResponse](
+      command = "forwardMessage",
+      bodyJson = Some(request.toJson)
+    )
+    message <- ZIO.fromOption(response.result).orElseFail(BotException("Error forwarding message"))
+  } yield message
+
+  override def copyMessage(request: ForwardMessageRequest): Task[MessageId] = for {
+    response <- callApi[CopyMessageResponse](
+      command = "copyMessage",
+      bodyJson = Some(request.toJson)
+    )
+    messageId <- ZIO.fromOption(response.result).orElseFail(BotException("Error forwarding message"))
+  } yield messageId
 }

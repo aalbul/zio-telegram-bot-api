@@ -1,6 +1,6 @@
 package com.github.aalbul.zio.telegram.domain.command
 
-import com.github.aalbul.zio.telegram.domain.{ApiResponse, User}
+import com.github.aalbul.zio.telegram.domain.User
 import io.circe.generic.extras.ConfiguredJsonCodec
 
 @ConfiguredJsonCodec(decodeOnly = true)

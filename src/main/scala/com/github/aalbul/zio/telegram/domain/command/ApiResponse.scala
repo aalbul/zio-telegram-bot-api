@@ -1,4 +1,4 @@
-package com.github.aalbul.zio.telegram.domain
+package com.github.aalbul.zio.telegram.domain.command
 
 trait ApiResponse {
   val ok: Boolean
