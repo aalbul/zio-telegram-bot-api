@@ -1,6 +1,6 @@
 package com.github.aalbul.zio.telegram.command
 
-import com.github.aalbul.zio.telegram.command.GetUpdates.GetUpdatesRequest
+import com.github.aalbul.zio.telegram.command.GetUpdates.GetUpdatesPayload
 import com.github.aalbul.zio.telegram.domain.Update
 import io.circe.generic.extras.ConfiguredJsonCodec
 
@@ -8,7 +8,7 @@ import java.time.Duration
 
 object GetUpdates {
   @ConfiguredJsonCodec(encodeOnly = true)
-  case class GetUpdatesRequest(
+  case class GetUpdatesPayload(
     offset: Option[Long],
     limit: Option[Long],
     timeout: Option[Long],
@@ -16,7 +16,7 @@ object GetUpdates {
   )
 
   def apply(): GetUpdates = GetUpdates(
-    GetUpdatesRequest(
+    GetUpdatesPayload(
       offset = None,
       limit = None,
       timeout = None,
@@ -25,13 +25,13 @@ object GetUpdates {
   )
 }
 
-case class GetUpdates(request: GetUpdatesRequest) extends Command[Seq[Update]] {
+case class GetUpdates(payload: GetUpdatesPayload) extends Command[Seq[Update]] {
   override val name: String = "getUpdates"
-  override def parameters: ApiParameters = JsonBody(request)
+  override def parameters: ApiParameters = JsonBody(payload)
 
-  def withOffset(offset: Long): GetUpdates = copy(request = request.copy(offset = Some(offset)))
-  def withLimit(limit: Long): GetUpdates = copy(request = request.copy(limit = Some(limit)))
-  def withTimeout(duration: Duration): GetUpdates = copy(request = request.copy(timeout = Some(duration.toSeconds)))
+  def withOffset(offset: Long): GetUpdates = copy(payload = payload.copy(offset = Some(offset)))
+  def withLimit(limit: Long): GetUpdates = copy(payload = payload.copy(limit = Some(limit)))
+  def withTimeout(duration: Duration): GetUpdates = copy(payload = payload.copy(timeout = Some(duration.toSeconds)))
   def withAllowedUpdates(updateTypes: Set[String]): GetUpdates =
-    copy(request = request.copy(allowedUpdates = Some(updateTypes)))
+    copy(payload = payload.copy(allowedUpdates = Some(updateTypes)))
 }

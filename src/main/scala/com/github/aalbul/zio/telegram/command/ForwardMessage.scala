@@ -1,12 +1,12 @@
 package com.github.aalbul.zio.telegram.command
 
-import com.github.aalbul.zio.telegram.command.ForwardMessage.ForwardMessageRequest
+import com.github.aalbul.zio.telegram.command.ForwardMessage.ForwardMessagePayload
 import com.github.aalbul.zio.telegram.domain.Message
 import io.circe.generic.extras.ConfiguredJsonCodec
 
 object ForwardMessage {
   @ConfiguredJsonCodec(encodeOnly = true)
-  case class ForwardMessageRequest(
+  case class ForwardMessagePayload(
     chatId: String,
     fromChatId: String,
     messageId: Long,
@@ -15,7 +15,7 @@ object ForwardMessage {
   )
 
   def of(messageId: Long, fromChatId: String, toChatId: String): ForwardMessage = ForwardMessage(
-    ForwardMessageRequest(
+    ForwardMessagePayload(
       chatId = toChatId,
       fromChatId = fromChatId,
       messageId = messageId,
@@ -25,12 +25,12 @@ object ForwardMessage {
   )
 }
 
-case class ForwardMessage(request: ForwardMessageRequest) extends Command[Message] {
+case class ForwardMessage(payload: ForwardMessagePayload) extends Command[Message] {
   override val name: String = "forwardMessage"
-  override def parameters: ApiParameters = JsonBody(request)
+  override def parameters: ApiParameters = JsonBody(payload)
 
   def withDisableNotification(disable: Boolean): ForwardMessage = copy(
-    request.copy(disableNotification = Some(disable))
+    payload.copy(disableNotification = Some(disable))
   )
-  def withProtectContent(protect: Boolean): ForwardMessage = copy(request.copy(protectContent = Some(protect)))
+  def withProtectContent(protect: Boolean): ForwardMessage = copy(payload.copy(protectContent = Some(protect)))
 }

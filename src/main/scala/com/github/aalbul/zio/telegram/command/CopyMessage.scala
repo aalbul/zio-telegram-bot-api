@@ -1,13 +1,13 @@
 package com.github.aalbul.zio.telegram.command
 
-import com.github.aalbul.zio.telegram.command.CopyMessage.CopyMessageRequest
+import com.github.aalbul.zio.telegram.command.CopyMessage.CopyMessagePayload
 import com.github.aalbul.zio.telegram.domain.ParseModes.ParseMode
 import com.github.aalbul.zio.telegram.domain.{Markup, MessageEntity, MessageId}
 import io.circe.generic.extras.ConfiguredJsonCodec
 
 object CopyMessage {
   @ConfiguredJsonCodec(encodeOnly = true)
-  case class CopyMessageRequest(
+  case class CopyMessagePayload(
     chatId: String,
     fromChatId: String,
     messageId: String,
@@ -22,7 +22,7 @@ object CopyMessage {
   )
 
   def of(chatId: String, fromChatId: String, messageId: String): CopyMessage = CopyMessage(
-    CopyMessageRequest(
+    CopyMessagePayload(
       chatId = chatId,
       fromChatId = fromChatId,
       messageId = messageId,
@@ -38,20 +38,20 @@ object CopyMessage {
   )
 }
 
-case class CopyMessage(request: CopyMessageRequest) extends Command[MessageId] {
+case class CopyMessage(payload: CopyMessagePayload) extends Command[MessageId] {
   override val name: String = "copyMessage"
-  override def parameters: ApiParameters = JsonBody(request)
+  override def parameters: ApiParameters = JsonBody(payload)
 
-  def withCaption(caption: String): CopyMessage = copy(request.copy(caption = Some(caption)))
-  def withParseMode(parseMode: ParseMode): CopyMessage = copy(request.copy(parseMode = Some(parseMode)))
+  def withCaption(caption: String): CopyMessage = copy(payload.copy(caption = Some(caption)))
+  def withParseMode(parseMode: ParseMode): CopyMessage = copy(payload.copy(parseMode = Some(parseMode)))
   def withCaptionEntities(entities: Seq[MessageEntity]): CopyMessage = copy(
-    request.copy(captionEntities = Some(entities))
+    payload.copy(captionEntities = Some(entities))
   )
-  def withDisableNotification(disable: Boolean): CopyMessage = copy(request.copy(disableNotification = Some(disable)))
-  def withProtectContent(protect: Boolean): CopyMessage = copy(request.copy(protectContent = Some(protect)))
-  def withReplyToMessageId(id: Long): CopyMessage = copy(request.copy(replyToMessageId = Some(id)))
+  def withDisableNotification(disable: Boolean): CopyMessage = copy(payload.copy(disableNotification = Some(disable)))
+  def withProtectContent(protect: Boolean): CopyMessage = copy(payload.copy(protectContent = Some(protect)))
+  def withReplyToMessageId(id: Long): CopyMessage = copy(payload.copy(replyToMessageId = Some(id)))
   def withAllowSendingWithoutReply(allow: Boolean): CopyMessage = copy(
-    request.copy(allowSendingWithoutReply = Some(allow))
+    payload.copy(allowSendingWithoutReply = Some(allow))
   )
-  def withReplyMarkup(markup: Markup): CopyMessage = copy(request.copy(replyMarkup = Some(markup)))
+  def withReplyMarkup(markup: Markup): CopyMessage = copy(payload.copy(replyMarkup = Some(markup)))
 }
