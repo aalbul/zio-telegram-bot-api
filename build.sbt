@@ -5,7 +5,7 @@ ThisBuild / version          := "0.1.0-SNAPSHOT"
 ThisBuild / organization     := "org.nemesis"
 ThisBuild / organizationName := "zio-telegram-bot-api"
 
-ThisBuild / scalacOptions ++= Seq("-Ymacro-annotations")
+ThisBuild / scalacOptions ++= Seq("-Ymacro-annotations", "-deprecation", "-unchecked")
 
 lazy val root = (project in file("."))
   .settings(
