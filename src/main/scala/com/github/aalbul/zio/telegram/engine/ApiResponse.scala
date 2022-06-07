@@ -1,4 +1,4 @@
-package com.github.aalbul.zio.telegram.domain.command
+package com.github.aalbul.zio.telegram.engine
 
 import cats.syntax.functor.*
 import io.circe.Decoder
