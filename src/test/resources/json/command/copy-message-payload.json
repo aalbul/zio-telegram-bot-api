@@ -1,0 +1,36 @@
+{
+  "chat_id": "12554",
+  "from_chat_id": "5578",
+  "message_id": "14339",
+  "caption": "Copied message",
+  "parse_mode": "Markdown",
+  "caption_entities": [
+    {
+      "type": "pre",
+      "offset": 10,
+      "length": 500,
+      "url": "https://someurl.com",
+      "user": {
+        "id": 1,
+        "is_bot": false,
+        "first_name": "John",
+        "last_name": "Wane",
+        "username": "jwane",
+        "language_code": "en",
+        "can_join_groups": true,
+        "can_read_all_group_messages": true,
+        "supports_inline_queries": false
+      },
+      "language": "js"
+    }
+  ],
+  "disable_notification": true,
+  "protect_content": false,
+  "reply_to_message_id": 20,
+  "allow_sending_without_reply": true,
+  "reply_markup": {
+    "force_reply": true,
+    "input_field_placeholder": "some text",
+    "selective": true
+  }
+}
