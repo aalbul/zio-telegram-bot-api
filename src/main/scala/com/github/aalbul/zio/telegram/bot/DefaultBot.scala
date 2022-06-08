@@ -1,6 +1,6 @@
 package com.github.aalbul.zio.telegram.bot
 
-import com.github.aalbul.zio.telegram.command.{CopyMessage, FileDescriptor, ForwardMessage, GetMe, SendAudio, SendDocument, SendMessage, SendPhoto, SendVideo}
+import com.github.aalbul.zio.telegram.command.*
 import zio.{ULayer, ZLayer}
 
 object DefaultBot {
@@ -18,4 +18,6 @@ class DefaultBot extends Bot {
   override def sendAudio(chatId: String, audio: FileDescriptor): SendAudio = SendAudio.of(chatId, audio)
   override def sendDocument(chatId: String, document: FileDescriptor): SendDocument = SendDocument.of(chatId, document)
   override def sendVideo(chatId: String, video: FileDescriptor): SendVideo = SendVideo.of(chatId, video)
+  override def sendAnimation(chatId: String, animation: FileDescriptor): SendAnimation =
+    SendAnimation.of(chatId, animation)
 }

@@ -1,6 +1,6 @@
 package com.github.aalbul.zio.telegram.bot
 
-import com.github.aalbul.zio.telegram.command.{CopyMessage, FileDescriptor, ForwardMessage, GetMe, SendAudio, SendDocument, SendMessage, SendPhoto, SendVideo}
+import com.github.aalbul.zio.telegram.command.*
 
 trait Bot {
   def getMe: GetMe
@@ -11,4 +11,5 @@ trait Bot {
   def sendAudio(chatId: String, audio: FileDescriptor): SendAudio
   def sendDocument(chatId: String, document: FileDescriptor): SendDocument
   def sendVideo(chatId: String, video: FileDescriptor): SendVideo
+  def sendAnimation(chatId: String, animation: FileDescriptor): SendAnimation
 }
