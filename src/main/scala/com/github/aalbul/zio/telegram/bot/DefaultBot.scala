@@ -4,7 +4,7 @@ import com.github.aalbul.zio.telegram.command.*
 import zio.{ULayer, ZLayer}
 
 object DefaultBot {
-  def layer: ULayer[Bot] = ZLayer.succeed(new DefaultBot)
+  val layer: ULayer[Bot] = ZLayer.succeed(new DefaultBot)
 }
 
 class DefaultBot extends Bot {
