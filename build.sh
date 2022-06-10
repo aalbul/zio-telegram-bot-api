@@ -1,0 +1,1 @@
+sbt scalafmtCheck compile test

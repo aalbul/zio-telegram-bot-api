@@ -5,6 +5,7 @@ import com.github.aalbul.zio.telegram.domain.Update
 import io.circe.generic.extras.ConfiguredJsonCodec
 
 import java.time.Duration
+import java.time.temporal.ChronoUnit.SECONDS
 
 object GetUpdates {
   @ConfiguredJsonCodec(encodeOnly = true)
@@ -31,7 +32,7 @@ case class GetUpdates(payload: GetUpdatesPayload) extends Command[Seq[Update]] {
 
   def withOffset(offset: Long): GetUpdates = copy(payload = payload.copy(offset = Some(offset)))
   def withLimit(limit: Long): GetUpdates = copy(payload = payload.copy(limit = Some(limit)))
-  def withTimeout(duration: Duration): GetUpdates = copy(payload = payload.copy(timeout = Some(duration.toSeconds)))
+  def withTimeout(duration: Duration): GetUpdates = copy(payload = payload.copy(timeout = Some(duration.get(SECONDS))))
   def withAllowedUpdates(updateTypes: Set[String]): GetUpdates =
     copy(payload = payload.copy(allowedUpdates = Some(updateTypes)))
 }

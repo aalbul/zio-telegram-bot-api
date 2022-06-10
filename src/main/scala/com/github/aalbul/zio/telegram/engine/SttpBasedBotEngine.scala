@@ -5,12 +5,12 @@ import com.github.aalbul.zio.telegram.engine.BotEngine.ApiCommandExecutionExcept
 import io.circe.Decoder
 import io.circe.parser.parse
 import sttp.capabilities.zio.ZioStreams
-import sttp.client3.{Identity, RequestT, SttpBackend, UriContext, basicRequest, multipart, multipartFile}
+import sttp.client3.{basicRequest, multipart, multipartFile, Identity, RequestT, SttpBackend, UriContext}
 import sttp.model.MediaType
 import zio.{Task, URLayer, ZIO, ZLayer}
 
 object SttpBasedBotEngine {
-  val layer: URLayer[SttpBackend[Task, ZioStreams] with BotConfig, BotEngine] =
+  val layer: URLayer[SttpBackend[Task, ZioStreams] & BotConfig, BotEngine] =
     ZLayer.fromFunction(new SttpBasedBotEngine(_, _))
 }
 
