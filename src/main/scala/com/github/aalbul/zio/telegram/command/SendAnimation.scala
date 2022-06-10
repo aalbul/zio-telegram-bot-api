@@ -41,7 +41,7 @@ case class SendAnimation(
 ) extends Command[Message] {
   override val name: String = "sendAnimation"
 
-  override def parameters: ApiParameters = MultipartBody.of(
+  override def parameters: ApiParameters = MultipartBody.ofOpt(
     Some(stringPart("chat_id", chatId)),
     Some(animation.asMultipart("animation")),
     duration.map(stringPart("duration", _)),

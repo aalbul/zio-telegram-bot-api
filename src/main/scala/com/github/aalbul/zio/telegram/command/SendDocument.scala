@@ -37,7 +37,7 @@ case class SendDocument(
 ) extends Command[Message] {
   override val name: String = "sendDocument"
 
-  override def parameters: ApiParameters = MultipartBody.of(
+  override def parameters: ApiParameters = MultipartBody.ofOpt(
     Some(stringPart("chat_id", chatId)),
     Some(document.asMultipart("document")),
     thumb.map(_.asMultipart("thumb")),

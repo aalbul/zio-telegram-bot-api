@@ -33,7 +33,7 @@ case class SendPhoto(
 ) extends Command[Message] {
   override val name: String = "sendPhoto"
 
-  override def parameters: ApiParameters = MultipartBody.of(
+  override def parameters: ApiParameters = MultipartBody.ofOpt(
     Some(stringPart("chat_id", chatId)),
     Some(photo.asMultipart("photo")),
     caption.map(stringPart("caption", _)),

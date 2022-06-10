@@ -41,7 +41,7 @@ case class SendAudio(
 ) extends Command[Message] {
   override val name: String = "sendAudio"
 
-  override def parameters: ApiParameters = MultipartBody.of(
+  override def parameters: ApiParameters = MultipartBody.ofOpt(
     Some(stringPart("chat_id", chatId)),
     Some(audio.asMultipart("audio")),
     caption.map(stringPart("caption", _)),

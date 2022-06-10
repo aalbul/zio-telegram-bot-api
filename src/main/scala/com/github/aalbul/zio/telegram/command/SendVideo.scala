@@ -42,7 +42,7 @@ case class SendVideo(
   replyMarkup: Option[Markup]
 ) extends Command[Message] {
   override val name: String = "sendVideo"
-  override def parameters: ApiParameters = MultipartBody.of(
+  override def parameters: ApiParameters = MultipartBody.ofOpt(
     Some(stringPart("chat_id", chatId)),
     Some(video.asMultipart("video")),
     duration.map(stringPart("duration", _)),
