@@ -1,13 +1,13 @@
 package com.github.aalbul.zio.telegram.command
 
-import com.github.aalbul.zio.telegram.command.SendMessage.SendMessageRequest
+import com.github.aalbul.zio.telegram.command.SendMessage.SendMessagePayload
 import com.github.aalbul.zio.telegram.domain.ParseModes.ParseMode
 import com.github.aalbul.zio.telegram.domain.{Markup, Message, MessageEntity}
 import io.circe.generic.extras.ConfiguredJsonCodec
 
 object SendMessage {
   @ConfiguredJsonCodec(encodeOnly = true)
-  case class SendMessageRequest(
+  case class SendMessagePayload(
     chatId: String,
     text: String,
     parseMode: Option[ParseMode],
@@ -21,7 +21,7 @@ object SendMessage {
   )
 
   def of(chatId: String, text: String): SendMessage = SendMessage(
-    SendMessageRequest(
+    SendMessagePayload(
       chatId = chatId,
       text = text,
       parseMode = None,
@@ -36,20 +36,21 @@ object SendMessage {
   )
 }
 
-case class SendMessage(request: SendMessageRequest) extends Command[Message] {
+case class SendMessage(payload: SendMessagePayload) extends Command[Message] {
   override val name: String = "sendMessage"
-  override def parameters: ApiParameters = JsonBody(request)
 
-  def withParseMode(parseMode: ParseMode): SendMessage = copy(request.copy(parseMode = Some(parseMode)))
-  def withEntities(entities: Seq[MessageEntity]): SendMessage = copy(request.copy(entities = Some(entities)))
+  override def parameters: ApiParameters = JsonBody(payload)
+
+  def withParseMode(parseMode: ParseMode): SendMessage = copy(payload.copy(parseMode = Some(parseMode)))
+  def withEntities(entities: Seq[MessageEntity]): SendMessage = copy(payload.copy(entities = Some(entities)))
   def withDisableWebPagePreview(disable: Boolean): SendMessage = copy(
-    request.copy(disableWebPagePreview = Some(disable))
+    payload.copy(disableWebPagePreview = Some(disable))
   )
-  def withDisableNotification(disable: Boolean): SendMessage = copy(request.copy(disableNotification = Some(disable)))
-  def withProtectContent(protect: Boolean): SendMessage = copy(request.copy(protectContent = Some(protect)))
-  def withReplyToMessageId(id: Long): SendMessage = copy(request.copy(replyToMessageId = Some(id)))
+  def withDisableNotification(disable: Boolean): SendMessage = copy(payload.copy(disableNotification = Some(disable)))
+  def withProtectContent(protect: Boolean): SendMessage = copy(payload.copy(protectContent = Some(protect)))
+  def withReplyToMessageId(id: Long): SendMessage = copy(payload.copy(replyToMessageId = Some(id)))
   def withAllowSendingWithoutReply(allow: Boolean): SendMessage = copy(
-    request.copy(allowSendingWithoutReply = Some(allow))
+    payload.copy(allowSendingWithoutReply = Some(allow))
   )
-  def withReplyMarkup(markup: Markup): SendMessage = copy(request.copy(replyMarkup = Some(markup)))
+  def withReplyMarkup(markup: Markup): SendMessage = copy(payload.copy(replyMarkup = Some(markup)))
 }

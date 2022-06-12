@@ -1,0 +1,35 @@
+{
+  "chat_id": "331",
+  "text": "hello world",
+  "parse_mode": "MarkdownV2",
+  "entities": [
+    {
+      "type": "pre",
+      "offset": 10,
+      "length": 500,
+      "url": "https://someurl.com",
+      "user": {
+        "id": 1,
+        "is_bot": false,
+        "first_name": "John",
+        "last_name": "Wane",
+        "username": "jwane",
+        "language_code": "en",
+        "can_join_groups": true,
+        "can_read_all_group_messages": true,
+        "supports_inline_queries": false
+      },
+      "language": "js"
+    }
+  ],
+  "disable_web_page_preview": true,
+  "disable_notification": false,
+  "protect_content": true,
+  "reply_to_message_id": 811,
+  "allow_sending_without_reply": false,
+  "reply_markup": {
+    "force_reply": true,
+    "input_field_placeholder": "some text",
+    "selective": true
+  }
+}

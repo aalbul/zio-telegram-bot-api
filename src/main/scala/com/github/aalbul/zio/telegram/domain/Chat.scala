@@ -3,6 +3,31 @@ package com.github.aalbul.zio.telegram.domain
 import com.github.aalbul.zio.telegram.domain.ChatTypes.ChatType
 import io.circe.generic.extras.ConfiguredJsonCodec
 
+object Chat {
+  def of(id: Long, `type`: ChatType): Chat = Chat(
+    id = id,
+    `type` = `type`,
+    title = None,
+    username = None,
+    firstName = None,
+    lastName = None,
+    photo = None,
+    bio = None,
+    hasPrivateForwards = None,
+    description = None,
+    inviteLink = None,
+    pinnedMessage = None,
+    permissions = None,
+    slowModeDelay = None,
+    messageAutoDeleteTime = None,
+    hasProtectedContent = None,
+    stickerSetName = None,
+    canSetStickerSet = None,
+    linkedChatId = None,
+    location = None
+  )
+}
+
 @ConfiguredJsonCodec(decodeOnly = true)
 case class Chat(
   id: Long,
