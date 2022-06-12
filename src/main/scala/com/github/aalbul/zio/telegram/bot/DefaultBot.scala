@@ -20,4 +20,5 @@ class DefaultBot extends Bot {
   override def sendVideo(chatId: String, video: FileDescriptor): SendVideo = SendVideo.of(chatId, video)
   override def sendAnimation(chatId: String, animation: FileDescriptor): SendAnimation =
     SendAnimation.of(chatId, animation)
+  override def sendVoice(chatId: String, voice: FileDescriptor): SendVoice = SendVoice.of(chatId, voice)
 }
