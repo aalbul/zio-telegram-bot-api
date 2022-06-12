@@ -13,4 +13,5 @@ trait Bot {
   def sendVideo(chatId: String, video: FileDescriptor): SendVideo
   def sendAnimation(chatId: String, animation: FileDescriptor): SendAnimation
   def sendVoice(chatId: String, voice: FileDescriptor): SendVoice
+  def sendVideoNote(chatId: String, voiceNote: FileDescriptor): SendVideoNote
 }
