@@ -28,4 +28,6 @@ class DefaultBot extends Bot {
   override def sendVideoNote(chatId: String, voiceNote: FileDescriptor): SendVideoNote =
     SendVideoNote.of(chatId, voiceNote)
   override def sendMediaGroup(chatId: String, media: Seq[InputMedia]): SendMediaGroup = SendMediaGroup.of(chatId, media)
+  override def sendLocation(chatId: String, latitude: Double, longitude: Double): SendLocation =
+    SendLocation.of(chatId, latitude, longitude)
 }

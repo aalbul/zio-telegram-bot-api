@@ -19,4 +19,5 @@ trait Bot {
   def sendVoice(chatId: String, voice: FileDescriptor): SendVoice
   def sendVideoNote(chatId: String, voiceNote: FileDescriptor): SendVideoNote
   def sendMediaGroup(chatId: String, media: Seq[InputMedia]): SendMediaGroup
+  def sendLocation(chatId: String, latitude: Double, longitude: Double): SendLocation
 }
