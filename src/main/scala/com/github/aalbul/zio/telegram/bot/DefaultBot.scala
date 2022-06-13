@@ -1,6 +1,9 @@
 package com.github.aalbul.zio.telegram.bot
 
 import com.github.aalbul.zio.telegram.command.*
+import com.github.aalbul.zio.telegram.domain.{InputMedia, Update}
+import com.github.aalbul.zio.telegram.engine.BotEngine
+import zio.stream.ZStream
 import zio.{ULayer, ZLayer}
 
 object DefaultBot {
@@ -9,6 +12,7 @@ object DefaultBot {
 
 class DefaultBot extends Bot {
   override def getMe: GetMe = new GetMe
+  override def streamUpdates(chunkSize: Long = 100L): ZStream[BotEngine, Throwable, Update] = StreamUpdates(chunkSize)
   override def sendMessage(chatId: String, text: String): SendMessage = SendMessage.of(chatId, text)
   override def forwardMessage(messageId: Long, fromChatId: String, toChatId: String): ForwardMessage =
     ForwardMessage.of(messageId, fromChatId, toChatId)
@@ -23,4 +27,5 @@ class DefaultBot extends Bot {
   override def sendVoice(chatId: String, voice: FileDescriptor): SendVoice = SendVoice.of(chatId, voice)
   override def sendVideoNote(chatId: String, voiceNote: FileDescriptor): SendVideoNote =
     SendVideoNote.of(chatId, voiceNote)
+  override def sendMediaGroup(chatId: String, media: Seq[InputMedia]): SendMediaGroup = SendMediaGroup.of(chatId, media)
 }

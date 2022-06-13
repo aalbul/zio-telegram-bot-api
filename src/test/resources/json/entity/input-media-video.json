@@ -1,0 +1,31 @@
+{
+  "media": "attach:///tmp/one.mp4",
+  "thumb": "attach:///tmp/video_thumb.jpg",
+  "caption": "my video",
+  "parse_mode": "HTML",
+  "caption_entities": [
+    {
+      "type": "pre",
+      "offset": 10,
+      "length": 500,
+      "url": "https://someurl.com",
+      "user": {
+        "id": 1,
+        "is_bot": false,
+        "first_name": "John",
+        "last_name": "Wane",
+        "username": "jwane",
+        "language_code": "en",
+        "can_join_groups": true,
+        "can_read_all_group_messages": true,
+        "supports_inline_queries": false
+      },
+      "language": "js"
+    }
+  ],
+  "width": 1920,
+  "height": 1080,
+  "duration": 980,
+  "supports_streaming": true,
+  "type": "video"
+}

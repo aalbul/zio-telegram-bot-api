@@ -32,4 +32,6 @@ object MultipartBody {
   def stringPart(name: String, value: Long): StringPart = StringPart(name, value.toString)
 }
 
-case class MultipartBody(parts: Seq[MultipartBodyPart]) extends ApiParameters
+case class MultipartBody(parts: Seq[MultipartBodyPart]) extends ApiParameters {
+  def plus(extra: Seq[MultipartBodyPart]): MultipartBody = copy(parts = parts ++ extra)
+}

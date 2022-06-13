@@ -1,9 +1,13 @@
 package com.github.aalbul.zio.telegram.bot
 
 import com.github.aalbul.zio.telegram.command.*
+import com.github.aalbul.zio.telegram.domain.{InputMedia, Update}
+import com.github.aalbul.zio.telegram.engine.BotEngine
+import zio.stream.ZStream
 
 trait Bot {
   def getMe: GetMe
+  def streamUpdates(chunkSize: Long = 100L): ZStream[BotEngine, Throwable, Update]
   def sendMessage(chatId: String, text: String): SendMessage
   def forwardMessage(messageId: Long, fromChatId: String, toChatId: String): ForwardMessage
   def copyMessage(chatId: String, fromChatId: String, messageId: String): CopyMessage
@@ -14,4 +18,5 @@ trait Bot {
   def sendAnimation(chatId: String, animation: FileDescriptor): SendAnimation
   def sendVoice(chatId: String, voice: FileDescriptor): SendVoice
   def sendVideoNote(chatId: String, voiceNote: FileDescriptor): SendVideoNote
+  def sendMediaGroup(chatId: String, media: Seq[InputMedia]): SendMediaGroup
 }
