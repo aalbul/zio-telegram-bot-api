@@ -41,7 +41,7 @@ class SendVenueSpec extends BaseSpec {
   "SendVenue" when {
     "name" should {
       "have proper name" in new Scope {
-        command.name shouldBe "sendMessage"
+        command.name shouldBe "sendVenue"
       }
     }
 
