@@ -1,0 +1,13 @@
+{
+  "chat_id": "123",
+  "emoji": "🎰",
+  "disable_notification": false,
+  "protect_content": true,
+  "reply_to_message_id": 811,
+  "allow_sending_without_reply": false,
+  "reply_markup": {
+    "force_reply": true,
+    "input_field_placeholder": "some text",
+    "selective": true
+  }
+}

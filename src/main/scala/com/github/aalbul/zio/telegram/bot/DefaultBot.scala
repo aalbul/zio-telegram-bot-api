@@ -44,4 +44,5 @@ class DefaultBot extends Bot {
     SendContact.of(chatId, phoneNumber, firstName)
   override def sendPoll(chatId: String, question: String, options: Seq[String]): SendPoll =
     SendPoll.of(chatId, question, options)
+  override def sendDice(chatId: String): SendDice = SendDice.of(chatId)
 }
