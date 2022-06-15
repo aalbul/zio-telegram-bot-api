@@ -40,4 +40,6 @@ class DefaultBot extends Bot {
     title: String,
     address: String
   ): SendVenue = SendVenue.of(chatId, latitude, longitude, title, address)
+  override def sendContact(chatId: String, phoneNumber: String, firstName: String): SendContact =
+    SendContact.of(chatId, phoneNumber, firstName)
 }
