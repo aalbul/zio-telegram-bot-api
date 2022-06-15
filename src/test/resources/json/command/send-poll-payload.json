@@ -1,0 +1,47 @@
+{
+  "chat_id": "441",
+  "question": "Are you sure?",
+  "options": [
+    "Yes",
+    "No",
+    "Not sure"
+  ],
+  "is_anonymous": false,
+  "type": "quiz",
+  "allows_multiple_answers": true,
+  "correct_option_id": 1,
+  "explanation": "Some explanation",
+  "explanation_parse_mode": "MarkdownV2",
+  "explanation_entities": [
+    {
+      "type": "pre",
+      "offset": 10,
+      "length": 500,
+      "url": "https://someurl.com",
+      "user": {
+        "id": 1,
+        "is_bot": false,
+        "first_name": "John",
+        "last_name": "Wane",
+        "username": "jwane",
+        "language_code": "en",
+        "can_join_groups": true,
+        "can_read_all_group_messages": true,
+        "supports_inline_queries": false
+      },
+      "language": "js"
+    }
+  ],
+  "open_period": 100,
+  "close_date": 1652436792,
+  "is_closed": false,
+  "disable_notification": false,
+  "protect_content": true,
+  "reply_to_message_id": 811,
+  "allow_sending_without_reply": false,
+  "reply_markup": {
+    "force_reply": true,
+    "input_field_placeholder": "some text",
+    "selective": true
+  }
+}

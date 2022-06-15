@@ -24,4 +24,5 @@ trait Bot {
   def stopMessageLiveLocation: StopMessageLiveLocation
   def sendVenue(chatId: String, latitude: Double, longitude: Double, title: String, address: String): SendVenue
   def sendContact(chatId: String, phoneNumber: String, firstName: String): SendContact
+  def sendPoll(chatId: String, question: String, options: Seq[String]): SendPoll
 }
