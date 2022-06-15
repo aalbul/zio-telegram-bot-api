@@ -1,0 +1,20 @@
+{
+  "chat_id": "123",
+  "latitude": 10.0,
+  "longitude": 20.0,
+  "title": "Aquario",
+  "address": "Street 1",
+  "foursquare_id": "223",
+  "foursquare_type": "arts_entertainment/aquarium",
+  "google_place_id": "334",
+  "google_place_type": "aquarium",
+  "disable_notification": false,
+  "protect_content": true,
+  "reply_to_message_id": 811,
+  "allow_sending_without_reply": false,
+  "reply_markup": {
+    "force_reply": true,
+    "input_field_placeholder": "some text",
+    "selective": true
+  }
+}

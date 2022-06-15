@@ -22,4 +22,5 @@ trait Bot {
   def sendLocation(chatId: String, latitude: Double, longitude: Double): SendLocation
   def editMessageLiveLocation(latitude: Double, longitude: Double): EditMessageLiveLocation
   def stopMessageLiveLocation: StopMessageLiveLocation
+  def sendVenue(chatId: String, latitude: Double, longitude: Double, title: String, address: String): SendVenue
 }

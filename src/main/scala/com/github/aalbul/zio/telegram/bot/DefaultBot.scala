@@ -33,4 +33,11 @@ class DefaultBot extends Bot {
   override def editMessageLiveLocation(latitude: Double, longitude: Double): EditMessageLiveLocation =
     EditMessageLiveLocation.of(latitude, longitude)
   override def stopMessageLiveLocation: StopMessageLiveLocation = StopMessageLiveLocation.of
+  override def sendVenue(
+    chatId: String,
+    latitude: Double,
+    longitude: Double,
+    title: String,
+    address: String
+  ): SendVenue = SendVenue.of(chatId, latitude, longitude, title, address)
 }
