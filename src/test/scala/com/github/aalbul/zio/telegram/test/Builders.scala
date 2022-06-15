@@ -1,7 +1,7 @@
 package com.github.aalbul.zio.telegram.test
 
 import com.github.aalbul.zio.telegram.command.FileDescriptor.{pathDescriptor, urlDescriptor}
-import com.github.aalbul.zio.telegram.domain.{Chat, ChatTypes, ForceReply, InputMedia, InputMediaAnimation, InputMediaAudio, InputMediaDocument, InputMediaPhoto, InputMediaVideo, Markup, Message, MessageEntity, MessageEntityTypes, ParseModes, Update, User}
+import com.github.aalbul.zio.telegram.domain.{CallbackGame, Chat, ChatTypes, ForceReply, InlineKeyboardButton, InlineKeyboardMarkup, InputMedia, InputMediaAnimation, InputMediaAudio, InputMediaDocument, InputMediaPhoto, InputMediaVideo, Markup, Message, MessageEntity, MessageEntityTypes, ParseModes, Update, User, WebAppInfo}
 
 import java.time.Instant
 
@@ -27,10 +27,40 @@ trait Builders {
     language = Some("js")
   )
 
+  lazy val callbackGame1: CallbackGame = CallbackGame()
+
+  lazy val webAppInfo1: WebAppInfo = WebAppInfo(url = "https://webapp.org")
+
   lazy val forceReplyMarkup1: Markup = ForceReply(
     forceReply = true,
     inputFieldPlaceholder = Some("some text"),
     selective = Some(true)
+  )
+
+  lazy val inlineKeyboardButton1: InlineKeyboardButton = InlineKeyboardButton(
+    text = "some button 1",
+    url = Some("https://google.com/url1"),
+    callbackData = Some("some data"),
+    webApp = Some(webAppInfo1),
+    switchInlineQuery = Some("inline query 1"),
+    switchInlineQueryCurrentChat = Some("inline query current chat 1"),
+    callbackGame = Some(callbackGame1),
+    pay = Some(true)
+  )
+
+  lazy val inlineKeyboardButton2: InlineKeyboardButton = InlineKeyboardButton(
+    text = "some button 2",
+    url = Some("https://google.com/url2"),
+    callbackData = Some("another data"),
+    webApp = None,
+    switchInlineQuery = Some("inline query 2"),
+    switchInlineQueryCurrentChat = Some("inline query current chat 2"),
+    callbackGame = None,
+    pay = Some(false)
+  )
+
+  lazy val inlineKeyboardMarkup1: InlineKeyboardMarkup = InlineKeyboardMarkup(
+    Seq(Seq(inlineKeyboardButton1), Seq(inlineKeyboardButton2))
   )
 
   lazy val chat1: Chat = Chat.of(id = 81, `type` = ChatTypes.Supergroup)

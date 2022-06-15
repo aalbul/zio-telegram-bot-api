@@ -30,4 +30,6 @@ class DefaultBot extends Bot {
   override def sendMediaGroup(chatId: String, media: Seq[InputMedia]): SendMediaGroup = SendMediaGroup.of(chatId, media)
   override def sendLocation(chatId: String, latitude: Double, longitude: Double): SendLocation =
     SendLocation.of(chatId, latitude, longitude)
+  override def editMessageLiveLocation(latitude: Double, longitude: Double): EditMessageLiveLocation =
+    EditMessageLiveLocation.of(latitude, longitude)
 }
