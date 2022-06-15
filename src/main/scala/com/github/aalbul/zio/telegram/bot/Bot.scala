@@ -21,4 +21,5 @@ trait Bot {
   def sendMediaGroup(chatId: String, media: Seq[InputMedia]): SendMediaGroup
   def sendLocation(chatId: String, latitude: Double, longitude: Double): SendLocation
   def editMessageLiveLocation(latitude: Double, longitude: Double): EditMessageLiveLocation
+  def stopMessageLiveLocation: StopMessageLiveLocation
 }

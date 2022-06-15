@@ -16,7 +16,7 @@ object GetUpdates {
     allowedUpdates: Option[Set[String]]
   )
 
-  def of(): GetUpdates = GetUpdates(
+  def of: GetUpdates = GetUpdates(
     GetUpdatesPayload(
       offset = None,
       limit = None,

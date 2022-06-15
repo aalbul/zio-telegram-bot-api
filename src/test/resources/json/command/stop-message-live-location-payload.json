@@ -1,0 +1,36 @@
+{
+  "chat_id": "345",
+  "message_id": 889,
+  "inline_message_id": "456",
+  "reply_markup": {
+    "inline_keyboard": [
+      [
+        {
+          "text": "some button 1",
+          "url": "https://google.com/url1",
+          "callback_data": "some data",
+          "web_app": {
+            "url": "https://webapp.org"
+          },
+          "switch_inline_query": "inline query 1",
+          "switch_inline_query_current_chat": "inline query current chat 1",
+          "callback_game": {
+          },
+          "pay": true
+        }
+      ],
+      [
+        {
+          "text": "some button 2",
+          "url": "https://google.com/url2",
+          "callback_data": "another data",
+          "web_app": null,
+          "switch_inline_query": "inline query 2",
+          "switch_inline_query_current_chat": "inline query current chat 2",
+          "callback_game": null,
+          "pay": false
+        }
+      ]
+    ]
+  }
+}

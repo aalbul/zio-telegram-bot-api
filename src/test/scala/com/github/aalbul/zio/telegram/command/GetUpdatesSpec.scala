@@ -10,7 +10,7 @@ class GetUpdatesSpec extends BaseSpec {
   trait Scope {
     val command: Command[Seq[Update]] =
       GetUpdates
-        .of()
+        .of
         .withOffset(5)
         .withLimit(100)
         .withTimeout(10.minutes)
