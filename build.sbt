@@ -1,6 +1,5 @@
 import Dependencies._
-
-import ReleaseTransformations._
+import sbtrelease.ReleasePlugin.autoImport.ReleaseTransformations._
 
 ThisBuild / name             := "zio-telegram-bot-api"
 ThisBuild / scalaVersion     := "2.13.8"
@@ -38,14 +37,10 @@ lazy val root = (project in file("."))
     scalacOptions ++= Seq("-Xsource:3")
   )
 
-ThisBuild / pomIncludeRepository := { _ => false }
-ThisBuild / publishTo := {
-  val nexus = "https://s01.oss.sonatype.org/"
-  if (isSnapshot.value) Some("snapshots" at nexus + "content/repositories/snapshots")
-  else Some("releases" at nexus + "service/local/staging/deploy/maven2")
-}
-ThisBuild / publishMavenStyle := true
-ThisBuild / publishConfiguration := publishConfiguration.value.withOverwrite(true)
+ThisBuild / publishTo                 := sonatypePublishTo.value
+ThisBuild / sonatypeRepository        := "https://s01.oss.sonatype.org/service/local"
+ThisBuild / sonatypeCredentialHost    := "s01.oss.sonatype.org"
+ThisBuild / publishConfiguration      := publishConfiguration.value.withOverwrite(true)
 ThisBuild / publishLocalConfiguration := publishLocalConfiguration.value.withOverwrite(true)
 
 releaseProcess := Seq[ReleaseStep](
