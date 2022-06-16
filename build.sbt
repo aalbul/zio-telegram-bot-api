@@ -16,6 +16,11 @@ ThisBuild / scmInfo := Some(
 
 ThisBuild / scalacOptions ++= Seq("-Ymacro-annotations", "-deprecation", "-unchecked")
 ThisBuild / versionScheme := Some("early-semver")
+ThisBuild / description   := "ZIO-Powered Telegram Bot Api for Scala"
+ThisBuild / licenses := List(
+  "MIT" -> new URL("https://raw.githubusercontent.com/aalbul/zio-telegram-bot-api/main/LICENSE")
+)
+ThisBuild / homepage := Some(url("https://github.com/aalbul/zio-telegram-bot-api"))
 
 lazy val root = (project in file("."))
   .settings(
