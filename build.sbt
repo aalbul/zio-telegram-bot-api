@@ -15,6 +15,7 @@ ThisBuild / scmInfo := Some(
 )
 
 ThisBuild / scalacOptions ++= Seq("-Ymacro-annotations", "-deprecation", "-unchecked")
+ThisBuild / versionScheme := Some("early-semver")
 
 lazy val root = (project in file("."))
   .settings(
