@@ -37,7 +37,7 @@ lazy val root = (project in file("."))
     scalacOptions ++= Seq("-Xsource:3")
   )
 
-ThisBuild / publishTo                 := sonatypePublishTo.value
+ThisBuild / publishTo                 := sonatypePublishToBundle.value
 ThisBuild / sonatypeRepository        := "https://s01.oss.sonatype.org/service/local"
 ThisBuild / sonatypeCredentialHost    := "s01.oss.sonatype.org"
 ThisBuild / publishConfiguration      := publishConfiguration.value.withOverwrite(true)
