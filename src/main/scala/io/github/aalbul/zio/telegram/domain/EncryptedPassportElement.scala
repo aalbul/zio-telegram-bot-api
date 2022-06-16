@@ -1,7 +1,8 @@
 package io.github.aalbul.zio.telegram.domain
 
-import io.github.aalbul.zio.telegram.domain.PassportElementTypes.PassportElementType
 import io.circe.generic.extras.ConfiguredJsonCodec
+import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
+import io.github.aalbul.zio.telegram.domain.PassportElementTypes.PassportElementType
 
 @ConfiguredJsonCodec(decodeOnly = true)
 case class EncryptedPassportElement(

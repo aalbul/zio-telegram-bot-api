@@ -3,6 +3,7 @@ package io.github.aalbul.zio.telegram.domain
 import io.github.aalbul.zio.telegram.command.FileDescriptor
 import io.github.aalbul.zio.telegram.domain.ParseModes.ParseMode
 import io.circe.generic.extras.ConfiguredJsonCodec
+import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 object InputMediaAudio {
   def of(media: FileDescriptor): InputMediaAudio = InputMediaAudio(

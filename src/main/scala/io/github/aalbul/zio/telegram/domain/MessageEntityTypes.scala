@@ -1,6 +1,7 @@
 package io.github.aalbul.zio.telegram.domain
 
 import io.circe.{Decoder, Encoder}
+import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 object MessageEntityTypes extends Enumeration {
   type MessageEntityType = Value

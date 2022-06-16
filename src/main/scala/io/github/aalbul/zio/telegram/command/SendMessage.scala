@@ -1,9 +1,10 @@
 package io.github.aalbul.zio.telegram.command
 
+import io.circe.generic.extras.ConfiguredJsonCodec
 import io.github.aalbul.zio.telegram.command.SendMessage.SendMessagePayload
+import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 import io.github.aalbul.zio.telegram.domain.ParseModes.ParseMode
 import io.github.aalbul.zio.telegram.domain.{Markup, Message, MessageEntity}
-import io.circe.generic.extras.ConfiguredJsonCodec
 
 object SendMessage {
   @ConfiguredJsonCodec(encodeOnly = true)

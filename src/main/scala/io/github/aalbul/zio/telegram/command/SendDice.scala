@@ -1,9 +1,10 @@
 package io.github.aalbul.zio.telegram.command
 
+import io.circe.generic.extras.ConfiguredJsonCodec
 import io.github.aalbul.zio.telegram.command.SendDice.SendDicePayload
 import io.github.aalbul.zio.telegram.domain.DiceTypes.DiceType
 import io.github.aalbul.zio.telegram.domain.{Markup, Message}
-import io.circe.generic.extras.ConfiguredJsonCodec
+import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 object SendDice {
   @ConfiguredJsonCodec(encodeOnly = true)

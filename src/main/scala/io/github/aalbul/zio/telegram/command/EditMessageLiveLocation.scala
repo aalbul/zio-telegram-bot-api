@@ -1,8 +1,9 @@
 package io.github.aalbul.zio.telegram.command
 
-import io.github.aalbul.zio.telegram.command.EditMessageLiveLocation.EditMessageLiveLocationPayload
-import io.github.aalbul.zio.telegram.domain.{InlineKeyboardMarkup, LiveLocationUpdateResult}
 import io.circe.generic.extras.ConfiguredJsonCodec
+import io.github.aalbul.zio.telegram.command.EditMessageLiveLocation.EditMessageLiveLocationPayload
+import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
+import io.github.aalbul.zio.telegram.domain.{InlineKeyboardMarkup, LiveLocationUpdateResult}
 
 object EditMessageLiveLocation {
   @ConfiguredJsonCodec(encodeOnly = true)

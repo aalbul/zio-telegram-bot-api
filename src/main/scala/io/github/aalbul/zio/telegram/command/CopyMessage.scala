@@ -1,9 +1,10 @@
 package io.github.aalbul.zio.telegram.command
 
+import io.circe.generic.extras.ConfiguredJsonCodec
 import io.github.aalbul.zio.telegram.command.CopyMessage.CopyMessagePayload
 import io.github.aalbul.zio.telegram.domain.ParseModes.ParseMode
 import io.github.aalbul.zio.telegram.domain.{Markup, MessageEntity, MessageId}
-import io.circe.generic.extras.ConfiguredJsonCodec
+import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 object CopyMessage {
   @ConfiguredJsonCodec(encodeOnly = true)

@@ -16,7 +16,15 @@ object FileDescriptor {
   }
 }
 
-sealed trait FileDescriptor
-case class PathBasedFileDescriptor(path: Path) extends FileDescriptor
-case class UrlFileDescriptor(url: String) extends FileDescriptor
-case class IdFileDescriptor(id: String) extends FileDescriptor
+sealed trait FileDescriptor {
+  def asMultipart(name: String): MultipartBodyPart
+}
+case class PathBasedFileDescriptor(path: Path) extends FileDescriptor {
+  override def asMultipart(name: String): MultipartBodyPart = FilePart(name, path)
+}
+case class UrlFileDescriptor(url: String) extends FileDescriptor {
+  override def asMultipart(name: String): MultipartBodyPart = StringPart(name, url)
+}
+case class IdFileDescriptor(id: String) extends FileDescriptor {
+  override def asMultipart(name: String): MultipartBodyPart = StringPart(name, id)
+}

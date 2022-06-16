@@ -1,12 +1,13 @@
 package io.github.aalbul.zio.telegram.command
 
+import io.circe.generic.extras.ConfiguredJsonCodec
 import io.github.aalbul.zio.telegram.command.SendPoll.SendPollPayload
 import io.github.aalbul.zio.telegram.domain.ParseModes.ParseMode
 import io.github.aalbul.zio.telegram.domain.PollTypes.PollType
 import io.github.aalbul.zio.telegram.domain.{Markup, Message, MessageEntity}
-import io.circe.generic.extras.ConfiguredJsonCodec
 
 import java.time.Instant
+import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 object SendPoll {
   @ConfiguredJsonCodec(encodeOnly = true)

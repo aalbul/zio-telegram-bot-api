@@ -1,7 +1,8 @@
 package io.github.aalbul.zio.telegram.domain
 
-import io.github.aalbul.zio.telegram.domain.ChatTypes.ChatType
 import io.circe.generic.extras.ConfiguredJsonCodec
+import io.github.aalbul.zio.telegram.domain.ChatTypes.ChatType
+import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 object Chat {
   def of(id: Long, `type`: ChatType): Chat = Chat(

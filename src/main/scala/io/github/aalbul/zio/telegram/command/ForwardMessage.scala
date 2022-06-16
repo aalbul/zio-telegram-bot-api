@@ -1,8 +1,9 @@
 package io.github.aalbul.zio.telegram.command
 
+import io.circe.generic.extras.ConfiguredJsonCodec
 import io.github.aalbul.zio.telegram.command.ForwardMessage.ForwardMessagePayload
 import io.github.aalbul.zio.telegram.domain.Message
-import io.circe.generic.extras.ConfiguredJsonCodec
+import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 object ForwardMessage {
   @ConfiguredJsonCodec(encodeOnly = true)

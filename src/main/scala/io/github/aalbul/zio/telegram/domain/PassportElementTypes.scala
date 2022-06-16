@@ -1,6 +1,7 @@
 package io.github.aalbul.zio.telegram.domain
 
 import io.circe.Decoder
+import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 object PassportElementTypes extends Enumeration {
   implicit val passportElementDecoder: Decoder[PassportElementType] = Decoder.decodeString.map(byName)

@@ -1,11 +1,12 @@
 package io.github.aalbul.zio.telegram.command
 
+import io.circe.generic.extras.ConfiguredJsonCodec
 import io.github.aalbul.zio.telegram.command.GetUpdates.GetUpdatesPayload
 import io.github.aalbul.zio.telegram.domain.Update
-import io.circe.generic.extras.ConfiguredJsonCodec
 
 import java.time.Duration
 import java.time.temporal.ChronoUnit.SECONDS
+import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 object GetUpdates {
   @ConfiguredJsonCodec(encodeOnly = true)

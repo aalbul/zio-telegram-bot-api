@@ -1,8 +1,9 @@
 package io.github.aalbul.zio.telegram.command
 
-import io.github.aalbul.zio.telegram.command.SendLocation.SendLocationPayload
-import io.github.aalbul.zio.telegram.domain.{Markup, Message}
 import io.circe.generic.extras.ConfiguredJsonCodec
+import io.github.aalbul.zio.telegram.command.SendLocation.SendLocationPayload
+import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
+import io.github.aalbul.zio.telegram.domain.{Markup, Message}
 
 object SendLocation {
   @ConfiguredJsonCodec(encodeOnly = true)

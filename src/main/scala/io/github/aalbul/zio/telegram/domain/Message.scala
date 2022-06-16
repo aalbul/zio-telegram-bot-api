@@ -3,6 +3,7 @@ package io.github.aalbul.zio.telegram.domain
 import io.circe.generic.extras.ConfiguredJsonCodec
 
 import java.time.Instant
+import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 object Message {
   def of(messageId: Int, date: Instant, chat: Chat): Message = Message(
