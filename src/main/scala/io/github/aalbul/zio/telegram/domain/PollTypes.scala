@@ -12,5 +12,5 @@ object PollTypes extends Enumeration {
 
   val Regular, Quiz = Value
 
-  def byName(name: String): PollType = withName(s"${name.headOption.map(_.toUpper).getOrElse("")}${name.tail}")
+  def byName(name: String): PollType = withName(StringOps(name).capitalize)
 }

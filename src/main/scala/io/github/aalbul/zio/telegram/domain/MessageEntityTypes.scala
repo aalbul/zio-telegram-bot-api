@@ -9,7 +9,7 @@ object MessageEntityTypes extends Enumeration {
     Code, Pre, TextLink, TextMention = Value
 
   private lazy val indexed = values
-    .map(value => value.toString.split("(?<=.)(?=\\p{Lu})").map(_.toLowerCase).mkString("_") -> value)
+    .map(value => value.toString.camelToSnakeCase -> value)
     .toMap
   private lazy val reverseIndex = indexed.toSeq.map(_.swap).toMap
 

@@ -5,5 +5,5 @@ object MaskPointTypes extends Enumeration {
 
   val Forehead, Eyes, Mouth, Chin = Value
 
-  def byName(name: String): MastPointType = withName(s"${name.headOption.map(_.toUpper).getOrElse("")}${name.drop(1)}")
+  def byName(name: String): MastPointType = withName(StringOps(name).capitalize)
 }

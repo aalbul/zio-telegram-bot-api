@@ -8,7 +8,7 @@ object PassportElementTypes extends Enumeration {
   type PassportElementType = Value
 
   private lazy val indexed = values
-    .map(value => value.toString.split("(?<=.)(?=\\p{Lu})").map(_.toLowerCase).mkString("_") -> value)
+    .map(value => value.toString.camelToSnakeCase -> value)
     .toMap
 
   val PersonalDetails, Passport, DriverLicense, IdentityCard, InternalPassport, Address, UtilityBill, BankStatement,

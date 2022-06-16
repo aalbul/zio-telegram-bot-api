@@ -9,5 +9,5 @@ object ChatTypes extends Enumeration {
 
   val Sender, Private, Group, Supergroup, Channel = Value
 
-  def byName(name: String): ChatType = withName(s"${name.headOption.map(_.toUpper).getOrElse("")}${name.drop(1)}")
+  def byName(name: String): ChatType = withName(StringOps(name).capitalize)
 }

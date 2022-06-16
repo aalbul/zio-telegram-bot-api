@@ -1,6 +1,7 @@
 package io.github.aalbul.zio.telegram.bot
 
 import io.github.aalbul.zio.telegram.command.*
+import io.github.aalbul.zio.telegram.domain.ChatActions.ChatAction
 import io.github.aalbul.zio.telegram.domain.{InputMedia, Update}
 import io.github.aalbul.zio.telegram.engine.BotEngine
 import zio.stream.ZStream
@@ -26,4 +27,5 @@ trait Bot {
   def sendContact(chatId: String, phoneNumber: String, firstName: String): SendContact
   def sendPoll(chatId: String, question: String, options: Seq[String]): SendPoll
   def sendDice(chatId: String): SendDice
+  def sendChatAction(chatId: String, action: ChatAction): SendChatAction
 }
