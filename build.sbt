@@ -42,6 +42,14 @@ ThisBuild / sonatypeRepository        := "https://s01.oss.sonatype.org/service/l
 ThisBuild / sonatypeCredentialHost    := "s01.oss.sonatype.org"
 ThisBuild / publishConfiguration      := publishConfiguration.value.withOverwrite(true)
 ThisBuild / publishLocalConfiguration := publishLocalConfiguration.value.withOverwrite(true)
+ThisBuild / developers := List(
+  Developer(
+    id = "gorenuru",
+    name = "Oleksandr Albul",
+    email = "gorenuru@gmail.com",
+    url = url("https://github.com/aalbul")
+  )
+)
 
 releaseProcess := Seq[ReleaseStep](
   checkSnapshotDependencies,
