@@ -28,4 +28,5 @@ trait Bot {
   def sendPoll(chatId: String, question: String, options: Seq[String]): SendPoll
   def sendDice(chatId: String): SendDice
   def sendChatAction(chatId: String, action: ChatAction): SendChatAction
+  def getUserProfilePhotos(userId: String): GetUserProfilePhotos
 }

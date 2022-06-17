@@ -47,4 +47,5 @@ class DefaultBot extends Bot {
     SendPoll.of(chatId, question, options)
   override def sendDice(chatId: String): SendDice = SendDice.of(chatId)
   override def sendChatAction(chatId: String, action: ChatAction): SendChatAction = SendChatAction.of(chatId, action)
+  override def getUserProfilePhotos(userId: String): GetUserProfilePhotos = GetUserProfilePhotos.of(userId)
 }
