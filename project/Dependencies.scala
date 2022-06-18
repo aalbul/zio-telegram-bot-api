@@ -1,11 +1,11 @@
 import sbt._
 
 trait DependencyVersions {
-  protected val zioVersion       = "2.0.0-RC6"
-  protected val sttpVersion      = "3.6.2"
-  protected val circeVersion     = "0.14.2"
-  protected val scalatestVersion = "3.2.12"
-  protected val testplusVersion  = "3.2.12.0"
+  protected val zioVersion          = "2.0.0-RC6"
+  protected val sttpVersion         = "3.6.2"
+  protected val circeVersion        = "0.14.2"
+  protected val scalatestVersion    = "3.2.12"
+  protected val mockitoScalaVersion = "1.17.7"
 }
 
 object Dependencies extends DependencyVersions {
@@ -16,5 +16,5 @@ object Dependencies extends DependencyVersions {
   lazy val circeGenericExtras = "io.circe"                      %% "circe-generic-extras"          % circeVersion
   lazy val sttpAsyncHttpZio   = "com.softwaremill.sttp.client3" %% "async-http-client-backend-zio" % sttpVersion
   lazy val scalatest          = "org.scalatest"                 %% "scalatest"                     % scalatestVersion
-  lazy val scalatestMockito   = "org.scalatestplus"             %% "mockito-4-5"                   % testplusVersion
+  lazy val mockitoScala       = "org.mockito"                   %% "mockito-scala-scalatest"       % mockitoScalaVersion
 }

@@ -3,9 +3,7 @@ package io.github.aalbul.zio.telegram.command
 import io.github.aalbul.zio.telegram.domain.Update
 import io.github.aalbul.zio.telegram.engine.BotEngine
 import io.github.aalbul.zio.telegram.test.BaseSpec
-import org.mockito.ArgumentMatchers.any
-import org.mockito.Mockito.when
-import org.scalatestplus.mockito.MockitoSugar
+import org.mockito.scalatest.MockitoSugar
 import zio.{Chunk, ULayer, ZIO, ZLayer}
 
 class StreamUpdatesSpec extends BaseSpec with MockitoSugar {

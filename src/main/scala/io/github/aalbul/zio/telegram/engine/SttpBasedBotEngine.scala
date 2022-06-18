@@ -1,20 +1,24 @@
 package io.github.aalbul.zio.telegram.engine
 
-import io.github.aalbul.zio.telegram.command.*
-import io.github.aalbul.zio.telegram.engine.BotEngine.ApiCommandExecutionException
 import io.circe.Decoder
 import io.circe.parser.parse
+import io.github.aalbul.zio.telegram.command.*
+import io.github.aalbul.zio.telegram.engine.BotEngine.{ApiCommandExecutionException, BotException}
 import sttp.capabilities.zio.ZioStreams
-import sttp.client3.{basicRequest, multipart, multipartFile, Identity, RequestT, SttpBackend, UriContext}
+import sttp.client3.asynchttpclient.zio.SttpClient
+import sttp.client3.{Identity, RequestT, UriContext, asStreamUnsafe, basicRequest, multipart, multipartFile}
 import sttp.model.MediaType
+import zio.stream.ZStream
 import zio.{Task, URLayer, ZIO, ZLayer}
 
+import scala.concurrent.duration.Duration
+
 object SttpBasedBotEngine {
-  val layer: URLayer[SttpBackend[Task, ZioStreams] & BotConfig, BotEngine] =
+  val layer: URLayer[SttpClient & BotConfig, BotEngine] =
     ZLayer.fromFunction(new SttpBasedBotEngine(_, _))
 }
 
-class SttpBasedBotEngine(backend: SttpBackend[Task, ZioStreams], botConfig: BotConfig) extends BotEngine {
+class SttpBasedBotEngine(backend: SttpClient, botConfig: BotConfig) extends BotEngine {
   private def prepareRequest[T](command: Command[T]): Task[RequestT[Identity, Either[String, String], Any]] =
     ZIO.succeed {
       val base = basicRequest.post(uri"https://api.telegram.org/bot${botConfig.token}/${command.name}")
@@ -47,4 +51,15 @@ class SttpBasedBotEngine(backend: SttpBackend[Task, ZioStreams], botConfig: BotC
       case SuccessApiResponse(result) => ZIO.succeed(result)
     }
   } yield result
+
+  override def streamFile(path: String): Task[ZStream[Any, Throwable, Byte]] = for {
+    request <- ZIO.succeed(
+      basicRequest
+        .get(uri"https://api.telegram.org/file/bot${botConfig.token}/$path")
+        .response(asStreamUnsafe(ZioStreams))
+        .readTimeout(Duration.Inf)
+    )
+    response <- backend.send(request)
+    body <- ZIO.fromEither(response.body.left.map(BotException))
+  } yield body
 }

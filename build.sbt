@@ -31,8 +31,8 @@ lazy val root = (project in file("."))
       circeParser,
       circeGenericExtras,
       sttpAsyncHttpZio,
-      scalatest        % Test,
-      scalatestMockito % Test
+      scalatest    % Test,
+      mockitoScala % Test
     ),
     scalacOptions ++= Seq("-Xsource:3")
   )

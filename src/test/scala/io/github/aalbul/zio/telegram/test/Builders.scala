@@ -1,7 +1,7 @@
 package io.github.aalbul.zio.telegram.test
 
 import io.github.aalbul.zio.telegram.command.FileDescriptor.{pathDescriptor, urlDescriptor}
-import io.github.aalbul.zio.telegram.domain.{CallbackGame, Chat, ChatTypes, ForceReply, InlineKeyboardButton, InlineKeyboardMarkup, InputMedia, InputMediaAnimation, InputMediaAudio, InputMediaDocument, InputMediaPhoto, InputMediaVideo, Markup, Message, MessageEntity, MessageEntityTypes, ParseModes, Update, User, WebAppInfo}
+import io.github.aalbul.zio.telegram.domain.*
 
 import java.time.Instant
 
@@ -131,4 +131,9 @@ trait Builders {
     .withHeight(1080)
     .withDuration(980)
     .withSupportsStreaming(true)
+
+  lazy val file1: File =
+    File(fileId = "file-1", fileUniqueId = "unique-file-1", fileSize = Some(20), filePath = Some("file-path"))
+
+  lazy val file2: File = File(fileId = "file-2", fileUniqueId = "unique-file-2", fileSize = None, filePath = None)
 }
