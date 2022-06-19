@@ -30,4 +30,5 @@ trait Bot {
   def sendChatAction(chatId: String, action: ChatAction): SendChatAction
   def getUserProfilePhotos(userId: String): GetUserProfilePhotos
   def getFile(fileId: String): GetFile
+  def banChatMember(chatId: String, userId: String): BanChatMember
 }

@@ -49,4 +49,5 @@ class DefaultBot extends Bot {
   override def sendChatAction(chatId: String, action: ChatAction): SendChatAction = SendChatAction.of(chatId, action)
   override def getUserProfilePhotos(userId: String): GetUserProfilePhotos = GetUserProfilePhotos.of(userId)
   override def getFile(fileId: String): GetFile = GetFile.of(fileId)
+  override def banChatMember(chatId: String, userId: String): BanChatMember = BanChatMember.of(chatId, userId)
 }
