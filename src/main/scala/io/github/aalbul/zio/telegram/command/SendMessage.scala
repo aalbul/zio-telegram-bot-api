@@ -6,8 +6,6 @@ import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 import io.github.aalbul.zio.telegram.domain.ParseModes.ParseMode
 import io.github.aalbul.zio.telegram.domain.{Markup, Message, MessageEntity}
 
-/** Use this method to send text messages. On success, the sent [[Message]] is returned.
-  */
 object SendMessage {
   @ConfiguredJsonCodec(encodeOnly = true)
   case class SendMessagePayload(
@@ -25,9 +23,9 @@ object SendMessage {
 
   /** Constructs minimal [[SendMessage]] command
     * @param chatId
-    *   \- Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    *   Unique identifier for the target chat or username of the target channel (in the format @channelusername)
     * @param text
-    *   \- Text of the message to be sent, '''1-4096''' characters after entities parsing
+    *   Text of the message to be sent, '''1-4096''' characters after entities parsing
     * @return
     *   [[SendMessage]] builder
     */
@@ -47,6 +45,8 @@ object SendMessage {
   )
 }
 
+/** Use this method to send text messages. On success, the sent [[Message]] is returned.
+  */
 case class SendMessage(payload: SendMessagePayload) extends Command[Message] {
   override val name: String = "sendMessage"
 

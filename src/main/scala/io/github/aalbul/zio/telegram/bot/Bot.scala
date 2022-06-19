@@ -2,13 +2,22 @@ package io.github.aalbul.zio.telegram.bot
 
 import io.github.aalbul.zio.telegram.command.*
 import io.github.aalbul.zio.telegram.domain.ChatActions.ChatAction
-import io.github.aalbul.zio.telegram.domain.{InputMedia, Update}
+import io.github.aalbul.zio.telegram.domain.{InputMedia, Message, Update}
 import io.github.aalbul.zio.telegram.engine.BotEngine
 import zio.stream.ZStream
 
 trait Bot {
   def getMe: GetMe
   def streamUpdates(chunkSize: Long = 100L): ZStream[BotEngine, Throwable, Update]
+
+  /** Use this method to send text messages. On success, the sent [[Message]] is returned.
+    * @param chatId
+    *   Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    * @param text
+    *   Text of the message to be sent, '''1-4096''' characters after entities parsing
+    * @return
+    *   [[SendMessage]] builder
+    */
   def sendMessage(chatId: String, text: String): SendMessage
   def forwardMessage(messageId: Long, fromChatId: String, toChatId: String): ForwardMessage
   def copyMessage(chatId: String, fromChatId: String, messageId: String): CopyMessage
@@ -31,4 +40,20 @@ trait Bot {
   def getUserProfilePhotos(userId: String): GetUserProfilePhotos
   def getFile(fileId: String): GetFile
   def banChatMember(chatId: String, userId: String): BanChatMember
+
+  /** Use this method to unban a previously banned user in a supergroup or channel. The user will not return to the
+    * group or channel automatically, but will be able to join via link, etc. The bot must be an administrator for this
+    * to work. By default, this method guarantees that after the call the user is not a member of the chat, but will be
+    * able to join it. So if the user is a member of the chat they will also be removed from the chat. If you don't want
+    * this, use the parameter ''only_if_banned''. Returns ''True'' on success.
+    *
+    * @param chatId
+    *   Unique identifier for the target group or username of the target supergroup or channel (in the format
+    *   \@channelusername)
+    * @param userId
+    *   Unique identifier of the target user
+    * @return
+    *   [[UnbanChatMember]] builder
+    */
+  def unbanChatMember(chatId: String, userId: String): UnbanChatMember
 }
