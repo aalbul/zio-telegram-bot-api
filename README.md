@@ -19,4 +19,10 @@ user=<your username>
 password=<your password>
 ```
 
+Make sure that you have PGP keys:
+
+```shell
+gpg --keyserver keyserver.ubuntu.com --recv-keys CE9AA526FAF075A4057AAEBA45BB1D604C232B8D
+```
+
 The actual release can be done using `sbt release` command
