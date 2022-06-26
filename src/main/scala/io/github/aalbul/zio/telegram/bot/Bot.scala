@@ -1,13 +1,38 @@
 package io.github.aalbul.zio.telegram.bot
 
 import io.github.aalbul.zio.telegram.command.*
+import io.github.aalbul.zio.telegram.domain.*
 import io.github.aalbul.zio.telegram.domain.ChatActions.ChatAction
-import io.github.aalbul.zio.telegram.domain.{ChatPermissions, InputMedia, Message, Update}
 import io.github.aalbul.zio.telegram.engine.BotEngine
 import zio.stream.ZStream
 
 trait Bot {
+
+  /** A simple method for testing your bot's authentication token. Requires no parameters. Returns basic information
+    * about the bot in form of a [[User]] object.
+    * @return
+    *   [[GetMe]] builder
+    */
   def getMe: GetMe
+
+  /** Use this method to log out from the cloud Bot API server before launching the bot locally. You must log out the
+    * bot before running it locally, otherwise there is no guarantee that the bot will receive updates. After a
+    * successful call, you can immediately log in on a local server, but will not be able to log in back to the cloud
+    * Bot API server for 10 minutes. Returns ''True'' on success. Requires no parameters.
+    * @return
+    *   [[LogOut]] builder
+    */
+  def logOut: LogOut
+
+  /** Use this method to close the bot instance before moving it from one local server to another. You need to delete
+    * the webhook before calling this method to ensure that the bot isn't launched again after server restart. The
+    * method will return error ''429'' in the first 10 minutes after the bot is launched. Returns ''True'' on success.
+    * Requires no parameters.
+    * @return
+    *   [[Close]] builder
+    */
+  def close: Close
+
   def streamUpdates(chunkSize: Long = 100L): ZStream[BotEngine, Throwable, Update]
 
   /** Use this method to send text messages. On success, the sent [[Message]] is returned.

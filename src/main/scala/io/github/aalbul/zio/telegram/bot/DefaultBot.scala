@@ -13,6 +13,8 @@ object DefaultBot {
 
 class DefaultBot extends Bot {
   override def getMe: GetMe = new GetMe
+  override def logOut: LogOut = new LogOut
+  override def close: Close = new Close
   override def streamUpdates(chunkSize: Long = 100L): ZStream[BotEngine, Throwable, Update] = StreamUpdates(chunkSize)
   override def sendMessage(chatId: String, text: String): SendMessage = SendMessage.of(chatId, text)
   override def forwardMessage(messageId: Long, fromChatId: String, toChatId: String): ForwardMessage =
