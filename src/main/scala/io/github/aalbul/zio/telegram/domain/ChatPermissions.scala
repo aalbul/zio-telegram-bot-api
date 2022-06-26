@@ -3,7 +3,7 @@ package io.github.aalbul.zio.telegram.domain
 import io.circe.generic.extras.ConfiguredJsonCodec
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
-@ConfiguredJsonCodec(decodeOnly = true)
+@ConfiguredJsonCodec
 case class ChatPermissions(
   canSendMessages: Option[Boolean],
   canSendMediaMessages: Option[Boolean],

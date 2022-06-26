@@ -136,4 +136,15 @@ trait Builders {
     File(fileId = "file-1", fileUniqueId = "unique-file-1", fileSize = Some(20), filePath = Some("file-path"))
 
   lazy val file2: File = File(fileId = "file-2", fileUniqueId = "unique-file-2", fileSize = None, filePath = None)
+
+  lazy val chatPermissions1: ChatPermissions = ChatPermissions(
+    canSendMessages = Some(true),
+    canSendMediaMessages = Some(false),
+    canSendPolls = Some(true),
+    canSendOtherMessages = Some(false),
+    canAddWebPagePreviews = Some(true),
+    canChangeInfo = Some(false),
+    canInviteUsers = Some(false),
+    canPinMessages = Some(true)
+  )
 }

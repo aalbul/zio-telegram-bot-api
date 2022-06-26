@@ -2,7 +2,7 @@ package io.github.aalbul.zio.telegram.bot
 
 import io.github.aalbul.zio.telegram.command.*
 import io.github.aalbul.zio.telegram.domain.ChatActions.ChatAction
-import io.github.aalbul.zio.telegram.domain.{InputMedia, Update}
+import io.github.aalbul.zio.telegram.domain.{ChatPermissions, InputMedia, Update}
 import io.github.aalbul.zio.telegram.engine.BotEngine
 import zio.stream.ZStream
 import zio.{ULayer, ZLayer}
@@ -51,4 +51,6 @@ class DefaultBot extends Bot {
   override def getFile(fileId: String): GetFile = GetFile.of(fileId)
   override def banChatMember(chatId: String, userId: String): BanChatMember = BanChatMember.of(chatId, userId)
   override def unbanChatMember(chatId: String, userId: String): UnbanChatMember = UnbanChatMember.of(chatId, userId)
+  override def setChatPermissions(chatId: String, permissions: ChatPermissions): SetChatPermissions =
+    SetChatPermissions.of(chatId, permissions)
 }
