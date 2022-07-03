@@ -33,6 +33,12 @@ trait Bot {
     */
   def close: Close
 
+  /** Create infinite stream of updates
+    * @param chunkSize
+    *   Limits the number of updates to be retrieved per chunk. Values between 1-100 are accepted. Defaults to 100.
+    * @return
+    *   [[ZStream]] of [[Update]]'s
+    */
   def streamUpdates(chunkSize: Long = 100L): ZStream[BotEngine, Throwable, Update]
 
   /** Use this method to send text messages. On success, the sent [[Message]] is returned.
@@ -44,6 +50,19 @@ trait Bot {
     *   [[SendMessage]] builder
     */
   def sendMessage(chatId: String, text: String): SendMessage
+
+  /** Use this method to forward messages of any kind. Service messages can't be forwarded. On success, the sent
+    * [[Message]] is returned.
+    * @param messageId
+    *   Message identifier in the chat specified in `fromChatId`
+    * @param fromChatId
+    *   Unique identifier for the chat where the original message was sent (or channel username in the format
+    *   \@channelusername)
+    * @param toChatId
+    *   Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    * @return
+    *   [[ForwardMessage]] builder
+    */
   def forwardMessage(messageId: Long, fromChatId: String, toChatId: String): ForwardMessage
   def copyMessage(chatId: String, fromChatId: String, messageId: String): CopyMessage
   def sendPhoto(chatId: String, photo: FileDescriptor): SendPhoto
