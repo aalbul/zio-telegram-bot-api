@@ -57,6 +57,12 @@ class DefaultBot extends Bot {
     RestrictChatMember.of(chatId, userId, permissions)
   override def promoteChatMember(chatId: String, userId: String): PromoteChatMember =
     PromoteChatMember.of(chatId, userId)
+  override def setChatAdministratorCustomTitle(
+    chatId: String,
+    userId: String,
+    customTitle: String
+  ): SetChatAdministratorCustomTitle =
+    SetChatAdministratorCustomTitle.of(chatId, userId, customTitle)
   override def setChatPermissions(chatId: String, permissions: ChatPermissions): SetChatPermissions =
     SetChatPermissions.of(chatId, permissions)
 }

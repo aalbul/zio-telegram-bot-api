@@ -384,6 +384,24 @@ trait Bot {
     */
   def promoteChatMember(chatId: String, userId: String): PromoteChatMember
 
+  /** Use this method to set a custom title for an administrator in a supergroup promoted by the bot. Returns ''True''
+    * on success.
+    *
+    * @param chatId
+    *   Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+    * @param userId
+    *   Unique identifier of the target user
+    * @param customTitle
+    *   New custom title for the administrator; 0-16 characters, emoji are not allowed
+    * @return
+    *   [[SetChatAdministratorCustomTitle]] builder
+    */
+  def setChatAdministratorCustomTitle(
+    chatId: String,
+    userId: String,
+    customTitle: String
+  ): SetChatAdministratorCustomTitle
+
   /** Use this method to set default chat permissions for all members. The bot must be an administrator in the group or
     * a supergroup for this to work and must have the ''can_restrict_members'' administrator rights. Returns ''True'' on
     * success.
