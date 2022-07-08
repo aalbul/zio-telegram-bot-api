@@ -69,4 +69,6 @@ class DefaultBot extends Bot {
     UnbanChatSenderChat.of(chatId, senderChatId)
   override def setChatPermissions(chatId: String, permissions: ChatPermissions): SetChatPermissions =
     SetChatPermissions.of(chatId, permissions)
+  override def exportChatInviteLink(chatId: String): ExportChatInviteLink = ExportChatInviteLink.of(chatId)
+  override def getChat(chatId: String): GetChat = GetChat.of(chatId)
 }
