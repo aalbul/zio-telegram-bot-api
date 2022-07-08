@@ -65,6 +65,8 @@ class DefaultBot extends Bot {
     SetChatAdministratorCustomTitle.of(chatId, userId, customTitle)
   override def banChatSenderChat(chatId: String, senderChatId: Long): BanChatSenderChat =
     BanChatSenderChat.of(chatId, senderChatId)
+  override def unbanChatSenderChat(chatId: String, senderChatId: Long): UnbanChatSenderChat =
+    UnbanChatSenderChat.of(chatId, senderChatId)
   override def setChatPermissions(chatId: String, permissions: ChatPermissions): SetChatPermissions =
     SetChatPermissions.of(chatId, permissions)
 }

@@ -416,6 +416,18 @@ trait Bot {
     */
   def banChatSenderChat(chatId: String, senderChatId: Long): BanChatSenderChat
 
+  /** Use this method to unban a previously banned channel chat in a supergroup or channel. The bot must be an
+    * administrator for this to work and must have the appropriate administrator rights. Returns ''True'' on success.
+    *
+    * @param chatId
+    *   Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+    * @param senderChatId
+    *   Unique identifier of the target sender chat
+    * @return
+    *   [[UnbanChatSenderChat]] builder
+    */
+  def unbanChatSenderChat(chatId: String, senderChatId: Long): UnbanChatSenderChat
+
   /** Use this method to set default chat permissions for all members. The bot must be an administrator in the group or
     * a supergroup for this to work and must have the ''can_restrict_members'' administrator rights. Returns ''True'' on
     * success.
