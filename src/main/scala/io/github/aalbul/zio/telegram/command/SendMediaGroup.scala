@@ -4,6 +4,15 @@ import io.github.aalbul.zio.telegram.command.MultipartBody.stringPart
 import io.github.aalbul.zio.telegram.domain.{InputMedia, Message}
 
 object SendMediaGroup {
+
+  /** Constructs minimal [[SendMediaGroup]] command
+    * @param chatId
+    *   Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    * @param media
+    *   A JSON-serialized array describing messages to be sent, must include 2-10 items
+    * @return
+    *   [[SendMediaGroup]] builder
+    */
   def of(chatId: String, media: Seq[InputMedia]): SendMediaGroup = SendMediaGroup(
     chatId = chatId,
     media = media,
@@ -14,6 +23,10 @@ object SendMediaGroup {
   )
 }
 
+/** Use this method to send a group of photos, videos, documents or audios as an album. Documents and audio files can be
+  * only grouped in an album with messages of the same type. On success, an array of [[Message]] that were sent is
+  * returned.
+  */
 case class SendMediaGroup(
   chatId: String,
   media: Seq[InputMedia],
@@ -42,8 +55,20 @@ case class SendMediaGroup(
       )
       .plus(attachedFiles)
 
+  /** Sends the message [[https://telegram.org/blog/channels-2-0#silent-messages silently]]. Users will receive a
+    * notification with no sound.
+    */
   def withDisableNotification(disable: Boolean): SendMediaGroup = copy(disableNotification = Some(disable))
+
+  /** Protects the contents of the sent message from forwarding and saving
+    */
   def withProtectContent(protect: Boolean): SendMediaGroup = copy(protectContent = Some(protect))
+
+  /** If the message is a reply, ID of the original message
+    */
   def withReplyToMessageId(id: Long): SendMediaGroup = copy(replyToMessageId = Some(id))
+
+  /** Pass ''True'', if the message should be sent even if the specified replied-to message is not found
+    */
   def withAllowSendingWithoutReply(allow: Boolean): SendMediaGroup = copy(allowSendingWithoutReply = Some(allow))
 }
