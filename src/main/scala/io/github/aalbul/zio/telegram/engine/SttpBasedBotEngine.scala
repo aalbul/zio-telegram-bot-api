@@ -7,7 +7,7 @@ import io.github.aalbul.zio.telegram.engine.BotEngine.{ApiCommandExecutionExcept
 import io.github.aalbul.zio.telegram.engine.SttpBasedBotEngine.*
 import sttp.capabilities.WebSockets
 import sttp.capabilities.zio.ZioStreams
-import sttp.client3.{Identity, RequestT, SttpBackend, UriContext, asStreamUnsafe, basicRequest, multipart, multipartFile}
+import sttp.client3.{asStreamUnsafe, basicRequest, multipart, multipartFile, Identity, RequestT, SttpBackend, UriContext}
 import sttp.model.MediaType
 import zio.stream.ZStream
 import zio.{Task, URLayer, ZIO, ZLayer}

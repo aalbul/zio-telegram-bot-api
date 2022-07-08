@@ -6,7 +6,7 @@ import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 object UnbanChatMember {
   @ConfiguredJsonCodec(encodeOnly = true)
-  case class UnbanChatMemberPayload(chatId: String, userId: String, onlyIfBanned: Option[Boolean])
+  case class UnbanChatMemberPayload(chatId: String, userId: Long, onlyIfBanned: Option[Boolean])
 
   /** Constructs minimal [[UnbanChatMember]] command
     * @param chatId
@@ -17,7 +17,7 @@ object UnbanChatMember {
     * @return
     *   [[UnbanChatMember]] builder
     */
-  def of(chatId: String, userId: String): UnbanChatMember = UnbanChatMember(
+  def of(chatId: String, userId: Long): UnbanChatMember = UnbanChatMember(
     UnbanChatMemberPayload(
       chatId = chatId,
       userId = userId,

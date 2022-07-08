@@ -8,7 +8,7 @@ object PromoteChatMember {
   @ConfiguredJsonCodec(encodeOnly = true)
   case class PromoteChatMemberPayload(
     chatId: String,
-    userId: String,
+    userId: Long,
     isAnonymous: Option[Boolean],
     canManageChat: Option[Boolean],
     canPostMessages: Option[Boolean],
@@ -31,7 +31,7 @@ object PromoteChatMember {
     * @return
     *   [[PromoteChatMember]] builder
     */
-  def of(chatId: String, userId: String): PromoteChatMember = PromoteChatMember(
+  def of(chatId: String, userId: Long): PromoteChatMember = PromoteChatMember(
     PromoteChatMemberPayload(
       chatId = chatId,
       userId = userId,

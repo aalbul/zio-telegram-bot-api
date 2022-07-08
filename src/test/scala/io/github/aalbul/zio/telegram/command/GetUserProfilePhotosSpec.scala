@@ -9,12 +9,12 @@ class GetUserProfilePhotosSpec extends BaseSpec {
   trait Scope {
     val command: Command[UserProfilePhotos] =
       GetUserProfilePhotos
-        .of("661")
+        .of(661)
         .withOffset(2)
         .withLimit(50)
 
     val payload: GetUserProfilePhotosPayload = GetUserProfilePhotosPayload(
-      userId = "661",
+      userId = 661,
       offset = Some(2),
       limit = Some(50)
     )

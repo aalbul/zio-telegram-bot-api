@@ -11,7 +11,7 @@ object RestrictChatMember {
   @ConfiguredJsonCodec(encodeOnly = true)
   case class RestrictChatMemberPayload(
     chatId: String,
-    userId: String,
+    userId: Long,
     permissions: ChatPermissions,
     untilDate: Option[Instant]
   )
@@ -27,7 +27,7 @@ object RestrictChatMember {
     * @return
     *   [[RestrictChatMember]] builder
     */
-  def of(chatId: String, userId: String, permissions: ChatPermissions): RestrictChatMember = RestrictChatMember(
+  def of(chatId: String, userId: Long, permissions: ChatPermissions): RestrictChatMember = RestrictChatMember(
     RestrictChatMemberPayload(chatId = chatId, userId = userId, permissions = permissions, untilDate = None)
   )
 }

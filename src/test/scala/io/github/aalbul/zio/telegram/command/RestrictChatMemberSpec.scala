@@ -8,12 +8,12 @@ class RestrictChatMemberSpec extends BaseSpec {
   trait Scope {
     val command: Command[Boolean] =
       RestrictChatMember
-        .of(chatId = "441", userId = "usr-31", permissions = chatPermissions1)
+        .of(chatId = "441", userId = 31, permissions = chatPermissions1)
         .withUntilDate(instant2)
 
     val payload: RestrictChatMemberPayload = RestrictChatMemberPayload(
       chatId = "441",
-      userId = "usr-31",
+      userId = 31,
       permissions = chatPermissions1,
       untilDate = Some(instant2)
     )

@@ -20,8 +20,7 @@ object SendContact {
     replyMarkup: Option[Markup]
   )
 
-  /**
-    * Constructs minimal [[SendContact]] command
+  /** Constructs minimal [[SendContact]] command
     * @param chatId
     *   Unique identifier for the target chat or username of the target channel (in the format @channelusername)
     * @param phoneNumber

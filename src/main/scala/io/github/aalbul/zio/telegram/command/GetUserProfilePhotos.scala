@@ -7,7 +7,7 @@ import io.github.aalbul.zio.telegram.domain.UserProfilePhotos
 
 object GetUserProfilePhotos {
   @ConfiguredJsonCodec(encodeOnly = true)
-  case class GetUserProfilePhotosPayload(userId: String, offset: Option[Long], limit: Option[Long])
+  case class GetUserProfilePhotosPayload(userId: Long, offset: Option[Long], limit: Option[Long])
 
   /** Constructs minimal [[GetUserProfilePhotos]] command
     * @param userId
@@ -15,7 +15,7 @@ object GetUserProfilePhotos {
     * @return
     *   [[GetUserProfilePhotos]] builder
     */
-  def of(userId: String): GetUserProfilePhotos = GetUserProfilePhotos(
+  def of(userId: Long): GetUserProfilePhotos = GetUserProfilePhotos(
     GetUserProfilePhotosPayload(
       userId = userId,
       offset = None,

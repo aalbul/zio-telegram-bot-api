@@ -1,6 +1,6 @@
 {
   "chat_id": "441",
-  "user_id": "usr-31",
+  "user_id": 31,
   "permissions": {
     "can_send_messages": true,
     "can_send_media_messages": false,

@@ -8,7 +8,7 @@ class PromoteChatMemberSpec extends BaseSpec {
   trait Scope {
     val command: Command[Boolean] =
       PromoteChatMember
-        .of(chatId = "445", userId = "usr-1")
+        .of(chatId = "445", userId = 12)
         .withAsAnonymous(true)
         .withCanManageChat(false)
         .withCanPostMessages(true)
@@ -23,7 +23,7 @@ class PromoteChatMemberSpec extends BaseSpec {
 
     val payload: PromoteChatMemberPayload = PromoteChatMemberPayload(
       chatId = "445",
-      userId = "usr-1",
+      userId = 12,
       isAnonymous = Some(true),
       canManageChat = Some(false),
       canPostMessages = Some(true),

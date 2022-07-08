@@ -10,7 +10,7 @@ object BanChatMember {
   @ConfiguredJsonCodec(encodeOnly = true)
   case class BanChatMemberPayload(
     chatId: String,
-    userId: String,
+    userId: Long,
     untilDate: Option[Instant],
     revokeMessages: Option[Boolean]
   )
@@ -25,7 +25,7 @@ object BanChatMember {
     * @return
     *   [[BanChatMember]] builder
     */
-  def of(chatId: String, userId: String): BanChatMember = BanChatMember(
+  def of(chatId: String, userId: Long): BanChatMember = BanChatMember(
     BanChatMemberPayload(chatId = chatId, userId = userId, untilDate = None, revokeMessages = None)
   )
 }

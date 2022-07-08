@@ -8,12 +8,12 @@ class UnbanChatMemberSpec extends BaseSpec {
   trait Scope {
     val command: Command[Boolean] =
       UnbanChatMember
-        .of(chatId = "881", userId = "misterx")
+        .of(chatId = "881", userId = 67)
         .withOnlyIfBanned(true)
 
     val payload: UnbanChatMemberPayload = UnbanChatMemberPayload(
       chatId = "881",
-      userId = "misterx",
+      userId = 67,
       onlyIfBanned = Some(true)
     )
   }

@@ -310,7 +310,7 @@ trait Bot {
     * @return
     *   [[GetUserProfilePhotos]] builder
     */
-  def getUserProfilePhotos(userId: String): GetUserProfilePhotos
+  def getUserProfilePhotos(userId: Long): GetUserProfilePhotos
 
   /** Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can
     * download files of up to 20MB in size. On success, a [[File]] object is returned. The file can then be downloaded
@@ -338,7 +338,7 @@ trait Bot {
     * @return
     *   [[BanChatMember]] builder
     */
-  def banChatMember(chatId: String, userId: String): BanChatMember
+  def banChatMember(chatId: String, userId: Long): BanChatMember
 
   /** Use this method to unban a previously banned user in a supergroup or channel. The user will not return to the
     * group or channel automatically, but will be able to join via link, etc. The bot must be an administrator for this
@@ -354,7 +354,7 @@ trait Bot {
     * @return
     *   [[UnbanChatMember]] builder
     */
-  def unbanChatMember(chatId: String, userId: String): UnbanChatMember
+  def unbanChatMember(chatId: String, userId: Long): UnbanChatMember
 
   /** Use this method to restrict a user in a supergroup. The bot must be an administrator in the supergroup for this to
     * work and must have the appropriate administrator rights. Pass ''True'' for all permissions to lift restrictions
@@ -369,7 +369,7 @@ trait Bot {
     * @return
     *   [[RestrictChatMember]] builder
     */
-  def restrictChatMember(chatId: String, userId: String, permissions: ChatPermissions): RestrictChatMember
+  def restrictChatMember(chatId: String, userId: Long, permissions: ChatPermissions): RestrictChatMember
 
   /** Use this method to promote or demote a user in a supergroup or a channel. The bot must be an administrator in the
     * chat for this to work and must have the appropriate administrator rights. Pass ''False'' for all boolean
@@ -382,7 +382,7 @@ trait Bot {
     * @return
     *   [[PromoteChatMember]] builder
     */
-  def promoteChatMember(chatId: String, userId: String): PromoteChatMember
+  def promoteChatMember(chatId: String, userId: Long): PromoteChatMember
 
   /** Use this method to set a custom title for an administrator in a supergroup promoted by the bot. Returns ''True''
     * on success.

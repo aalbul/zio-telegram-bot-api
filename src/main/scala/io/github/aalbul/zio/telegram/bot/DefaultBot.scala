@@ -49,13 +49,13 @@ class DefaultBot extends Bot {
     SendPoll.of(chatId, question, options)
   override def sendDice(chatId: String): SendDice = SendDice.of(chatId)
   override def sendChatAction(chatId: String, action: ChatAction): SendChatAction = SendChatAction.of(chatId, action)
-  override def getUserProfilePhotos(userId: String): GetUserProfilePhotos = GetUserProfilePhotos.of(userId)
+  override def getUserProfilePhotos(userId: Long): GetUserProfilePhotos = GetUserProfilePhotos.of(userId)
   override def getFile(fileId: String): GetFile = GetFile.of(fileId)
-  override def banChatMember(chatId: String, userId: String): BanChatMember = BanChatMember.of(chatId, userId)
-  override def unbanChatMember(chatId: String, userId: String): UnbanChatMember = UnbanChatMember.of(chatId, userId)
-  override def restrictChatMember(chatId: String, userId: String, permissions: ChatPermissions): RestrictChatMember =
+  override def banChatMember(chatId: String, userId: Long): BanChatMember = BanChatMember.of(chatId, userId)
+  override def unbanChatMember(chatId: String, userId: Long): UnbanChatMember = UnbanChatMember.of(chatId, userId)
+  override def restrictChatMember(chatId: String, userId: Long, permissions: ChatPermissions): RestrictChatMember =
     RestrictChatMember.of(chatId, userId, permissions)
-  override def promoteChatMember(chatId: String, userId: String): PromoteChatMember =
+  override def promoteChatMember(chatId: String, userId: Long): PromoteChatMember =
     PromoteChatMember.of(chatId, userId)
   override def setChatAdministratorCustomTitle(
     chatId: String,

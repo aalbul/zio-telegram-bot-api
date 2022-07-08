@@ -11,13 +11,13 @@ class BanChatMemberSpec extends BaseSpec {
     private val date = Instant.parse("2022-06-10T08:12:51.00Z")
 
     val command: Command[Boolean] = BanChatMember
-      .of(chatId = "881", userId = "misterx")
+      .of(chatId = "881", userId = 55)
       .withUntilDate(date)
       .withRevokeMessages(true)
 
     val payload: BanChatMemberPayload = BanChatMemberPayload(
       chatId = "881",
-      userId = "misterx",
+      userId = 55,
       untilDate = Some(date),
       revokeMessages = Some(true)
     )
