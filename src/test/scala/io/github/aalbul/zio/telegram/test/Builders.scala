@@ -69,17 +69,21 @@ trait Builders {
 
   lazy val chat3: Chat = Chat.of(id = 83, `type` = ChatTypes.Supergroup)
 
-  lazy val message1: Message =
-    Message.of(messageId = 15, date = Instant.parse("2022-06-12T10:15:30.00Z"), chat = chat1)
+  lazy val instant1: Instant = Instant.parse("2022-06-12T10:15:30.00Z")
 
-  lazy val message2: Message =
-    Message.of(messageId = 16, date = Instant.parse("2022-06-12T10:41:32.00Z"), chat = chat2)
+  lazy val instant2: Instant = Instant.parse("2022-06-12T10:41:32.00Z")
 
-  lazy val message3: Message =
-    Message.of(messageId = 17, date = Instant.parse("2022-06-13T06:15:11.00Z"), chat = chat3)
+  lazy val instant3: Instant = Instant.parse("2022-06-13T06:15:11.00Z")
 
-  lazy val message4: Message =
-    Message.of(messageId = 18, date = Instant.parse("2022-06-13T06:18:10.00Z"), chat = chat3)
+  private val instant4: Instant = Instant.parse("2022-06-13T06:18:10.00Z")
+
+  lazy val message1: Message = Message.of(messageId = 15, date = instant1, chat = chat1)
+
+  lazy val message2: Message = Message.of(messageId = 16, date = instant2, chat = chat2)
+
+  lazy val message3: Message = Message.of(messageId = 17, date = instant3, chat = chat3)
+
+  lazy val message4: Message = Message.of(messageId = 18, date = instant4, chat = chat3)
 
   lazy val update1: Update = Update.of(updateId = 66).copy(message = Some(message1))
   lazy val update2: Update = Update.of(updateId = 67).copy(message = Some(message2))

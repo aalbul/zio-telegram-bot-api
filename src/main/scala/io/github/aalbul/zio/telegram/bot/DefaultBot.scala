@@ -53,6 +53,8 @@ class DefaultBot extends Bot {
   override def getFile(fileId: String): GetFile = GetFile.of(fileId)
   override def banChatMember(chatId: String, userId: String): BanChatMember = BanChatMember.of(chatId, userId)
   override def unbanChatMember(chatId: String, userId: String): UnbanChatMember = UnbanChatMember.of(chatId, userId)
+  override def restrictChatMember(chatId: String, userId: String, permissions: ChatPermissions): RestrictChatMember =
+    RestrictChatMember.of(chatId, userId, permissions)
   override def setChatPermissions(chatId: String, permissions: ChatPermissions): SetChatPermissions =
     SetChatPermissions.of(chatId, permissions)
 }

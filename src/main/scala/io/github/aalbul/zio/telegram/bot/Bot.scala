@@ -356,6 +356,21 @@ trait Bot {
     */
   def unbanChatMember(chatId: String, userId: String): UnbanChatMember
 
+  /** Use this method to restrict a user in a supergroup. The bot must be an administrator in the supergroup for this to
+    * work and must have the appropriate administrator rights. Pass ''True'' for all permissions to lift restrictions
+    * from a user. Returns ''True'' on success.
+    *
+    * @param chatId
+    *   Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+    * @param userId
+    *   Unique identifier of the target user
+    * @param permissions
+    *   A JSON-serialized object for new user permissions
+    * @return
+    *   [[RestrictChatMember]] builder
+    */
+  def restrictChatMember(chatId: String, userId: String, permissions: ChatPermissions): RestrictChatMember
+
   /** Use this method to set default chat permissions for all members. The bot must be an administrator in the group or
     * a supergroup for this to work and must have the ''can_restrict_members'' administrator rights. Returns ''True'' on
     * success.
