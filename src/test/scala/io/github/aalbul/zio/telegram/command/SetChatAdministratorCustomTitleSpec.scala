@@ -7,11 +7,11 @@ import io.github.aalbul.zio.telegram.test.BaseSpec
 class SetChatAdministratorCustomTitleSpec extends BaseSpec {
   trait Scope {
     val command: Command[Boolean] =
-      SetChatAdministratorCustomTitle.of(chatId = "126", userId = "usr-5", customTitle = "test title")
+      SetChatAdministratorCustomTitle.of(chatId = "126", userId = 55, customTitle = "test title")
 
     val payload: SetChatAdministratorCustomTitlePayload = SetChatAdministratorCustomTitlePayload(
       chatId = "126",
-      userId = "usr-5",
+      userId = 55,
       customTitle = "test title"
     )
   }

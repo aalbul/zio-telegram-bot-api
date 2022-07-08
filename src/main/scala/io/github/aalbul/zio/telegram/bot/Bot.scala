@@ -398,9 +398,23 @@ trait Bot {
     */
   def setChatAdministratorCustomTitle(
     chatId: String,
-    userId: String,
+    userId: Long,
     customTitle: String
   ): SetChatAdministratorCustomTitle
+
+  /** Use this method to ban a channel chat in a supergroup or a channel. Until the chat is
+    * [[https://core.telegram.org/bots/api#unbanchatsenderchat unbanned]], the owner of the banned chat won't be able to
+    * send messages on behalf of any of their channels. The bot must be an administrator in the supergroup or channel
+    * for this to work and must have the appropriate administrator rights. Returns ''True'' on success.
+    *
+    * @param chatId
+    *   Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+    * @param senderChatId
+    *   Unique identifier of the target sender chat
+    * @return
+    *   [[BanChatSenderChat]] builder
+    */
+  def banChatSenderChat(chatId: String, senderChatId: Long): BanChatSenderChat
 
   /** Use this method to set default chat permissions for all members. The bot must be an administrator in the group or
     * a supergroup for this to work and must have the ''can_restrict_members'' administrator rights. Returns ''True'' on

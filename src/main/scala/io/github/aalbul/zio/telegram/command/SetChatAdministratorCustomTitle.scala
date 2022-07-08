@@ -6,7 +6,7 @@ import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 object SetChatAdministratorCustomTitle {
   @ConfiguredJsonCodec(encodeOnly = true)
-  case class SetChatAdministratorCustomTitlePayload(chatId: String, userId: String, customTitle: String)
+  case class SetChatAdministratorCustomTitlePayload(chatId: String, userId: Long, customTitle: String)
 
   /** Constructs minimal [[SetChatAdministratorCustomTitle]] command
     * @param chatId
@@ -18,7 +18,7 @@ object SetChatAdministratorCustomTitle {
     * @return
     *   [[SetChatAdministratorCustomTitle]] builder
     */
-  def of(chatId: String, userId: String, customTitle: String): SetChatAdministratorCustomTitle =
+  def of(chatId: String, userId: Long, customTitle: String): SetChatAdministratorCustomTitle =
     SetChatAdministratorCustomTitle(
       SetChatAdministratorCustomTitlePayload(chatId, userId, customTitle)
     )
