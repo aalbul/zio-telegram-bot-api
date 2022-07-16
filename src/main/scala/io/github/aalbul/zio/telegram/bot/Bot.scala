@@ -4,6 +4,7 @@ import io.github.aalbul.zio.telegram.command.*
 import io.github.aalbul.zio.telegram.domain.*
 import io.github.aalbul.zio.telegram.domain.ChatActions.ChatAction
 import io.github.aalbul.zio.telegram.engine.BotEngine
+import io.github.aalbul.zio.telegram.projection.{ProjectionBuilder, UpdateProjection}
 import zio.stream.ZStream
 
 trait Bot {
@@ -40,6 +41,12 @@ trait Bot {
     *   [[ZStream]] of [[Update]]'s
     */
   def streamUpdates(chunkSize: Long = 100L): ZStream[BotEngine, Throwable, Update]
+
+  /** Create stream projection builder
+    * @return
+    *   [[ProjectionBuilder]] instance
+    */
+  def project: ProjectionBuilder
 
   /** Use this method to send text messages. On success, the sent [[Message]] is returned.
     * @param chatId

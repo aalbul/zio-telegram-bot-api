@@ -2,6 +2,10 @@ package io.github.aalbul.zio.telegram.test
 
 import io.github.aalbul.zio.telegram.command.FileDescriptor.{pathDescriptor, urlDescriptor}
 import io.github.aalbul.zio.telegram.domain.*
+import io.github.aalbul.zio.telegram.projection.UpdateProjection
+import io.github.aalbul.zio.telegram.projection.message.*
+import io.github.aalbul.zio.telegram.projection.message.MediaMessageProjection.Media
+import io.github.aalbul.zio.telegram.projection.message.MessageProjection.Data
 
 import java.time.Instant
 
@@ -37,11 +41,18 @@ trait Builders {
     selective = Some(true)
   )
 
+  lazy val loginUrl1: LoginUrl = LoginUrl
+    .of("https://google.com/login")
+    .withBotUsername("bot-1")
+    .withForwardText("forward text")
+    .withRequestWriteAccess(true)
+
   lazy val inlineKeyboardButton1: InlineKeyboardButton = InlineKeyboardButton(
     text = "some button 1",
     url = Some("https://google.com/url1"),
     callbackData = Some("some data"),
     webApp = Some(webAppInfo1),
+    loginUrl = Some(loginUrl1),
     switchInlineQuery = Some("inline query 1"),
     switchInlineQueryCurrentChat = Some("inline query current chat 1"),
     callbackGame = Some(callbackGame1),
@@ -53,6 +64,7 @@ trait Builders {
     url = Some("https://google.com/url2"),
     callbackData = Some("another data"),
     webApp = None,
+    loginUrl = Some(loginUrl1),
     switchInlineQuery = Some("inline query 2"),
     switchInlineQueryCurrentChat = Some("inline query current chat 2"),
     callbackGame = None,
@@ -150,5 +162,342 @@ trait Builders {
     canChangeInfo = Some(false),
     canInviteUsers = Some(false),
     canPinMessages = Some(true)
+  )
+
+  lazy val photoSize1: PhotoSize = PhotoSize(
+    fileId = "photo-size-1",
+    fileUniqueId = "unique-photo-size-1",
+    width = 300,
+    height = 200,
+    fileSize = Some(11)
+  )
+
+  lazy val photoSize2: PhotoSize = PhotoSize(
+    fileId = "photo-size-2",
+    fileUniqueId = "unique-photo-size-2",
+    width = 1300,
+    height = 500,
+    fileSize = Some(421)
+  )
+
+  lazy val animation1: Animation = Animation(
+    fileId = "animation-file-1",
+    fileUniqueId = "unique-animation-file-1",
+    width = 640,
+    height = 480,
+    duration = 50,
+    thumb = Some(photoSize1),
+    fileName = Some("animation-file"),
+    mimeType = Some("image/gif"),
+    fileSize = Some(450)
+  )
+
+  lazy val document1: Document = Document(
+    fileId = "document-file-1",
+    fileUniqueId = "unique-document-file-1",
+    thumb = Some(photoSize2),
+    fileName = Some("document-1"),
+    mimeType = None,
+    fileSize = Some(5000)
+  )
+
+  lazy val audio1: Audio = Audio(
+    fileId = "audio-file-1",
+    fileUniqueId = "unique-audio-file-1",
+    duration = 422,
+    performer = Some("Amia Venera Landscape"),
+    title = Some("A New Aurora"),
+    fileName = Some("02 - A New Aurora.flac"),
+    mimeType = Some("audio/x-flac,audio/flac"),
+    fileSize = Some(300000000),
+    thumb = Some(photoSize1)
+  )
+
+  lazy val contact1: Contact = Contact(
+    phoneNumber = "+31680822212",
+    firstName = "John",
+    lastName = Some("Wick"),
+    userId = Some(1),
+    vcard = Some("vcard")
+  )
+
+  lazy val dice1: Dice = Dice(
+    emoji = "🏀",
+    value = 2
+  )
+
+  lazy val game1: Game = Game(
+    title = "Guess who",
+    description =
+      "Guess Who? is a two-player board game where players each guess the identity of the other's chosen character",
+    photo = Seq(photoSize1, photoSize2),
+    text = Some("Some text"),
+    textEntities = Some(Seq(messageEntity1)),
+    animation = Some(animation1)
+  )
+
+  lazy val location1: Location = Location(
+    longitude = 52.22,
+    latitude = 4.55,
+    horizontalAccuracy = Some(1.23),
+    livePeriod = Some(50),
+    heading = Some(23),
+    proximityAlertRadius = Some(51)
+  )
+
+  lazy val poll1: Poll = Poll(
+    id = "poll-1",
+    question = "Favorite fruit",
+    options = Seq(
+      PollOption(text = "Apple", voterCount = 10),
+      PollOption(text = "Peer", voterCount = 3),
+      PollOption(text = "Watermelon", voterCount = 8)
+    ),
+    totalVoterCount = 21,
+    isClosed = true,
+    isAnonymous = false,
+    `type` = PollTypes.Quiz,
+    allowsMultipleAnswers = false,
+    correctOptionId = Some(0),
+    explanation = Some("Which is your favorite fruit of all time?"),
+    explanationEntities = Some(Seq(messageEntity1)),
+    openPeriod = Some(24),
+    closeDate = Some(500)
+  )
+
+  lazy val maskPosition1: MaskPosition = MaskPosition(
+    point = "point-1",
+    xShift = 10.2,
+    yShift = 5.4,
+    scale = 1.3
+  )
+
+  lazy val sticker1: Sticker = Sticker(
+    fileId = "sticker-1",
+    fileUniqueId = "unique-sticker-1",
+    width = 80,
+    height = 50,
+    isAnimated = true,
+    isVideo = false,
+    thumb = Some(photoSize1),
+    emoji = Some("🎰"),
+    setName = Some("set-1"),
+    maskPosition = Some(maskPosition1)
+  )
+
+  lazy val venue1: Venue = Venue(
+    location = location1,
+    title = "NEMO Science Museum",
+    address = "Oosterdok 2, 1011 VX Amsterdam",
+    foursquareId = Some("fsq1"),
+    foursquareType = Some("fsq-t-1"),
+    googlePlaceId = Some("gpi1"),
+    googlePlaceType = Some("gp-t-1")
+  )
+
+  lazy val video1: Video = Video(
+    fileId = "video-1",
+    fileUniqueId = "unique-video-1",
+    width = 640,
+    height = 480,
+    duration = 15,
+    thumb = Some(photoSize1),
+    fileName = Some("video-1"),
+    mimeType = Some("video/mp4"),
+    fileSize = Some(54000)
+  )
+
+  lazy val videoNote1: VideoNote = VideoNote(
+    fileId = "video-note-1",
+    fileUniqueId = "unique-video-note-1",
+    length = 4000,
+    duration = 23,
+    thumb = Some(photoSize2),
+    fileSize = Some(64441)
+  )
+
+  lazy val voice1: Voice = Voice(
+    fileId = "voice-1",
+    fileUniqueId = "unique-voice-1",
+    duration = 50,
+    mimeType = Some("audio/mpeg"),
+    fileSize = Some(1355)
+  )
+
+  lazy val animationMessage1: Message = Message
+    .of(messageId = 411, date = instant1, chat = chat1)
+    .withFrom(user1)
+    .withAnimation(animation1)
+    .withDocument(document1)
+
+  lazy val audioMessage1: Message = Message
+    .of(messageId = 412, date = instant2, chat = chat1)
+    .withFrom(user1)
+    .withAudio(audio1)
+
+  lazy val contactMessage1: Message = Message
+    .of(messageId = 413, date = instant3, chat = chat2)
+    .withFrom(user1)
+    .withContact(contact1)
+
+  lazy val diceMessage1: Message = Message
+    .of(messageId = 414, date = instant1, chat = chat1)
+    .withFrom(user1)
+    .withDice(dice1)
+
+  lazy val documentMessage1: Message = Message
+    .of(messageId = 415, date = instant3, chat = chat1)
+    .withFrom(user1)
+    .withDocument(document1)
+
+  lazy val gameMessage1: Message = Message
+    .of(messageId = 416, date = instant4, chat = chat1)
+    .withFrom(user1)
+    .withGame(game1)
+
+  lazy val locationMessage1: Message = Message
+    .of(messageId = 417, date = instant1, chat = chat1)
+    .withFrom(user1)
+    .withLocation(location1)
+
+  lazy val photoMessage1: Message = Message
+    .of(messageId = 418, date = instant1, chat = chat1)
+    .withFrom(user1)
+    .withPhoto(Seq(photoSize1, photoSize2))
+
+  lazy val pollMessage1: Message = Message
+    .of(messageId = 419, date = instant3, chat = chat1)
+    .withFrom(user1)
+    .withPoll(poll1)
+
+  lazy val stickerMessage1: Message = Message
+    .of(messageId = 420, date = instant3, chat = chat1)
+    .withFrom(user1)
+    .withSticker(sticker1)
+
+  lazy val textMessage1: Message = Message
+    .of(messageId = 421, date = instant1, chat = chat1)
+    .withFrom(user1)
+    .withEntities(Seq(messageEntity1))
+    .withText("hello world")
+
+  lazy val venueMessage1: Message = Message
+    .of(messageId = 422, date = instant2, chat = chat1)
+    .withFrom(user1)
+    .withVenue(venue1)
+
+  lazy val videoMessage1: Message = Message
+    .of(messageId = 423, date = instant2, chat = chat1)
+    .withFrom(user1)
+    .withVideo(video1)
+
+  lazy val videoNoteMessage1: Message = Message
+    .of(messageId = 424, date = instant3, chat = chat1)
+    .withFrom(user1)
+    .withVideoNote(videoNote1)
+
+  lazy val voiceMessage1: Message = Message
+    .of(messageId = 425, date = instant1, chat = chat3)
+    .withFrom(user1)
+    .withVoice(voice1)
+
+  lazy val allMessages: Set[Message] = Set(
+    animationMessage1,
+    audioMessage1,
+    contactMessage1,
+    diceMessage1,
+    documentMessage1,
+    gameMessage1,
+    locationMessage1,
+    photoMessage1,
+    pollMessage1,
+    stickerMessage1,
+    textMessage1,
+    venueMessage1,
+    videoMessage1,
+    videoNoteMessage1,
+    voiceMessage1
+  )
+
+  lazy val animationMessageProjection: UpdateProjection = AnimationMessage(
+    data = Data.of(animationMessage1).get,
+    media = Media.of(animationMessage1),
+    document = document1,
+    animation = animation1
+  )
+
+  lazy val audioMessageProjection: UpdateProjection = AudioMessage(
+    data = Data.of(audioMessage1).get,
+    media = Media.of(audioMessage1),
+    audio = audio1
+  )
+
+  lazy val contactMessageProjection: UpdateProjection = ContactMessage(
+    data = Data.of(contactMessage1).get,
+    contact = contact1
+  )
+
+  lazy val diceMessageProjection: UpdateProjection = DiceMessage(
+    data = Data.of(diceMessage1).get,
+    dice = dice1
+  )
+
+  lazy val documentMessageProjection: UpdateProjection = DocumentMessage(
+    data = Data.of(documentMessage1).get,
+    media = Media.of(documentMessage1),
+    document = document1
+  )
+
+  lazy val gameMessageProjection: UpdateProjection = GameMessage(
+    data = Data.of(gameMessage1).get,
+    game = game1
+  )
+
+  lazy val locationMessageProjection: UpdateProjection = LocationMessage(
+    data = Data.of(locationMessage1).get,
+    location = location1
+  )
+
+  lazy val photoMessageProjection: UpdateProjection = PhotoMessage(
+    data = Data.of(photoMessage1).get,
+    media = Media.of(photoMessage1),
+    photo = Seq(photoSize1, photoSize2)
+  )
+
+  lazy val pollMessageProjection: UpdateProjection = PollMessage(
+    data = Data.of(pollMessage1).get,
+    poll = poll1
+  )
+
+  lazy val stickerMessageProjection: UpdateProjection = StickerMessage(
+    data = Data.of(stickerMessage1).get,
+    sticker = sticker1
+  )
+
+  lazy val textMessageProjection: UpdateProjection = TextMessage(
+    data = Data.of(textMessage1).get,
+    entities = Seq(messageEntity1),
+    text = "hello world"
+  )
+
+  lazy val venueMessageProjection: UpdateProjection = VenueMessage(
+    data = Data.of(venueMessage1).get,
+    venue = venue1
+  )
+
+  lazy val videoMessageProjection: UpdateProjection = VideoMessage(
+    data = Data.of(videoMessage1).get,
+    media = Media.of(videoMessage1),
+    video = video1
+  )
+
+  lazy val videoNoteMessageProjection: UpdateProjection = VideoNoteMessage(
+    data = Data.of(videoNoteMessage1).get,
+    videoNote = videoNote1
+  )
+
+  lazy val voiceMessageProjection: UpdateProjection = VoiceMessage(
+    data = Data.of(voiceMessage1).get,
+    voice = voice1
   )
 }
