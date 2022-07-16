@@ -33,6 +33,9 @@ class ProjectionBuilder(projector: UpdateProjector[UpdateProjection]) {
   def withVideoMessage: ProjectionBuilder = plus(UpdateProjector[VideoMessage])
   def withVideoNoteMessage: ProjectionBuilder = plus(UpdateProjector[VideoNoteMessage])
   def withVoiceMessage: ProjectionBuilder = plus(UpdateProjector[VoiceMessage])
+  def withNewChatMembersMessage: ProjectionBuilder = plus(UpdateProjector[NewChatMembersMessage])
+  def withLeftChatMemberMessage: ProjectionBuilder = plus(UpdateProjector[LeftChatMemberMessage])
+  def withNewChatTitleMessage: ProjectionBuilder = plus(UpdateProjector[NewChatTitleMessage])
 
   def stream(chunkSize: Long = 100L): ZStream[BotEngine & Bot, Throwable, UpdateProjection] =
     ZStream

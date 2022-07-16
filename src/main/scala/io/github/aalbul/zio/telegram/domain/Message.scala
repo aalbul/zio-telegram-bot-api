@@ -268,6 +268,9 @@ case class Message(
     */
   def withNewChatMembers(members: Seq[User]): Message = copy(newChatMembers = Some(members))
 
+  /** A member was removed from the group, information about them (this member may be the bot itself) */
+  def withLeftChatMember(member: User): Message = copy(leftChatMember = Some(member))
+
   /** A chat title was changed to this value */
   def withNewChatTitle(title: String): Message = copy(newChatTitle = Some(title))
 

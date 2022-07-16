@@ -401,6 +401,21 @@ trait Builders {
     .withFrom(user1)
     .withVoice(voice1)
 
+  lazy val newChatMembersMessage1: Message = Message
+    .of(messageId = 426, date = instant2, chat = chat2)
+    .withFrom(user1)
+    .withNewChatMembers(Seq(user1))
+
+  lazy val leftChatMemberMessage1: Message = Message
+    .of(messageId = 427, date = instant1, chat = chat2)
+    .withFrom(user1)
+    .withLeftChatMember(user1)
+
+  lazy val newChatTitleMessage1: Message = Message
+    .of(messageId = 428, date = instant3, chat = chat1)
+    .withFrom(user1)
+    .withNewChatTitle("title one")
+
   lazy val allMessages: Set[Message] = Set(
     animationMessage1,
     audioMessage1,
@@ -416,7 +431,10 @@ trait Builders {
     venueMessage1,
     videoMessage1,
     videoNoteMessage1,
-    voiceMessage1
+    voiceMessage1,
+    newChatMembersMessage1,
+    leftChatMemberMessage1,
+    newChatTitleMessage1
   )
 
   lazy val animationMessageProjection: UpdateProjection = AnimationMessage(
@@ -499,5 +517,20 @@ trait Builders {
   lazy val voiceMessageProjection: UpdateProjection = VoiceMessage(
     data = Data.of(voiceMessage1).get,
     voice = voice1
+  )
+
+  lazy val newChatMembersProjection: UpdateProjection = NewChatMembersMessage(
+    data = Data.of(newChatMembersMessage1).get,
+    newMembers = Seq(user1)
+  )
+
+  lazy val leftChatMemberProjection: UpdateProjection = LeftChatMemberMessage(
+    data = Data.of(leftChatMemberMessage1).get,
+    member = user1
+  )
+
+  lazy val newChatTitleProjection: UpdateProjection = NewChatTitleMessage(
+    data = Data.of(newChatTitleMessage1).get,
+    newTitle = "title one"
   )
 }
