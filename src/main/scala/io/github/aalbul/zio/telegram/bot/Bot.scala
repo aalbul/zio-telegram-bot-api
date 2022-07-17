@@ -3,6 +3,7 @@ package io.github.aalbul.zio.telegram.bot
 import io.github.aalbul.zio.telegram.command.*
 import io.github.aalbul.zio.telegram.domain.*
 import io.github.aalbul.zio.telegram.domain.ChatActions.ChatAction
+import io.github.aalbul.zio.telegram.domain.UpdateTypes.UpdateType
 import io.github.aalbul.zio.telegram.engine.BotEngine
 import io.github.aalbul.zio.telegram.projection.{ProjectionBuilder, UpdateProjection}
 import zio.stream.ZStream
@@ -37,10 +38,22 @@ trait Bot {
   /** Create infinite stream of updates
     * @param chunkSize
     *   Limits the number of updates to be retrieved per chunk. Values between 1-100 are accepted. Defaults to 100.
+    * @param allowedTypes
+    *   A list of the update types you want your bot to receive. For example, specify [“message”, “edited_channel_post”,
+    *   “callback_query”] to only receive updates of these types. See Update for a complete list of available update
+    *   types. Specify an empty list to receive all update types except chat_member (default). If not specified, the
+    *   previous setting will be used.
+    *
+    * Please note that this parameter doesn't affect updates created before the call to the getUpdates, so unwanted
+    * updates may be received for a short period of time.
+    *
     * @return
     *   [[ZStream]] of [[Update]]'s
     */
-  def streamUpdates(chunkSize: Long = 100L): ZStream[BotEngine, Throwable, Update]
+  def streamUpdates(
+    chunkSize: Long = 100L,
+    allowedTypes: Set[UpdateType] = Set.empty
+  ): ZStream[BotEngine, Throwable, Update]
 
   /** Create stream projection builder
     * @return

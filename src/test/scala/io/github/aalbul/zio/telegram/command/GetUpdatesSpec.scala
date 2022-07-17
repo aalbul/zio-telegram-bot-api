@@ -1,7 +1,7 @@
 package io.github.aalbul.zio.telegram.command
 
 import io.github.aalbul.zio.telegram.command.GetUpdates.GetUpdatesPayload
-import io.github.aalbul.zio.telegram.domain.Update
+import io.github.aalbul.zio.telegram.domain.{Update, UpdateTypes}
 import io.github.aalbul.zio.telegram.test.BaseSpec
 import io.circe.syntax.EncoderOps
 import zio.durationInt
@@ -14,13 +14,13 @@ class GetUpdatesSpec extends BaseSpec {
         .withOffset(5)
         .withLimit(100)
         .withTimeout(10.minutes)
-        .withAllowedUpdates(Set("group-chat"))
+        .withAllowedUpdates(Set(UpdateTypes.ChannelPost))
 
     val payload: GetUpdatesPayload = GetUpdatesPayload(
       offset = Some(5),
       limit = Some(100),
       timeout = Some(600),
-      allowedUpdates = Some(Set("group-chat"))
+      allowedUpdates = Some(Set(UpdateTypes.ChannelPost))
     )
   }
 

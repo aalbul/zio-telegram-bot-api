@@ -60,7 +60,7 @@ class ProjectionBuilder(projector: UpdateProjector[UpdateProjection]) {
 
   def stream(chunkSize: Long = 100L): ZStream[BotEngine & Bot, Throwable, UpdateProjection] =
     ZStream
-      .unwrap(ZIO.serviceWith[Bot](_.streamUpdates(chunkSize)))
+      .unwrap(ZIO.serviceWith[Bot](_.streamUpdates(chunkSize = chunkSize, allowedTypes = projector.updateTypes)))
       .map(projector.project)
       .collectSome
 }

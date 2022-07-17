@@ -3,6 +3,6 @@
   "limit": 100,
   "timeout": 600,
   "allowed_updates": [
-    "group-chat"
+    "channel_post"
   ]
 }

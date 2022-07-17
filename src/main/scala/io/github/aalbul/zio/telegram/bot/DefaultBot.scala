@@ -2,9 +2,10 @@ package io.github.aalbul.zio.telegram.bot
 
 import io.github.aalbul.zio.telegram.command.*
 import io.github.aalbul.zio.telegram.domain.ChatActions.ChatAction
+import io.github.aalbul.zio.telegram.domain.UpdateTypes.UpdateType
 import io.github.aalbul.zio.telegram.domain.{ChatPermissions, InputMedia, Update}
 import io.github.aalbul.zio.telegram.engine.BotEngine
-import io.github.aalbul.zio.telegram.projection.{ProjectionBuilder, UpdateProjection}
+import io.github.aalbul.zio.telegram.projection.ProjectionBuilder
 import zio.stream.ZStream
 import zio.{ULayer, ZLayer}
 
@@ -16,7 +17,10 @@ class DefaultBot extends Bot {
   override def getMe: GetMe = new GetMe
   override def logOut: LogOut = new LogOut
   override def close: Close = new Close
-  override def streamUpdates(chunkSize: Long = 100L): ZStream[BotEngine, Throwable, Update] = StreamUpdates(chunkSize)
+  override def streamUpdates(
+    chunkSize: Long = 100L,
+    allowedTypes: Set[UpdateType]
+  ): ZStream[BotEngine, Throwable, Update] = StreamUpdates(chunkSize, allowedTypes)
   override def project: ProjectionBuilder = ProjectionBuilder.empty
   override def sendMessage(chatId: String, text: String): SendMessage = SendMessage.of(chatId, text)
   override def forwardMessage(messageId: Long, fromChatId: String, toChatId: String): ForwardMessage =
