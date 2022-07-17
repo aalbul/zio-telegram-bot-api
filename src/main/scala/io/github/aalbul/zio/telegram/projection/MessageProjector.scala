@@ -27,9 +27,7 @@ object MessageProjector {
     MessageProjector[GameMessage],
     MessageProjector[PollMessage],
     MessageProjector[VenueMessage],
-    MessageProjector[NewChatMembersMessage],
-    MessageProjector[LeftChatMemberMessage],
-    MessageProjector[NewChatTitleMessage],
+    ServiceMessageProjection.all,
     MediaMessageProjection.all
   ).reduce(_ <+> _)
 }

@@ -15,4 +15,4 @@ object LeftChatMemberMessage {
     )
 }
 
-case class LeftChatMemberMessage(data: Data, member: User) extends MessageProjection
+case class LeftChatMemberMessage(data: Data, member: User) extends ServiceMessageProjection

@@ -15,4 +15,4 @@ object NewChatMembersMessage {
     )
 }
 
-case class NewChatMembersMessage(data: Data, newMembers: Seq[User]) extends MessageProjection
+case class NewChatMembersMessage(data: Data, newMembers: Seq[User]) extends ServiceMessageProjection

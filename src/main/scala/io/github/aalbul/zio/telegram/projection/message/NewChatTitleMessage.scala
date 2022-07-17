@@ -15,4 +15,4 @@ object NewChatTitleMessage {
     )
 }
 
-case class NewChatTitleMessage(data: Data, newTitle: String) extends MessageProjection
+case class NewChatTitleMessage(data: Data, newTitle: String) extends ServiceMessageProjection

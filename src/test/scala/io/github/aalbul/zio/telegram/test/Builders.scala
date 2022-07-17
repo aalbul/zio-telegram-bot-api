@@ -416,6 +416,21 @@ trait Builders {
     .withFrom(user1)
     .withNewChatTitle("title one")
 
+  lazy val newChatPhotoMessage1: Message = Message
+    .of(messageId = 429, date = instant1, chat = chat1)
+    .withFrom(user1)
+    .withNewChatPhoto(Seq(photoSize2, photoSize1))
+
+  lazy val deleteChatPhotoMessage1: Message = Message
+    .of(messageId = 430, date = instant2, chat = chat1)
+    .withFrom(user1)
+    .withDeleteChatPhoto(true)
+
+  lazy val groupChatCreatedMessage1: Message = Message
+    .of(messageId = 431, date = instant4, chat = chat1)
+    .withFrom(user1)
+    .withGroupChatCreated(true)
+
   lazy val allMessages: Set[Message] = Set(
     animationMessage1,
     audioMessage1,
@@ -434,7 +449,10 @@ trait Builders {
     voiceMessage1,
     newChatMembersMessage1,
     leftChatMemberMessage1,
-    newChatTitleMessage1
+    newChatTitleMessage1,
+    newChatPhotoMessage1,
+    deleteChatPhotoMessage1,
+    groupChatCreatedMessage1
   )
 
   lazy val animationMessageProjection: UpdateProjection = AnimationMessage(
@@ -532,5 +550,18 @@ trait Builders {
   lazy val newChatTitleProjection: UpdateProjection = NewChatTitleMessage(
     data = Data.of(newChatTitleMessage1).get,
     newTitle = "title one"
+  )
+
+  lazy val newChatPhotoProjection: UpdateProjection = NewChatPhotoMessage(
+    data = Data.of(newChatPhotoMessage1).get,
+    newPhoto = Seq(photoSize2, photoSize1)
+  )
+
+  lazy val deleteChatPhotoProjection: UpdateProjection = DeleteChatPhotoMessage(
+    data = Data.of(deleteChatPhotoMessage1).get
+  )
+
+  lazy val groupChatCreatedProjection: UpdateProjection = GroupChatCreatedMessage(
+    data = Data.of(groupChatCreatedMessage1).get
   )
 }
