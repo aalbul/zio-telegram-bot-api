@@ -15,4 +15,4 @@ object MigrateToChatIdMessage {
     )
 }
 
-case class MigrateToChatIdMessage(data: Data, chatId: Long) extends MessageProjection
+case class MigrateToChatIdMessage(data: Data, chatId: Long) extends ServiceMessageProjection

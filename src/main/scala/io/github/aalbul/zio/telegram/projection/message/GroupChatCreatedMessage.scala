@@ -13,4 +13,4 @@ object GroupChatCreatedMessage {
     } yield GroupChatCreatedMessage(data = data)
 }
 
-case class GroupChatCreatedMessage(data: Data) extends MessageProjection
+case class GroupChatCreatedMessage(data: Data) extends ServiceMessageProjection

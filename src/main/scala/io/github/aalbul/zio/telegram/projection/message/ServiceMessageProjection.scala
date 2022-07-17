@@ -4,7 +4,7 @@ import cats.syntax.semigroupk.*
 import io.github.aalbul.zio.telegram.projection.MessageProjector
 
 object ServiceMessageProjection {
-  val all: MessageProjector[MessageProjection] = Seq(
+  val all: MessageProjector[ServiceMessageProjection] = Seq(
     MessageProjector[NewChatMembersMessage],
     MessageProjector[LeftChatMemberMessage],
     MessageProjector[NewChatTitleMessage],
@@ -15,7 +15,16 @@ object ServiceMessageProjection {
     MessageProjector[ChannelChatCreatedMessage],
     MessageProjector[MessageAutoDeleteTimerChangedMessage],
     MessageProjector[MigrateToChatIdMessage],
-    MessageProjector[MigrateFromChatIdMessage]
+    MessageProjector[MigrateFromChatIdMessage],
+    MessageProjector[PinnedMessageMessage],
+    MessageProjector[InvoiceMessage],
+    MessageProjector[SuccessfulPaymentMessage],
+    MessageProjector[ProximityAlertTriggeredMessage],
+    MessageProjector[VideoChatScheduledMessage],
+    MessageProjector[VideoChatStartedMessage],
+    MessageProjector[VideoChatEndedMessage],
+    MessageProjector[VideoChatParticipantsInvitedMessage],
+    MessageProjector[WebAppDataMessage]
   ).reduce(_ <+> _)
 }
 

@@ -338,7 +338,7 @@ case class Message(
   def withPassportData(data: PassportData): Message = copy(passportData = Some(data))
 
   /** Service message. A user in the chat triggered another user's proximity alert while sharing Live Location. */
-  def withProximityAlertTriggered(alert: ProximityAlertTriggered): Message = copy(proximityAlertTriggered = Some(alert))
+  def withProximityAlertTriggered(event: ProximityAlertTriggered): Message = copy(proximityAlertTriggered = Some(event))
 
   /** Service message: video chat scheduled */
   def withVideoChatScheduled(scheduled: VideoChatScheduled): Message = copy(videoChatScheduled = Some(scheduled))

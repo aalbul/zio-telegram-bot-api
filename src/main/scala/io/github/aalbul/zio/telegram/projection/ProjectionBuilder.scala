@@ -45,6 +45,18 @@ class ProjectionBuilder(projector: UpdateProjector[UpdateProjection]) {
     plus(UpdateProjector[MessageAutoDeleteTimerChangedMessage])
   def withMigrateToChatIdMessage: ProjectionBuilder = plus(UpdateProjector[MigrateToChatIdMessage])
   def withMigrateFromChatIdMessage: ProjectionBuilder = plus(UpdateProjector[MigrateFromChatIdMessage])
+  def withPinnedMessageMessage: ProjectionBuilder = plus(UpdateProjector[PinnedMessageMessage])
+  def withInvoiceMessage: ProjectionBuilder = plus(UpdateProjector[InvoiceMessage])
+  def withSuccessfulPaymentMessage: ProjectionBuilder = plus(UpdateProjector[SuccessfulPaymentMessage])
+  def withPassportDataMessage: ProjectionBuilder = plus(UpdateProjector[PassportDataMessage])
+  def withProximityAlertTriggeredMessage: ProjectionBuilder = plus(UpdateProjector[ProximityAlertTriggeredMessage])
+  def withVideoChatScheduledMessage: ProjectionBuilder = plus(UpdateProjector[VideoChatScheduledMessage])
+  def withVideoChatStartedMessage: ProjectionBuilder = plus(UpdateProjector[VideoChatStartedMessage])
+  def withVideoChatEndedMessage: ProjectionBuilder = plus(UpdateProjector[VideoChatEndedMessage])
+  def withVideoChatParticipantsInvitedMessage: ProjectionBuilder = plus(
+    UpdateProjector[VideoChatParticipantsInvitedMessage]
+  )
+  def withWebAppDataMessage: ProjectionBuilder = plus(UpdateProjector[WebAppDataMessage])
 
   def stream(chunkSize: Long = 100L): ZStream[BotEngine & Bot, Throwable, UpdateProjection] =
     ZStream

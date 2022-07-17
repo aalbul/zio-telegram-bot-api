@@ -8,6 +8,8 @@ import io.github.aalbul.zio.telegram.projection.message.MediaMessageProjection.M
 import io.github.aalbul.zio.telegram.projection.message.MessageProjection.Data
 
 import java.time.Instant
+import scala.concurrent.duration.DurationInt
+import scala.jdk.DurationConverters.*
 
 trait Builders {
   lazy val user1: User = User(
@@ -20,6 +22,18 @@ trait Builders {
     canJoinGroups = Some(true),
     canReadAllGroupMessages = Some(true),
     supportsInlineQueries = Some(false)
+  )
+
+  lazy val user2: User = User(
+    id = 2,
+    isBot = true,
+    firstName = "Bot",
+    lastName = Some("Woot"),
+    username = Some("nemesis"),
+    languageCode = Some("en"),
+    canJoinGroups = Some(true),
+    canReadAllGroupMessages = Some(true),
+    supportsInlineQueries = Some(true)
   )
 
   lazy val messageEntity1: MessageEntity = MessageEntity(
@@ -324,6 +338,86 @@ trait Builders {
     fileSize = Some(1355)
   )
 
+  lazy val invoice1: Invoice = Invoice(
+    title = "Shopping",
+    description = "Your invoice",
+    startParameter = "param-1",
+    currency = "EUR",
+    totalAmount = 53
+  )
+
+  lazy val shippingAddress1: ShippingAddress = ShippingAddress(
+    countryCode = "NL",
+    state = "Utrecht",
+    city = "Amersfoort",
+    streetLine1 = "Some Street 1",
+    streetLine2 = "Other",
+    postCode = "3821KL"
+  )
+
+  lazy val orderInfo1: OrderInfo = OrderInfo
+    .of()
+    .withName("John Wick")
+    .withEmail("jwick@google.com")
+    .withPhoneNumber("+312345689")
+    .withShippingAddress(shippingAddress1)
+
+  lazy val successfulPayment1: SuccessfulPayment = SuccessfulPayment
+    .of(
+      currency = "EUR",
+      totalAmount = 53,
+      invoicePayload = "payload - 1",
+      telegramPaymentChargeId = "charge - 1",
+      providerPaymentChargeId = "provider payment - 1"
+    )
+    .withOrderInfo(orderInfo1)
+    .withShippingOptionId("option - 1")
+
+  lazy val encryptedCredentials1: EncryptedCredentials = EncryptedCredentials(
+    data = "data-1",
+    hash = "hash-1",
+    secret = "secret-1"
+  )
+
+  lazy val encryptedPassportElement1: EncryptedPassportElement = EncryptedPassportElement(
+    `type` = PassportElementTypes.Address,
+    data = Some("address-1"),
+    phoneNumber = Some("+31630911234"),
+    email = Some("email@gmail.com"),
+    files = None,
+    frontSide = None,
+    reverseSide = None,
+    selfie = None,
+    translation = None,
+    hash = "hash-1"
+  )
+
+  lazy val passportData1: PassportData = PassportData(
+    data = Seq(encryptedPassportElement1),
+    credentials = encryptedCredentials1
+  )
+
+  lazy val proximityAlertTriggered1: ProximityAlertTriggered = ProximityAlertTriggered(
+    traveler = user1,
+    watcher = user2,
+    distance = 20
+  )
+
+  lazy val videoChatScheduled1: VideoChatScheduled = VideoChatScheduled(startDate = instant4)
+
+  lazy val videoChatStarted1: VideoChatStarted = VideoChatStarted()
+
+  lazy val videoChatEnded1: VideoChatEnded = VideoChatEnded(duration = 10.minutes.toJava)
+
+  lazy val videoChatParticipantsInvited1: VideoChatParticipantsInvited = VideoChatParticipantsInvited(
+    users = Seq(user2, user1)
+  )
+
+  lazy val webAppData1: WebAppData = WebAppData(
+    data = "data-1",
+    buttonText = "button one"
+  )
+
   lazy val messageAutoDeleteTimerChanged1: MessageAutoDeleteTimerChanged =
     MessageAutoDeleteTimerChanged(messageAutoDeleteTime = 30)
 
@@ -459,6 +553,56 @@ trait Builders {
     .withFrom(user1)
     .withMigrateFromChatId(15)
 
+  lazy val pinnedMessageMessage1: Message = Message
+    .of(messageId = 437, date = instant2, chat = chat1)
+    .withFrom(user1)
+    .withPinnedMessage(textMessage1)
+
+  lazy val invoiceMessage1: Message = Message
+    .of(messageId = 438, date = instant1, chat = chat1)
+    .withFrom(user1)
+    .withInvoice(invoice1)
+
+  lazy val successfulPaymentMessage1: Message = Message
+    .of(messageId = 439, date = instant3, chat = chat1)
+    .withFrom(user1)
+    .withSuccessfulPayment(successfulPayment1)
+
+  lazy val passportDataMessage1: Message = Message
+    .of(messageId = 440, date = instant1, chat = chat2)
+    .withFrom(user1)
+    .withPassportData(passportData1)
+
+  lazy val proximityAlertTriggeredMessage1: Message = Message
+    .of(messageId = 441, date = instant3, chat = chat2)
+    .withFrom(user1)
+    .withProximityAlertTriggered(proximityAlertTriggered1)
+
+  lazy val videoChatScheduledMessage1: Message = Message
+    .of(messageId = 442, date = instant2, chat = chat1)
+    .withFrom(user1)
+    .withVideoChatScheduled(videoChatScheduled1)
+
+  lazy val videoChatStartedMessage1: Message = Message
+    .of(messageId = 443, date = instant1, chat = chat1)
+    .withFrom(user1)
+    .withVideoChatStarted(videoChatStarted1)
+
+  lazy val videoChatEndedMessage1: Message = Message
+    .of(messageId = 444, date = instant2, chat = chat1)
+    .withFrom(user1)
+    .withVideoChatEnded(videoChatEnded1)
+
+  lazy val videoChatParticipantsInvitedMessage1: Message = Message
+    .of(messageId = 445, date = instant3, chat = chat1)
+    .withFrom(user1)
+    .withVideoChatParticipantsInvited(videoChatParticipantsInvited1)
+
+  lazy val webAppDataMessage1: Message = Message
+    .of(messageId = 446, date = instant2, chat = chat1)
+    .withFrom(user1)
+    .withWebAppData(webAppData1)
+
   lazy val allMessages: Set[Message] = Set(
     animationMessage1,
     audioMessage1,
@@ -485,7 +629,17 @@ trait Builders {
     channelChatCreatedMessage1,
     messageAutoDeleteTimerChangedMessage1,
     migrateToChatIdMessage1,
-    migrateFromChatIdMessage1
+    migrateFromChatIdMessage1,
+    pinnedMessageMessage1,
+    invoiceMessage1,
+    successfulPaymentMessage1,
+    passportDataMessage1,
+    proximityAlertTriggeredMessage1,
+    videoChatScheduledMessage1,
+    videoChatStartedMessage1,
+    videoChatEndedMessage1,
+    videoChatParticipantsInvitedMessage1,
+    webAppDataMessage1
   )
 
   lazy val animationMessageProjection: UpdateProjection = AnimationMessage(
@@ -619,5 +773,54 @@ trait Builders {
   lazy val migrateFromChatIdProjection: UpdateProjection = MigrateFromChatIdMessage(
     data = Data.of(migrateFromChatIdMessage1).get,
     chatId = 15
+  )
+
+  lazy val pinnedMessageProjection: UpdateProjection = PinnedMessageMessage(
+    data = Data.of(pinnedMessageMessage1).get,
+    message = textMessageProjection
+  )
+
+  lazy val invoiceMessageProjection: UpdateProjection = InvoiceMessage(
+    data = Data.of(invoiceMessage1).get,
+    invoice = invoice1
+  )
+
+  lazy val successfulPaymentProjection: UpdateProjection = SuccessfulPaymentMessage(
+    data = Data.of(successfulPaymentMessage1).get,
+    payment = successfulPayment1
+  )
+
+  lazy val passportDataProjection: UpdateProjection = PassportDataMessage(
+    data = Data.of(passportDataMessage1).get,
+    passportData = passportData1
+  )
+
+  lazy val proximityAlertTriggeredProjection: UpdateProjection = ProximityAlertTriggeredMessage(
+    data = Data.of(proximityAlertTriggeredMessage1).get,
+    event = proximityAlertTriggered1
+  )
+
+  lazy val videoChatScheduledProjection: UpdateProjection = VideoChatScheduledMessage(
+    data = Data.of(videoChatScheduledMessage1).get,
+    event = videoChatScheduled1
+  )
+
+  lazy val videoChatStartedProjection: UpdateProjection = VideoChatStartedMessage(
+    data = Data.of(videoChatStartedMessage1).get
+  )
+
+  lazy val videoChatEndedProjection: UpdateProjection = VideoChatEndedMessage(
+    data = Data.of(videoChatEndedMessage1).get,
+    event = videoChatEnded1
+  )
+
+  lazy val videoChatParticipantsInvitedProjection: UpdateProjection = VideoChatParticipantsInvitedMessage(
+    data = Data.of(videoChatParticipantsInvitedMessage1).get,
+    event = videoChatParticipantsInvited1
+  )
+
+  lazy val webAppDataProjection: UpdateProjection = WebAppDataMessage(
+    data = Data.of(webAppDataMessage1).get,
+    webAppData = webAppData1
   )
 }

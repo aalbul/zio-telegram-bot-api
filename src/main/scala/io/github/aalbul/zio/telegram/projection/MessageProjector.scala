@@ -27,6 +27,7 @@ object MessageProjector {
     MessageProjector[GameMessage],
     MessageProjector[PollMessage],
     MessageProjector[VenueMessage],
+    MessageProjector[PassportDataMessage],
     ServiceMessageProjection.all,
     MediaMessageProjection.all
   ).reduce(_ <+> _)
