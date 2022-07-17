@@ -324,6 +324,9 @@ trait Builders {
     fileSize = Some(1355)
   )
 
+  lazy val messageAutoDeleteTimerChanged1: MessageAutoDeleteTimerChanged =
+    MessageAutoDeleteTimerChanged(messageAutoDeleteTime = 30)
+
   lazy val animationMessage1: Message = Message
     .of(messageId = 411, date = instant1, chat = chat1)
     .withFrom(user1)
@@ -431,6 +434,31 @@ trait Builders {
     .withFrom(user1)
     .withGroupChatCreated(true)
 
+  lazy val supergroupChatCreatedMessage1: Message = Message
+    .of(messageId = 432, date = instant1, chat = chat1)
+    .withFrom(user1)
+    .withSupergroupChatCreated(true)
+
+  lazy val channelChatCreatedMessage1: Message = Message
+    .of(messageId = 433, date = instant2, chat = chat1)
+    .withFrom(user1)
+    .withChannelChatCreated(true)
+
+  lazy val messageAutoDeleteTimerChangedMessage1: Message = Message
+    .of(messageId = 434, date = instant3, chat = chat1)
+    .withFrom(user1)
+    .withMessageAutoDeleteTimerChanged(messageAutoDeleteTimerChanged1)
+
+  lazy val migrateToChatIdMessage1: Message = Message
+    .of(messageId = 435, date = instant1, chat = chat1)
+    .withFrom(user1)
+    .withMigrateToChatId(31)
+
+  lazy val migrateFromChatIdMessage1: Message = Message
+    .of(messageId = 436, date = instant4, chat = chat1)
+    .withFrom(user1)
+    .withMigrateFromChatId(15)
+
   lazy val allMessages: Set[Message] = Set(
     animationMessage1,
     audioMessage1,
@@ -452,7 +480,12 @@ trait Builders {
     newChatTitleMessage1,
     newChatPhotoMessage1,
     deleteChatPhotoMessage1,
-    groupChatCreatedMessage1
+    groupChatCreatedMessage1,
+    supergroupChatCreatedMessage1,
+    channelChatCreatedMessage1,
+    messageAutoDeleteTimerChangedMessage1,
+    migrateToChatIdMessage1,
+    migrateFromChatIdMessage1
   )
 
   lazy val animationMessageProjection: UpdateProjection = AnimationMessage(
@@ -563,5 +596,28 @@ trait Builders {
 
   lazy val groupChatCreatedProjection: UpdateProjection = GroupChatCreatedMessage(
     data = Data.of(groupChatCreatedMessage1).get
+  )
+
+  lazy val supergroupChatCreatedProjection: UpdateProjection = SupergroupChatCreatedMessage(
+    data = Data.of(supergroupChatCreatedMessage1).get
+  )
+
+  lazy val channelChatCreatedProjection: UpdateProjection = ChannelChatCreatedMessage(
+    data = Data.of(channelChatCreatedMessage1).get
+  )
+
+  lazy val messageAutoDeleteTimerChangedProjection: UpdateProjection = MessageAutoDeleteTimerChangedMessage(
+    data = Data.of(messageAutoDeleteTimerChangedMessage1).get,
+    change = messageAutoDeleteTimerChanged1
+  )
+
+  lazy val migrateToChatIdProjection: UpdateProjection = MigrateToChatIdMessage(
+    data = Data.of(migrateToChatIdMessage1).get,
+    chatId = 31
+  )
+
+  lazy val migrateFromChatIdProjection: UpdateProjection = MigrateFromChatIdMessage(
+    data = Data.of(migrateFromChatIdMessage1).get,
+    chatId = 15
   )
 }

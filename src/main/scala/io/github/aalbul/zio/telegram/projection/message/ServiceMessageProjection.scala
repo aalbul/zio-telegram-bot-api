@@ -10,7 +10,12 @@ object ServiceMessageProjection {
     MessageProjector[NewChatTitleMessage],
     MessageProjector[NewChatPhotoMessage],
     MessageProjector[DeleteChatPhotoMessage],
-    MessageProjector[GroupChatCreatedMessage]
+    MessageProjector[GroupChatCreatedMessage],
+    MessageProjector[SupergroupChatCreatedMessage],
+    MessageProjector[ChannelChatCreatedMessage],
+    MessageProjector[MessageAutoDeleteTimerChangedMessage],
+    MessageProjector[MigrateToChatIdMessage],
+    MessageProjector[MigrateFromChatIdMessage]
   ).reduce(_ <+> _)
 }
 

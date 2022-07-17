@@ -39,6 +39,12 @@ class ProjectionBuilder(projector: UpdateProjector[UpdateProjection]) {
   def withNewChatPhotoMessage: ProjectionBuilder = plus(UpdateProjector[NewChatPhotoMessage])
   def withDeleteChatPhotoMessage: ProjectionBuilder = plus(UpdateProjector[DeleteChatPhotoMessage])
   def withGroupChatCreatedMessage: ProjectionBuilder = plus(UpdateProjector[GroupChatCreatedMessage])
+  def withSupergroupChatCreatedMessage: ProjectionBuilder = plus(UpdateProjector[SupergroupChatCreatedMessage])
+  def withChannelChatCreatedMessage: ProjectionBuilder = plus(UpdateProjector[ChannelChatCreatedMessage])
+  def withMessageAutoDeleteTimerChangedMessage: ProjectionBuilder =
+    plus(UpdateProjector[MessageAutoDeleteTimerChangedMessage])
+  def withMigrateToChatIdMessage: ProjectionBuilder = plus(UpdateProjector[MigrateToChatIdMessage])
+  def withMigrateFromChatIdMessage: ProjectionBuilder = plus(UpdateProjector[MigrateFromChatIdMessage])
 
   def stream(chunkSize: Long = 100L): ZStream[BotEngine & Bot, Throwable, UpdateProjection] =
     ZStream
