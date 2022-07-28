@@ -9,7 +9,7 @@ import zio.stream.ZStream
 
 object StreamUpdates {
   def apply(chunkSize: Long = 100L, allowedTypes: Set[UpdateType] = Set.empty): ZStream[BotEngine, Throwable, Update] =
-    ZStream.unfoldChunkZIO(0) { offset =>
+    ZStream.unfoldChunkZIO(0L) { offset =>
       for {
         updates <- GetUpdates.of.withLimit(chunkSize).withOffset(offset).withAllowedUpdates(allowedTypes)
         newOffset = updates.lastOption.map(_.updateId + 1).getOrElse(offset)

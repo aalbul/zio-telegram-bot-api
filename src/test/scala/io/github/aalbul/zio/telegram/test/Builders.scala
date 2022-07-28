@@ -2,7 +2,7 @@ package io.github.aalbul.zio.telegram.test
 
 import io.github.aalbul.zio.telegram.command.FileDescriptor.{pathDescriptor, urlDescriptor}
 import io.github.aalbul.zio.telegram.domain.*
-import io.github.aalbul.zio.telegram.projection.UpdateProjection
+import io.github.aalbul.zio.telegram.projection.{EditedMessage, UpdateProjection}
 import io.github.aalbul.zio.telegram.projection.message.*
 import io.github.aalbul.zio.telegram.projection.message.MediaMessageProjection.Media
 import io.github.aalbul.zio.telegram.projection.message.MessageProjection.Data
@@ -110,11 +110,6 @@ trait Builders {
   lazy val message3: Message = Message.of(messageId = 17, date = instant3, chat = chat3)
 
   lazy val message4: Message = Message.of(messageId = 18, date = instant4, chat = chat3)
-
-  lazy val update1: Update = Update.of(updateId = 66).copy(message = Some(message1))
-  lazy val update2: Update = Update.of(updateId = 67).copy(message = Some(message2))
-  lazy val update3: Update = Update.of(updateId = 68).copy(message = Some(message3))
-  lazy val update4: Update = Update.of(updateId = 69).copy(message = Some(message4))
 
   lazy val inputMediaAnimation: InputMedia = InputMediaAnimation
     .of(pathDescriptor("/tmp/one.gif"))
@@ -478,6 +473,8 @@ trait Builders {
     .withEntities(Seq(messageEntity1))
     .withText("hello world")
 
+  lazy val textMessage2: Message = textMessage1.withText("changed text")
+
   lazy val venueMessage1: Message = Message
     .of(messageId = 422, date = instant2, chat = chat1)
     .withFrom(user1)
@@ -640,6 +637,17 @@ trait Builders {
     videoChatEndedMessage1,
     videoChatParticipantsInvitedMessage1,
     webAppDataMessage1
+  )
+
+  lazy val updateTextMessage1: Update = Update.of(updateId = 66).withMessage(textMessage1)
+  lazy val updateVoiceMessage1: Update = Update.of(updateId = 67).withMessage(voiceMessage1)
+  lazy val updateAudioMessage1: Update = Update.of(updateId = 68).withMessage(audioMessage1)
+  lazy val updateVideoMessage1: Update = Update.of(updateId = 69).withMessage(videoMessage1)
+
+  lazy val updateEditedTextMessage: Update = Update.of(updateId = 70).withEditedMessage(textMessage2)
+
+  lazy val allUpdates: Set[Update] = allMessages.map(message => Update.of(1).withMessage(message)) ++ Set(
+    updateEditedTextMessage
   )
 
   lazy val animationMessageProjection: UpdateProjection = AnimationMessage(
@@ -822,5 +830,13 @@ trait Builders {
   lazy val webAppDataProjection: UpdateProjection = WebAppDataMessage(
     data = Data.of(webAppDataMessage1).get,
     webAppData = webAppData1
+  )
+
+  lazy val editedTextMessageProjection: UpdateProjection = EditedMessage(
+    TextMessage(
+      data = Data.of(textMessage2).get,
+      entities = Seq(messageEntity1),
+      text = "changed text"
+    )
   )
 }

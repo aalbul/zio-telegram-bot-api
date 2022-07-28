@@ -57,6 +57,7 @@ class ProjectionBuilder(projector: UpdateProjector[UpdateProjection]) {
     UpdateProjector[VideoChatParticipantsInvitedMessage]
   )
   def withWebAppDataMessage: ProjectionBuilder = plus(UpdateProjector[WebAppDataMessage])
+  def withEditedMessage: ProjectionBuilder = plus(UpdateProjector[EditedMessage])
 
   def stream(chunkSize: Long = 100L): ZStream[BotEngine & Bot, Throwable, UpdateProjection] =
     ZStream

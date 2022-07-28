@@ -15,12 +15,15 @@ class StreamUpdatesSpec extends BaseSpec with MockitoSugar {
   "StreamUpdates" when {
     "apply" should {
       "return a stream of updates" in new Scope {
-        when(botEngine.execute(any[Command[Seq[Update]]])(any))
-          .thenReturn(ZIO.succeed(Seq(update1, update2)), ZIO.succeed(Seq(update3)), ZIO.succeed(Nil))
+        when(botEngine.execute(any[Command[Seq[Update]]])(any)).thenReturn(
+          ZIO.succeed(Seq(updateTextMessage1, updateVoiceMessage1)),
+          ZIO.succeed(Seq(updateAudioMessage1)),
+          ZIO.succeed(Nil)
+        )
         StreamUpdates(chunkSize = 2).take(3).runCollect.provideLayer(botEngineLayer).run shouldBe Chunk(
-          update1,
-          update2,
-          update3
+          updateTextMessage1,
+          updateVoiceMessage1,
+          updateAudioMessage1
         )
       }
     }

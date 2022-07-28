@@ -29,9 +29,10 @@ object UpdateProjector {
     override val updateTypes: Set[UpdateType] = Set(UpdateTypes.Message)
   }
 
-  val all: UpdateProjector[UpdateProjection] =
-    Seq(UpdateProjector.fromMessageProjector(MessageProjector.all))
-      .reduce(_ <+> _)
+  val all: UpdateProjector[UpdateProjection] = Seq(
+    fromMessageProjector(MessageProjector.all),
+    UpdateProjector[EditedMessage]
+  ).reduce(_ <+> _)
 }
 
 trait UpdateProjector[+T] {
