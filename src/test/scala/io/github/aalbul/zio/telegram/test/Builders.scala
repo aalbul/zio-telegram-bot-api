@@ -2,7 +2,7 @@ package io.github.aalbul.zio.telegram.test
 
 import io.github.aalbul.zio.telegram.command.FileDescriptor.{pathDescriptor, urlDescriptor}
 import io.github.aalbul.zio.telegram.domain.*
-import io.github.aalbul.zio.telegram.projection.{EditedMessage, UpdateProjection}
+import io.github.aalbul.zio.telegram.projection.{ChannelPost, EditedMessage, UpdateProjection}
 import io.github.aalbul.zio.telegram.projection.message.*
 import io.github.aalbul.zio.telegram.projection.message.MediaMessageProjection.Media
 import io.github.aalbul.zio.telegram.projection.message.MessageProjection.Data
@@ -645,9 +645,11 @@ trait Builders {
   lazy val updateVideoMessage1: Update = Update.of(updateId = 69).withMessage(videoMessage1)
 
   lazy val updateEditedTextMessage: Update = Update.of(updateId = 70).withEditedMessage(textMessage2)
+  lazy val channelPostAudioMessage: Update = Update.of(updateId = 71).withChannelPost(audioMessage1)
 
   lazy val allUpdates: Set[Update] = allMessages.map(message => Update.of(1).withMessage(message)) ++ Set(
-    updateEditedTextMessage
+    updateEditedTextMessage,
+    channelPostAudioMessage
   )
 
   lazy val animationMessageProjection: UpdateProjection = AnimationMessage(
@@ -837,6 +839,14 @@ trait Builders {
       data = Data.of(textMessage2).get,
       entities = Seq(messageEntity1),
       text = "changed text"
+    )
+  )
+
+  lazy val channelPostMessageProjection: UpdateProjection = ChannelPost(
+    AudioMessage(
+      data = Data.of(audioMessage1).get,
+      media = Media.of(audioMessage1),
+      audio = audio1
     )
   )
 }
