@@ -32,7 +32,8 @@ object UpdateProjector {
   val all: UpdateProjector[UpdateProjection] = Seq(
     fromMessageProjector(MessageProjector.all),
     UpdateProjector[EditedMessage],
-    UpdateProjector[ChannelPost]
+    UpdateProjector[ChannelPost],
+    UpdateProjector[EditedChannelPost]
   ).reduce(_ <+> _)
 }
 

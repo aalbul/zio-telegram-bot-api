@@ -2,10 +2,10 @@ package io.github.aalbul.zio.telegram.test
 
 import io.github.aalbul.zio.telegram.command.FileDescriptor.{pathDescriptor, urlDescriptor}
 import io.github.aalbul.zio.telegram.domain.*
-import io.github.aalbul.zio.telegram.projection.{ChannelPost, EditedMessage, UpdateProjection}
 import io.github.aalbul.zio.telegram.projection.message.*
 import io.github.aalbul.zio.telegram.projection.message.MediaMessageProjection.Media
 import io.github.aalbul.zio.telegram.projection.message.MessageProjection.Data
+import io.github.aalbul.zio.telegram.projection.{ChannelPost, EditedChannelPost, EditedMessage, UpdateProjection}
 
 import java.time.Instant
 import scala.concurrent.duration.DurationInt
@@ -646,6 +646,7 @@ trait Builders {
 
   lazy val updateEditedTextMessage: Update = Update.of(updateId = 70).withEditedMessage(textMessage2)
   lazy val channelPostAudioMessage: Update = Update.of(updateId = 71).withChannelPost(audioMessage1)
+  lazy val editedChannelPostMessage: Update = Update.of(updateId = 72).withEditedChannelPost(voiceMessage1)
 
   lazy val allUpdates: Set[Update] = allMessages.map(message => Update.of(1).withMessage(message)) ++ Set(
     updateEditedTextMessage,
@@ -847,6 +848,13 @@ trait Builders {
       data = Data.of(audioMessage1).get,
       media = Media.of(audioMessage1),
       audio = audio1
+    )
+  )
+
+  lazy val editedChannelPostProjection: UpdateProjection = EditedChannelPost(
+    VoiceMessage(
+      data = Data.of(voiceMessage1).get,
+      voice = voice1
     )
   )
 }
