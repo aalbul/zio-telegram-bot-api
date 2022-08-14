@@ -5,7 +5,7 @@ import io.github.aalbul.zio.telegram.domain.*
 import io.github.aalbul.zio.telegram.projection.message.*
 import io.github.aalbul.zio.telegram.projection.message.MediaMessageProjection.Media
 import io.github.aalbul.zio.telegram.projection.message.MessageProjection.Data
-import io.github.aalbul.zio.telegram.projection.{ChannelPost, EditedChannelPost, EditedMessage, UpdateProjection}
+import io.github.aalbul.zio.telegram.projection.*
 
 import java.time.Instant
 import scala.concurrent.duration.DurationInt
@@ -413,6 +413,15 @@ trait Builders {
     buttonText = "button one"
   )
 
+  lazy val inlineQuery: InlineQuery = InlineQuery(
+    id = "query-1",
+    from = user1,
+    query = "test",
+    offset = "1",
+    chatType = Some(ChatTypes.Sender),
+    location = Some(location1)
+  )
+
   lazy val messageAutoDeleteTimerChanged1: MessageAutoDeleteTimerChanged =
     MessageAutoDeleteTimerChanged(messageAutoDeleteTime = 30)
 
@@ -647,6 +656,7 @@ trait Builders {
   lazy val updateEditedTextMessage: Update = Update.of(updateId = 70).withEditedMessage(textMessage2)
   lazy val channelPostAudioMessage: Update = Update.of(updateId = 71).withChannelPost(audioMessage1)
   lazy val editedChannelPostMessage: Update = Update.of(updateId = 72).withEditedChannelPost(voiceMessage1)
+  lazy val inlineQueryMessage: Update = Update.of(updateId = 73).withInlineQuery(inlineQuery)
 
   lazy val allUpdates: Set[Update] = allMessages.map(message => Update.of(1).withMessage(message)) ++ Set(
     updateEditedTextMessage,
@@ -857,4 +867,6 @@ trait Builders {
       voice = voice1
     )
   )
+
+  lazy val inlineQueryProjection: UpdateProjection = NewInlineQuery(inlineQuery)
 }
