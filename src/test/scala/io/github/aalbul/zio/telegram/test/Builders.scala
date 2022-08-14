@@ -431,6 +431,16 @@ trait Builders {
     query = "query-1"
   )
 
+  lazy val callbackQuery: CallbackQuery = CallbackQuery(
+    id = "callback-1",
+    from = user1,
+    message = Some(message1),
+    inlineMessageId = Some("inline-message-1"),
+    chatInstance = "chat-1",
+    data = Some("data-1"),
+    gameShortName = Some("game-short-name")
+  )
+
   lazy val messageAutoDeleteTimerChanged1: MessageAutoDeleteTimerChanged =
     MessageAutoDeleteTimerChanged(messageAutoDeleteTime = 30)
 
@@ -667,13 +677,15 @@ trait Builders {
   lazy val editedChannelPostMessage: Update = Update.of(updateId = 72).withEditedChannelPost(voiceMessage1)
   lazy val inlineQueryMessage: Update = Update.of(updateId = 73).withInlineQuery(inlineQuery)
   lazy val chosenInlineResultMessage: Update = Update.of(updateId = 74).withChosenInlineResult(chosenInlineResult)
+  lazy val callbackQueryMessage: Update = Update.of(updateId = 75).withCallbackQuery(callbackQuery)
 
   lazy val allUpdates: Set[Update] = allMessages.map(message => Update.of(1).withMessage(message)) ++ Set(
     updateEditedTextMessage,
     channelPostAudioMessage,
     editedChannelPostMessage,
     inlineQueryMessage,
-    chosenInlineResultMessage
+    chosenInlineResultMessage,
+    callbackQueryMessage
   )
 
   lazy val animationMessageProjection: UpdateProjection = AnimationMessage(
@@ -884,4 +896,6 @@ trait Builders {
   lazy val chosenInlineResultProjection: UpdateProjection = projection.ChosenInlineResult(chosenInlineResult)
 
   lazy val inlineQueryProjection: UpdateProjection = NewInlineQuery(inlineQuery)
+
+  lazy val newCallbackQueryProjection: UpdateProjection = NewCallbackQuery(callbackQuery)
 }

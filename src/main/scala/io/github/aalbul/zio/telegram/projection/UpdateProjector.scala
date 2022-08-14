@@ -35,7 +35,8 @@ object UpdateProjector {
     UpdateProjector[ChannelPost],
     UpdateProjector[EditedChannelPost],
     UpdateProjector[NewInlineQuery],
-    UpdateProjector[ChosenInlineResult]
+    UpdateProjector[ChosenInlineResult],
+    UpdateProjector[NewCallbackQuery]
   ).reduce(_ <+> _)
 }
 
