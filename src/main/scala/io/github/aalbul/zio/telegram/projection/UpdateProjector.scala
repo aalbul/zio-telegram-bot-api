@@ -34,7 +34,8 @@ object UpdateProjector {
     UpdateProjector[EditedMessage],
     UpdateProjector[ChannelPost],
     UpdateProjector[EditedChannelPost],
-    UpdateProjector[NewInlineQuery]
+    UpdateProjector[NewInlineQuery],
+    UpdateProjector[ChosenInlineResult]
   ).reduce(_ <+> _)
 }
 

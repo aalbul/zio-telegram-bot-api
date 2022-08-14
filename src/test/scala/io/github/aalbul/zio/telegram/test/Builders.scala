@@ -2,10 +2,11 @@ package io.github.aalbul.zio.telegram.test
 
 import io.github.aalbul.zio.telegram.command.FileDescriptor.{pathDescriptor, urlDescriptor}
 import io.github.aalbul.zio.telegram.domain.*
+import io.github.aalbul.zio.telegram.projection.*
 import io.github.aalbul.zio.telegram.projection.message.*
 import io.github.aalbul.zio.telegram.projection.message.MediaMessageProjection.Media
 import io.github.aalbul.zio.telegram.projection.message.MessageProjection.Data
-import io.github.aalbul.zio.telegram.projection.*
+import io.github.aalbul.zio.telegram.{domain, projection}
 
 import java.time.Instant
 import scala.concurrent.duration.DurationInt
@@ -422,6 +423,14 @@ trait Builders {
     location = Some(location1)
   )
 
+  lazy val chosenInlineResult: domain.ChosenInlineResult = domain.ChosenInlineResult(
+    resultId = "result-1",
+    from = user1,
+    location = Some(location1),
+    inlineMessageId = Some("message-1"),
+    query = "query-1"
+  )
+
   lazy val messageAutoDeleteTimerChanged1: MessageAutoDeleteTimerChanged =
     MessageAutoDeleteTimerChanged(messageAutoDeleteTime = 30)
 
@@ -657,10 +666,14 @@ trait Builders {
   lazy val channelPostAudioMessage: Update = Update.of(updateId = 71).withChannelPost(audioMessage1)
   lazy val editedChannelPostMessage: Update = Update.of(updateId = 72).withEditedChannelPost(voiceMessage1)
   lazy val inlineQueryMessage: Update = Update.of(updateId = 73).withInlineQuery(inlineQuery)
+  lazy val chosenInlineResultMessage: Update = Update.of(updateId = 74).withChosenInlineResult(chosenInlineResult)
 
   lazy val allUpdates: Set[Update] = allMessages.map(message => Update.of(1).withMessage(message)) ++ Set(
     updateEditedTextMessage,
-    channelPostAudioMessage
+    channelPostAudioMessage,
+    editedChannelPostMessage,
+    inlineQueryMessage,
+    chosenInlineResultMessage
   )
 
   lazy val animationMessageProjection: UpdateProjection = AnimationMessage(
@@ -867,6 +880,8 @@ trait Builders {
       voice = voice1
     )
   )
+
+  lazy val chosenInlineResultProjection: UpdateProjection = projection.ChosenInlineResult(chosenInlineResult)
 
   lazy val inlineQueryProjection: UpdateProjection = NewInlineQuery(inlineQuery)
 }

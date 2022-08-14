@@ -61,6 +61,7 @@ class ProjectionBuilder(projector: UpdateProjector[UpdateProjection]) {
   def withChannelPost: ProjectionBuilder = plus(UpdateProjector[ChannelPost])
   def withEditedChannelPost: ProjectionBuilder = plus(UpdateProjector[EditedChannelPost])
   def withNewInlineQuery: ProjectionBuilder = plus(UpdateProjector[NewInlineQuery])
+  def withChosenInlineResult: ProjectionBuilder = plus(UpdateProjector[ChosenInlineResult])
 
   def stream(chunkSize: Long = 100L): ZStream[BotEngine & Bot, Throwable, UpdateProjection] =
     ZStream
