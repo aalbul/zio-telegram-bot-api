@@ -8,7 +8,7 @@ object UpdatedMyChatMember {
     new UpdateProjector[UpdatedMyChatMember] {
       override def project(update: Update): Option[UpdatedMyChatMember] = update.myChatMember.map(UpdatedMyChatMember(_))
 
-      override val updateTypes: Set[UpdateType] = Set(UpdateTypes.ChatMember)
+      override val updateTypes: Set[UpdateType] = Set(UpdateTypes.MyChatMember)
     }
 }
 

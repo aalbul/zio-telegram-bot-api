@@ -7,7 +7,7 @@ class UpdatedMyChatMemberSpec extends BaseSpec {
   "UpdatedMyChatMember" when {
     "updatedMyChatMemberProjector" should {
       "properly handle new updated my chat member messages" in {
-        updatedMyChatMemberProjector.project(updatedMyChatMemberMessage) shouldBe Some(updatedChatMemberProjection)
+        updatedMyChatMemberProjector.project(updatedMyChatMemberMessage) shouldBe Some(updatedMyChatMemberProjection)
       }
 
       "not match any other updates" in {
