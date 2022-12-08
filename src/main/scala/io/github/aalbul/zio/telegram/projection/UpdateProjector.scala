@@ -40,7 +40,8 @@ object UpdateProjector {
     UpdateProjector[NewShippingQuery],
     UpdateProjector[NewPreCheckoutQuery],
     UpdateProjector[NewPoll],
-    UpdateProjector[NewPollAnswer]
+    UpdateProjector[NewPollAnswer],
+    UpdateProjector[UpdatedChatMember]
   ).reduce(_ <+> _)
 }
 
