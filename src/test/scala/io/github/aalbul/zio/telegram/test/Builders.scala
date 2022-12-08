@@ -275,6 +275,12 @@ trait Builders {
     closeDate = Some(500)
   )
 
+  lazy val pollAnswer1: PollAnswer = PollAnswer(
+    pollId = poll1.id,
+    user = user2,
+    optionIds = Seq(2, 3)
+  )
+
   lazy val maskPosition1: MaskPosition = MaskPosition(
     point = "point-1",
     xShift = 10.2,
@@ -698,6 +704,7 @@ trait Builders {
   lazy val shippingQueryMessage: Update = Update.of(updateId = 76).withShippingQuery(shippingQuery)
   lazy val preCheckoutQueryMessage: Update = Update.of(updateId = 77).withPreCheckoutQuery(preCheckoutQuery)
   lazy val newPollMessage: Update = Update.of(updateId = 78).withPoll(poll1)
+  lazy val newPollAnswerMessage: Update = Update.of(updateId = 79).withPollAnswer(pollAnswer1)
 
   lazy val allUpdates: Set[Update] = allMessages.map(message => Update.of(1).withMessage(message)) ++ Set(
     updateEditedTextMessage,
@@ -706,7 +713,10 @@ trait Builders {
     inlineQueryMessage,
     chosenInlineResultMessage,
     callbackQueryMessage,
-    shippingQueryMessage
+    shippingQueryMessage,
+    preCheckoutQueryMessage,
+    newPollMessage,
+    newPollAnswerMessage
   )
 
   lazy val animationMessageProjection: UpdateProjection = AnimationMessage(
@@ -925,4 +935,6 @@ trait Builders {
   lazy val newPreCheckoutQueryProjection: UpdateProjection = NewPreCheckoutQuery(preCheckoutQuery)
 
   lazy val newPollProjection: UpdateProjection = NewPoll(poll1)
+
+  lazy val newPollAnswerProjection: UpdateProjection = NewPollAnswer(pollAnswer1)
 }
