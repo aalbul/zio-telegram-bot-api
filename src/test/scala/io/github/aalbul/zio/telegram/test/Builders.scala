@@ -289,7 +289,7 @@ trait Builders {
 
   lazy val chatMember2: ChatMember = ChatMemberLeft(user = user2)
 
-  lazy val chatInviteLink: ChatInviteLink = ChatInviteLink(
+  lazy val chatInviteLink1: ChatInviteLink = ChatInviteLink(
     inviteLink = "http://google.com/invite",
     creator = user1,
     createsJoinRequest = true,
@@ -307,7 +307,15 @@ trait Builders {
     date = instant2,
     oldChatMember = chatMember1,
     newChatMember = chatMember2,
-    inviteLink = Option(chatInviteLink)
+    inviteLink = Option(chatInviteLink1)
+  )
+
+  lazy val chatJoinRequest1: ChatJoinRequest = ChatJoinRequest(
+    chat = chat1,
+    from = user2,
+    date = instant4,
+    bio = Some("bio-1"),
+    inviteLink = Some(chatInviteLink1)
   )
 
   lazy val maskPosition1: MaskPosition = MaskPosition(
@@ -736,6 +744,7 @@ trait Builders {
   lazy val newPollAnswerMessage: Update = Update.of(updateId = 79).withPollAnswer(pollAnswer1)
   lazy val updatedMyChatMemberMessage: Update = Update.of(updateId = 80).withMyChatMember(chatMemberUpdated1)
   lazy val updatedChatMemberMessage: Update = Update.of(updateId = 81).withChatMember(chatMemberUpdated1)
+  lazy val newChatJoinRequestMessage: Update = Update.of(updateId = 82).withChatJoinRequest(chatJoinRequest1)
 
   lazy val allUpdates: Set[Update] = allMessages.map(message => Update.of(1).withMessage(message)) ++ Set(
     updateEditedTextMessage,
@@ -749,7 +758,8 @@ trait Builders {
     newPollMessage,
     newPollAnswerMessage,
     updatedChatMemberMessage,
-    updatedMyChatMemberMessage
+    updatedMyChatMemberMessage,
+    newChatJoinRequestMessage
   )
 
   lazy val animationMessageProjection: UpdateProjection = AnimationMessage(
@@ -974,4 +984,6 @@ trait Builders {
   lazy val updatedMyChatMemberProjection: UpdateProjection = UpdatedMyChatMember(chatMemberUpdated1)
 
   lazy val updatedChatMemberProjection: UpdateProjection = UpdatedChatMember(chatMemberUpdated1)
+
+  lazy val newChatJoinRequestProjection: UpdateProjection = NewChatJoinRequest(chatJoinRequest1)
 }

@@ -42,7 +42,8 @@ object UpdateProjector {
     UpdateProjector[NewPoll],
     UpdateProjector[NewPollAnswer],
     UpdateProjector[UpdatedChatMember],
-    UpdateProjector[UpdatedMyChatMember]
+    UpdateProjector[UpdatedMyChatMember],
+    UpdateProjector[NewChatJoinRequest]
   ).reduce(_ <+> _)
 }
 
