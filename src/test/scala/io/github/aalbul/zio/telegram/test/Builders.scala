@@ -734,7 +734,7 @@ trait Builders {
   lazy val preCheckoutQueryMessage: Update = Update.of(updateId = 77).withPreCheckoutQuery(preCheckoutQuery)
   lazy val newPollMessage: Update = Update.of(updateId = 78).withPoll(poll1)
   lazy val newPollAnswerMessage: Update = Update.of(updateId = 79).withPollAnswer(pollAnswer1)
-  lazy val updatedChatMemberMessage: Update = Update.of(updateId = 80).withChatMember(chatMemberUpdated1)
+  lazy val updatedMyChatMemberMessage: Update = Update.of(updateId = 80).withMyChatMember(chatMemberUpdated1)
 
   lazy val allUpdates: Set[Update] = allMessages.map(message => Update.of(1).withMessage(message)) ++ Set(
     updateEditedTextMessage,
@@ -747,7 +747,7 @@ trait Builders {
     preCheckoutQueryMessage,
     newPollMessage,
     newPollAnswerMessage,
-    updatedChatMemberMessage
+    updatedMyChatMemberMessage
   )
 
   lazy val animationMessageProjection: UpdateProjection = AnimationMessage(
@@ -969,5 +969,5 @@ trait Builders {
 
   lazy val newPollAnswerProjection: UpdateProjection = NewPollAnswer(pollAnswer1)
 
-  lazy val updatedChatMemberProjection: UpdateProjection = UpdatedChatMember(chatMemberUpdated1)
+  lazy val updatedChatMemberProjection: UpdateProjection = UpdatedMyChatMember(chatMemberUpdated1)
 }

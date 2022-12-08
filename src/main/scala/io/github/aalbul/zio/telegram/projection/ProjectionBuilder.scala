@@ -67,7 +67,7 @@ class ProjectionBuilder(projector: UpdateProjector[UpdateProjection]) {
   def withNewPreCheckoutQuery: ProjectionBuilder = plus(UpdateProjector[NewPreCheckoutQuery])
   def withNewPoll: ProjectionBuilder = plus(UpdateProjector[NewPoll])
   def withNewPollAnswer: ProjectionBuilder = plus(UpdateProjector[NewPollAnswer])
-  def withUpdatedChatMember: ProjectionBuilder = plus(UpdateProjector[UpdatedChatMember])
+  def withUpdatedMyChatMember: ProjectionBuilder = plus(UpdateProjector[UpdatedMyChatMember])
 
   def stream(chunkSize: Long = 100L): ZStream[BotEngine & Bot, Throwable, UpdateProjection] =
     ZStream
