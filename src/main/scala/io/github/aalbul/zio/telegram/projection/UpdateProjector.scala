@@ -38,7 +38,8 @@ object UpdateProjector {
     UpdateProjector[ChosenInlineResult],
     UpdateProjector[NewCallbackQuery],
     UpdateProjector[NewShippingQuery],
-    UpdateProjector[NewPreCheckoutQuery]
+    UpdateProjector[NewPreCheckoutQuery],
+    UpdateProjector[NewPoll]
   ).reduce(_ <+> _)
 }
 

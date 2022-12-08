@@ -6,7 +6,7 @@ import NewInlineQuery.newInlineQueryProjector
 class NewInlineQuerySpec extends BaseSpec {
   "NewInlineQuery" when {
     "newInlineQueryProjector" should {
-      "properly inline query messages" in {
+      "properly handle inline query messages" in {
         newInlineQueryProjector.project(inlineQueryMessage) shouldBe Some(inlineQueryProjection)
       }
 

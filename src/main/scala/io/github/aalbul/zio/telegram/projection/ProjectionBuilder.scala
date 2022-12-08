@@ -65,6 +65,7 @@ class ProjectionBuilder(projector: UpdateProjector[UpdateProjection]) {
   def withNewCallbackQuery: ProjectionBuilder = plus(UpdateProjector[NewCallbackQuery])
   def withNewShippingQuery: ProjectionBuilder = plus(UpdateProjector[NewShippingQuery])
   def withNewPreCheckoutQuery: ProjectionBuilder = plus(UpdateProjector[NewPreCheckoutQuery])
+  def withNewPoll: ProjectionBuilder = plus(UpdateProjector[NewPoll])
 
   def stream(chunkSize: Long = 100L): ZStream[BotEngine & Bot, Throwable, UpdateProjection] =
     ZStream

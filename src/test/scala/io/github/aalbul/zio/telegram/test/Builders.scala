@@ -697,6 +697,7 @@ trait Builders {
   lazy val callbackQueryMessage: Update = Update.of(updateId = 75).withCallbackQuery(callbackQuery)
   lazy val shippingQueryMessage: Update = Update.of(updateId = 76).withShippingQuery(shippingQuery)
   lazy val preCheckoutQueryMessage: Update = Update.of(updateId = 77).withPreCheckoutQuery(preCheckoutQuery)
+  lazy val newPollMessage: Update = Update.of(updateId = 78).withPoll(poll1)
 
   lazy val allUpdates: Set[Update] = allMessages.map(message => Update.of(1).withMessage(message)) ++ Set(
     updateEditedTextMessage,
@@ -922,4 +923,6 @@ trait Builders {
   lazy val newShippingQueryProjection: UpdateProjection = NewShippingQuery(shippingQuery)
 
   lazy val newPreCheckoutQueryProjection: UpdateProjection = NewPreCheckoutQuery(preCheckoutQuery)
+
+  lazy val newPollProjection: UpdateProjection = NewPoll(poll1)
 }
