@@ -1,10 +1,10 @@
 import sbt._
 
 trait DependencyVersions {
-  protected val zioVersion          = "2.0.0"
+  protected val zioVersion          = "2.0.4"
   protected val zioInteropRSVersion = "2.0.0"
   protected val sttpVersion         = "3.6.2"
-  protected val circeVersion        = "0.14.2"
+  protected val circeVersion        = "0.14.3"
   protected val scalatestVersion    = "3.2.12"
   protected val mockitoScalaVersion = "1.17.7"
 }

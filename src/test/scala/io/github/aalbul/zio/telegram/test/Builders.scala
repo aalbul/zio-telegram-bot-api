@@ -441,6 +441,13 @@ trait Builders {
     gameShortName = Some("game-short-name")
   )
 
+  lazy val shippingQuery: ShippingQuery = ShippingQuery(
+    id = "shipping-query-1",
+    from = user1,
+    invoicePayload = "payload-1",
+    shippingAddress = shippingAddress1
+  )
+
   lazy val messageAutoDeleteTimerChanged1: MessageAutoDeleteTimerChanged =
     MessageAutoDeleteTimerChanged(messageAutoDeleteTime = 30)
 
@@ -678,6 +685,7 @@ trait Builders {
   lazy val inlineQueryMessage: Update = Update.of(updateId = 73).withInlineQuery(inlineQuery)
   lazy val chosenInlineResultMessage: Update = Update.of(updateId = 74).withChosenInlineResult(chosenInlineResult)
   lazy val callbackQueryMessage: Update = Update.of(updateId = 75).withCallbackQuery(callbackQuery)
+  lazy val shippingQueryMessage: Update = Update.of(updateId = 76).withShippingQuery(shippingQuery)
 
   lazy val allUpdates: Set[Update] = allMessages.map(message => Update.of(1).withMessage(message)) ++ Set(
     updateEditedTextMessage,
@@ -685,7 +693,8 @@ trait Builders {
     editedChannelPostMessage,
     inlineQueryMessage,
     chosenInlineResultMessage,
-    callbackQueryMessage
+    callbackQueryMessage,
+    shippingQueryMessage
   )
 
   lazy val animationMessageProjection: UpdateProjection = AnimationMessage(
@@ -898,4 +907,6 @@ trait Builders {
   lazy val inlineQueryProjection: UpdateProjection = NewInlineQuery(inlineQuery)
 
   lazy val newCallbackQueryProjection: UpdateProjection = NewCallbackQuery(callbackQuery)
+
+  lazy val newShippingQueryProjection: UpdateProjection = NewShippingQuery(shippingQuery)
 }
