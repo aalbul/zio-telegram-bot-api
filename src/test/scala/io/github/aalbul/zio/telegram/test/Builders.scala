@@ -448,6 +448,16 @@ trait Builders {
     shippingAddress = shippingAddress1
   )
 
+  lazy val preCheckoutQuery: PreCheckoutQuery = PreCheckoutQuery(
+    id = "pre-checkout-query-1",
+    from = user1,
+    currency = "USB",
+    totalAmount = 20,
+    invoicePayload = "payload-1",
+    shippingOptionId = Some("option-id-1"),
+    orderInfo = Some(orderInfo1)
+  )
+
   lazy val messageAutoDeleteTimerChanged1: MessageAutoDeleteTimerChanged =
     MessageAutoDeleteTimerChanged(messageAutoDeleteTime = 30)
 
@@ -686,6 +696,7 @@ trait Builders {
   lazy val chosenInlineResultMessage: Update = Update.of(updateId = 74).withChosenInlineResult(chosenInlineResult)
   lazy val callbackQueryMessage: Update = Update.of(updateId = 75).withCallbackQuery(callbackQuery)
   lazy val shippingQueryMessage: Update = Update.of(updateId = 76).withShippingQuery(shippingQuery)
+  lazy val preCheckoutQueryMessage: Update = Update.of(updateId = 77).withPreCheckoutQuery(preCheckoutQuery)
 
   lazy val allUpdates: Set[Update] = allMessages.map(message => Update.of(1).withMessage(message)) ++ Set(
     updateEditedTextMessage,
@@ -909,4 +920,6 @@ trait Builders {
   lazy val newCallbackQueryProjection: UpdateProjection = NewCallbackQuery(callbackQuery)
 
   lazy val newShippingQueryProjection: UpdateProjection = NewShippingQuery(shippingQuery)
+
+  lazy val newPreCheckoutQueryProjection: UpdateProjection = NewPreCheckoutQuery(preCheckoutQuery)
 }
