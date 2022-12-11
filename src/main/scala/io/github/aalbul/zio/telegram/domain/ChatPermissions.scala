@@ -12,5 +12,6 @@ case class ChatPermissions(
   canAddWebPagePreviews: Option[Boolean],
   canChangeInfo: Option[Boolean],
   canInviteUsers: Option[Boolean],
-  canPinMessages: Option[Boolean]
+  canPinMessages: Option[Boolean],
+  canManageTopics: Option[Boolean]
 )

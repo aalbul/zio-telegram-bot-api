@@ -18,5 +18,6 @@ case class ChatMemberAdministrator(
   canPostMessages: Option[Boolean],
   canEditMessages: Option[Boolean],
   canPinMessages: Option[Boolean],
+  canManageTopics: Option[Boolean],
   customerTitle: Option[String]
 ) extends ChatMember

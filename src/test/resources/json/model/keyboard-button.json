@@ -1,0 +1,11 @@
+{
+  "text": "simple button",
+  "request_contact": true,
+  "request_location": false,
+  "request_poll": {
+    "type": "quiz"
+  },
+  "web_app": {
+    "url": "https://webapp.org"
+  }
+}

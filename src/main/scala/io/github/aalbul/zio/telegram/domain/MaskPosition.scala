@@ -2,6 +2,7 @@ package io.github.aalbul.zio.telegram.domain
 
 import io.circe.generic.extras.ConfiguredJsonCodec
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
+import io.github.aalbul.zio.telegram.domain.MaskPointTypes.MaskPointType
 
 object MaskPosition {
 
@@ -19,11 +20,11 @@ object MaskPosition {
     * @return
     *   [[MaskPosition]] builder
     */
-  def of(point: String, xShift: Double, yShift: Double, scale: Double): MaskPosition =
+  def of(point: MaskPointType, xShift: Double, yShift: Double, scale: Double): MaskPosition =
     MaskPosition(point, xShift, yShift, scale)
 }
 
 /** This object describes the position on faces where a mask should be placed by default.
   */
 @ConfiguredJsonCodec(decodeOnly = true)
-case class MaskPosition(point: String, xShift: Double, yShift: Double, scale: Double)
+case class MaskPosition(point: MaskPointType, xShift: Double, yShift: Double, scale: Double)

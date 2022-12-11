@@ -24,7 +24,10 @@ object ServiceMessageProjection {
     MessageProjector[VideoChatStartedMessage],
     MessageProjector[VideoChatEndedMessage],
     MessageProjector[VideoChatParticipantsInvitedMessage],
-    MessageProjector[WebAppDataMessage]
+    MessageProjector[WebAppDataMessage],
+    MessageProjector[ForumTopicCreatedMessage],
+    MessageProjector[ForumTopicClosedMessage],
+    MessageProjector[ForumTopicReopenedMessage]
   ).reduce(_ <+> _)
 }
 

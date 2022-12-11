@@ -1,0 +1,6 @@
+{
+  "url": "https://google.com/login",
+  "bot_username": "bot-1",
+  "forward_text": "forward text",
+  "request_write_access": true
+}

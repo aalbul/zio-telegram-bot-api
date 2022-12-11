@@ -62,6 +62,16 @@ trait Builders {
     .withForwardText("forward text")
     .withRequestWriteAccess(true)
 
+  lazy val keyboardButtonPollType1: KeyboardButtonPollType = KeyboardButtonPollType(PollTypes.Quiz)
+
+  lazy val keyboardButton1: KeyboardButton = KeyboardButton(
+    text = "simple button",
+    requestContact = Some(true),
+    requestLocation = Some(false),
+    requestPoll = Some(keyboardButtonPollType1),
+    webApp = Some(webAppInfo1)
+  )
+
   lazy val inlineKeyboardButton1: InlineKeyboardButton = InlineKeyboardButton(
     text = "some button 1",
     url = Some("https://google.com/url1"),
@@ -90,11 +100,53 @@ trait Builders {
     Seq(Seq(inlineKeyboardButton1), Seq(inlineKeyboardButton2))
   )
 
+  lazy val replyKeyboardMarkup1: ReplyKeyboardMarkup = ReplyKeyboardMarkup(
+    keyboard = Seq(Seq(keyboardButton1)),
+    resizeKeyboard = Some(true),
+    oneTimeKeyboard = Some(false),
+    inputFieldPlaceholder = Some("type you data here"),
+    selective = Some(true)
+  )
+
+  lazy val replyKeyboardRemove1: ReplyKeyboardRemove = ReplyKeyboardRemove(
+    removeKeyboard = true,
+    selective = Some(true)
+  )
+
   lazy val chat1: Chat = Chat.of(id = 81, `type` = ChatTypes.Supergroup)
 
   lazy val chat2: Chat = Chat.of(id = 82, `type` = ChatTypes.Private)
 
   lazy val chat3: Chat = Chat.of(id = 83, `type` = ChatTypes.Supergroup)
+
+  lazy val chat4: Chat = Chat(
+    id = 88,
+    `type` = ChatTypes.Channel,
+    title = Some("hello world"),
+    username = Some("user-1"),
+    firstName = Some("John"),
+    lastName = Some("Wick"),
+    isForum = Some(false),
+    photo = Some(chatPhoto1),
+    activeUsernames = Some(Seq("user-1", "user-2")),
+    emojiStatusCustomEmojiId = Some("emoji-id-1"),
+    bio = Some("some bio"),
+    hasPrivateForwards = Some(true),
+    hasRestrictedVoiceAndVideoMessages = Some(false),
+    joinToSendMessages = Some(true),
+    joinByRequest = Some(true),
+    description = Some("some description"),
+    inviteLink = Some("http://google.com/invite"),
+    pinnedMessage = Some(message1),
+    permissions = Some(chatPermissions1),
+    slowModeDelay = Some(5),
+    messageAutoDeleteTime = Some(10),
+    hasProtectedContent = Some(false),
+    stickerSetName = Some("sticker-set-1"),
+    canSetStickerSet = Some(true),
+    linkedChatId = Some(55),
+    location = Some(chatLocation1)
+  )
 
   lazy val instant1: Instant = Instant.parse("2022-06-12T10:15:30.00Z")
 
@@ -112,7 +164,7 @@ trait Builders {
 
   lazy val message4: Message = Message.of(messageId = 18, date = instant4, chat = chat3)
 
-  lazy val inputMediaAnimation: InputMedia = InputMediaAnimation
+  lazy val inputMediaAnimation1: InputMedia = InputMediaAnimation
     .of(pathDescriptor("/tmp/one.gif"))
     .withThumb(urlDescriptor("https://google.com/animation_thumb.jpg"))
     .withCaption("my gif")
@@ -122,7 +174,7 @@ trait Builders {
     .withHeight(769)
     .withDuration(346)
 
-  lazy val inputMediaAudio: InputMedia = InputMediaAudio
+  lazy val inputMediaAudio1: InputMedia = InputMediaAudio
     .of(pathDescriptor("/tmp/one.mp3"))
     .withThumb(pathDescriptor("/tmp/song_thumb.jpg"))
     .withCaption("my song")
@@ -132,7 +184,7 @@ trait Builders {
     .withPerformer("Me")
     .withTitle("Best song ever")
 
-  lazy val inputMediaDocument: InputMedia = InputMediaDocument
+  lazy val inputMediaDocument1: InputMedia = InputMediaDocument
     .of(pathDescriptor("/tmp/one.pdf"))
     .withThumb(pathDescriptor("/tmp/document_thumb.jpg"))
     .withCaption("my document")
@@ -140,14 +192,14 @@ trait Builders {
     .withCaptionEntities(Seq(messageEntity1))
     .withDisableContentTypeDetection(true)
 
-  lazy val inputMediaPhoto: InputMedia = InputMediaPhoto
+  lazy val inputMediaPhoto1: InputMedia = InputMediaPhoto
     .of(pathDescriptor("/tmp/one.jpg"))
     .withThumb(pathDescriptor("/tmp/photo_thumb.jpg"))
     .withCaption("my photo")
     .withParseMode(ParseModes.Markdown)
     .withCaptionEntities(Seq(messageEntity1))
 
-  lazy val inputMediaVideo: InputMedia = InputMediaVideo
+  lazy val inputMediaVideo1: InputMedia = InputMediaVideo
     .of(pathDescriptor("/tmp/one.mp4"))
     .withThumb(pathDescriptor("/tmp/video_thumb.jpg"))
     .withCaption("my video")
@@ -171,7 +223,8 @@ trait Builders {
     canAddWebPagePreviews = Some(true),
     canChangeInfo = Some(false),
     canInviteUsers = Some(false),
-    canPinMessages = Some(true)
+    canPinMessages = Some(true),
+    canManageTopics = Some(true)
   )
 
   lazy val photoSize1: PhotoSize = PhotoSize(
@@ -207,7 +260,7 @@ trait Builders {
     fileUniqueId = "unique-document-file-1",
     thumb = Some(photoSize2),
     fileName = Some("document-1"),
-    mimeType = None,
+    mimeType = Some("application/document"),
     fileSize = Some(5000)
   )
 
@@ -289,6 +342,45 @@ trait Builders {
 
   lazy val chatMember2: ChatMember = ChatMemberLeft(user = user2)
 
+  lazy val chatMember3: ChatMember = ChatMemberAdministrator(
+    user = user1,
+    canBeEdited = true,
+    isAnonymous = false,
+    canManageChat = true,
+    canDeleteMessages = false,
+    canManageVideoChats = true,
+    canRestrictMembers = false,
+    canPromoteMembers = false,
+    canChangeInfo = true,
+    canInviteUsers = false,
+    canPostMessages = Some(true),
+    canEditMessages = Some(false),
+    canPinMessages = Some(true),
+    canManageTopics = Some(false),
+    customerTitle = Some("custom title")
+  )
+
+  lazy val chatMember4: ChatMember = ChatMemberBanned(
+    user = user1,
+    untilDate = 30000
+  )
+
+  lazy val chatMember5: ChatMember = ChatMemberMember(user = user1)
+
+  lazy val chatMember6: ChatMember = ChatMemberRestricted(
+    user = user1,
+    isMember = true,
+    canChangeInfo = false,
+    canInviteUsers = true,
+    canPinMembers = false,
+    canSendMessages = true,
+    canSendMediaMessages = false,
+    canSendPolls = false,
+    canSendOtherMessages = true,
+    canAddWebPagePreviews = true,
+    untilDate = 50
+  )
+
   lazy val chatInviteLink1: ChatInviteLink = ChatInviteLink(
     inviteLink = "http://google.com/invite",
     creator = user1,
@@ -319,7 +411,7 @@ trait Builders {
   )
 
   lazy val maskPosition1: MaskPosition = MaskPosition(
-    point = "point-1",
+    point = MaskPointTypes.Forehead,
     xShift = 10.2,
     yShift = 5.4,
     scale = 1.3
@@ -418,16 +510,51 @@ trait Builders {
     secret = "secret-1"
   )
 
+  lazy val passportFile1: PassportFile = PassportFile(
+    fileId = "file-1",
+    fileUniqueId = "unique-file-1",
+    fileSize = 200,
+    fileDate = instant1
+  )
+
+  lazy val passportFile2: PassportFile = PassportFile(
+    fileId = "file-2",
+    fileUniqueId = "unique-file-2",
+    fileSize = 150,
+    fileDate = instant2
+  )
+
+  lazy val passportFile3: PassportFile = PassportFile(
+    fileId = "file-3",
+    fileUniqueId = "unique-file-3",
+    fileSize = 125,
+    fileDate = instant3
+  )
+
+  lazy val passportFile4: PassportFile = PassportFile(
+    fileId = "file-4",
+    fileUniqueId = "unique-file-4",
+    fileSize = 63,
+    fileDate = instant4
+  )
+
+  lazy val passportFile5: PassportFile = PassportFile(
+    fileId = "file-5",
+    fileUniqueId = "unique-file-5",
+    fileSize = 11,
+    fileDate = instant2
+  )
+
   lazy val encryptedPassportElement1: EncryptedPassportElement = EncryptedPassportElement(
     `type` = PassportElementTypes.Address,
     data = Some("address-1"),
     phoneNumber = Some("+31630911234"),
     email = Some("email@gmail.com"),
-    files = None,
-    frontSide = None,
-    reverseSide = None,
-    selfie = None,
-    translation = None,
+    files = Some(Seq(passportFile1)),
+    frontSide = Some(passportFile2),
+    reverseSide = Some(passportFile3),
+    selfie = Some(passportFile4),
+    translation = Some(Seq(passportFile5)),
     hash = "hash-1"
   )
 
@@ -457,7 +584,15 @@ trait Builders {
     buttonText = "button one"
   )
 
-  lazy val inlineQuery: InlineQuery = InlineQuery(
+  lazy val forumTopicCreated1: ForumTopicCreated = ForumTopicCreated
+    .of(name = "topic-1", iconColor = 255)
+    .withIconCustomEmojiId("emoji-1")
+
+  lazy val forumTopicClosed1: ForumTopicClosed = ForumTopicClosed.of()
+
+  lazy val forumTopicReopened1: ForumTopicReopened = ForumTopicReopened.of()
+
+  lazy val inlineQuery1: InlineQuery = InlineQuery(
     id = "query-1",
     from = user1,
     query = "test",
@@ -466,7 +601,19 @@ trait Builders {
     location = Some(location1)
   )
 
-  lazy val chosenInlineResult: domain.ChosenInlineResult = domain.ChosenInlineResult(
+  lazy val chatPhoto1: ChatPhoto = ChatPhoto(
+    smallFileId = "small-file-id-1",
+    smallFileUniqueId = "unique-small-file-id-1",
+    bigFileId = "big-file-id-1",
+    bigFileUniqueId = "unique-big-file-id-1"
+  )
+
+  lazy val chatLocation1: ChatLocation = ChatLocation(
+    location = location1,
+    address = "Jachthaven 1, 2172 JX Sassenheim"
+  )
+
+  lazy val chosenInlineResult1: domain.ChosenInlineResult = domain.ChosenInlineResult(
     resultId = "result-1",
     from = user1,
     location = Some(location1),
@@ -474,7 +621,7 @@ trait Builders {
     query = "query-1"
   )
 
-  lazy val callbackQuery: CallbackQuery = CallbackQuery(
+  lazy val callbackQuery1: CallbackQuery = CallbackQuery(
     id = "callback-1",
     from = user1,
     message = Some(message1),
@@ -688,6 +835,21 @@ trait Builders {
     .withFrom(user1)
     .withWebAppData(webAppData1)
 
+  lazy val forumTopicCreatedMessage1: Message = Message
+    .of(messageId = 447, date = instant1, chat = chat1)
+    .withFrom(user1)
+    .withForumTopicCreated(forumTopicCreated1)
+
+  lazy val forumTopicClosedMessage1: Message = Message
+    .of(messageId = 448, date = instant2, chat = chat1)
+    .withFrom(user1)
+    .withForumTopicClosed(forumTopicClosed1)
+
+  lazy val forumTopicReopenedMessage1: Message = Message
+    .of(messageId = 449, date = instant4, chat = chat1)
+    .withFrom(user1)
+    .withForumTopicReopened(forumTopicReopened1)
+
   lazy val allMessages: Set[Message] = Set(
     animationMessage1,
     audioMessage1,
@@ -724,7 +886,10 @@ trait Builders {
     videoChatStartedMessage1,
     videoChatEndedMessage1,
     videoChatParticipantsInvitedMessage1,
-    webAppDataMessage1
+    webAppDataMessage1,
+    forumTopicCreatedMessage1,
+    forumTopicClosedMessage1,
+    forumTopicReopenedMessage1
   )
 
   lazy val updateTextMessage1: Update = Update.of(updateId = 66).withMessage(textMessage1)
@@ -735,9 +900,9 @@ trait Builders {
   lazy val updateEditedTextMessage: Update = Update.of(updateId = 70).withEditedMessage(textMessage2)
   lazy val channelPostAudioMessage: Update = Update.of(updateId = 71).withChannelPost(audioMessage1)
   lazy val editedChannelPostMessage: Update = Update.of(updateId = 72).withEditedChannelPost(voiceMessage1)
-  lazy val inlineQueryMessage: Update = Update.of(updateId = 73).withInlineQuery(inlineQuery)
-  lazy val chosenInlineResultMessage: Update = Update.of(updateId = 74).withChosenInlineResult(chosenInlineResult)
-  lazy val callbackQueryMessage: Update = Update.of(updateId = 75).withCallbackQuery(callbackQuery)
+  lazy val inlineQueryMessage: Update = Update.of(updateId = 73).withInlineQuery(inlineQuery1)
+  lazy val chosenInlineResultMessage: Update = Update.of(updateId = 74).withChosenInlineResult(chosenInlineResult1)
+  lazy val callbackQueryMessage: Update = Update.of(updateId = 75).withCallbackQuery(callbackQuery1)
   lazy val shippingQueryMessage: Update = Update.of(updateId = 76).withShippingQuery(shippingQuery)
   lazy val preCheckoutQueryMessage: Update = Update.of(updateId = 77).withPreCheckoutQuery(preCheckoutQuery)
   lazy val newPollMessage: Update = Update.of(updateId = 78).withPoll(poll1)
@@ -967,11 +1132,11 @@ trait Builders {
     )
   )
 
-  lazy val chosenInlineResultProjection: UpdateProjection = projection.ChosenInlineResult(chosenInlineResult)
+  lazy val chosenInlineResultProjection: UpdateProjection = projection.ChosenInlineResult(chosenInlineResult1)
 
-  lazy val inlineQueryProjection: UpdateProjection = NewInlineQuery(inlineQuery)
+  lazy val inlineQueryProjection: UpdateProjection = NewInlineQuery(inlineQuery1)
 
-  lazy val newCallbackQueryProjection: UpdateProjection = NewCallbackQuery(callbackQuery)
+  lazy val newCallbackQueryProjection: UpdateProjection = NewCallbackQuery(callbackQuery1)
 
   lazy val newShippingQueryProjection: UpdateProjection = NewShippingQuery(shippingQuery)
 
@@ -986,4 +1151,13 @@ trait Builders {
   lazy val updatedChatMemberProjection: UpdateProjection = UpdatedChatMember(chatMemberUpdated1)
 
   lazy val newChatJoinRequestProjection: UpdateProjection = NewChatJoinRequest(chatJoinRequest1)
+
+  lazy val forumTopicCreatedProjection: UpdateProjection =
+    ForumTopicCreatedMessage(Data.of(forumTopicCreatedMessage1).get, forumTopicCreated1)
+
+  lazy val forumTopicClosedProjection: UpdateProjection =
+    ForumTopicClosedMessage(Data.of(forumTopicClosedMessage1).get, forumTopicClosed1)
+
+  lazy val forumTopicReopenedProjection: UpdateProjection =
+    ForumTopicReopenedMessage(Data.of(forumTopicReopenedMessage1).get, forumTopicReopened1)
 }

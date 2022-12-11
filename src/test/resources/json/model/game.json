@@ -1,0 +1,58 @@
+{
+  "title": "Guess who",
+  "description": "Guess Who? is a two-player board game where players each guess the identity of the other's chosen character",
+  "photo": [
+    {
+      "file_id": "photo-size-1",
+      "file_unique_id": "unique-photo-size-1",
+      "width": 300,
+      "height": 200,
+      "file_size": 11
+    },
+    {
+      "file_id": "photo-size-2",
+      "file_unique_id": "unique-photo-size-2",
+      "width": 1300,
+      "height": 500,
+      "file_size": 421
+    }
+  ],
+  "text": "Some text",
+  "text_entities": [
+    {
+      "type": "pre",
+      "offset": 10,
+      "length": 500,
+      "url": "https://someurl.com",
+      "user": {
+        "id": 1,
+        "is_bot": false,
+        "first_name": "John",
+        "last_name": "Wane",
+        "username": "jwane",
+        "language_code": "en",
+        "can_join_groups": true,
+        "can_read_all_group_messages": true,
+        "supports_inline_queries": false
+      },
+      "language": "js"
+    }
+  ],
+  "animation": {
+    "file_id": "animation-file-1",
+    "file_unique_id": "unique-animation-file-1",
+    "width": 640,
+    "height": 480,
+    "duration": 50,
+    "thumb": {
+      "file_id": "photo-size-1",
+      "file_unique_id": "unique-photo-size-1",
+      "width": 300,
+      "height": 200,
+      "file_size": 11
+    },
+    "file_name": "animation-file",
+    "mime_type": "image/gif",
+    "file_size": 450
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "result_id": "result-1",
+  "from": {
+    "id": 1,
+    "is_bot": false,
+    "first_name": "John",
+    "last_name": "Wane",
+    "username": "jwane",
+    "language_code": "en",
+    "can_join_groups": true,
+    "can_read_all_group_messages": true,
+    "supports_inline_queries": false
+  },
+  "location": {
+    "longitude": 52.22,
+    "latitude": 4.55,
+    "horizontal_accuracy": 1.23,
+    "live_period": 50,
+    "heading": 23,
+    "proximity_alert_radius": 51
+  },
+  "inline_message_id": "message-1",
+  "query": "query-1"
+}

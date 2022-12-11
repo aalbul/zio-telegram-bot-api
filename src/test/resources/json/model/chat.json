@@ -1,0 +1,60 @@
+{
+  "id": 88,
+  "type": "channel",
+  "title": "hello world",
+  "username": "user-1",
+  "first_name": "John",
+  "last_name": "Wick",
+  "is_forum": false,
+  "photo": {
+    "small_file_id": "small-file-id-1",
+    "small_file_unique_id": "unique-small-file-id-1",
+    "big_file_id": "big-file-id-1",
+    "big_file_unique_id": "unique-big-file-id-1"
+  },
+  "active_usernames": ["user-1", "user-2"],
+  "emoji_status_custom_emoji_id": "emoji-id-1",
+  "bio": "some bio",
+  "has_private_forwards": true,
+  "has_restricted_voice_and_video_messages": false,
+  "join_to_send_messages": true,
+  "join_by_request": true,
+  "description": "some description",
+  "invite_link": "http://google.com/invite",
+  "pinned_message": {
+    "message_id": 15,
+    "date": 1655028930,
+    "chat": {
+      "id": 81,
+      "type": "supergroup"
+    }
+  },
+  "permissions": {
+    "can_send_messages": true,
+    "can_send_media_messages": false,
+    "can_send_polls": true,
+    "can_send_other_messages": false,
+    "can_add_web_page_previews": true,
+    "can_change_info": false,
+    "can_invite_users": false,
+    "can_pin_messages": true,
+    "can_manage_topics": true
+  },
+  "slow_mode_delay": 5,
+  "message_auto_delete_time": 10,
+  "has_protected_content": false,
+  "sticker_set_name": "sticker-set-1",
+  "can_set_sticker_set": true,
+  "linked_chat_id": 55,
+  "location": {
+    "location": {
+      "longitude": 52.22,
+      "latitude": 4.55,
+      "horizontal_accuracy": 1.23,
+      "live_period": 50,
+      "heading": 23,
+      "proximity_alert_radius": 51
+    },
+    "address": "Jachthaven 1, 2172 JX Sassenheim"
+  }
+}

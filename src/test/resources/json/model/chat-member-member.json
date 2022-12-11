@@ -1,0 +1,14 @@
+{
+  "status": "member",
+  "user": {
+    "id": 1,
+    "is_bot": false,
+    "first_name": "John",
+    "last_name": "Wane",
+    "username": "jwane",
+    "language_code": "en",
+    "can_join_groups": true,
+    "can_read_all_group_messages": true,
+    "supports_inline_queries": false
+  }
+}

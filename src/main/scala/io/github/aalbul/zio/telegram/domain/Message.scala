@@ -19,6 +19,7 @@ object Message {
     */
   def of(messageId: Long, date: Instant, chat: Chat): Message = Message(
     messageId = messageId,
+    messageThreadId = None,
     from = None,
     senderChat = None,
     date = date,
@@ -29,6 +30,7 @@ object Message {
     forwardSignature = None,
     forwardSenderName = None,
     forwardDate = None,
+    isTopicMessage = None,
     isAutomaticForward = None,
     replyToMessage = None,
     viaBot = None,
@@ -71,6 +73,9 @@ object Message {
     connectedWebsite = None,
     passportData = None,
     proximityAlertTriggered = None,
+    forumTopicCreated = None,
+    forumTopicClosed = None,
+    forumTopicReopened = None,
     videoChatScheduled = None,
     videoChatStarted = None,
     videoChatEnded = None,
@@ -84,6 +89,7 @@ object Message {
 @ConfiguredJsonCodec(decodeOnly = true)
 case class Message(
   messageId: Long,
+  messageThreadId: Option[Long],
   from: Option[User],
   senderChat: Option[Chat],
   date: Instant,
@@ -94,6 +100,7 @@ case class Message(
   forwardSignature: Option[String],
   forwardSenderName: Option[String],
   forwardDate: Option[Instant],
+  isTopicMessage: Option[Boolean],
   isAutomaticForward: Option[Boolean],
   replyToMessage: Option[Message],
   viaBot: Option[User],
@@ -136,6 +143,9 @@ case class Message(
   connectedWebsite: Option[String],
   passportData: Option[PassportData],
   proximityAlertTriggered: Option[ProximityAlertTriggered],
+  forumTopicCreated: Option[ForumTopicCreated],
+  forumTopicClosed: Option[ForumTopicClosed],
+  forumTopicReopened: Option[ForumTopicReopened],
   videoChatScheduled: Option[VideoChatScheduled],
   videoChatStarted: Option[VideoChatStarted],
   videoChatEnded: Option[VideoChatEnded],
@@ -143,6 +153,10 @@ case class Message(
   webAppData: Option[WebAppData],
   replyMarkup: Option[InlineKeyboardMarkup]
 ) {
+
+  /** Unique identifier of a message thread to which the message belongs; for supergroups only
+    */
+  def withMessageThreadId(id: Long): Message = copy(messageThreadId = Some(id))
 
   /** Sender of the message; empty for messages sent to channels. For backward compatibility, the field contains a fake
     * sender user in non-channel chats, if the message was sent on behalf of a chat.
@@ -177,6 +191,10 @@ case class Message(
 
   /** For forwarded messages, date the original message was sent in Unix time */
   def withForwardDate(date: Instant): Message = copy(forwardDate = Some(date))
+
+  /** True, if the message is sent to a forum topic
+    */
+  def withIsTopicMessage(isTopicMessage: Boolean): Message = copy(isTopicMessage = Some(isTopicMessage))
 
   /** True, if the message is a channel post that was automatically forwarded to the connected discussion group */
   def withIsAutomaticForward(isAutomatic: Boolean): Message = copy(isAutomaticForward = Some(isAutomatic))
@@ -339,6 +357,18 @@ case class Message(
 
   /** Service message. A user in the chat triggered another user's proximity alert while sharing Live Location. */
   def withProximityAlertTriggered(event: ProximityAlertTriggered): Message = copy(proximityAlertTriggered = Some(event))
+
+  /** Service message: forum topic created */
+  def withForumTopicCreated(forumTopicCreated: ForumTopicCreated): Message =
+    copy(forumTopicCreated = Some(forumTopicCreated))
+
+  /** Service message: forum topic closed */
+  def withForumTopicClosed(forumTopicClosed: ForumTopicClosed): Message =
+    copy(forumTopicClosed = Some(forumTopicClosed))
+
+  /** Service message: forum topic reopened */
+  def withForumTopicReopened(forumTopicReopened: ForumTopicReopened): Message =
+    copy(forumTopicReopened = Some(forumTopicReopened))
 
   /** Service message: video chat scheduled */
   def withVideoChatScheduled(scheduled: VideoChatScheduled): Message = copy(videoChatScheduled = Some(scheduled))

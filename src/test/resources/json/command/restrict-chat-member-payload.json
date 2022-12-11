@@ -9,7 +9,8 @@
     "can_add_web_page_previews": true,
     "can_change_info": false,
     "can_invite_users": false,
-    "can_pin_messages": true
+    "can_pin_messages": true,
+    "can_manage_topics": true
   },
   "until_date": 1655030492
 }

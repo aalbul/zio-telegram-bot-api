@@ -1,0 +1,40 @@
+{
+  "chat": {
+    "id": 81,
+    "type": "supergroup"
+  },
+  "from": {
+    "id": 2,
+    "is_bot": true,
+    "first_name": "Bot",
+    "last_name": "Woot",
+    "username": "nemesis",
+    "language_code": "en",
+    "can_join_groups": true,
+    "can_read_all_group_messages": true,
+    "supports_inline_queries": true
+  },
+  "date": 1655101090,
+  "bio": "bio-1",
+  "invite_link": {
+    "invite_link": "http://google.com/invite",
+    "creator": {
+      "id": 1,
+      "is_bot": false,
+      "first_name": "John",
+      "last_name": "Wane",
+      "username": "jwane",
+      "language_code": "en",
+      "can_join_groups": true,
+      "can_read_all_group_messages": true,
+      "supports_inline_queries": false
+    },
+    "creates_join_request": true,
+    "is_primary": true,
+    "is_revoked": false,
+    "name": "invite-1",
+    "expiration_date": 1655101090,
+    "member_limit": 22,
+    "pending_join_request_count": 6
+  }
+}

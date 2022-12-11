@@ -1,0 +1,17 @@
+{
+  "file_id": "audio-file-1",
+  "file_unique_id": "unique-audio-file-1",
+  "duration": 422,
+  "performer": "Amia Venera Landscape",
+  "title": "A New Aurora",
+  "file_name": "02 - A New Aurora.flac",
+  "mime_type": "audio/x-flac,audio/flac",
+  "file_size": 300000000,
+  "thumb": {
+    "file_id": "photo-size-1",
+    "file_unique_id": "unique-photo-size-1",
+    "width": 300,
+    "height": 200,
+    "file_size": 11
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "location": {
+    "longitude": 52.22,
+    "latitude": 4.55,
+    "horizontal_accuracy": 1.23,
+    "live_period": 50,
+    "heading": 23,
+    "proximity_alert_radius": 51
+  },
+  "address": "Jachthaven 1, 2172 JX Sassenheim"
+}

@@ -1,0 +1,7 @@
+{
+  "title": "Shopping",
+  "description": "Your invoice",
+  "start_parameter": "param-1",
+  "currency": "EUR",
+  "total_amount": 53
+}

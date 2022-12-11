@@ -57,6 +57,9 @@ class ProjectionBuilder(projector: UpdateProjector[UpdateProjection]) {
     UpdateProjector[VideoChatParticipantsInvitedMessage]
   )
   def withWebAppDataMessage: ProjectionBuilder = plus(UpdateProjector[WebAppDataMessage])
+  def withForumTopicCreatedMessage: ProjectionBuilder = plus(UpdateProjector[ForumTopicCreatedMessage])
+  def withForumTopicClosedMessage: ProjectionBuilder = plus(UpdateProjector[ForumTopicClosedMessage])
+  def withForumTopicReopenedMessage: ProjectionBuilder = plus(UpdateProjector[ForumTopicReopenedMessage])
   def withEditedMessage: ProjectionBuilder = plus(UpdateProjector[EditedMessage])
   def withChannelPost: ProjectionBuilder = plus(UpdateProjector[ChannelPost])
   def withEditedChannelPost: ProjectionBuilder = plus(UpdateProjector[EditedChannelPost])

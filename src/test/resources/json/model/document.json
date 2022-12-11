@@ -1,0 +1,14 @@
+{
+  "file_id": "document-file-1",
+  "file_unique_id": "unique-document-file-1",
+  "thumb": {
+    "file_id": "photo-size-2",
+    "file_unique_id": "unique-photo-size-2",
+    "width": 1300,
+    "height": 500,
+    "file_size": 421
+  },
+  "file_name": "document-1",
+  "mime_type": "application/document",
+  "file_size": 5000
+}

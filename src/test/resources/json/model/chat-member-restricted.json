@@ -1,0 +1,24 @@
+{
+  "status":  "restricted",
+  "user": {
+    "id": 1,
+    "is_bot": false,
+    "first_name": "John",
+    "last_name": "Wane",
+    "username": "jwane",
+    "language_code": "en",
+    "can_join_groups": true,
+    "can_read_all_group_messages": true,
+    "supports_inline_queries": false
+  },
+  "is_member": true,
+  "can_change_info": false,
+  "can_invite_users": true,
+  "can_pin_members": false,
+  "can_send_messages": true,
+  "can_send_media_messages": false,
+  "can_send_polls": false,
+  "can_send_other_messages": true,
+  "can_add_web_page_previews": true,
+  "until_date": 50
+}

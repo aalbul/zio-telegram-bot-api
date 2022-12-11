@@ -11,11 +11,11 @@ class SendMediaGroupSpec extends BaseSpec {
         .of(
           chatId = "5526",
           media = Seq(
-            inputMediaAnimation,
-            inputMediaAudio,
-            inputMediaDocument,
-            inputMediaPhoto,
-            inputMediaVideo
+            inputMediaAnimation1,
+            inputMediaAudio1,
+            inputMediaDocument1,
+            inputMediaPhoto1,
+            inputMediaVideo1
           )
         )
         .withDisableNotification(true)

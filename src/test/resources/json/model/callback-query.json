@@ -1,0 +1,26 @@
+{
+  "id": "callback-1",
+  "from": {
+    "id": 1,
+    "is_bot": false,
+    "first_name": "John",
+    "last_name": "Wane",
+    "username": "jwane",
+    "language_code": "en",
+    "can_join_groups": true,
+    "can_read_all_group_messages": true,
+    "supports_inline_queries": false
+  },
+  "message": {
+    "message_id": 15,
+    "date": 1655028930,
+    "chat": {
+      "id": 81,
+      "type": "supergroup"
+    }
+  },
+  "inline_message_id": "inline-message-1",
+  "chat_instance": "chat-1",
+  "data": "data-1",
+  "game_short_name": "game-short-name"
+}
