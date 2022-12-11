@@ -1,0 +1,31 @@
+{
+  "id": "pre-checkout-query-1",
+  "from": {
+    "id": 1,
+    "is_bot": false,
+    "first_name": "John",
+    "last_name": "Wane",
+    "username": "jwane",
+    "language_code": "en",
+    "can_join_groups": true,
+    "can_read_all_group_messages": true,
+    "supports_inline_queries": false
+  },
+  "currency": "USD",
+  "total_amount": 20,
+  "invoice_payload": "payload-1",
+  "shipping_option_id": "option-id-1",
+  "order_info": {
+    "name": "John Wick",
+    "email": "jwick@google.com",
+    "phone_number": "+312345689",
+    "shipping_address": {
+      "country_code": "NL",
+      "state": "Utrecht",
+      "city": "Amersfoort",
+      "street_line1": "Some Street 1",
+      "street_line2": "Other",
+      "post_code": "3821KL"
+    }
+  }
+}

@@ -7,7 +7,7 @@ object MessageEntityTypes extends Enumeration {
   type MessageEntityType = Value
 
   val Mention, Hashtag, Cashtag, BotCommand, Url, Email, PhoneNumber, Bold, Italic, Underline, Strikethrough, Spoiler,
-    Code, Pre, TextLink, TextMention = Value
+    Code, Pre, TextLink, TextMention, CustomEmoji = Value
 
   private lazy val indexed = values
     .map(value => value.toString.camelToSnakeCase -> value)

@@ -1,0 +1,50 @@
+{
+  "data": [
+    {
+      "type": "address",
+      "data": "address-1",
+      "phone_number": "+31630911234",
+      "email": "email@gmail.com",
+      "files": [
+        {
+          "file_id": "file-1",
+          "file_unique_id": "unique-file-1",
+          "file_size": 200,
+          "file_date": 1655028930
+        }
+      ],
+      "front_side": {
+        "file_id": "file-2",
+        "file_unique_id": "unique-file-2",
+        "file_size": 150,
+        "file_date": 1655030492
+      },
+      "reverse_side": {
+        "file_id": "file-3",
+        "file_unique_id": "unique-file-3",
+        "file_size": 125,
+        "file_date": 1655100911
+      },
+      "selfie": {
+        "file_id": "file-4",
+        "file_unique_id": "unique-file-4",
+        "file_size": 63,
+        "file_date": 1655101090
+      },
+      "translation": [
+        {
+          "file_id": "file-5",
+          "file_unique_id": "unique-file-5",
+          "file_size": 11,
+          "file_date": 1655030492
+        }
+      ],
+      "hash": "hash-1"
+    }
+  ],
+  "credentials": {
+    "data": "data-1",
+    "hash": "hash-1",
+    "secret": "secret-1"
+  }
+}

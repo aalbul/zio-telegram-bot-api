@@ -10,7 +10,6 @@ import io.github.aalbul.zio.telegram.{domain, projection}
 
 import java.time.Instant
 import scala.concurrent.duration.DurationInt
-import scala.jdk.DurationConverters.*
 
 trait Builders {
   lazy val user1: User = User(
@@ -155,6 +154,8 @@ trait Builders {
   lazy val instant3: Instant = Instant.parse("2022-06-13T06:15:11.00Z")
 
   private val instant4: Instant = Instant.parse("2022-06-13T06:18:10.00Z")
+
+  lazy val messageId1: MessageId = MessageId(11)
 
   lazy val message1: Message = Message.of(messageId = 15, date = instant1, chat = chat1)
 
@@ -372,14 +373,14 @@ trait Builders {
     proximityAlertRadius = Some(51)
   )
 
+  lazy val pollOption1: PollOption = PollOption(text = "Apple", voterCount = 10)
+  lazy val pollOption2: PollOption = PollOption(text = "Peer", voterCount = 3)
+  lazy val pollOption3: PollOption = PollOption(text = "Watermelon", voterCount = 8)
+
   lazy val poll1: Poll = Poll(
     id = "poll-1",
     question = "Favorite fruit",
-    options = Seq(
-      PollOption(text = "Apple", voterCount = 10),
-      PollOption(text = "Peer", voterCount = 3),
-      PollOption(text = "Watermelon", voterCount = 8)
-    ),
+    options = Seq(pollOption1, pollOption2, pollOption3),
     totalVoterCount = 21,
     isClosed = true,
     isAnonymous = false,
@@ -484,6 +485,7 @@ trait Builders {
   lazy val sticker1: Sticker = Sticker(
     fileId = "sticker-1",
     fileUniqueId = "unique-sticker-1",
+    `type` = StickerTypes.CustomEmoji,
     width = 80,
     height = 50,
     isAnimated = true,
@@ -491,7 +493,10 @@ trait Builders {
     thumb = Some(photoSize1),
     emoji = Some("🎰"),
     setName = Some("set-1"),
-    maskPosition = Some(maskPosition1)
+    premiumAnimation = Some(file1),
+    maskPosition = Some(maskPosition1),
+    customEmojiId = Some("custom-emoji-id-1"),
+    fileSize = Some(500)
   )
 
   lazy val venue1: Venue = Venue(
@@ -695,17 +700,17 @@ trait Builders {
     gameShortName = Some("game-short-name")
   )
 
-  lazy val shippingQuery: ShippingQuery = ShippingQuery(
+  lazy val shippingQuery1: ShippingQuery = ShippingQuery(
     id = "shipping-query-1",
     from = user1,
     invoicePayload = "payload-1",
     shippingAddress = shippingAddress1
   )
 
-  lazy val preCheckoutQuery: PreCheckoutQuery = PreCheckoutQuery(
+  lazy val preCheckoutQuery1: PreCheckoutQuery = PreCheckoutQuery(
     id = "pre-checkout-query-1",
     from = user1,
-    currency = "USB",
+    currency = "USD",
     totalAmount = 20,
     invoicePayload = "payload-1",
     shippingOptionId = Some("option-id-1"),
@@ -967,8 +972,8 @@ trait Builders {
   lazy val inlineQueryMessage: Update = Update.of(updateId = 73).withInlineQuery(inlineQuery1)
   lazy val chosenInlineResultMessage: Update = Update.of(updateId = 74).withChosenInlineResult(chosenInlineResult1)
   lazy val callbackQueryMessage: Update = Update.of(updateId = 75).withCallbackQuery(callbackQuery1)
-  lazy val shippingQueryMessage: Update = Update.of(updateId = 76).withShippingQuery(shippingQuery)
-  lazy val preCheckoutQueryMessage: Update = Update.of(updateId = 77).withPreCheckoutQuery(preCheckoutQuery)
+  lazy val shippingQueryMessage: Update = Update.of(updateId = 76).withShippingQuery(shippingQuery1)
+  lazy val preCheckoutQueryMessage: Update = Update.of(updateId = 77).withPreCheckoutQuery(preCheckoutQuery1)
   lazy val newPollMessage: Update = Update.of(updateId = 78).withPoll(poll1)
   lazy val newPollAnswerMessage: Update = Update.of(updateId = 79).withPollAnswer(pollAnswer1)
   lazy val updatedMyChatMemberMessage: Update = Update.of(updateId = 80).withMyChatMember(chatMemberUpdated1)
@@ -1202,9 +1207,9 @@ trait Builders {
 
   lazy val newCallbackQueryProjection: UpdateProjection = NewCallbackQuery(callbackQuery1)
 
-  lazy val newShippingQueryProjection: UpdateProjection = NewShippingQuery(shippingQuery)
+  lazy val newShippingQueryProjection: UpdateProjection = NewShippingQuery(shippingQuery1)
 
-  lazy val newPreCheckoutQueryProjection: UpdateProjection = NewPreCheckoutQuery(preCheckoutQuery)
+  lazy val newPreCheckoutQueryProjection: UpdateProjection = NewPreCheckoutQuery(preCheckoutQuery1)
 
   lazy val newPollProjection: UpdateProjection = NewPoll(poll1)
 

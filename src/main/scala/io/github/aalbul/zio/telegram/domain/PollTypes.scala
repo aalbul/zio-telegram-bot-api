@@ -4,14 +4,17 @@ import io.circe.{Decoder, Encoder}
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 object PollTypes extends Enumeration {
-  implicit val pollTypeDecoder: Decoder[PollType] = Decoder.decodeString.map(byName)
-  implicit val pollTypeEncoder: Encoder[PollType] = Encoder.encodeString.contramap[PollType](pollType =>
-    s"${pollType.toString.headOption.map(_.toLower).getOrElse("")}${pollType.toString.tail}"
-  )
+  private lazy val indexed = values
+    .map(value => value.toString.camelToSnakeCase -> value)
+    .toMap
+  private lazy val reverseIndex = indexed.toSeq.map(_.swap).toMap
 
   type PollType = Value
 
   val Regular, Quiz = Value
 
-  def byName(name: String): PollType = withName(StringOps(name).capitalize)
+  def byName(name: String): PollType = indexed(name)
+
+  implicit val pollTypeDecoder: Decoder[PollType] = Decoder.decodeString.map(byName)
+  implicit val pollTypeEncoder: Encoder[PollType] = Encoder.encodeString.contramap(reverseIndex)
 }

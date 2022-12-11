@@ -12,6 +12,8 @@ object OrderInfo {
   def of(): OrderInfo = OrderInfo(name = None, phoneNumber = None, email = None, shippingAddress = None)
 }
 
+/** This object represents information about an order.
+  */
 @ConfiguredJsonCodec(decodeOnly = true)
 case class OrderInfo(
   name: Option[String],

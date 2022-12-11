@@ -1,0 +1,47 @@
+{
+  "id": "poll-1",
+  "question": "Favorite fruit",
+  "options": [
+    {
+      "text": "Apple",
+      "voter_count": 10
+    },
+    {
+      "text": "Peer",
+      "voter_count": 3
+    },
+    {
+      "text": "Watermelon",
+      "voter_count": 8
+    }
+  ],
+  "total_voter_count": 21,
+  "is_closed": true,
+  "is_anonymous": false,
+  "type": "quiz",
+  "allows_multiple_answers": false,
+  "correct_option_id": 0,
+  "explanation": "Which is your favorite fruit of all time?",
+  "explanation_entities": [
+    {
+      "type": "pre",
+      "offset": 10,
+      "length": 500,
+      "url": "https://someurl.com",
+      "user": {
+        "id": 1,
+        "is_bot": false,
+        "first_name": "John",
+        "last_name": "Wane",
+        "username": "jwane",
+        "language_code": "en",
+        "can_join_groups": true,
+        "can_read_all_group_messages": true,
+        "supports_inline_queries": false
+      },
+      "language": "js"
+    }
+  ],
+  "open_period": 24,
+  "close_date": 500
+}

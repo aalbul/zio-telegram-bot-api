@@ -1,0 +1,18 @@
+{
+  "poll_id": "poll-1",
+  "user": {
+    "id": 2,
+    "is_bot": true,
+    "first_name": "Bot",
+    "last_name": "Woot",
+    "username": "nemesis",
+    "language_code": "en",
+    "can_join_groups": true,
+    "can_read_all_group_messages": true,
+    "supports_inline_queries": true
+  },
+  "option_ids": [
+    2,
+    3
+  ]
+}

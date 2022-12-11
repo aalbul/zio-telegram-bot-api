@@ -6,7 +6,7 @@ class MessageSpec extends BaseSpec {
   "Message" when {
     "decoder" should {
       "decode message from json" in {
-        jsonResourceAs[Message]("json/model/full-message.json")
+        jsonResourceAs[Message]("json/model/full-message.json") shouldBe fullMessage1
       }
     }
   }
