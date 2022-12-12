@@ -1,0 +1,21 @@
+{
+  "currency": "EUR",
+  "total_amount": 53,
+  "invoice_payload": "payload - 1",
+  "telegram_payment_charge_id": "charge - 1",
+  "provider_payment_charge_id": "provider payment - 1",
+  "order_info": {
+    "name": "John Wick",
+    "email": "jwick@google.com",
+    "phone_number": "+312345689",
+    "shipping_address": {
+      "country_code": "NL",
+      "state": "Utrecht",
+      "city": "Amersfoort",
+      "street_line1": "Some Street 1",
+      "street_line2": "Other",
+      "post_code": "3821KL"
+    }
+  },
+  "shipping_option_id": "option - 1"
+}

@@ -1,0 +1,14 @@
+{
+  "file_id": "video-note-1",
+  "file_unique_id": "unique-video-note-1",
+  "length": 4000,
+  "duration": 23,
+  "thumb": {
+    "file_id": "photo-size-2",
+    "file_unique_id": "unique-photo-size-2",
+    "width": 1300,
+    "height": 500,
+    "file_size": 421
+  },
+  "file_size": 64441
+}

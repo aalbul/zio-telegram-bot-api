@@ -1,0 +1,16 @@
+{
+  "location": {
+    "longitude": 52.22,
+    "latitude": 4.55,
+    "horizontal_accuracy": 1.23,
+    "live_period": 50,
+    "heading": 23,
+    "proximity_alert_radius": 51
+  },
+  "title": "NEMO Science Museum",
+  "address": "Oosterdok 2, 1011 VX Amsterdam",
+  "foursquare_id": "fsq1",
+  "foursquare_type": "fsq-t-1",
+  "google_place_id": "gpi1",
+  "google_place_type": "gp-t-1"
+}

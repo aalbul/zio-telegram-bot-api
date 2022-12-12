@@ -12,28 +12,39 @@ import java.time.Instant
 import scala.concurrent.duration.DurationInt
 
 trait Builders {
-  lazy val user1: User = User(
-    id = 1,
-    isBot = false,
-    firstName = "John",
-    lastName = Some("Wane"),
-    username = Some("jwane"),
-    languageCode = Some("en"),
-    canJoinGroups = Some(true),
-    canReadAllGroupMessages = Some(true),
-    supportsInlineQueries = Some(false)
-  )
+  lazy val user1: User = User
+    .of(
+      id = 1,
+      isBot = false,
+      firstName = "John"
+    )
+    .withLastName("Wane")
+    .withUsername("jwane")
+    .withLanguageCode("en")
+    .withIsPremium(true)
+    .withAddedToAttachmentMenu(true)
+    .withCanJoinGroups(true)
+    .withCanReadAllGroupMessages(true)
+    .withSupportsInlineQueries(false)
 
-  lazy val user2: User = User(
-    id = 2,
-    isBot = true,
-    firstName = "Bot",
-    lastName = Some("Woot"),
-    username = Some("nemesis"),
-    languageCode = Some("en"),
-    canJoinGroups = Some(true),
-    canReadAllGroupMessages = Some(true),
-    supportsInlineQueries = Some(true)
+  lazy val user2: User = User
+    .of(
+      id = 2,
+      isBot = true,
+      firstName = "Bot"
+    )
+    .withLastName("Woot")
+    .withUsername("nemesis")
+    .withLanguageCode("en")
+    .withIsPremium(false)
+    .withAddedToAttachmentMenu(true)
+    .withCanJoinGroups(true)
+    .withCanReadAllGroupMessages(true)
+    .withSupportsInlineQueries(true)
+
+  lazy val userProfilePhotos1: UserProfilePhotos = UserProfilePhotos.of(
+    totalCount = 2,
+    photos = Seq(Seq(photoSize1), Seq(photoSize2))
   )
 
   lazy val messageEntity1: MessageEntity = MessageEntity(
@@ -47,7 +58,7 @@ trait Builders {
 
   lazy val callbackGame1: CallbackGame = CallbackGame()
 
-  lazy val webAppInfo1: WebAppInfo = WebAppInfo(url = "https://webapp.org")
+  lazy val webAppInfo1: WebAppInfo = WebAppInfo.of(url = "https://webapp.org")
 
   lazy val forceReplyMarkup1: Markup = ForceReply(
     forceReply = true,
@@ -499,44 +510,48 @@ trait Builders {
     fileSize = Some(500)
   )
 
-  lazy val venue1: Venue = Venue(
-    location = location1,
-    title = "NEMO Science Museum",
-    address = "Oosterdok 2, 1011 VX Amsterdam",
-    foursquareId = Some("fsq1"),
-    foursquareType = Some("fsq-t-1"),
-    googlePlaceId = Some("gpi1"),
-    googlePlaceType = Some("gp-t-1")
-  )
+  lazy val venue1: Venue = Venue
+    .of(
+      location = location1,
+      title = "NEMO Science Museum",
+      address = "Oosterdok 2, 1011 VX Amsterdam"
+    )
+    .withFoursquareId("fsq1")
+    .withFoursquareType("fsq-t-1")
+    .withGooglePlaceId("gpi1")
+    .withGooglePlaceType("gp-t-1")
 
-  lazy val video1: Video = Video(
-    fileId = "video-1",
-    fileUniqueId = "unique-video-1",
-    width = 640,
-    height = 480,
-    duration = 15,
-    thumb = Some(photoSize1),
-    fileName = Some("video-1"),
-    mimeType = Some("video/mp4"),
-    fileSize = Some(54000)
-  )
+  lazy val video1: Video = Video
+    .of(
+      fileId = "video-1",
+      fileUniqueId = "unique-video-1",
+      width = 640,
+      height = 480,
+      duration = 15
+    )
+    .withThumb(photoSize1)
+    .withFileName("video-1")
+    .withMimeType("video/mp4")
+    .withFileSize(54000)
 
-  lazy val videoNote1: VideoNote = VideoNote(
-    fileId = "video-note-1",
-    fileUniqueId = "unique-video-note-1",
-    length = 4000,
-    duration = 23,
-    thumb = Some(photoSize2),
-    fileSize = Some(64441)
-  )
+  lazy val videoNote1: VideoNote = VideoNote
+    .of(
+      fileId = "video-note-1",
+      fileUniqueId = "unique-video-note-1",
+      length = 4000,
+      duration = 23
+    )
+    .withThumb(photoSize2)
+    .withFileSize(64441)
 
-  lazy val voice1: Voice = Voice(
-    fileId = "voice-1",
-    fileUniqueId = "unique-voice-1",
-    duration = 50,
-    mimeType = Some("audio/mpeg"),
-    fileSize = Some(1355)
-  )
+  lazy val voice1: Voice = Voice
+    .of(
+      fileId = "voice-1",
+      fileUniqueId = "unique-voice-1",
+      duration = 50
+    )
+    .withMimeType("audio/mpeg")
+    .withFileSize(1355)
 
   lazy val invoice1: Invoice = Invoice(
     title = "Shopping",
@@ -638,17 +653,17 @@ trait Builders {
     distance = 20
   )
 
-  lazy val videoChatScheduled1: VideoChatScheduled = VideoChatScheduled(startDate = instant4)
+  lazy val videoChatScheduled1: VideoChatScheduled = VideoChatScheduled.of(startDate = instant4)
 
-  lazy val videoChatStarted1: VideoChatStarted = VideoChatStarted()
+  lazy val videoChatStarted1: VideoChatStarted = VideoChatStarted.of()
 
-  lazy val videoChatEnded1: VideoChatEnded = VideoChatEnded(duration = 10.minutes)
+  lazy val videoChatEnded1: VideoChatEnded = VideoChatEnded.of(duration = 10.minutes)
 
-  lazy val videoChatParticipantsInvited1: VideoChatParticipantsInvited = VideoChatParticipantsInvited(
+  lazy val videoChatParticipantsInvited1: VideoChatParticipantsInvited = VideoChatParticipantsInvited.of(
     users = Seq(user2, user1)
   )
 
-  lazy val webAppData1: WebAppData = WebAppData(
+  lazy val webAppData1: WebAppData = WebAppData.of(
     data = "data-1",
     buttonText = "button one"
   )

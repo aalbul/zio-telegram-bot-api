@@ -1,0 +1,17 @@
+{
+  "file_id": "video-1",
+  "file_unique_id": "unique-video-1",
+  "width": 640,
+  "height": 480,
+  "duration": 15,
+  "thumb": {
+    "file_id": "photo-size-1",
+    "file_unique_id": "unique-photo-size-1",
+    "width": 300,
+    "height": 200,
+    "file_size": 11
+  },
+  "file_name": "video-1",
+  "mime_type": "video/mp4",
+  "file_size": 54000
+}

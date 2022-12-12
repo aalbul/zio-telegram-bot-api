@@ -13,6 +13,8 @@
     "last_name": "Wane",
     "username": "jwane",
     "language_code": "en",
+    "is_premium": true,
+    "added_to_attachment_menu": true,
     "can_join_groups": true,
     "can_read_all_group_messages": true,
     "supports_inline_queries": false
@@ -28,6 +30,8 @@
     "last_name": "Woot",
     "username": "nemesis",
     "language_code": "en",
+    "is_premium": false,
+    "added_to_attachment_menu": true,
     "can_join_groups": true,
     "can_read_all_group_messages": true,
     "supports_inline_queries": true
@@ -57,6 +61,8 @@
     "last_name": "Woot",
     "username": "nemesis",
     "language_code": "en",
+    "is_premium": false,
+    "added_to_attachment_menu": true,
     "can_join_groups": true,
     "can_read_all_group_messages": true,
     "supports_inline_queries": true
@@ -79,6 +85,8 @@
         "last_name": "Wane",
         "username": "jwane",
         "language_code": "en",
+        "is_premium": true,
+        "added_to_attachment_menu": true,
         "can_join_groups": true,
         "can_read_all_group_messages": true,
         "supports_inline_queries": false
@@ -234,6 +242,8 @@
         "last_name": "Wane",
         "username": "jwane",
         "language_code": "en",
+        "is_premium": true,
+        "added_to_attachment_menu": true,
         "can_join_groups": true,
         "can_read_all_group_messages": true,
         "supports_inline_queries": false
@@ -285,6 +295,8 @@
           "last_name": "Wane",
           "username": "jwane",
           "language_code": "en",
+          "is_premium": true,
+          "added_to_attachment_menu": true,
           "can_join_groups": true,
           "can_read_all_group_messages": true,
           "supports_inline_queries": false
@@ -347,6 +359,8 @@
           "last_name": "Wane",
           "username": "jwane",
           "language_code": "en",
+          "is_premium": true,
+          "added_to_attachment_menu": true,
           "can_join_groups": true,
           "can_read_all_group_messages": true,
           "supports_inline_queries": false
@@ -389,6 +403,8 @@
       "last_name": "Wane",
       "username": "jwane",
       "language_code": "en",
+      "is_premium": true,
+      "added_to_attachment_menu": true,
       "can_join_groups": true,
       "can_read_all_group_messages": true,
       "supports_inline_queries": false
@@ -401,6 +417,8 @@
     "last_name": "Woot",
     "username": "nemesis",
     "language_code": "en",
+    "is_premium": false,
+    "added_to_attachment_menu": true,
     "can_join_groups": true,
     "can_read_all_group_messages": true,
     "supports_inline_queries": true
@@ -519,6 +537,8 @@
       "last_name": "Wane",
       "username": "jwane",
       "language_code": "en",
+      "is_premium": true,
+      "added_to_attachment_menu": true,
       "can_join_groups": true,
       "can_read_all_group_messages": true,
       "supports_inline_queries": false
@@ -530,6 +550,8 @@
       "last_name": "Woot",
       "username": "nemesis",
       "language_code": "en",
+      "is_premium": false,
+      "added_to_attachment_menu": true,
       "can_join_groups": true,
       "can_read_all_group_messages": true,
       "supports_inline_queries": true
@@ -559,6 +581,8 @@
         "last_name": "Woot",
         "username": "nemesis",
         "language_code": "en",
+        "is_premium": false,
+        "added_to_attachment_menu": true,
         "can_join_groups": true,
         "can_read_all_group_messages": true,
         "supports_inline_queries": true
@@ -570,6 +594,8 @@
         "last_name": "Wane",
         "username": "jwane",
         "language_code": "en",
+        "is_premium": true,
+        "added_to_attachment_menu": true,
         "can_join_groups": true,
         "can_read_all_group_messages": true,
         "supports_inline_queries": false
