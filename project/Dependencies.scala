@@ -2,7 +2,6 @@ import sbt._
 
 trait DependencyVersions {
   protected val zioVersion            = "2.0.4"
-  protected val zioInteropRSVersion   = "2.0.0"
   protected val sttpVersion           = "3.8.3"
   protected val scalatestVersion      = "3.2.14"
   protected val scalatestCirceVersion = "0.2.5"
@@ -13,13 +12,12 @@ trait DependencyVersions {
 }
 
 object Dependencies extends DependencyVersions {
-  lazy val zio              = "dev.zio"                       %% "zio"                           % zioVersion
-  lazy val zioStreams       = "dev.zio"                       %% "zio-streams"                   % zioVersion
-  lazy val zioInteropRS     = "dev.zio"                       %% "zio-interop-reactivestreams"   % zioInteropRSVersion
-  lazy val sttpAsyncHttpZio = "com.softwaremill.sttp.client3" %% "async-http-client-backend-zio" % sttpVersion
-  lazy val enumeratum       = "com.beachape"                  %% "enumeratum"                    % enumeratumVersion
-  lazy val catsCore         = "org.typelevel"                 %% "cats-core"                     % catsVersion
-  lazy val scalatest        = "org.scalatest"                 %% "scalatest"                     % scalatestVersion
+  lazy val zio                 = "dev.zio"                               %% "zio"                   % zioVersion
+  lazy val zioStreams          = "dev.zio"                               %% "zio-streams"           % zioVersion
+  lazy val sttpZio             = "com.softwaremill.sttp.client3"         %% "zio"                   % sttpVersion
+  lazy val enumeratum          = "com.beachape"                          %% "enumeratum"            % enumeratumVersion
+  lazy val catsCore            = "org.typelevel"                         %% "cats-core"             % catsVersion
+  lazy val scalatest           = "org.scalatest"                         %% "scalatest"             % scalatestVersion
   lazy val jsoniterScalaCore   = "com.github.plokhotnyuk.jsoniter-scala" %% "jsoniter-scala-core"   % jsoniterVersion
   lazy val jsoniterScalaMacros = "com.github.plokhotnyuk.jsoniter-scala" %% "jsoniter-scala-macros" % jsoniterVersion
   lazy val scalatestCirce = "com.stephenn" %% "scalatest-circe"         % scalatestCirceVersion

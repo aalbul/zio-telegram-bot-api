@@ -27,8 +27,7 @@ lazy val root = (project in file("."))
     libraryDependencies ++= Seq(
       zio,
       zioStreams,
-      zioInteropRS,
-      sttpAsyncHttpZio,
+      sttpZio,
       enumeratum,
       catsCore,
       jsoniterScalaCore,
