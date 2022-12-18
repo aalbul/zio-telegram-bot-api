@@ -2,7 +2,6 @@ package io.github.aalbul.zio.telegram.command
 
 import io.github.aalbul.zio.telegram.command.MultipartBody.stringPart
 import io.github.aalbul.zio.telegram.domain.*
-import io.github.aalbul.zio.telegram.domain.ParseModes.ParseMode
 
 object SendVoice {
 

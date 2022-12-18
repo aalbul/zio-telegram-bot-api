@@ -1,16 +1,34 @@
 package io.github.aalbul.zio.telegram.domain
 
-import io.circe.Decoder
+import com.github.plokhotnyuk.jsoniter_scala.core.{JsonReader, JsonValueCodec, JsonWriter}
+import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.codecs
+import io.github.aalbul.zio.telegram.domain.Message.messageJsonCodec
+
+import scala.util.Try
 
 object LiveLocationUpdateResult {
-  private val decodeBoolean: Decoder[LiveLocationUpdateResult] =
-    Decoder.decodeBoolean.map(result => LiveLocationUpdateResult(message = None, inlineUpdated = result))
-  private val decodeMessage: Decoder[LiveLocationUpdateResult] =
-    implicitly[Decoder[Message]].map(message =>
-      LiveLocationUpdateResult(message = Some(message), inlineUpdated = false)
-    )
+  implicit val liveLocationUpdateResultJsonCodec: JsonValueCodec[LiveLocationUpdateResult] =
+    new JsonValueCodec[LiveLocationUpdateResult] {
+      override def decodeValue(in: JsonReader, default: LiveLocationUpdateResult): LiveLocationUpdateResult =
+        Try {
+          in.setMark()
+          codecs.boolean.decodeValue(in, false)
+        }.map(result => LiveLocationUpdateResult(message = None, inlineUpdated = result))
+          .getOrElse {
+            in.rollbackToMark()
+            LiveLocationUpdateResult(
+              message = Some(messageJsonCodec.decodeValue(in, null)),
+              inlineUpdated = false
+            )
+          }
 
-  implicit val decoder: Decoder[LiveLocationUpdateResult] = decodeBoolean.or(decodeMessage)
+      override def encodeValue(x: LiveLocationUpdateResult, out: JsonWriter): Unit = x match {
+        case LiveLocationUpdateResult(Some(message), _) => messageJsonCodec.encodeValue(message, out)
+        case _                                          => codecs.boolean.encodeValue(x.inlineUpdated, out)
+      }
+
+      override def nullValue: LiveLocationUpdateResult = null
+    }
 }
 
 /** If the edited message is not an inline message, the edited `message` is returned, otherwise `inlineUpdated` with

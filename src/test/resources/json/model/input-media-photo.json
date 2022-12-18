@@ -1,4 +1,5 @@
 {
+  "type": "photo",
   "media": "attach:///tmp/one.jpg",
   "thumb": "attach:///tmp/photo_thumb.jpg",
   "caption": "my photo",
@@ -24,6 +25,5 @@
       },
       "language": "js"
     }
-  ],
-  "type": "photo"
+  ]
 }

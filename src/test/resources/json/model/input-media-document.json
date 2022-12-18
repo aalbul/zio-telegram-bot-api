@@ -1,4 +1,5 @@
 {
+  "type": "document",
   "media": "attach:///tmp/one.pdf",
   "thumb": "attach:///tmp/document_thumb.jpg",
   "caption": "my document",
@@ -25,6 +26,5 @@
       "language": "js"
     }
   ],
-  "disable_content_type_detection": true,
-  "type": "document"
+  "disable_content_type_detection": true
 }

@@ -1,6 +1,6 @@
 package io.github.aalbul.zio.telegram.command
 
-import io.circe.syntax.EncoderOps
+import com.github.plokhotnyuk.jsoniter_scala.core.writeToString
 import io.github.aalbul.zio.telegram.command.ExportChatInviteLink.ExportChatInviteLinkPayload
 import io.github.aalbul.zio.telegram.test.BaseSpec
 
@@ -25,8 +25,18 @@ class ExportChatInviteLinkSpec extends BaseSpec {
     }
 
     "ExportChatInviteLinkPayload" should {
-      "serialize payload to json" in new Scope {
-        payload.asJson shouldBe jsonResource("json/command/export-chat-invite-link-payload.json")
+      "encoder" should {
+        "encode payload to json" in new Scope {
+          writeToString(payload) should matchJsonResource("json/command/export-chat-invite-link-payload.json")
+        }
+      }
+
+      "decoder" should {
+        "decode payload from json" in new Scope {
+          jsonResourceAs[ExportChatInviteLinkPayload](
+            "json/command/export-chat-invite-link-payload.json"
+          ) shouldBe payload
+        }
       }
     }
   }

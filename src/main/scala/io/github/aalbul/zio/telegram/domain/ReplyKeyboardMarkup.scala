@@ -1,6 +1,7 @@
 package io.github.aalbul.zio.telegram.domain
 
-import io.circe.generic.extras.ConfiguredJsonCodec
+import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
+import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodecMaker}
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 object ReplyKeyboardMarkup {
@@ -18,12 +19,15 @@ object ReplyKeyboardMarkup {
     inputFieldPlaceholder = None,
     selective = None
   )
+
+  implicit val replyKeyboardMarkupJsonCodec: JsonValueCodec[ReplyKeyboardMarkup] = JsonCodecMaker.make(
+    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
+  )
 }
 
 /** This object represents a [[https://core.telegram.org/bots#keyboards custom keyboard]] with reply options (see
   * [[https://core.telegram.org/bots#keyboards Introduction to bots]] for details and examples).
   */
-@ConfiguredJsonCodec(encodeOnly = true)
 case class ReplyKeyboardMarkup(
   keyboard: Seq[Seq[KeyboardButton]],
   resizeKeyboard: Option[Boolean],

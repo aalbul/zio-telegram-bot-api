@@ -1,8 +1,8 @@
 package io.github.aalbul.zio.telegram.command
 
-import io.circe.Decoder
+import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
 
-abstract class Command[T: Decoder] {
+abstract class Command[T: JsonValueCodec] {
   val name: String
   def parameters: ApiParameters
 }

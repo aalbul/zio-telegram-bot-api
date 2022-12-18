@@ -1,12 +1,17 @@
 package io.github.aalbul.zio.telegram.command
 
-import io.circe.generic.extras.ConfiguredJsonCodec
+import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
+import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodecMaker}
 import io.github.aalbul.zio.telegram.command.SendLocation.SendLocationPayload
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 import io.github.aalbul.zio.telegram.domain.{Markup, Message}
 
 object SendLocation {
-  @ConfiguredJsonCodec(encodeOnly = true)
+  object SendLocationPayload {
+    implicit val sendLocationPayloadJsonCodec: JsonValueCodec[SendLocationPayload] =
+      JsonCodecMaker.make(CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2))
+  }
+
   case class SendLocationPayload(
     chatId: String,
     latitude: Double,

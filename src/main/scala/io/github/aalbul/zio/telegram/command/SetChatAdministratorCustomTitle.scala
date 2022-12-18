@@ -1,11 +1,18 @@
 package io.github.aalbul.zio.telegram.command
 
-import io.circe.generic.extras.ConfiguredJsonCodec
+import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
+import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodecMaker}
 import io.github.aalbul.zio.telegram.command.SetChatAdministratorCustomTitle.SetChatAdministratorCustomTitlePayload
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
+import codecs.boolean
 
 object SetChatAdministratorCustomTitle {
-  @ConfiguredJsonCodec(encodeOnly = true)
+  object SetChatAdministratorCustomTitlePayload {
+    implicit val setChatAdministratorCustomTitlePayloadJsonCodec
+      : JsonValueCodec[SetChatAdministratorCustomTitlePayload] =
+      JsonCodecMaker.make(CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2))
+  }
+
   case class SetChatAdministratorCustomTitlePayload(chatId: String, userId: Long, customTitle: String)
 
   /** Constructs minimal [[SetChatAdministratorCustomTitle]] command

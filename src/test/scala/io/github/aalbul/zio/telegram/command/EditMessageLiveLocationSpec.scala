@@ -1,9 +1,9 @@
 package io.github.aalbul.zio.telegram.command
 
+import com.github.plokhotnyuk.jsoniter_scala.core.writeToString
 import io.github.aalbul.zio.telegram.command.EditMessageLiveLocation.EditMessageLiveLocationPayload
 import io.github.aalbul.zio.telegram.domain.LiveLocationUpdateResult
 import io.github.aalbul.zio.telegram.test.BaseSpec
-import io.circe.syntax.EncoderOps
 
 class EditMessageLiveLocationSpec extends BaseSpec {
   trait Scope {
@@ -45,8 +45,18 @@ class EditMessageLiveLocationSpec extends BaseSpec {
     }
 
     "EditMessageLiveLocationPayload" should {
-      "serialize payload to json" in new Scope {
-        payload.asJson shouldBe jsonResource("json/command/edit-message-live-location-payload.json")
+      "encoder" should {
+        "encode payload to json" in new Scope {
+          writeToString(payload) should matchJsonResource("json/command/edit-message-live-location-payload.json")
+        }
+      }
+
+      "decoder" should {
+        "decode payload from json" in new Scope {
+          jsonResourceAs[EditMessageLiveLocationPayload](
+            "json/command/edit-message-live-location-payload.json"
+          ) shouldBe payload
+        }
       }
     }
   }

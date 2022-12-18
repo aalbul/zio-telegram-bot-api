@@ -28,12 +28,14 @@ lazy val root = (project in file("."))
       zio,
       zioStreams,
       zioInteropRS,
-      circeGeneric,
-      circeParser,
-      circeGenericExtras,
       sttpAsyncHttpZio,
-      scalatest    % Test,
-      mockitoScala % Test
+      enumeratum,
+      catsCore,
+      jsoniterScalaCore,
+      jsoniterScalaMacros % "provided",
+      scalatestCirce      % Test,
+      scalatest           % Test,
+      mockitoScala        % Test
     ),
     scalacOptions ++= Seq("-Xsource:3")
   )

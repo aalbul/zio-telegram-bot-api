@@ -1,6 +1,7 @@
 package io.github.aalbul.zio.telegram.domain
 
-import io.circe.generic.extras.ConfiguredJsonCodec
+import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
+import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodecMaker}
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 import java.time.Instant
@@ -16,9 +17,12 @@ object VideoChatScheduled {
   def of(startDate: Instant): VideoChatScheduled = VideoChatScheduled(
     startDate = startDate
   )
+
+  implicit val videoChatScheduledJsonCodec: JsonValueCodec[VideoChatScheduled] = JsonCodecMaker.make(
+    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
+  )
 }
 
 /** This object represents a service message about a video chat scheduled in the chat.
   */
-@ConfiguredJsonCodec(decodeOnly = true)
 case class VideoChatScheduled(startDate: Instant)

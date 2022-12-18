@@ -1,8 +1,8 @@
 package io.github.aalbul.zio.telegram.domain
 
-import io.circe.generic.extras.ConfiguredJsonCodec
+import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
+import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodecMaker}
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
-import io.github.aalbul.zio.telegram.domain.MaskPointTypes.MaskPointType
 
 object MaskPosition {
 
@@ -22,9 +22,12 @@ object MaskPosition {
     */
   def of(point: MaskPointType, xShift: Double, yShift: Double, scale: Double): MaskPosition =
     MaskPosition(point, xShift, yShift, scale)
+
+  implicit val maskPositionJsonCodec: JsonValueCodec[MaskPosition] = JsonCodecMaker.make(
+    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
+  )
 }
 
 /** This object describes the position on faces where a mask should be placed by default.
   */
-@ConfiguredJsonCodec(decodeOnly = true)
 case class MaskPosition(point: MaskPointType, xShift: Double, yShift: Double, scale: Double)

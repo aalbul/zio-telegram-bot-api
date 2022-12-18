@@ -1,12 +1,17 @@
 package io.github.aalbul.zio.telegram.command
 
-import io.circe.generic.extras.ConfiguredJsonCodec
+import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
+import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodecMaker}
 import io.github.aalbul.zio.telegram.command.GetUserProfilePhotos.GetUserProfilePhotosPayload
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 import io.github.aalbul.zio.telegram.domain.UserProfilePhotos
 
 object GetUserProfilePhotos {
-  @ConfiguredJsonCodec(encodeOnly = true)
+  object GetUserProfilePhotosPayload {
+    implicit val getUserProfilePhotosPayloadJsonCodec: JsonValueCodec[GetUserProfilePhotosPayload] =
+      JsonCodecMaker.make(CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2))
+  }
+
   case class GetUserProfilePhotosPayload(userId: Long, offset: Option[Long], limit: Option[Long])
 
   /** Constructs minimal [[GetUserProfilePhotos]] command

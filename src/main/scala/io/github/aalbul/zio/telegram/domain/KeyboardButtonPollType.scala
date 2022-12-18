@@ -1,8 +1,13 @@
 package io.github.aalbul.zio.telegram.domain
 
-import io.github.aalbul.zio.telegram.domain.PollTypes.PollType
-import io.circe.generic.extras.ConfiguredJsonCodec
+import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
+import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodecMaker}
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
-@ConfiguredJsonCodec(encodeOnly = true)
+object KeyboardButtonPollType {
+  implicit val keyboardButtonPollTypeJsonCodec: JsonValueCodec[KeyboardButtonPollType] = JsonCodecMaker.make(
+    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
+  )
+}
+
 case class KeyboardButtonPollType(`type`: PollType)

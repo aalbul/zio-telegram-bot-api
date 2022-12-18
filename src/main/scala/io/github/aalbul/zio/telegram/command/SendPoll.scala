@@ -1,16 +1,19 @@
 package io.github.aalbul.zio.telegram.command
 
-import io.circe.generic.extras.ConfiguredJsonCodec
+import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
+import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodecMaker}
 import io.github.aalbul.zio.telegram.command.SendPoll.SendPollPayload
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
-import io.github.aalbul.zio.telegram.domain.ParseModes.ParseMode
-import io.github.aalbul.zio.telegram.domain.PollTypes.PollType
-import io.github.aalbul.zio.telegram.domain.{Markup, Message, MessageEntity}
+import io.github.aalbul.zio.telegram.domain.*
 
 import java.time.Instant
 
 object SendPoll {
-  @ConfiguredJsonCodec(encodeOnly = true)
+  object SendPollPayload {
+    implicit val sendPollPayloadJsonCodec: JsonValueCodec[SendPollPayload] =
+      JsonCodecMaker.make(CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2))
+  }
+
   case class SendPollPayload(
     chatId: String,
     question: String,

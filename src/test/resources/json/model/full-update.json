@@ -1,0 +1,441 @@
+{
+  "update_id": 83,
+  "message": {
+    "message_id": 15,
+    "date": 1655028930,
+    "chat": {
+      "id": 81,
+      "type": "supergroup"
+    }
+  },
+  "edited_message": {
+    "message_id": 16,
+    "date": 1655030492,
+    "chat": {
+      "id": 82,
+      "type": "private"
+    }
+  },
+  "channel_post": {
+    "message_id": 17,
+    "date": 1655100911,
+    "chat": {
+      "id": 83,
+      "type": "supergroup"
+    }
+  },
+  "edited_channel_post": {
+    "message_id": 18,
+    "date": 1655101090,
+    "chat": {
+      "id": 83,
+      "type": "supergroup"
+    }
+  },
+  "inline_query": {
+    "id": "query-1",
+    "from": {
+      "id": 1,
+      "is_bot": false,
+      "first_name": "John",
+      "last_name": "Wane",
+      "username": "jwane",
+      "language_code": "en",
+      "is_premium": true,
+      "added_to_attachment_menu": true,
+      "can_join_groups": true,
+      "can_read_all_group_messages": true,
+      "supports_inline_queries": false
+    },
+    "query": "test",
+    "offset": "1",
+    "chat_type": "sender",
+    "location": {
+      "longitude": 52.22,
+      "latitude": 4.55,
+      "horizontal_accuracy": 1.23,
+      "live_period": 50,
+      "heading": 23,
+      "proximity_alert_radius": 51
+    }
+  },
+  "chosen_inline_result": {
+    "result_id": "result-1",
+    "from": {
+      "id": 1,
+      "is_bot": false,
+      "first_name": "John",
+      "last_name": "Wane",
+      "username": "jwane",
+      "language_code": "en",
+      "is_premium": true,
+      "added_to_attachment_menu": true,
+      "can_join_groups": true,
+      "can_read_all_group_messages": true,
+      "supports_inline_queries": false
+    },
+    "location": {
+      "longitude": 52.22,
+      "latitude": 4.55,
+      "horizontal_accuracy": 1.23,
+      "live_period": 50,
+      "heading": 23,
+      "proximity_alert_radius": 51
+    },
+    "inline_message_id": "message-1",
+    "query": "query-1"
+  },
+  "callback_query": {
+    "id": "callback-1",
+    "from": {
+      "id": 1,
+      "is_bot": false,
+      "first_name": "John",
+      "last_name": "Wane",
+      "username": "jwane",
+      "language_code": "en",
+      "is_premium": true,
+      "added_to_attachment_menu": true,
+      "can_join_groups": true,
+      "can_read_all_group_messages": true,
+      "supports_inline_queries": false
+    },
+    "message": {
+      "message_id": 15,
+      "date": 1655028930,
+      "chat": {
+        "id": 81,
+        "type": "supergroup"
+      }
+    },
+    "inline_message_id": "inline-message-1",
+    "chat_instance": "chat-1",
+    "data": "data-1",
+    "game_short_name": "game-short-name"
+  },
+  "shipping_query": {
+    "id": "shipping-query-1",
+    "from": {
+      "id": 1,
+      "is_bot": false,
+      "first_name": "John",
+      "last_name": "Wane",
+      "username": "jwane",
+      "language_code": "en",
+      "is_premium": true,
+      "added_to_attachment_menu": true,
+      "can_join_groups": true,
+      "can_read_all_group_messages": true,
+      "supports_inline_queries": false
+    },
+    "invoice_payload": "payload-1",
+    "shipping_address": {
+      "country_code": "NL",
+      "state": "Utrecht",
+      "city": "Amersfoort",
+      "street_line1": "Some Street 1",
+      "street_line2": "Other",
+      "post_code": "3821KL"
+    }
+  },
+  "pre_checkout_query": {
+    "id": "pre-checkout-query-1",
+    "from": {
+      "id": 1,
+      "is_bot": false,
+      "first_name": "John",
+      "last_name": "Wane",
+      "username": "jwane",
+      "language_code": "en",
+      "is_premium": true,
+      "added_to_attachment_menu": true,
+      "can_join_groups": true,
+      "can_read_all_group_messages": true,
+      "supports_inline_queries": false
+    },
+    "currency": "USD",
+    "total_amount": 20,
+    "invoice_payload": "payload-1",
+    "shipping_option_id": "option-id-1",
+    "order_info": {
+      "name": "John Wick",
+      "phone_number": "+312345689",
+      "email": "jwick@google.com",
+      "shipping_address": {
+        "country_code": "NL",
+        "state": "Utrecht",
+        "city": "Amersfoort",
+        "street_line1": "Some Street 1",
+        "street_line2": "Other",
+        "post_code": "3821KL"
+      }
+    }
+  },
+  "poll": {
+    "id": "poll-1",
+    "question": "Favorite fruit",
+    "options": [
+      {
+        "text": "Apple",
+        "voter_count": 10
+      },
+      {
+        "text": "Peer",
+        "voter_count": 3
+      },
+      {
+        "text": "Watermelon",
+        "voter_count": 8
+      }
+    ],
+    "total_voter_count": 21,
+    "is_closed": true,
+    "is_anonymous": false,
+    "type": "quiz",
+    "allows_multiple_answers": false,
+    "correct_option_id": 0,
+    "explanation": "Which is your favorite fruit of all time?",
+    "explanation_entities": [
+      {
+        "type": "pre",
+        "offset": 10,
+        "length": 500,
+        "url": "https://someurl.com",
+        "user": {
+          "id": 1,
+          "is_bot": false,
+          "first_name": "John",
+          "last_name": "Wane",
+          "username": "jwane",
+          "language_code": "en",
+          "is_premium": true,
+          "added_to_attachment_menu": true,
+          "can_join_groups": true,
+          "can_read_all_group_messages": true,
+          "supports_inline_queries": false
+        },
+        "language": "js"
+      }
+    ],
+    "open_period": 24,
+    "close_date": 500
+  },
+  "poll_answer": {
+    "poll_id": "poll-1",
+    "user": {
+      "id": 2,
+      "is_bot": true,
+      "first_name": "Bot",
+      "last_name": "Woot",
+      "username": "nemesis",
+      "language_code": "en",
+      "is_premium": false,
+      "added_to_attachment_menu": true,
+      "can_join_groups": true,
+      "can_read_all_group_messages": true,
+      "supports_inline_queries": true
+    },
+    "option_ids": [
+      2,
+      3
+    ]
+  },
+  "my_chat_member": {
+    "chat": {
+      "id": 81,
+      "type": "supergroup"
+    },
+    "from": {
+      "id": 1,
+      "is_bot": false,
+      "first_name": "John",
+      "last_name": "Wane",
+      "username": "jwane",
+      "language_code": "en",
+      "is_premium": true,
+      "added_to_attachment_menu": true,
+      "can_join_groups": true,
+      "can_read_all_group_messages": true,
+      "supports_inline_queries": false
+    },
+    "date": 1655030492,
+    "old_chat_member": {
+      "status": "creator",
+      "user": {
+        "id": 1,
+        "is_bot": false,
+        "first_name": "John",
+        "last_name": "Wane",
+        "username": "jwane",
+        "language_code": "en",
+        "is_premium": true,
+        "added_to_attachment_menu": true,
+        "can_join_groups": true,
+        "can_read_all_group_messages": true,
+        "supports_inline_queries": false
+      },
+      "is_anonymous": false,
+      "custom_title": "title-1"
+    },
+    "new_chat_member": {
+      "status": "left",
+      "user": {
+        "id": 2,
+        "is_bot": true,
+        "first_name": "Bot",
+        "last_name": "Woot",
+        "username": "nemesis",
+        "language_code": "en",
+        "is_premium": false,
+        "added_to_attachment_menu": true,
+        "can_join_groups": true,
+        "can_read_all_group_messages": true,
+        "supports_inline_queries": true
+      }
+    },
+    "invite_link": {
+      "invite_link": "http://google.com/invite",
+      "creator": {
+        "id": 1,
+        "is_bot": false,
+        "first_name": "John",
+        "last_name": "Wane",
+        "username": "jwane",
+        "language_code": "en",
+        "is_premium": true,
+        "added_to_attachment_menu": true,
+        "can_join_groups": true,
+        "can_read_all_group_messages": true,
+        "supports_inline_queries": false
+      },
+      "creates_join_request": true,
+      "is_primary": true,
+      "is_revoked": false,
+      "name": "invite-1",
+      "expiration_date": 1655101090,
+      "member_limit": 22,
+      "pending_join_request_count": 6
+    }
+  },
+  "chat_member": {
+    "chat": {
+      "id": 81,
+      "type": "supergroup"
+    },
+    "from": {
+      "id": 1,
+      "is_bot": false,
+      "first_name": "John",
+      "last_name": "Wane",
+      "username": "jwane",
+      "language_code": "en",
+      "is_premium": true,
+      "added_to_attachment_menu": true,
+      "can_join_groups": true,
+      "can_read_all_group_messages": true,
+      "supports_inline_queries": false
+    },
+    "date": 1655030492,
+    "old_chat_member": {
+      "status": "creator",
+      "user": {
+        "id": 1,
+        "is_bot": false,
+        "first_name": "John",
+        "last_name": "Wane",
+        "username": "jwane",
+        "language_code": "en",
+        "is_premium": true,
+        "added_to_attachment_menu": true,
+        "can_join_groups": true,
+        "can_read_all_group_messages": true,
+        "supports_inline_queries": false
+      },
+      "is_anonymous": false,
+      "custom_title": "title-1"
+    },
+    "new_chat_member": {
+      "status": "left",
+      "user": {
+        "id": 2,
+        "is_bot": true,
+        "first_name": "Bot",
+        "last_name": "Woot",
+        "username": "nemesis",
+        "language_code": "en",
+        "is_premium": false,
+        "added_to_attachment_menu": true,
+        "can_join_groups": true,
+        "can_read_all_group_messages": true,
+        "supports_inline_queries": true
+      }
+    },
+    "invite_link": {
+      "invite_link": "http://google.com/invite",
+      "creator": {
+        "id": 1,
+        "is_bot": false,
+        "first_name": "John",
+        "last_name": "Wane",
+        "username": "jwane",
+        "language_code": "en",
+        "is_premium": true,
+        "added_to_attachment_menu": true,
+        "can_join_groups": true,
+        "can_read_all_group_messages": true,
+        "supports_inline_queries": false
+      },
+      "creates_join_request": true,
+      "is_primary": true,
+      "is_revoked": false,
+      "name": "invite-1",
+      "expiration_date": 1655101090,
+      "member_limit": 22,
+      "pending_join_request_count": 6
+    }
+  },
+  "chat_join_request": {
+    "chat": {
+      "id": 81,
+      "type": "supergroup"
+    },
+    "from": {
+      "id": 2,
+      "is_bot": true,
+      "first_name": "Bot",
+      "last_name": "Woot",
+      "username": "nemesis",
+      "language_code": "en",
+      "is_premium": false,
+      "added_to_attachment_menu": true,
+      "can_join_groups": true,
+      "can_read_all_group_messages": true,
+      "supports_inline_queries": true
+    },
+    "date": 1655101090,
+    "bio": "bio-1",
+    "invite_link": {
+      "invite_link": "http://google.com/invite",
+      "creator": {
+        "id": 1,
+        "is_bot": false,
+        "first_name": "John",
+        "last_name": "Wane",
+        "username": "jwane",
+        "language_code": "en",
+        "is_premium": true,
+        "added_to_attachment_menu": true,
+        "can_join_groups": true,
+        "can_read_all_group_messages": true,
+        "supports_inline_queries": false
+      },
+      "creates_join_request": true,
+      "is_primary": true,
+      "is_revoked": false,
+      "name": "invite-1",
+      "expiration_date": 1655101090,
+      "member_limit": 22,
+      "pending_join_request_count": 6
+    }
+  }
+}

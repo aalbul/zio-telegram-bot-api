@@ -2,7 +2,7 @@ package io.github.aalbul.zio.telegram.command
 
 import io.github.aalbul.zio.telegram.command.FileDescriptor.{idDescriptor, pathDescriptor}
 import io.github.aalbul.zio.telegram.command.MultipartBody.{filePart, stringPart}
-import io.github.aalbul.zio.telegram.domain.{Message, ParseModes}
+import io.github.aalbul.zio.telegram.domain.{Message, ParseMode}
 import io.github.aalbul.zio.telegram.test.BaseSpec
 
 class SendVideoSpec extends BaseSpec {
@@ -15,7 +15,7 @@ class SendVideoSpec extends BaseSpec {
         .withHeight(1080)
         .withThumb(pathDescriptor("/tmp/10.png"))
         .withCaption("my video")
-        .withParseMode(ParseModes.MarkdownV2)
+        .withParseMode(ParseMode.MarkdownV2)
         .withCaptionEntities(Seq(messageEntity1))
         .withSupportsStreaming(true)
         .withDisableNotification(true)

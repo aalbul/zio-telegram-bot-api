@@ -1,7 +1,6 @@
 package io.github.aalbul.zio.telegram.command
 
-import io.github.aalbul.zio.telegram.domain.Update
-import io.github.aalbul.zio.telegram.domain.UpdateTypes.UpdateType
+import io.github.aalbul.zio.telegram.domain.{Update, UpdateType}
 import io.github.aalbul.zio.telegram.engine.BotEngine
 import io.github.aalbul.zio.telegram.syntax.all.*
 import zio.Chunk

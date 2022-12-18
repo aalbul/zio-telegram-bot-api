@@ -1,7 +1,7 @@
 package io.github.aalbul.zio.telegram.projection.message
 
-import io.github.aalbul.zio.telegram.domain.MessageEntityTypes.{BotCommand, MessageEntityType}
-import io.github.aalbul.zio.telegram.domain.{Message, MessageEntity}
+import io.github.aalbul.zio.telegram.domain.MessageEntityType.BotCommand
+import io.github.aalbul.zio.telegram.domain.{Message, MessageEntity, MessageEntityType}
 import io.github.aalbul.zio.telegram.projection.MessageProjector
 import io.github.aalbul.zio.telegram.projection.message.MessageProjection.Data
 

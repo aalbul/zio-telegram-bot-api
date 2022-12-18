@@ -1,6 +1,7 @@
 package io.github.aalbul.zio.telegram.domain
 
-import io.circe.generic.extras.ConfiguredJsonCodec
+import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
+import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodecMaker}
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 object Location {
@@ -23,10 +24,13 @@ object Location {
     heading = None,
     proximityAlertRadius = None
   )
+
+  implicit val locationJsonCodec: JsonValueCodec[Location] = JsonCodecMaker.make(
+    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
+  )
 }
 
 /** This object represents a point on the map. */
-@ConfiguredJsonCodec(decodeOnly = true)
 case class Location(
   longitude: Double,
   latitude: Double,

@@ -1,26 +1,61 @@
 package io.github.aalbul.zio.telegram.domain
 
-import cats.syntax.functor.*
-import io.circe.{Decoder, DecodingFailure, HCursor}
+import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
+import com.github.plokhotnyuk.jsoniter_scala.macros.{named, CodecMakerConfig, JsonCodecMaker}
+import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 object ChatMember {
-  private val decoders: Map[String, Decoder[ChatMember]] = Map(
-    "creator" -> implicitly[Decoder[ChatMemberOwner]].widen,
-    "administrator" -> implicitly[Decoder[ChatMemberAdministrator]].widen,
-    "member" -> implicitly[Decoder[ChatMemberMember]].widen,
-    "restricted" -> implicitly[Decoder[ChatMemberRestricted]].widen,
-    "left" -> implicitly[Decoder[ChatMemberLeft]].widen,
-    "kicked" -> implicitly[Decoder[ChatMemberBanned]].widen
+  implicit val chatMemberJsonCodec: JsonValueCodec[ChatMember] = JsonCodecMaker.make(
+    CodecMakerConfig
+      .withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
+      .withDiscriminatorFieldName(Some("status"))
   )
-
-  implicit val chatMemberDecoder: Decoder[ChatMember] = (cursor: HCursor) =>
-    for {
-      status <- cursor.downField("status").as[String]
-      decoder <- decoders
-        .get(status)
-        .toRight(DecodingFailure(s"No decoder for ChatMember with status `$status`", Nil))
-      result <- decoder.apply(cursor)
-    } yield result
 }
 
-trait ChatMember
+sealed trait ChatMember
+
+@named("administrator")
+case class ChatMemberAdministrator(
+  user: User,
+  canBeEdited: Boolean,
+  isAnonymous: Boolean,
+  canManageChat: Boolean,
+  canDeleteMessages: Boolean,
+  canManageVideoChats: Boolean,
+  canRestrictMembers: Boolean,
+  canPromoteMembers: Boolean,
+  canChangeInfo: Boolean,
+  canInviteUsers: Boolean,
+  canPostMessages: Option[Boolean],
+  canEditMessages: Option[Boolean],
+  canPinMessages: Option[Boolean],
+  canManageTopics: Option[Boolean],
+  customerTitle: Option[String]
+) extends ChatMember
+
+@named("kicked")
+case class ChatMemberBanned(user: User, untilDate: Int) extends ChatMember
+
+@named("left")
+case class ChatMemberLeft(user: User) extends ChatMember
+
+@named("member")
+case class ChatMemberMember(user: User) extends ChatMember
+
+@named("creator")
+case class ChatMemberOwner(user: User, isAnonymous: Boolean, customTitle: Option[String]) extends ChatMember
+
+@named("restricted")
+case class ChatMemberRestricted(
+  user: User,
+  isMember: Boolean,
+  canChangeInfo: Boolean,
+  canInviteUsers: Boolean,
+  canPinMembers: Boolean,
+  canSendMessages: Boolean,
+  canSendMediaMessages: Boolean,
+  canSendPolls: Boolean,
+  canSendOtherMessages: Boolean,
+  canAddWebPagePreviews: Boolean,
+  untilDate: Int
+) extends ChatMember

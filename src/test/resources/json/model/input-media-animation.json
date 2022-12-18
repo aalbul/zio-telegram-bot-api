@@ -1,4 +1,5 @@
 {
+  "type": "animation",
   "media": "attach:///tmp/one.gif",
   "thumb": "https://google.com/animation_thumb.jpg",
   "caption": "my gif",
@@ -27,6 +28,5 @@
   ],
   "width": 1024,
   "height": 769,
-  "duration": 346,
-  "type": "animation"
+  "duration": 346
 }

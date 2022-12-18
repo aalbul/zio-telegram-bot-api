@@ -1,11 +1,17 @@
 package io.github.aalbul.zio.telegram.command
 
-import io.circe.generic.extras.ConfiguredJsonCodec
+import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
+import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodecMaker}
 import io.github.aalbul.zio.telegram.command.ExportChatInviteLink.ExportChatInviteLinkPayload
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
+import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.codecs.string
 
 object ExportChatInviteLink {
-  @ConfiguredJsonCodec(encodeOnly = true)
+  object ExportChatInviteLinkPayload {
+    implicit val exportChatInviteLinkPayloadJsonCodec: JsonValueCodec[ExportChatInviteLinkPayload] =
+      JsonCodecMaker.make(CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2))
+  }
+
   case class ExportChatInviteLinkPayload(chatId: String)
 
   /** Constructs minimal [[ExportChatInviteLink]] command

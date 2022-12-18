@@ -1,22 +1,36 @@
 package io.github.aalbul.zio.telegram.command
 
-import io.github.aalbul.zio.telegram.command.FileDescriptor.{fileDescriptorEncoder, idDescriptor, pathDescriptor, urlDescriptor}
+import com.github.plokhotnyuk.jsoniter_scala.core.{readFromString, writeToString}
+import io.github.aalbul.zio.telegram.command.FileDescriptor.{idDescriptor, pathDescriptor, urlDescriptor}
 import io.github.aalbul.zio.telegram.test.BaseSpec
-import io.circe.Json
 
 class FileDescriptorSpec extends BaseSpec {
   "FileDescriptor" when {
-    "fileDescriptorEncoder" should {
-      "encode PathBasedFileDescriptor" in {
-        fileDescriptorEncoder.apply(pathDescriptor("/tmp/test.txt")) shouldBe Json.fromString("attach:///tmp/test.txt")
+    "encoder" should {
+      "encode PathBasedFileDescriptor to json" in {
+        writeToString(pathDescriptor("/tmp/test.txt")) shouldBe "\"attach:///tmp/test.txt\""
       }
 
-      "encode UrlFileDescriptor" in {
-        fileDescriptorEncoder.apply(urlDescriptor("https://google.com")) shouldBe Json.fromString("https://google.com")
+      "encode UrlFileDescriptor to json" in {
+        writeToString(urlDescriptor("https://google.com")) shouldBe "\"https://google.com\""
       }
 
-      "encode IdFileDescriptor" in {
-        fileDescriptorEncoder.apply(idDescriptor("5843")) shouldBe Json.fromString("5843")
+      "encode IdFileDescriptor to json" in {
+        writeToString(idDescriptor("5843")) shouldBe "\"5843\""
+      }
+    }
+
+    "decoder" should {
+      "decode PathBasedFileDescriptor from json" in {
+        readFromString[FileDescriptor]("\"attach:///tmp/test.txt\"") shouldBe pathDescriptor("/tmp/test.txt")
+      }
+
+      "decode UrlFileDescriptor from json" in {
+        readFromString[FileDescriptor]("\"https://google.com\"") shouldBe urlDescriptor("https://google.com")
+      }
+
+      "decode IdFileDescriptor from json" in {
+        readFromString[FileDescriptor]("\"5843\"") shouldBe idDescriptor("5843")
       }
     }
   }

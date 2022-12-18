@@ -1,6 +1,7 @@
 package io.github.aalbul.zio.telegram.domain
 
-import io.circe.generic.extras.ConfiguredJsonCodec
+import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
+import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodecMaker}
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 object Venue {
@@ -24,11 +25,14 @@ object Venue {
     googlePlaceId = None,
     googlePlaceType = None
   )
+
+  implicit val venueJsonCodec: JsonValueCodec[Venue] = JsonCodecMaker.make(
+    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
+  )
 }
 
 /** This object represents a venue.
   */
-@ConfiguredJsonCodec(decodeOnly = true)
 case class Venue(
   location: Location,
   title: String,

@@ -1,6 +1,7 @@
 package io.github.aalbul.zio.telegram.domain
 
-import io.circe.generic.extras.ConfiguredJsonCodec
+import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
+import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodecMaker}
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 object OrderInfo {
@@ -10,11 +11,14 @@ object OrderInfo {
     *   [[OrderInfo]] builder
     */
   def of(): OrderInfo = OrderInfo(name = None, phoneNumber = None, email = None, shippingAddress = None)
+
+  implicit val orderInfoJsonCodec: JsonValueCodec[OrderInfo] = JsonCodecMaker.make(
+    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
+  )
 }
 
 /** This object represents information about an order.
   */
-@ConfiguredJsonCodec(decodeOnly = true)
 case class OrderInfo(
   name: Option[String],
   phoneNumber: Option[String],

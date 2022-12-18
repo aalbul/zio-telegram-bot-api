@@ -1,7 +1,6 @@
 package io.github.aalbul.zio.telegram.projection
 
-import io.github.aalbul.zio.telegram.domain.UpdateTypes.UpdateType
-import io.github.aalbul.zio.telegram.domain.{ChatMemberUpdated, Update, UpdateTypes}
+import io.github.aalbul.zio.telegram.domain.{ChatMemberUpdated, Update, UpdateType}
 
 object UpdatedMyChatMember {
   implicit val updatedMyChatMemberProjector: UpdateProjector[UpdatedMyChatMember] =
@@ -9,7 +8,7 @@ object UpdatedMyChatMember {
       override def project(update: Update): Option[UpdatedMyChatMember] =
         update.myChatMember.map(UpdatedMyChatMember(_))
 
-      override val updateTypes: Set[UpdateType] = Set(UpdateTypes.MyChatMember)
+      override val updateTypes: Set[UpdateType] = Set(UpdateType.MyChatMember)
     }
 }
 

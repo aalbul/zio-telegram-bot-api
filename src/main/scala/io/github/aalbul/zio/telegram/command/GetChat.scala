@@ -1,12 +1,17 @@
 package io.github.aalbul.zio.telegram.command
 
-import io.circe.generic.extras.ConfiguredJsonCodec
+import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
+import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodecMaker}
 import io.github.aalbul.zio.telegram.command.GetChat.GetChatPayload
 import io.github.aalbul.zio.telegram.domain.Chat
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 object GetChat {
-  @ConfiguredJsonCodec(encodeOnly = true)
+  object GetChatPayload {
+    implicit val getChatPayloadJsonCodec: JsonValueCodec[GetChatPayload] =
+      JsonCodecMaker.make(CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2))
+  }
+
   case class GetChatPayload(chatId: String)
 
   /** Constructs minimal [[GetChat]] command

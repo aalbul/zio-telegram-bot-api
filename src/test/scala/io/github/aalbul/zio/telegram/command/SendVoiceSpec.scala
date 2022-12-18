@@ -2,7 +2,7 @@ package io.github.aalbul.zio.telegram.command
 
 import io.github.aalbul.zio.telegram.command.FileDescriptor.idDescriptor
 import io.github.aalbul.zio.telegram.command.MultipartBody.{filePart, stringPart}
-import io.github.aalbul.zio.telegram.domain.{Message, ParseModes}
+import io.github.aalbul.zio.telegram.domain.{Message, ParseMode}
 import io.github.aalbul.zio.telegram.test.BaseSpec
 
 class SendVoiceSpec extends BaseSpec {
@@ -11,7 +11,7 @@ class SendVoiceSpec extends BaseSpec {
       SendVoice
         .of(chatId = "803", voice = idDescriptor("980008"))
         .withCaption("my voice")
-        .withParseMode(ParseModes.MarkdownV2)
+        .withParseMode(ParseMode.MarkdownV2)
         .withCaptionEntities(Seq(messageEntity1))
         .withDuration(400)
         .withDisableNotification(true)

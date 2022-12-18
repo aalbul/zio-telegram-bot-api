@@ -1,16 +1,16 @@
 package io.github.aalbul.zio.telegram.command
 
+import com.github.plokhotnyuk.jsoniter_scala.core.writeToString
 import io.github.aalbul.zio.telegram.command.SendMessage.SendMessagePayload
-import io.github.aalbul.zio.telegram.domain.{Message, ParseModes}
+import io.github.aalbul.zio.telegram.domain.{Message, ParseMode}
 import io.github.aalbul.zio.telegram.test.BaseSpec
-import io.circe.syntax.EncoderOps
 
 class SendMessageSpec extends BaseSpec {
   trait Scope {
     val command: Command[Message] =
       SendMessage
         .of(chatId = "331", text = "hello world")
-        .withParseMode(ParseModes.MarkdownV2)
+        .withParseMode(ParseMode.MarkdownV2)
         .withEntities(Seq(messageEntity1))
         .withDisableWebPagePreview(true)
         .withDisableNotification(false)
@@ -22,7 +22,7 @@ class SendMessageSpec extends BaseSpec {
     val payload: SendMessagePayload = SendMessagePayload(
       chatId = "331",
       text = "hello world",
-      parseMode = Some(ParseModes.MarkdownV2),
+      parseMode = Some(ParseMode.MarkdownV2),
       entities = Some(Seq(messageEntity1)),
       disableWebPagePreview = Some(true),
       disableNotification = Some(false),
@@ -47,8 +47,16 @@ class SendMessageSpec extends BaseSpec {
     }
 
     "SendMessagePayload" should {
-      "serialize payload to json" in new Scope {
-        payload.asJson shouldBe jsonResource("json/command/send-message-payload.json")
+      "encoder" should {
+        "encode payload to json" in new Scope {
+          writeToString(payload) should matchJsonResource("json/command/send-message-payload.json")
+        }
+      }
+
+      "decoder" should {
+        "decode payload from json" in new Scope {
+          jsonResourceAs[SendMessagePayload]("json/command/send-message-payload.json") shouldBe payload
+        }
       }
     }
   }

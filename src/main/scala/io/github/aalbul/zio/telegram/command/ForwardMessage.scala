@@ -1,12 +1,17 @@
 package io.github.aalbul.zio.telegram.command
 
-import io.circe.generic.extras.ConfiguredJsonCodec
+import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
+import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodecMaker}
 import io.github.aalbul.zio.telegram.command.ForwardMessage.ForwardMessagePayload
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 import io.github.aalbul.zio.telegram.domain.Message
 
 object ForwardMessage {
-  @ConfiguredJsonCodec(encodeOnly = true)
+  object ForwardMessagePayload {
+    implicit val forwardMessagePayloadJsonCodec: JsonValueCodec[ForwardMessagePayload] =
+      JsonCodecMaker.make(CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2))
+  }
+
   case class ForwardMessagePayload(
     chatId: String,
     fromChatId: String,

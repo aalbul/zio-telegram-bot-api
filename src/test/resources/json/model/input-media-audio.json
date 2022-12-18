@@ -1,4 +1,5 @@
 {
+  "type": "audio",
   "media": "attach:///tmp/one.mp3",
   "thumb": "attach:///tmp/song_thumb.jpg",
   "caption": "my song",
@@ -27,6 +28,5 @@
   ],
   "duration": 346,
   "performer": "Me",
-  "title": "Best song ever",
-  "type": "audio"
+  "title": "Best song ever"
 }

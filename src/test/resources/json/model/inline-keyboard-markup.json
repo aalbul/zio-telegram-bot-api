@@ -26,7 +26,6 @@
         "text": "some button 2",
         "url": "https://google.com/url2",
         "callback_data": "another data",
-        "web_app": null,
         "login_url": {
           "url": "https://google.com/login",
           "forward_text": "forward text",
@@ -35,7 +34,6 @@
         },
         "switch_inline_query": "inline query 2",
         "switch_inline_query_current_chat": "inline query current chat 2",
-        "callback_game": null,
         "pay": false
       }
     ]

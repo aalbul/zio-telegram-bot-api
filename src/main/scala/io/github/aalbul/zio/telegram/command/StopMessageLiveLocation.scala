@@ -1,12 +1,17 @@
 package io.github.aalbul.zio.telegram.command
 
-import io.circe.generic.extras.ConfiguredJsonCodec
+import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
+import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodecMaker}
 import io.github.aalbul.zio.telegram.command.StopMessageLiveLocation.StopMessageLiveLocationPayload
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 import io.github.aalbul.zio.telegram.domain.{InlineKeyboardMarkup, LiveLocationUpdateResult, Message}
 
 object StopMessageLiveLocation {
-  @ConfiguredJsonCodec(encodeOnly = true)
+  object StopMessageLiveLocationPayload {
+    implicit val stopMessageLiveLocationPayloadJsonCodec: JsonValueCodec[StopMessageLiveLocationPayload] =
+      JsonCodecMaker.make(CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2))
+  }
+
   case class StopMessageLiveLocationPayload(
     chatId: Option[String],
     messageId: Option[Long],

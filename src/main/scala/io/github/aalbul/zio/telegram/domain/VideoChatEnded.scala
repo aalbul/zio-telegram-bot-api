@@ -1,6 +1,7 @@
 package io.github.aalbul.zio.telegram.domain
 
-import io.circe.generic.extras.ConfiguredJsonCodec
+import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
+import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodecMaker}
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 import scala.concurrent.duration.Duration
@@ -16,9 +17,12 @@ object VideoChatEnded {
   def of(duration: Duration): VideoChatEnded = VideoChatEnded(
     duration = duration
   )
+
+  implicit val videoChatEndedJsonCodec: JsonValueCodec[VideoChatEnded] = JsonCodecMaker.make(
+    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
+  )
 }
 
 /** This object represents a service message about a video chat ended in the chat.
   */
-@ConfiguredJsonCodec(decodeOnly = true)
 case class VideoChatEnded(duration: Duration)

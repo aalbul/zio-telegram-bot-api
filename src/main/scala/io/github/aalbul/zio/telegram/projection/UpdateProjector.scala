@@ -2,8 +2,7 @@ package io.github.aalbul.zio.telegram.projection
 
 import cats.MonoidK
 import cats.syntax.semigroupk.*
-import io.github.aalbul.zio.telegram.domain.UpdateTypes.UpdateType
-import io.github.aalbul.zio.telegram.domain.{Update, UpdateTypes}
+import io.github.aalbul.zio.telegram.domain.{Update, UpdateType}
 
 object UpdateProjector {
   def apply[T: UpdateProjector]: UpdateProjector[T] = implicitly[UpdateProjector[T]]
@@ -26,7 +25,7 @@ object UpdateProjector {
     messageProjector: MessageProjector[T]
   ): UpdateProjector[T] = new UpdateProjector[T] {
     override def project(update: Update): Option[T] = update.message.flatMap(messageProjector.project)
-    override val updateTypes: Set[UpdateType] = Set(UpdateTypes.Message)
+    override val updateTypes: Set[UpdateType] = Set(UpdateType.Message)
   }
 
   val all: UpdateProjector[UpdateProjection] = Seq(

@@ -1,6 +1,7 @@
 package io.github.aalbul.zio.telegram.domain
 
-import io.circe.generic.extras.ConfiguredJsonCodec
+import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
+import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodecMaker}
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 object Video {
@@ -31,11 +32,14 @@ object Video {
     mimeType = None,
     fileSize = None
   )
+
+  implicit val videoJsonCodec: JsonValueCodec[Video] = JsonCodecMaker.make(
+    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
+  )
 }
 
 /** This object represents a video file.
   */
-@ConfiguredJsonCodec(decodeOnly = true)
 case class Video(
   fileId: String,
   fileUniqueId: String,

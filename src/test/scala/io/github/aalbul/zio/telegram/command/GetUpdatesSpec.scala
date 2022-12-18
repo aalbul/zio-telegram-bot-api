@@ -1,26 +1,26 @@
 package io.github.aalbul.zio.telegram.command
 
+import com.github.plokhotnyuk.jsoniter_scala.core.writeToString
+import io.github.aalbul.zio.telegram.command.ForwardMessage.ForwardMessagePayload
 import io.github.aalbul.zio.telegram.command.GetUpdates.GetUpdatesPayload
-import io.github.aalbul.zio.telegram.domain.{Update, UpdateTypes}
+import io.github.aalbul.zio.telegram.domain.{Update, UpdateType}
 import io.github.aalbul.zio.telegram.test.BaseSpec
-import io.circe.syntax.EncoderOps
 import zio.durationInt
 
 class GetUpdatesSpec extends BaseSpec {
   trait Scope {
     val command: Command[Seq[Update]] =
-      GetUpdates
-        .of
+      GetUpdates.of
         .withOffset(5)
         .withLimit(100)
         .withTimeout(10.minutes)
-        .withAllowedUpdates(Set(UpdateTypes.ChannelPost))
+        .withAllowedUpdates(Set(UpdateType.ChannelPost))
 
     val payload: GetUpdatesPayload = GetUpdatesPayload(
       offset = Some(5),
       limit = Some(100),
       timeout = Some(600),
-      allowedUpdates = Some(Set(UpdateTypes.ChannelPost))
+      allowedUpdates = Some(Set(UpdateType.ChannelPost))
     )
   }
 
@@ -37,9 +37,17 @@ class GetUpdatesSpec extends BaseSpec {
       }
     }
 
-    "ForwardMessagePayload" should {
-      "serialize payload to json" in new Scope {
-        payload.asJson shouldBe jsonResource("json/command/get-updates-payload.json")
+    "GetUpdatesPayload" should {
+      "encoder" should {
+        "encode payload to json" in new Scope {
+          writeToString(payload) should matchJsonResource("json/command/get-updates-payload.json")
+        }
+      }
+
+      "decoder" should {
+        "decode payload from json" in new Scope {
+          jsonResourceAs[GetUpdatesPayload]("json/command/get-updates-payload.json") shouldBe payload
+        }
       }
     }
   }

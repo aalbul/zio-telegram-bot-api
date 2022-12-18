@@ -1,16 +1,16 @@
 package io.github.aalbul.zio.telegram.command
 
+import com.github.plokhotnyuk.jsoniter_scala.core.writeToString
 import io.github.aalbul.zio.telegram.command.CopyMessage.CopyMessagePayload
-import io.github.aalbul.zio.telegram.domain.{MessageId, ParseModes}
+import io.github.aalbul.zio.telegram.domain.{MessageId, ParseMode}
 import io.github.aalbul.zio.telegram.test.BaseSpec
-import io.circe.syntax.EncoderOps
 
 class CopyMessageSpec extends BaseSpec {
   trait Scope {
     val command: Command[MessageId] = CopyMessage
       .of(chatId = "12554", "5578", "14339")
       .withCaption("Copied message")
-      .withParseMode(ParseModes.Markdown)
+      .withParseMode(ParseMode.Markdown)
       .withCaptionEntities(Seq(messageEntity1))
       .withDisableNotification(true)
       .withProtectContent(false)
@@ -23,7 +23,7 @@ class CopyMessageSpec extends BaseSpec {
       fromChatId = "5578",
       messageId = "14339",
       caption = Some("Copied message"),
-      parseMode = Some(ParseModes.Markdown),
+      parseMode = Some(ParseMode.Markdown),
       captionEntities = Some(Seq(messageEntity1)),
       disableNotification = Some(true),
       protectContent = Some(false),
@@ -47,8 +47,16 @@ class CopyMessageSpec extends BaseSpec {
     }
 
     "CopyMessagePayload" should {
-      "serialize payload to json" in new Scope {
-        payload.asJson shouldBe jsonResource("json/command/copy-message-payload.json")
+      "encoder" should {
+        "encode payload to json" in new Scope {
+          writeToString(payload) should matchJsonResource("json/command/copy-message-payload.json")
+        }
+      }
+
+      "decoder" should {
+        "decode payload from json" in new Scope {
+          jsonResourceAs[CopyMessagePayload]("json/command/copy-message-payload.json") shouldBe payload
+        }
       }
     }
   }

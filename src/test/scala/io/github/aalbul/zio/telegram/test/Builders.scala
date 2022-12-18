@@ -2,6 +2,7 @@ package io.github.aalbul.zio.telegram.test
 
 import io.github.aalbul.zio.telegram.command.FileDescriptor.{pathDescriptor, urlDescriptor}
 import io.github.aalbul.zio.telegram.domain.*
+import io.github.aalbul.zio.telegram.engine.{ApiResponse, FailureApiResponse, SuccessApiResponse}
 import io.github.aalbul.zio.telegram.projection.*
 import io.github.aalbul.zio.telegram.projection.message.*
 import io.github.aalbul.zio.telegram.projection.message.MediaMessageProjection.Media
@@ -48,7 +49,7 @@ trait Builders {
   )
 
   lazy val messageEntity1: MessageEntity = MessageEntity(
-    `type` = MessageEntityTypes.Pre,
+    `type` = MessageEntityType.Pre,
     offset = 10,
     length = 500,
     url = Some("https://someurl.com"),
@@ -60,7 +61,7 @@ trait Builders {
 
   lazy val webAppInfo1: WebAppInfo = WebAppInfo.of(url = "https://webapp.org")
 
-  lazy val forceReplyMarkup1: Markup = ForceReply(
+  lazy val forceReplyMarkup1: ForceReply = ForceReply(
     forceReply = true,
     inputFieldPlaceholder = Some("some text"),
     selective = Some(true)
@@ -72,7 +73,7 @@ trait Builders {
     .withForwardText("forward text")
     .withRequestWriteAccess(true)
 
-  lazy val keyboardButtonPollType1: KeyboardButtonPollType = KeyboardButtonPollType(PollTypes.Quiz)
+  lazy val keyboardButtonPollType1: KeyboardButtonPollType = KeyboardButtonPollType(PollType.Quiz)
 
   lazy val keyboardButton1: KeyboardButton = KeyboardButton(
     text = "simple button",
@@ -123,15 +124,15 @@ trait Builders {
     selective = Some(true)
   )
 
-  lazy val chat1: Chat = Chat.of(id = 81, `type` = ChatTypes.Supergroup)
+  lazy val chat1: Chat = Chat.of(id = 81, `type` = ChatType.Supergroup)
 
-  lazy val chat2: Chat = Chat.of(id = 82, `type` = ChatTypes.Private)
+  lazy val chat2: Chat = Chat.of(id = 82, `type` = ChatType.Private)
 
-  lazy val chat3: Chat = Chat.of(id = 83, `type` = ChatTypes.Supergroup)
+  lazy val chat3: Chat = Chat.of(id = 83, `type` = ChatType.Supergroup)
 
   lazy val chat4: Chat = Chat(
     id = 88,
-    `type` = ChatTypes.Channel,
+    `type` = ChatType.Channel,
     title = Some("hello world"),
     username = Some("user-1"),
     firstName = Some("John"),
@@ -244,7 +245,7 @@ trait Builders {
     .of(pathDescriptor("/tmp/one.gif"))
     .withThumb(urlDescriptor("https://google.com/animation_thumb.jpg"))
     .withCaption("my gif")
-    .withParseMode(ParseModes.MarkdownV2)
+    .withParseMode(ParseMode.MarkdownV2)
     .withCaptionEntities(Seq(messageEntity1))
     .withWidth(1024)
     .withHeight(769)
@@ -254,7 +255,7 @@ trait Builders {
     .of(pathDescriptor("/tmp/one.mp3"))
     .withThumb(pathDescriptor("/tmp/song_thumb.jpg"))
     .withCaption("my song")
-    .withParseMode(ParseModes.HTML)
+    .withParseMode(ParseMode.HTML)
     .withCaptionEntities(Seq(messageEntity1))
     .withDuration(346)
     .withPerformer("Me")
@@ -264,7 +265,7 @@ trait Builders {
     .of(pathDescriptor("/tmp/one.pdf"))
     .withThumb(pathDescriptor("/tmp/document_thumb.jpg"))
     .withCaption("my document")
-    .withParseMode(ParseModes.Markdown)
+    .withParseMode(ParseMode.Markdown)
     .withCaptionEntities(Seq(messageEntity1))
     .withDisableContentTypeDetection(true)
 
@@ -272,14 +273,14 @@ trait Builders {
     .of(pathDescriptor("/tmp/one.jpg"))
     .withThumb(pathDescriptor("/tmp/photo_thumb.jpg"))
     .withCaption("my photo")
-    .withParseMode(ParseModes.Markdown)
+    .withParseMode(ParseMode.Markdown)
     .withCaptionEntities(Seq(messageEntity1))
 
   lazy val inputMediaVideo1: InputMedia = InputMediaVideo
     .of(pathDescriptor("/tmp/one.mp4"))
     .withThumb(pathDescriptor("/tmp/video_thumb.jpg"))
     .withCaption("my video")
-    .withParseMode(ParseModes.HTML)
+    .withParseMode(ParseMode.HTML)
     .withCaptionEntities(Seq(messageEntity1))
     .withWidth(1920)
     .withHeight(1080)
@@ -395,7 +396,7 @@ trait Builders {
     totalVoterCount = 21,
     isClosed = true,
     isAnonymous = false,
-    `type` = PollTypes.Quiz,
+    `type` = PollType.Quiz,
     allowsMultipleAnswers = false,
     correctOptionId = Some(0),
     explanation = Some("Which is your favorite fruit of all time?"),
@@ -487,7 +488,7 @@ trait Builders {
   )
 
   lazy val maskPosition1: MaskPosition = MaskPosition(
-    point = MaskPointTypes.Forehead,
+    point = MaskPointType.Forehead,
     xShift = 10.2,
     yShift = 5.4,
     scale = 1.3
@@ -496,7 +497,7 @@ trait Builders {
   lazy val sticker1: Sticker = Sticker(
     fileId = "sticker-1",
     fileUniqueId = "unique-sticker-1",
-    `type` = StickerTypes.CustomEmoji,
+    `type` = StickerType.CustomEmoji,
     width = 80,
     height = 50,
     isAnimated = true,
@@ -630,7 +631,7 @@ trait Builders {
   )
 
   lazy val encryptedPassportElement1: EncryptedPassportElement = EncryptedPassportElement(
-    `type` = PassportElementTypes.Address,
+    `type` = PassportElementType.Address,
     data = Some("address-1"),
     phoneNumber = Some("+31630911234"),
     email = Some("email@gmail.com"),
@@ -681,7 +682,7 @@ trait Builders {
     from = user1,
     query = "test",
     offset = "1",
-    chatType = Some(ChatTypes.Sender),
+    chatType = Some(ChatType.Sender),
     location = Some(location1)
   )
 
@@ -995,6 +996,23 @@ trait Builders {
   lazy val updatedChatMemberMessage: Update = Update.of(updateId = 81).withChatMember(chatMemberUpdated1)
   lazy val newChatJoinRequestMessage: Update = Update.of(updateId = 82).withChatJoinRequest(chatJoinRequest1)
 
+  lazy val fullUpdate1: Update = Update
+    .of(83)
+    .withMessage(message1)
+    .withEditedMessage(message2)
+    .withChannelPost(message3)
+    .withEditedChannelPost(message4)
+    .withInlineQuery(inlineQuery1)
+    .withChosenInlineResult(chosenInlineResult1)
+    .withCallbackQuery(callbackQuery1)
+    .withShippingQuery(shippingQuery1)
+    .withPreCheckoutQuery(preCheckoutQuery1)
+    .withPoll(poll1)
+    .withPollAnswer(pollAnswer1)
+    .withMyChatMember(chatMemberUpdated1)
+    .withChatMember(chatMemberUpdated1)
+    .withChatJoinRequest(chatJoinRequest1)
+
   lazy val allUpdates: Set[Update] = allMessages.map(message => Update.of(1).withMessage(message)) ++ Set(
     updateEditedTextMessage,
     channelPostAudioMessage,
@@ -1244,4 +1262,12 @@ trait Builders {
 
   lazy val forumTopicReopenedProjection: UpdateProjection =
     ForumTopicReopenedMessage(Data.of(forumTopicReopenedMessage1).get, forumTopicReopened1)
+
+  lazy val failureApiResponse1: ApiResponse[String] = FailureApiResponse(
+    ok = false,
+    errorCode = 500,
+    description = "server error"
+  )
+
+  lazy val successApiResponse1: ApiResponse[String] = SuccessApiResponse(result = "hello world")
 }

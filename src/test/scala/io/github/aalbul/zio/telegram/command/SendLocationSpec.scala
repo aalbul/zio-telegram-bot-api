@@ -1,9 +1,9 @@
 package io.github.aalbul.zio.telegram.command
 
+import com.github.plokhotnyuk.jsoniter_scala.core.writeToString
 import io.github.aalbul.zio.telegram.command.SendLocation.SendLocationPayload
 import io.github.aalbul.zio.telegram.domain.Message
 import io.github.aalbul.zio.telegram.test.BaseSpec
-import io.circe.syntax.EncoderOps
 
 class SendLocationSpec extends BaseSpec {
   trait Scope {
@@ -50,8 +50,16 @@ class SendLocationSpec extends BaseSpec {
     }
 
     "SendLocationPayload" should {
-      "serialize payload to json" in new Scope {
-        payload.asJson shouldBe jsonResource("json/command/send-location-payload.json")
+      "encoder" should {
+        "encode payload to json" in new Scope {
+          writeToString(payload) should matchJsonResource("json/command/send-location-payload.json")
+        }
+      }
+
+      "decoder" should {
+        "decode payload from json" in new Scope {
+          jsonResourceAs[SendLocationPayload]("json/command/send-location-payload.json") shouldBe payload
+        }
       }
     }
   }

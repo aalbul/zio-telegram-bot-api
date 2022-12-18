@@ -1,7 +1,7 @@
 package io.github.aalbul.zio.telegram.domain
 
-import io.circe.generic.extras.ConfiguredJsonCodec
-import io.github.aalbul.zio.telegram.domain.ChatTypes.ChatType
+import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
+import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodecMaker}
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 object Chat {
@@ -33,9 +33,14 @@ object Chat {
     linkedChatId = None,
     location = None
   )
+
+  implicit val chatJsonCodec: JsonValueCodec[Chat] = JsonCodecMaker.make(
+    CodecMakerConfig
+      .withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
+      .withAllowRecursiveTypes(true)
+  )
 }
 
-@ConfiguredJsonCodec(decodeOnly = true)
 case class Chat(
   id: Long,
   `type`: ChatType,

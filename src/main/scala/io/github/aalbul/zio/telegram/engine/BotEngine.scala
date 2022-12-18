@@ -1,6 +1,6 @@
 package io.github.aalbul.zio.telegram.engine
 
-import io.circe.Decoder
+import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
 import io.github.aalbul.zio.telegram.command.Command
 import zio.Task
 import zio.stream.ZStream
@@ -13,6 +13,6 @@ object BotEngine {
 }
 
 trait BotEngine {
-  def execute[T: Decoder](command: Command[T]): Task[T]
+  def execute[T: JsonValueCodec](command: Command[T]): Task[T]
   def streamFile(path: String): Task[ZStream[Any, Throwable, Byte]]
 }

@@ -2,10 +2,8 @@ package io.github.aalbul.zio.telegram.bot
 
 import io.github.aalbul.zio.telegram.command.*
 import io.github.aalbul.zio.telegram.domain.*
-import io.github.aalbul.zio.telegram.domain.ChatActions.ChatAction
-import io.github.aalbul.zio.telegram.domain.UpdateTypes.UpdateType
 import io.github.aalbul.zio.telegram.engine.BotEngine
-import io.github.aalbul.zio.telegram.projection.{ProjectionBuilder, UpdateProjection}
+import io.github.aalbul.zio.telegram.projection.ProjectionBuilder
 import zio.stream.ZStream
 
 trait Bot {

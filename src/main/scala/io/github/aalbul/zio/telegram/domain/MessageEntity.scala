@@ -1,10 +1,17 @@
 package io.github.aalbul.zio.telegram.domain
 
-import io.github.aalbul.zio.telegram.domain.MessageEntityTypes.MessageEntityType
-import io.circe.generic.extras.ConfiguredJsonCodec
+import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
+import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodecMaker}
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
-@ConfiguredJsonCodec
+object MessageEntity {
+  implicit val messageEntityJsonCodec: JsonValueCodec[MessageEntity] = JsonCodecMaker.make(
+    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
+  )
+
+  implicit val seqMessageEntityJsonCodec: JsonValueCodec[Seq[MessageEntity]] = JsonCodecMaker.make
+}
+
 case class MessageEntity(
   `type`: MessageEntityType,
   offset: Int,

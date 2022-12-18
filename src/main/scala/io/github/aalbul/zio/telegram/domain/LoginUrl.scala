@@ -1,6 +1,7 @@
 package io.github.aalbul.zio.telegram.domain
 
-import io.circe.generic.extras.ConfiguredJsonCodec
+import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
+import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodecMaker}
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 object LoginUrl {
@@ -20,6 +21,10 @@ object LoginUrl {
     botUsername = None,
     requestWriteAccess = None
   )
+
+  implicit val loginUrlJsonCodec: JsonValueCodec[LoginUrl] = JsonCodecMaker.make(
+    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
+  )
 }
 
 /** This object represents a parameter of the inline keyboard button used to automatically authorize a user. Serves as a
@@ -29,7 +34,6 @@ object LoginUrl {
   * Telegram apps support these buttons as of
   * [[https://telegram.org/blog/privacy-discussions-web-bots#meet-seamless-web-bots version 5.7]].
   */
-@ConfiguredJsonCodec
 case class LoginUrl(
   url: String,
   forwardText: Option[String],

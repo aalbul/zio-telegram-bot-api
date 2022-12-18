@@ -1,7 +1,6 @@
 package io.github.aalbul.zio.telegram.engine
 
-import io.circe.Decoder
-import io.circe.parser.parse
+import com.github.plokhotnyuk.jsoniter_scala.core.{readFromString, JsonValueCodec}
 import io.github.aalbul.zio.telegram.command.*
 import io.github.aalbul.zio.telegram.engine.BotEngine.{ApiCommandExecutionException, BotException}
 import io.github.aalbul.zio.telegram.engine.SttpBasedBotEngine.*
@@ -37,10 +36,10 @@ class SttpBasedBotEngine(backend: SttpClient, botConfig: BotConfig) extends BotE
       }
     }
 
-  override def execute[T: Decoder](command: Command[T]): Task[T] = for {
+  override def execute[T: JsonValueCodec](command: Command[T]): Task[T] = for {
     request <- prepareRequest(command)
     bodyJson <- backend.send(request).map(_.body.fold(identity, identity))
-    response <- ZIO.fromEither(parse(bodyJson).flatMap(_.as[ApiResponse[? <: T]]))
+    response <- ZIO.attempt(readFromString[ApiResponse[T]](bodyJson))
     result <- response match {
       case failure: FailureApiResponse =>
         ZIO

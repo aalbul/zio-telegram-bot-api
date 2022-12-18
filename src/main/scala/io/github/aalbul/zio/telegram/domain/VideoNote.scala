@@ -1,6 +1,7 @@
 package io.github.aalbul.zio.telegram.domain
 
-import io.circe.generic.extras.ConfiguredJsonCodec
+import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
+import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodecMaker}
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 object VideoNote {
@@ -26,12 +27,15 @@ object VideoNote {
     thumb = None,
     fileSize = None
   )
+
+  implicit val videoNoteJsonCodec: JsonValueCodec[VideoNote] = JsonCodecMaker.make(
+    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
+  )
 }
 
 /** This object represents a [[https://telegram.org/blog/video-messages-and-telescope video message]] (available in
   * Telegram apps as of [[https://telegram.org/blog/video-messages-and-telescope v.4.0]]).
   */
-@ConfiguredJsonCodec(decodeOnly = true)
 case class VideoNote(
   fileId: String,
   fileUniqueId: String,

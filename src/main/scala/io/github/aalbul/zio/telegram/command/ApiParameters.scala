@@ -1,19 +1,13 @@
 package io.github.aalbul.zio.telegram.command
 
-import io.github.aalbul.zio.telegram.command.ApiParameters.jsonPrinter
-import io.circe.syntax.EncoderOps
-import io.circe.{Encoder, Printer}
+import com.github.plokhotnyuk.jsoniter_scala.core.{writeToString, JsonValueCodec}
 
 import java.nio.file.{Path, Paths}
 
-object ApiParameters {
-  val jsonPrinter: Printer = Printer.noSpaces.copy(dropNullValues = true)
-}
-
 sealed trait ApiParameters
 case object NoParameters extends ApiParameters
-case class JsonBody[T: Encoder](body: T) extends ApiParameters {
-  def toJson: String = body.asJson.printWith(jsonPrinter)
+case class JsonBody[T: JsonValueCodec](body: T) extends ApiParameters {
+  def toJson: String = writeToString(body)
 }
 
 sealed trait MultipartBodyPart {

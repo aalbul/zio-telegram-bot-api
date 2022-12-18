@@ -1,14 +1,14 @@
 package io.github.aalbul.zio.telegram.command
 
-import io.circe.syntax.EncoderOps
+import com.github.plokhotnyuk.jsoniter_scala.core.writeToString
 import io.github.aalbul.zio.telegram.command.SendChatAction.SendChatActionPayload
-import io.github.aalbul.zio.telegram.domain.ChatActions
+import io.github.aalbul.zio.telegram.domain.ChatAction
 import io.github.aalbul.zio.telegram.test.BaseSpec
 
 class SendChatActionSpec extends BaseSpec {
   trait Scope {
-    val command: Command[Boolean] = SendChatAction.of(chatId = "21", action = ChatActions.ChooseSticker)
-    val payload: SendChatActionPayload = SendChatActionPayload(chatId = "21", action = ChatActions.ChooseSticker)
+    val command: Command[Boolean] = SendChatAction.of(chatId = "21", action = ChatAction.ChooseSticker)
+    val payload: SendChatActionPayload = SendChatActionPayload(chatId = "21", action = ChatAction.ChooseSticker)
   }
 
   "SendChatAction" when {
@@ -25,8 +25,16 @@ class SendChatActionSpec extends BaseSpec {
     }
 
     "SendChatActionPayload" should {
-      "serialize payload to json" in new Scope {
-        payload.asJson shouldBe jsonResource("json/command/send-chat-action-payload.json")
+      "encoder" should {
+        "encode payload to json" in new Scope {
+          writeToString(payload) should matchJsonResource("json/command/send-chat-action-payload.json")
+        }
+      }
+
+      "decoder" should {
+        "decode payload from json" in new Scope {
+          jsonResourceAs[SendChatActionPayload]("json/command/send-chat-action-payload.json") shouldBe payload
+        }
       }
     }
   }

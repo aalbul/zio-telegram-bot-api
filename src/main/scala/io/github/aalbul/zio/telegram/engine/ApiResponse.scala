@@ -1,20 +1,39 @@
 package io.github.aalbul.zio.telegram.engine
 
-import cats.syntax.functor.*
-import io.circe.Decoder
-import io.circe.generic.extras.ConfiguredJsonCodec
+import com.github.plokhotnyuk.jsoniter_scala.core.{JsonReader, JsonValueCodec, JsonWriter}
+import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodecMaker}
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
-object ApiResponse {
+import scala.util.Try
 
-  implicit def apiResponseDecoder[T: Decoder]: Decoder[ApiResponse[? <: T]] =
-    implicitly[Decoder[FailureApiResponse]].widen or implicitly[Decoder[SuccessApiResponse[T]]].widen
+object ApiResponse {
+  private val failureApiResponseJsonCodec: JsonValueCodec[FailureApiResponse] =
+    JsonCodecMaker.make(CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2))
+
+  implicit def apiResponseJsonCodec[T: JsonValueCodec]: JsonValueCodec[ApiResponse[T]] =
+    new JsonValueCodec[ApiResponse[T]] {
+      val successfulCodec: JsonValueCodec[SuccessApiResponse[T]] = JsonCodecMaker.make(
+        CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
+      )
+
+      override def decodeValue(in: JsonReader, default: ApiResponse[T]): ApiResponse[T] =
+        Try {
+          in.setMark()
+          failureApiResponseJsonCodec.decodeValue(in, null)
+        }.getOrElse {
+          in.rollbackToMark()
+          successfulCodec.decodeValue(in, null)
+        }
+
+      override def encodeValue(x: ApiResponse[T], out: JsonWriter): Unit = x match {
+        case fail: FailureApiResponse        => failureApiResponseJsonCodec.encodeValue(fail, out)
+        case response: SuccessApiResponse[T] => successfulCodec.encodeValue(response, out)
+      }
+
+      override def nullValue: ApiResponse[T] = null
+    }
 }
 
-sealed trait ApiResponse[T]
-
-@ConfiguredJsonCodec(decodeOnly = true)
+sealed trait ApiResponse[+T]
 case class FailureApiResponse(ok: Boolean, errorCode: Int, description: String) extends ApiResponse[Nothing]
-
-@ConfiguredJsonCodec(decodeOnly = true)
 case class SuccessApiResponse[T](result: T) extends ApiResponse[T]

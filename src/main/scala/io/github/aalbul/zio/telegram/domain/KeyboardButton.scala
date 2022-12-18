@@ -1,6 +1,7 @@
 package io.github.aalbul.zio.telegram.domain
 
-import io.circe.generic.extras.ConfiguredJsonCodec
+import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
+import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodecMaker}
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 object KeyboardButton {
@@ -20,13 +21,16 @@ object KeyboardButton {
     requestPoll = None,
     webApp = None
   )
+
+  implicit val keyboardButtonJsonCodec: JsonValueCodec[KeyboardButton] = JsonCodecMaker.make(
+    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
+  )
 }
 
 /** This object represents one button of the reply keyboard. For simple text buttons String can be used instead of this
   * object to specify text of the button. Optional fields web_app, request_contact, request_location, and request_poll
   * are mutually exclusive.
   */
-@ConfiguredJsonCodec(encodeOnly = true)
 case class KeyboardButton(
   text: String,
   requestContact: Option[Boolean],

@@ -2,7 +2,7 @@ package io.github.aalbul.zio.telegram.command
 
 import io.github.aalbul.zio.telegram.command.FileDescriptor.{pathDescriptor, urlDescriptor}
 import io.github.aalbul.zio.telegram.command.MultipartBody.{filePart, stringPart}
-import io.github.aalbul.zio.telegram.domain.{Message, ParseModes}
+import io.github.aalbul.zio.telegram.domain.{Message, ParseMode}
 import io.github.aalbul.zio.telegram.test.BaseSpec
 
 class SendAnimationSpec extends BaseSpec {
@@ -15,7 +15,7 @@ class SendAnimationSpec extends BaseSpec {
         .withHeight(768)
         .withThumb(pathDescriptor("/tmp/thumb.jpg"))
         .withCaption("funny image")
-        .withParseMode(ParseModes.MarkdownV2)
+        .withParseMode(ParseMode.MarkdownV2)
         .withCaptionEntities(Seq(messageEntity1))
         .withDisableNotification(true)
         .withProtectContent(false)

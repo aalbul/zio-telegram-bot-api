@@ -1,16 +1,20 @@
 package io.github.aalbul.zio.telegram.command
 
-import io.circe.generic.extras.ConfiguredJsonCodec
+import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
+import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodecMaker}
 import io.github.aalbul.zio.telegram.command.GetUpdates.GetUpdatesPayload
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
-import io.github.aalbul.zio.telegram.domain.Update
-import io.github.aalbul.zio.telegram.domain.UpdateTypes.UpdateType
+import io.github.aalbul.zio.telegram.domain.{Update, UpdateType}
 
 import java.time.Duration
 import java.time.temporal.ChronoUnit.SECONDS
 
 object GetUpdates {
-  @ConfiguredJsonCodec(encodeOnly = true)
+  object GetUpdatesPayload {
+    implicit val getUpdatesPayloadJsonCodec: JsonValueCodec[GetUpdatesPayload] =
+      JsonCodecMaker.make(CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2))
+  }
+
   case class GetUpdatesPayload(
     offset: Option[Long],
     limit: Option[Long],

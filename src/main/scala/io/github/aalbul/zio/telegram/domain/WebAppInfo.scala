@@ -1,6 +1,7 @@
 package io.github.aalbul.zio.telegram.domain
 
-import io.circe.generic.extras.ConfiguredJsonCodec
+import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
+import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodecMaker}
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 object WebAppInfo {
@@ -13,9 +14,12 @@ object WebAppInfo {
     *   [[WebAppInfo]] builder
     */
   def of(url: String): WebAppInfo = WebAppInfo(url = url)
+
+  implicit val webAppInfoJsonCodec: JsonValueCodec[WebAppInfo] = JsonCodecMaker.make(
+    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
+  )
 }
 
 /** Describes a [[https://core.telegram.org/bots/webapps Web App]].
   */
-@ConfiguredJsonCodec
 case class WebAppInfo(url: String)

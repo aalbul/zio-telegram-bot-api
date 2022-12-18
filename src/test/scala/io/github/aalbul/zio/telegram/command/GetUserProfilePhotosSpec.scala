@@ -1,6 +1,6 @@
 package io.github.aalbul.zio.telegram.command
 
-import io.circe.syntax.EncoderOps
+import com.github.plokhotnyuk.jsoniter_scala.core.writeToString
 import io.github.aalbul.zio.telegram.command.GetUserProfilePhotos.GetUserProfilePhotosPayload
 import io.github.aalbul.zio.telegram.domain.UserProfilePhotos
 import io.github.aalbul.zio.telegram.test.BaseSpec
@@ -34,8 +34,18 @@ class GetUserProfilePhotosSpec extends BaseSpec {
     }
 
     "GetUserProfilePhotosPayload" should {
-      "serialize payload to json" in new Scope {
-        payload.asJson shouldBe jsonResource("json/command/get-user-profile-photos-payload.json")
+      "encoder" should {
+        "encode payload to json" in new Scope {
+          writeToString(payload) should matchJsonResource("json/command/get-user-profile-photos-payload.json")
+        }
+      }
+
+      "decoder" should {
+        "decode payload from json" in new Scope {
+          jsonResourceAs[GetUserProfilePhotosPayload](
+            "json/command/get-user-profile-photos-payload.json"
+          ) shouldBe payload
+        }
       }
     }
   }

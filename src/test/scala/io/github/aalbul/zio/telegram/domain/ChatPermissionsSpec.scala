@@ -1,13 +1,13 @@
 package io.github.aalbul.zio.telegram.domain
 
-import io.circe.syntax.EncoderOps
+import com.github.plokhotnyuk.jsoniter_scala.core.writeToString
 import io.github.aalbul.zio.telegram.test.BaseSpec
 
 class ChatPermissionsSpec extends BaseSpec {
   "ChatPermissions" when {
     "encoder" should {
       "encode chat permissions to json" in {
-        chatPermissions1.asJson shouldBe jsonResource("json/model/chat-permissions.json")
+        writeToString(chatPermissions1) should matchJsonResource("json/model/chat-permissions.json")
       }
     }
 

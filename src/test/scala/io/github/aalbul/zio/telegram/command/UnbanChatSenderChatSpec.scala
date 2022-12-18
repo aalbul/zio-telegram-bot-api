@@ -1,6 +1,6 @@
 package io.github.aalbul.zio.telegram.command
 
-import io.circe.syntax.EncoderOps
+import com.github.plokhotnyuk.jsoniter_scala.core.writeToString
 import io.github.aalbul.zio.telegram.command.UnbanChatSenderChat.UnbanChatSenderChatPayload
 import io.github.aalbul.zio.telegram.test.BaseSpec
 
@@ -28,8 +28,20 @@ class UnbanChatSenderChatSpec extends BaseSpec {
     }
 
     "UnbanChatSenderChatPayload" should {
-      "serialize payload to json" in new Scope {
-        payload.asJson shouldBe jsonResource("json/command/unban-chat-sender-chat-payload.json")
+      "encoder" should {
+        "encode payload to json" in new Scope {
+          writeToString(payload) should matchJsonResource(
+            "json/command/unban-chat-sender-chat-payload.json"
+          )
+        }
+      }
+
+      "decoder" should {
+        "decode payload from json" in new Scope {
+          jsonResourceAs[UnbanChatSenderChatPayload](
+            "json/command/unban-chat-sender-chat-payload.json"
+          ) shouldBe payload
+        }
       }
     }
   }

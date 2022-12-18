@@ -1,6 +1,7 @@
 package io.github.aalbul.zio.telegram.domain
 
-import io.circe.generic.extras.ConfiguredJsonCodec
+import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
+import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodecMaker}
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 object Voice {
@@ -23,11 +24,14 @@ object Voice {
     mimeType = None,
     fileSize = None
   )
+
+  implicit val voiceJsonCodec: JsonValueCodec[Voice] = JsonCodecMaker.make(
+    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
+  )
 }
 
 /** This object represents a voice note.
   */
-@ConfiguredJsonCodec(decodeOnly = true)
 case class Voice(
   fileId: String,
   fileUniqueId: String,

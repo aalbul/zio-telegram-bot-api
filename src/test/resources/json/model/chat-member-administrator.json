@@ -1,4 +1,5 @@
 {
+  "status": "administrator",
   "user": {
     "id": 1,
     "is_bot": false,
@@ -12,7 +13,6 @@
     "can_read_all_group_messages": true,
     "supports_inline_queries": false
   },
-  "status": "administrator",
   "can_be_edited": true,
   "is_anonymous": false,
   "can_manage_chat": true,

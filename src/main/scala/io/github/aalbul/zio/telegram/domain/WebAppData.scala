@@ -1,6 +1,7 @@
 package io.github.aalbul.zio.telegram.domain
 
-import io.circe.generic.extras.ConfiguredJsonCodec
+import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
+import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodecMaker}
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 object WebAppData {
@@ -18,9 +19,12 @@ object WebAppData {
     data = data,
     buttonText = buttonText
   )
+
+  implicit val webAppDataJsonCodec: JsonValueCodec[WebAppData] = JsonCodecMaker.make(
+    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
+  )
 }
 
 /** Describes data sent from a [[https://core.telegram.org/bots/webapps Web App]] to the bot.
   */
-@ConfiguredJsonCodec(decodeOnly = true)
 case class WebAppData(data: String, buttonText: String)

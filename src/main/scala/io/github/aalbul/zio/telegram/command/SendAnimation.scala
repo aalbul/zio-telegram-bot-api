@@ -1,8 +1,7 @@
 package io.github.aalbul.zio.telegram.command
 
 import io.github.aalbul.zio.telegram.command.MultipartBody.stringPart
-import io.github.aalbul.zio.telegram.domain.ParseModes.ParseMode
-import io.github.aalbul.zio.telegram.domain.{Markup, Message, MessageEntity}
+import io.github.aalbul.zio.telegram.domain.{Markup, Message, MessageEntity, ParseMode}
 
 object SendAnimation {
 

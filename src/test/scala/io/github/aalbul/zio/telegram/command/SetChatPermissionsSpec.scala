@@ -1,6 +1,6 @@
 package io.github.aalbul.zio.telegram.command
 
-import io.circe.syntax.EncoderOps
+import com.github.plokhotnyuk.jsoniter_scala.core.writeToString
 import io.github.aalbul.zio.telegram.command.SetChatPermissions.SetChatPermissionsPayload
 import io.github.aalbul.zio.telegram.test.BaseSpec
 
@@ -25,8 +25,20 @@ class SetChatPermissionsSpec extends BaseSpec {
     }
 
     "SetChatPermissionsPayload" should {
-      "serialize payload to json" in new Scope {
-        payload.asJson shouldBe jsonResource("json/command/set-chat-permissions-payload.json")
+      "encoder" should {
+        "encode payload to json" in new Scope {
+          writeToString(payload) should matchJsonResource(
+            "json/command/set-chat-permissions-payload.json"
+          )
+        }
+      }
+
+      "decoder" should {
+        "decode payload from json" in new Scope {
+          jsonResourceAs[SetChatPermissionsPayload](
+            "json/command/set-chat-permissions-payload.json"
+          ) shouldBe payload
+        }
       }
     }
   }

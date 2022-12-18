@@ -1,6 +1,7 @@
 package io.github.aalbul.zio.telegram.domain
 
-import io.circe.generic.extras.ConfiguredJsonCodec
+import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
+import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodecMaker}
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 /** This object represent a user's profile pictures.
@@ -19,7 +20,10 @@ object UserProfilePhotos {
     totalCount = totalCount,
     photos = photos
   )
+
+  implicit val userProfilePhotosJsonCodec: JsonValueCodec[UserProfilePhotos] = JsonCodecMaker.make(
+    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
+  )
 }
 
-@ConfiguredJsonCodec(decodeOnly = true)
 case class UserProfilePhotos(totalCount: Long, photos: Seq[Seq[PhotoSize]])

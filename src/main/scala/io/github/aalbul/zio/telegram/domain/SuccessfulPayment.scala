@@ -1,6 +1,7 @@
 package io.github.aalbul.zio.telegram.domain
 
-import io.circe.generic.extras.ConfiguredJsonCodec
+import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
+import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodecMaker}
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 object SuccessfulPayment {
@@ -37,10 +38,13 @@ object SuccessfulPayment {
     telegramPaymentChargeId = telegramPaymentChargeId,
     providerPaymentChargeId = providerPaymentChargeId
   )
+
+  implicit val successfulPaymentJsonCodec: JsonValueCodec[SuccessfulPayment] = JsonCodecMaker.make(
+    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
+  )
 }
 
 /** This object contains basic information about a successful payment. */
-@ConfiguredJsonCodec(decodeOnly = true)
 case class SuccessfulPayment(
   currency: String,
   totalAmount: Int,

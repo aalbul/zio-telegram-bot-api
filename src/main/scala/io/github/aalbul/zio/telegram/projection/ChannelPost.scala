@@ -1,7 +1,6 @@
 package io.github.aalbul.zio.telegram.projection
 
-import io.github.aalbul.zio.telegram.domain.UpdateTypes.UpdateType
-import io.github.aalbul.zio.telegram.domain.{Update, UpdateTypes}
+import io.github.aalbul.zio.telegram.domain.{Update, UpdateType}
 import io.github.aalbul.zio.telegram.projection.message.MessageProjection
 
 object ChannelPost {
@@ -11,7 +10,7 @@ object ChannelPost {
       message <- MessageProjector.all.project(channelPost)
     } yield ChannelPost(message)
 
-    override val updateTypes: Set[UpdateType] = Set(UpdateTypes.ChannelPost)
+    override val updateTypes: Set[UpdateType] = Set(UpdateType.ChannelPost)
   }
 }
 

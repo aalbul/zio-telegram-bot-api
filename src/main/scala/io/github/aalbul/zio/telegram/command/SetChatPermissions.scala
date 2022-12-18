@@ -1,12 +1,18 @@
 package io.github.aalbul.zio.telegram.command
 
-import io.circe.generic.extras.ConfiguredJsonCodec
+import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
+import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodecMaker}
 import io.github.aalbul.zio.telegram.command.SetChatPermissions.SetChatPermissionsPayload
 import io.github.aalbul.zio.telegram.domain.ChatPermissions
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
+import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.codecs.boolean
 
 object SetChatPermissions {
-  @ConfiguredJsonCodec(encodeOnly = true)
+  object SetChatPermissionsPayload {
+    implicit val setChatPermissionsPayloadJsonCodec: JsonValueCodec[SetChatPermissionsPayload] =
+      JsonCodecMaker.make(CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2))
+  }
+
   case class SetChatPermissionsPayload(chatId: String, permissions: ChatPermissions)
 
   /** Constructs minimal [[SetChatPermissions]] command

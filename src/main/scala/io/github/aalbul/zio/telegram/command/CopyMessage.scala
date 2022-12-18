@@ -1,13 +1,18 @@
 package io.github.aalbul.zio.telegram.command
 
-import io.circe.generic.extras.ConfiguredJsonCodec
+import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
+import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodecMaker}
 import io.github.aalbul.zio.telegram.command.CopyMessage.CopyMessagePayload
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
-import io.github.aalbul.zio.telegram.domain.ParseModes.ParseMode
-import io.github.aalbul.zio.telegram.domain.{Markup, MessageEntity, MessageId}
+import io.github.aalbul.zio.telegram.domain.{Markup, MessageEntity, MessageId, ParseMode}
 
 object CopyMessage {
-  @ConfiguredJsonCodec(encodeOnly = true)
+  object CopyMessagePayload {
+    implicit val copyMessagePayloadJsonCodec: JsonValueCodec[CopyMessagePayload] = JsonCodecMaker.make(
+      CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
+    )
+  }
+
   case class CopyMessagePayload(
     chatId: String,
     fromChatId: String,

@@ -2,7 +2,7 @@ package io.github.aalbul.zio.telegram.command
 
 import io.github.aalbul.zio.telegram.command.FileDescriptor.idDescriptor
 import io.github.aalbul.zio.telegram.command.MultipartBody.{filePart, stringPart}
-import io.github.aalbul.zio.telegram.domain.{Message, ParseModes}
+import io.github.aalbul.zio.telegram.domain.{Message, ParseMode}
 import io.github.aalbul.zio.telegram.test.BaseSpec
 
 class SendPhotoSpec extends BaseSpec {
@@ -11,7 +11,7 @@ class SendPhotoSpec extends BaseSpec {
       SendPhoto
         .of(chatId = "801", photo = idDescriptor("980006"))
         .withCaption("my photo")
-        .withParseMode(ParseModes.HTML)
+        .withParseMode(ParseMode.HTML)
         .withCaptionEntities(Seq(messageEntity1))
         .withDisableNotification(true)
         .withProtectContent(false)

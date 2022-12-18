@@ -1,6 +1,6 @@
 package io.github.aalbul.zio.telegram.command
 
-import io.circe.syntax.EncoderOps
+import com.github.plokhotnyuk.jsoniter_scala.core.writeToString
 import io.github.aalbul.zio.telegram.command.SetChatAdministratorCustomTitle.SetChatAdministratorCustomTitlePayload
 import io.github.aalbul.zio.telegram.test.BaseSpec
 
@@ -30,8 +30,20 @@ class SetChatAdministratorCustomTitleSpec extends BaseSpec {
     }
 
     "SetChatAdministratorCustomTitlePayload" should {
-      "serialize payload to json" in new Scope {
-        payload.asJson shouldBe jsonResource("json/command/set-chat-administrator-custom-title-payload.json")
+      "encoder" should {
+        "encode payload to json" in new Scope {
+          writeToString(payload) should matchJsonResource(
+            "json/command/set-chat-administrator-custom-title-payload.json"
+          )
+        }
+      }
+
+      "decoder" should {
+        "decode payload from json" in new Scope {
+          jsonResourceAs[SetChatAdministratorCustomTitlePayload](
+            "json/command/set-chat-administrator-custom-title-payload.json"
+          ) shouldBe payload
+        }
       }
     }
   }

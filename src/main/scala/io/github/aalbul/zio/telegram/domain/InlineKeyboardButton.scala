@@ -1,6 +1,7 @@
 package io.github.aalbul.zio.telegram.domain
 
-import io.circe.generic.extras.ConfiguredJsonCodec
+import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
+import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodecMaker}
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 object InlineKeyboardButton {
@@ -23,11 +24,14 @@ object InlineKeyboardButton {
     callbackGame = None,
     pay = None
   )
+
+  implicit val inlineKeyboardButtonJsonCodec: JsonValueCodec[InlineKeyboardButton] = JsonCodecMaker.make(
+    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
+  )
 }
 
 /** This object represents one button of an inline keyboard. You must use exactly one of the optional fields.
   */
-@ConfiguredJsonCodec
 case class InlineKeyboardButton(
   text: String,
   url: Option[String],

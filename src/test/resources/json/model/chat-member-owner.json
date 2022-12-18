@@ -1,4 +1,5 @@
 {
+  "status": "creator",
   "user": {
     "id": 1,
     "is_bot": false,
@@ -13,6 +14,5 @@
     "supports_inline_queries": false
   },
   "is_anonymous": false,
-  "custom_title": "title-1",
-  "status": "creator"
+  "custom_title": "title-1"
 }

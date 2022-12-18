@@ -1,6 +1,7 @@
 package io.github.aalbul.zio.telegram.domain
 
-import io.circe.generic.extras.ConfiguredJsonCodec
+import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
+import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodecMaker}
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 object Update {
@@ -32,12 +33,19 @@ object Update {
     chatMember = None,
     chatJoinRequest = None
   )
+
+  implicit val updateJsonCodec: JsonValueCodec[Update] = JsonCodecMaker.make(
+    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
+  )
+
+  implicit val seqUpdateJsonCodec: JsonValueCodec[Seq[Update]] = JsonCodecMaker.make(
+    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
+  )
 }
 
 /** This object represents an incoming update. At most one of the optional parameters can be present in any given
   * update.
   */
-@ConfiguredJsonCodec(decodeOnly = true)
 case class Update(
   updateId: Long,
   message: Option[Message],

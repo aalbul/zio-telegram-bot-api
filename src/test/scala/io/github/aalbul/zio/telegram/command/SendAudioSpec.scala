@@ -2,7 +2,7 @@ package io.github.aalbul.zio.telegram.command
 
 import io.github.aalbul.zio.telegram.command.FileDescriptor.{idDescriptor, pathDescriptor}
 import io.github.aalbul.zio.telegram.command.MultipartBody.{filePart, stringPart}
-import io.github.aalbul.zio.telegram.domain.{Message, ParseModes}
+import io.github.aalbul.zio.telegram.domain.{Message, ParseMode}
 import io.github.aalbul.zio.telegram.test.BaseSpec
 
 class SendAudioSpec extends BaseSpec {
@@ -11,7 +11,7 @@ class SendAudioSpec extends BaseSpec {
       SendAudio
         .of(chatId = "9921", audio = idDescriptor("980001"))
         .withCaption("cool music")
-        .withParseMode(ParseModes.HTML)
+        .withParseMode(ParseMode.HTML)
         .withCaptionEntities(Seq(messageEntity1))
         .withDuration(1533)
         .withPerformer("John Wick")

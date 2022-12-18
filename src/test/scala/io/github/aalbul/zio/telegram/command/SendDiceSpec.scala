@@ -1,16 +1,16 @@
 package io.github.aalbul.zio.telegram.command
 
+import com.github.plokhotnyuk.jsoniter_scala.core.writeToString
 import io.github.aalbul.zio.telegram.command.SendDice.SendDicePayload
-import io.github.aalbul.zio.telegram.domain.{DiceTypes, Message}
+import io.github.aalbul.zio.telegram.domain.{DiceType, Message}
 import io.github.aalbul.zio.telegram.test.BaseSpec
-import io.circe.syntax.EncoderOps
 
 class SendDiceSpec extends BaseSpec {
   trait Scope {
     val command: Command[Message] =
       SendDice
         .of("123")
-        .withEmoji(DiceTypes.SlotMachine)
+        .withEmoji(DiceType.SlotMachine)
         .withDisableNotification(false)
         .withProtectContent(true)
         .withReplyToMessageId(811)
@@ -19,7 +19,7 @@ class SendDiceSpec extends BaseSpec {
 
     val payload: SendDicePayload = SendDicePayload(
       chatId = "123",
-      emoji = Some(DiceTypes.SlotMachine),
+      emoji = Some(DiceType.SlotMachine),
       disableNotification = Some(false),
       protectContent = Some(true),
       replyToMessageId = Some(811),
@@ -42,8 +42,16 @@ class SendDiceSpec extends BaseSpec {
     }
 
     "SendDicePayload" should {
-      "serialize payload to json" in new Scope {
-        payload.asJson shouldBe jsonResource("json/command/send-dice-payload.json")
+      "encoder" should {
+        "encode payload to json" in new Scope {
+          writeToString(payload) should matchJsonResource("json/command/send-dice-payload.json")
+        }
+      }
+
+      "decoder" should {
+        "decode payload from json" in new Scope {
+          jsonResourceAs[SendDicePayload]("json/command/send-dice-payload.json") shouldBe payload
+        }
       }
     }
   }

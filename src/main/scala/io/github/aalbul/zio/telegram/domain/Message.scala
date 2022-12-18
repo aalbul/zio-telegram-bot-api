@@ -1,6 +1,7 @@
 package io.github.aalbul.zio.telegram.domain
 
-import io.circe.generic.extras.ConfiguredJsonCodec
+import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
+import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodecMaker}
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 import java.time.Instant
@@ -83,10 +84,17 @@ object Message {
     webAppData = None,
     replyMarkup = None
   )
+
+  implicit val messageJsonCodec: JsonValueCodec[Message] = JsonCodecMaker.make(
+    CodecMakerConfig
+      .withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
+      .withAllowRecursiveTypes(true)
+  )
+
+  implicit val seqMessageJsonCodec: JsonValueCodec[Seq[Message]] = JsonCodecMaker.make
 }
 
 /** This object represents a message. */
-@ConfiguredJsonCodec(decodeOnly = true)
 case class Message(
   messageId: Long,
   messageThreadId: Option[Long],

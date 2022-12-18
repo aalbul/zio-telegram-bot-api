@@ -1,11 +1,17 @@
 package io.github.aalbul.zio.telegram.domain
 
-import io.circe.generic.extras.ConfiguredJsonCodec
+import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
+import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodecMaker}
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 import java.time.Instant
 
-@ConfiguredJsonCodec(decodeOnly = true)
+object ChatInviteLink {
+  implicit val chatInviteLinkJsonCodec: JsonValueCodec[ChatInviteLink] = JsonCodecMaker.make(
+    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
+  )
+}
+
 case class ChatInviteLink(
   inviteLink: String,
   creator: User,

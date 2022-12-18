@@ -1,14 +1,20 @@
 package io.github.aalbul.zio.telegram.command
 
-import io.circe.generic.extras.ConfiguredJsonCodec
+import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
+import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodecMaker}
 import io.github.aalbul.zio.telegram.command.RestrictChatMember.RestrictChatMemberPayload
 import io.github.aalbul.zio.telegram.domain.ChatPermissions
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
+import codecs.boolean
 
 import java.time.Instant
 
 object RestrictChatMember {
-  @ConfiguredJsonCodec(encodeOnly = true)
+  object RestrictChatMemberPayload {
+    implicit val restrictChatMemberPayloadJsonCodec: JsonValueCodec[RestrictChatMemberPayload] =
+      JsonCodecMaker.make(CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2))
+  }
+
   case class RestrictChatMemberPayload(
     chatId: String,
     userId: Long,

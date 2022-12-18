@@ -1,6 +1,7 @@
 package io.github.aalbul.zio.telegram.domain
 
-import io.circe.generic.extras.ConfiguredJsonCodec
+import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
+import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodecMaker}
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 object User {
@@ -30,9 +31,12 @@ object User {
     canReadAllGroupMessages = None,
     supportsInlineQueries = None
   )
+
+  implicit val userJsonCodec: JsonValueCodec[User] = JsonCodecMaker.make(
+    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
+  )
 }
 
-@ConfiguredJsonCodec
 case class User(
   id: Long,
   isBot: Boolean,
