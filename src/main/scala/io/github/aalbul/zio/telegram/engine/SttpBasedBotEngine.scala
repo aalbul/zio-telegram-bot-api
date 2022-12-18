@@ -6,17 +6,19 @@ import io.github.aalbul.zio.telegram.engine.BotEngine.{ApiCommandExecutionExcept
 import io.github.aalbul.zio.telegram.engine.SttpBasedBotEngine.*
 import sttp.capabilities.WebSockets
 import sttp.capabilities.zio.ZioStreams
+import sttp.client3.httpclient.zio.HttpClientZioBackend
 import sttp.client3.{asStreamUnsafe, basicRequest, multipart, multipartFile, Identity, RequestT, SttpBackend, UriContext}
 import sttp.model.MediaType
 import zio.stream.ZStream
-import zio.{Task, URLayer, ZIO, ZLayer}
+import zio.{RLayer, Task, ZIO, ZLayer}
 
 import scala.concurrent.duration.Duration
 
 object SttpBasedBotEngine {
   type SttpClient = SttpBackend[Task, ZioStreams & WebSockets]
 
-  val layer: URLayer[SttpClient & BotConfig, BotEngine] = ZLayer.fromFunction(new SttpBasedBotEngine(_, _))
+  val layer: RLayer[BotConfig, BotEngine] =
+    HttpClientZioBackend.layer() >>> ZLayer.fromFunction(new SttpBasedBotEngine(_, _))
 }
 
 class SttpBasedBotEngine(backend: SttpClient, botConfig: BotConfig) extends BotEngine {
