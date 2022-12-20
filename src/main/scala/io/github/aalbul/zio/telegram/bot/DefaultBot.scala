@@ -1,7 +1,7 @@
 package io.github.aalbul.zio.telegram.bot
 
 import io.github.aalbul.zio.telegram.command.*
-import io.github.aalbul.zio.telegram.domain.{ChatAction, ChatPermissions, InputMedia, Update, UpdateType}
+import io.github.aalbul.zio.telegram.domain.*
 import io.github.aalbul.zio.telegram.engine.BotEngine
 import io.github.aalbul.zio.telegram.projection.ProjectionBuilder
 import zio.stream.ZStream
@@ -74,5 +74,6 @@ class DefaultBot extends Bot {
   override def setChatPermissions(chatId: String, permissions: ChatPermissions): SetChatPermissions =
     SetChatPermissions.of(chatId, permissions)
   override def exportChatInviteLink(chatId: String): ExportChatInviteLink = ExportChatInviteLink.of(chatId)
+  override def createChatInviteLink(chatId: String): CreateChatInviteLink = CreateChatInviteLink.of(chatId)
   override def getChat(chatId: String): GetChat = GetChat.of(chatId)
 }

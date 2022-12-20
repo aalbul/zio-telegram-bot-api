@@ -474,6 +474,18 @@ trait Bot {
     */
   def exportChatInviteLink(chatId: String): ExportChatInviteLink
 
+  /** Use this method to create an additional invite link for a chat. The bot must be an administrator in the chat for
+    * this to work and must have the appropriate administrator rights. The link can be revoked using the method
+    * [[https://core.telegram.org/bots/api#revokechatinvitelink revokeChatInviteLink]]. Returns the new invite link as
+    * [[https://core.telegram.org/bots/api#chatinvitelink ChatInviteLink]] object.
+    *
+    * @param chatId
+    *   Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    * @return
+    *   [[CreateChatInviteLink]] builder
+    */
+  def createChatInviteLink(chatId: String): CreateChatInviteLink
+
   /** Use this method to get up to date information about the chat (current name of the user for one-on-one
     * conversations, current username of a user, group or channel, etc.). Returns a [[Chat]] object on success.
     *
