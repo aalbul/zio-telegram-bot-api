@@ -486,6 +486,19 @@ trait Bot {
     */
   def createChatInviteLink(chatId: String): CreateChatInviteLink
 
+  /** Use this method to edit a non-primary invite link created by the bot. The bot must be an administrator in the chat
+    * for this to work and must have the appropriate administrator rights. Returns the edited invite link as a
+    * [[https://core.telegram.org/bots/api#chatinvitelink ChatInviteLink]] object.
+    *
+    * @param chatId
+    *   Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    * @param inviteLink
+    *   The invite link to edit
+    * @return
+    *   [[EditChatInviteLink]] builder
+    */
+  def editChatInviteLink(chatId: String, inviteLink: String): EditChatInviteLink
+
   /** Use this method to get up to date information about the chat (current name of the user for one-on-one
     * conversations, current username of a user, group or channel, etc.). Returns a [[Chat]] object on success.
     *
