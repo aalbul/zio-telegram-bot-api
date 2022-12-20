@@ -91,7 +91,8 @@
         "can_read_all_group_messages": true,
         "supports_inline_queries": false
       },
-      "language": "js"
+      "language": "js",
+      "custom_emoji_id": "emoji1"
     }
   ],
   "animation": {
@@ -248,7 +249,8 @@
         "can_read_all_group_messages": true,
         "supports_inline_queries": false
       },
-      "language": "js"
+      "language": "js",
+      "custom_emoji_id": "emoji1"
     }
   ],
   "contact": {
@@ -301,7 +303,8 @@
           "can_read_all_group_messages": true,
           "supports_inline_queries": false
         },
-        "language": "js"
+        "language": "js",
+        "custom_emoji_id": "emoji1"
       }
     ],
     "animation": {
@@ -365,11 +368,12 @@
           "can_read_all_group_messages": true,
           "supports_inline_queries": false
         },
-        "language": "js"
+        "language": "js",
+        "custom_emoji_id": "emoji1"
       }
     ],
     "open_period": 24,
-    "close_date": 500
+    "close_date": 1655100911
   },
   "venue": {
     "location": {

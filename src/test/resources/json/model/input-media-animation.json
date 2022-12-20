@@ -23,7 +23,8 @@
         "can_read_all_group_messages": true,
         "supports_inline_queries": false
       },
-      "language": "js"
+      "language": "js",
+      "custom_emoji_id": "emoji1"
     }
   ],
   "width": 1024,
