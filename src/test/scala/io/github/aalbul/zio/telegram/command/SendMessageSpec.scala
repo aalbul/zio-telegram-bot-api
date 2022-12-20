@@ -10,6 +10,7 @@ class SendMessageSpec extends BaseSpec {
     val command: Command[Message] =
       SendMessage
         .of(chatId = "331", text = "hello world")
+        .withMessageThreadId(22)
         .withParseMode(ParseMode.MarkdownV2)
         .withEntities(Seq(messageEntity1))
         .withDisableWebPagePreview(true)
@@ -21,6 +22,7 @@ class SendMessageSpec extends BaseSpec {
 
     val payload: SendMessagePayload = SendMessagePayload(
       chatId = "331",
+      messageThreadId = Some(22),
       text = "hello world",
       parseMode = Some(ParseMode.MarkdownV2),
       entities = Some(Seq(messageEntity1)),

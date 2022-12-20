@@ -4,7 +4,12 @@ import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
 import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodecMaker}
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
+import scala.concurrent.duration.Duration
+
 object Video {
+  implicit val videoJsonCodec: JsonValueCodec[Video] = JsonCodecMaker.make(
+    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
+  )
 
   /** Constructs minimal [[Video]]
     * @param fileId
@@ -21,7 +26,7 @@ object Video {
     * @return
     *   [[Video]] builder
     */
-  def of(fileId: String, fileUniqueId: String, width: Int, height: Int, duration: Int): Video = Video(
+  def of(fileId: String, fileUniqueId: String, width: Long, height: Long, duration: Duration): Video = Video(
     fileId = fileId,
     fileUniqueId = fileUniqueId,
     width = width,
@@ -32,10 +37,6 @@ object Video {
     mimeType = None,
     fileSize = None
   )
-
-  implicit val videoJsonCodec: JsonValueCodec[Video] = JsonCodecMaker.make(
-    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
-  )
 }
 
 /** This object represents a video file.
@@ -43,13 +44,13 @@ object Video {
 case class Video(
   fileId: String,
   fileUniqueId: String,
-  width: Int,
-  height: Int,
-  duration: Int,
+  width: Long,
+  height: Long,
+  duration: Duration,
   thumb: Option[PhotoSize],
   fileName: Option[String],
   mimeType: Option[String],
-  fileSize: Option[Int]
+  fileSize: Option[Long]
 ) {
 
   /** Video thumbnail
@@ -65,8 +66,8 @@ case class Video(
   def withMimeType(mimeType: String): Video = copy(mimeType = Some(mimeType))
 
   /** File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects
-    * in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float
+    * in Longerpreting it. But it has at most 52 significant bits, so a signed 64-bit Longeger or double-precision float
     * type are safe for storing this value.
     */
-  def withFileSize(fileSize: Int): Video = copy(fileSize = Some(fileSize))
+  def withFileSize(fileSize: Long): Video = copy(fileSize = Some(fileSize))
 }

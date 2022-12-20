@@ -3,6 +3,8 @@ package io.github.aalbul.zio.telegram.command
 import io.github.aalbul.zio.telegram.command.MultipartBody.stringPart
 import io.github.aalbul.zio.telegram.domain.{Markup, Message}
 
+import scala.concurrent.duration.Duration
+
 object SendVideoNote {
 
   /** Constructs minimal [[SendVideoNote]] command
@@ -18,6 +20,7 @@ object SendVideoNote {
     */
   def of(chatId: String, videoNote: FileDescriptor): SendVideoNote = SendVideoNote(
     chatId = chatId,
+    messageThreadId = None,
     videoNote = videoNote,
     duration = None,
     length = None,
@@ -36,8 +39,9 @@ object SendVideoNote {
   */
 case class SendVideoNote(
   chatId: String,
+  messageThreadId: Option[Long],
   videoNote: FileDescriptor,
-  duration: Option[Long],
+  duration: Option[Duration],
   length: Option[Long],
   thumb: Option[FileDescriptor],
   disableNotification: Option[Boolean],
@@ -50,6 +54,7 @@ case class SendVideoNote(
 
   override def parameters: ApiParameters = MultipartBody.ofOpt(
     Some(stringPart("chat_id", chatId)),
+    messageThreadId.map(stringPart("message_thread_id", _)),
     Some(videoNote.asMultipart("video_note")),
     duration.map(stringPart("duration", _)),
     length.map(stringPart("length", _)),
@@ -61,9 +66,13 @@ case class SendVideoNote(
     replyMarkup.map(markup => stringPart("reply_markup", JsonBody(markup).toJson))
   )
 
+  /** Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+    */
+  def withMessageThreadId(messageThreadId: Long): SendVideoNote = copy(messageThreadId = Some(messageThreadId))
+
   /** Duration of sent video in seconds
     */
-  def withDuration(duration: Long): SendVideoNote = copy(duration = Some(duration))
+  def withDuration(duration: Duration): SendVideoNote = copy(duration = Some(duration))
 
   /** Video width and height, i.e. diameter of the video message
     */

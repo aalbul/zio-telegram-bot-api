@@ -5,6 +5,9 @@ import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodec
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 object MaskPosition {
+  implicit val maskPositionJsonCodec: JsonValueCodec[MaskPosition] = JsonCodecMaker.make(
+    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
+  )
 
   /** Constructs minimal [[MaskPosition]]
     * @param point
@@ -22,10 +25,6 @@ object MaskPosition {
     */
   def of(point: MaskPointType, xShift: Double, yShift: Double, scale: Double): MaskPosition =
     MaskPosition(point, xShift, yShift, scale)
-
-  implicit val maskPositionJsonCodec: JsonValueCodec[MaskPosition] = JsonCodecMaker.make(
-    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
-  )
 }
 
 /** This object describes the position on faces where a mask should be placed by default.

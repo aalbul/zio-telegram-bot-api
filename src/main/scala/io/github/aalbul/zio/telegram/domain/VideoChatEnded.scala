@@ -7,6 +7,9 @@ import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 import scala.concurrent.duration.Duration
 
 object VideoChatEnded {
+  implicit val videoChatEndedJsonCodec: JsonValueCodec[VideoChatEnded] = JsonCodecMaker.make(
+    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
+  )
 
   /** Constructs minimal [[VideoChatEnded]]
     * @param duration
@@ -16,10 +19,6 @@ object VideoChatEnded {
     */
   def of(duration: Duration): VideoChatEnded = VideoChatEnded(
     duration = duration
-  )
-
-  implicit val videoChatEndedJsonCodec: JsonValueCodec[VideoChatEnded] = JsonCodecMaker.make(
-    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
   )
 }
 

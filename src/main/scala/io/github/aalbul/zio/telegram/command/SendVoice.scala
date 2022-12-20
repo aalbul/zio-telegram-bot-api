@@ -3,6 +3,8 @@ package io.github.aalbul.zio.telegram.command
 import io.github.aalbul.zio.telegram.command.MultipartBody.stringPart
 import io.github.aalbul.zio.telegram.domain.*
 
+import scala.concurrent.duration.Duration
+
 object SendVoice {
 
   /** Constructs minimal [[SendVoice]] command
@@ -17,6 +19,7 @@ object SendVoice {
     */
   def of(chatId: String, voice: FileDescriptor): SendVoice = SendVoice(
     chatId = chatId,
+    messageThreadId = None,
     voice = voice,
     caption = None,
     parseMode = None,
@@ -37,11 +40,12 @@ object SendVoice {
   */
 case class SendVoice(
   chatId: String,
+  messageThreadId: Option[Long],
   voice: FileDescriptor,
   caption: Option[String],
   parseMode: Option[ParseMode],
   captionEntities: Option[Seq[MessageEntity]],
-  duration: Option[Long],
+  duration: Option[Duration],
   disableNotification: Option[Boolean],
   protectContent: Option[Boolean],
   replyToMessageId: Option[Long],
@@ -52,6 +56,7 @@ case class SendVoice(
 
   override def parameters: ApiParameters = MultipartBody.ofOpt(
     Some(stringPart("chat_id", chatId)),
+    messageThreadId.map(stringPart("message_thread_id", _)),
     Some(voice.asMultipart("voice")),
     caption.map(stringPart("caption", _)),
     parseMode.map(mode => stringPart("parse_mode", mode.toString)),
@@ -63,6 +68,10 @@ case class SendVoice(
     allowSendingWithoutReply.map(stringPart("allow_sending_without_reply", _)),
     replyMarkup.map(markup => stringPart("reply_markup", JsonBody(markup).toJson))
   )
+
+  /** Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+    */
+  def withMessageThreadId(messageThreadId: Long): SendVoice = copy(messageThreadId = Some(messageThreadId))
 
   /** Voice message caption, 0-1024 characters after entities parsing
     */
@@ -81,7 +90,7 @@ case class SendVoice(
 
   /** Duration of the voice message in seconds
     */
-  def withDuration(duration: Long): SendVoice = copy(duration = Some(duration))
+  def withDuration(duration: Duration): SendVoice = copy(duration = Some(duration))
 
   /** Sends the message [[https://telegram.org/blog/channels-2-0#silent-messages silently]]. Users will receive a
     * notification with no sound.

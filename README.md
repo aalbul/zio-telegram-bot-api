@@ -1,5 +1,9 @@
 # zio-telegram-bot-api
 
+## API
+
+Currently supported version is: 5.3
+
 ## Releasing
 
 To release you first need to configure your sbt sonatype credentials:

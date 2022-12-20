@@ -3,10 +3,11 @@ package io.github.aalbul.zio.telegram.command
 import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
 import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodecMaker}
 import io.github.aalbul.zio.telegram.command.SendPoll.SendPollPayload
-import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 import io.github.aalbul.zio.telegram.domain.*
+import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 import java.time.Instant
+import scala.concurrent.duration.Duration
 
 object SendPoll {
   object SendPollPayload {
@@ -16,6 +17,7 @@ object SendPoll {
 
   case class SendPollPayload(
     chatId: String,
+    messageThreadId: Option[Long],
     question: String,
     options: Seq[String],
     isAnonymous: Option[Boolean],
@@ -25,7 +27,7 @@ object SendPoll {
     explanation: Option[String],
     explanationParseMode: Option[ParseMode],
     explanationEntities: Option[Seq[MessageEntity]],
-    openPeriod: Option[Long],
+    openPeriod: Option[Duration],
     closeDate: Option[Instant],
     isClosed: Option[Boolean],
     disableNotification: Option[Boolean],
@@ -48,6 +50,7 @@ object SendPoll {
   def of(chatId: String, question: String, options: Seq[String]): SendPoll = SendPoll(
     SendPollPayload(
       chatId = chatId,
+      messageThreadId = None,
       question = question,
       options = options,
       isAnonymous = None,
@@ -76,53 +79,56 @@ case class SendPoll(payload: SendPollPayload) extends Command[Message] {
 
   override def parameters: ApiParameters = JsonBody(payload)
 
+  def withMessageThreadId(messageThreadId: Long): SendPoll = copy(payload.copy(messageThreadId = Some(messageThreadId)))
+
   /** ''True'', if the poll needs to be anonymous, defaults to True
     */
-  def withIsAnonymous(anonymous: Boolean): SendPoll = copy(payload = payload.copy(isAnonymous = Some(anonymous)))
+  def withIsAnonymous(anonymous: Boolean): SendPoll = copy(payload.copy(isAnonymous = Some(anonymous)))
 
   /** Poll type, “quiz” or “regular”, defaults to “regular”
     */
-  def withType(`type`: PollType): SendPoll = copy(payload = payload.copy(`type` = Some(`type`)))
+  def withType(`type`: PollType): SendPoll = copy(payload.copy(`type` = Some(`type`)))
 
   /** ''True'', if the poll allows multiple answers, ignored for polls in quiz mode, defaults to False
     */
-  def withAllowsMultipleAnswers(allows: Boolean): SendPoll =
-    copy(payload = payload.copy(allowsMultipleAnswers = Some(allows)))
+  def withAllowsMultipleAnswers(allows: Boolean): SendPoll = copy(payload.copy(allowsMultipleAnswers = Some(allows)))
 
   /** 0-based identifier of the correct answer option, required for polls in quiz mode
     */
-  def withCorrectOptionId(id: Long): SendPoll = copy(payload = payload.copy(correctOptionId = Some(id)))
+  def withCorrectOptionId(id: Long): SendPoll = copy(payload.copy(correctOptionId = Some(id)))
 
   /** Text that is shown when a user chooses an incorrect answer or taps on the lamp icon in a quiz-style poll, 0-200
     * characters with at most 2 line feeds after entities parsing
     */
-  def withExplanation(explanation: String): SendPoll = copy(payload = payload.copy(explanation = Some(explanation)))
+  def withExplanation(explanation: String): SendPoll = copy(payload.copy(explanation = Some(explanation)))
 
   /** Mode for parsing entities in the explanation. See
     * [[https://core.telegram.org/bots/api#formatting-options formatting options]] for more details.
     */
-  def withExplanationParseMode(parseMode: ParseMode): SendPoll =
-    copy(payload = payload.copy(explanationParseMode = Some(parseMode)))
+  def withExplanationParseMode(parseMode: ParseMode): SendPoll = copy(
+    payload.copy(explanationParseMode = Some(parseMode))
+  )
 
   /** A JSON-serialized list of special entities that appear in the poll explanation, which can be specified instead of
     * ''parse_mode''
     */
-  def withExplanationEntities(entities: Seq[MessageEntity]): SendPoll =
-    copy(payload = payload.copy(explanationEntities = Some(entities)))
+  def withExplanationEntities(entities: Seq[MessageEntity]): SendPoll = copy(
+    payload.copy(explanationEntities = Some(entities))
+  )
 
   /** Amount of time in seconds the poll will be active after creation, 5-600. Can't be used together with
     * ''close_date''.
     */
-  def withOpenPeriod(period: Long): SendPoll = copy(payload = payload.copy(openPeriod = Some(period)))
+  def withOpenPeriod(period: Duration): SendPoll = copy(payload.copy(openPeriod = Some(period)))
 
   /** Point in time (Unix timestamp) when the poll will be automatically closed. Must be at least 5 and no more than 600
     * seconds in the future. Can't be used together with ''open_period''.
     */
-  def withCloseDate(date: Instant): SendPoll = copy(payload = payload.copy(closeDate = Some(date)))
+  def withCloseDate(date: Instant): SendPoll = copy(payload.copy(closeDate = Some(date)))
 
   /** Pass ''True'', if the poll needs to be immediately closed. This can be useful for poll preview.
     */
-  def withIsClosed(closed: Boolean): SendPoll = copy(payload = payload.copy(isClosed = Some(closed)))
+  def withIsClosed(closed: Boolean): SendPoll = copy(payload.copy(isClosed = Some(closed)))
 
   /** Sends the message [[https://telegram.org/blog/channels-2-0#silent-messages silently]]. Users will receive a
     * notification with no sound.

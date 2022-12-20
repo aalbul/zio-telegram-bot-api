@@ -5,6 +5,9 @@ import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodec
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 object Venue {
+  implicit val venueJsonCodec: JsonValueCodec[Venue] = JsonCodecMaker.make(
+    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
+  )
 
   /** Constructs minimal [[Venue]]
     * @param location
@@ -24,10 +27,6 @@ object Venue {
     foursquareType = None,
     googlePlaceId = None,
     googlePlaceType = None
-  )
-
-  implicit val venueJsonCodec: JsonValueCodec[Venue] = JsonCodecMaker.make(
-    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
   )
 }
 

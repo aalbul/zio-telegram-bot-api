@@ -5,15 +5,18 @@ import io.github.aalbul.zio.telegram.command.MultipartBody.{filePart, stringPart
 import io.github.aalbul.zio.telegram.domain.{Message, ParseMode}
 import io.github.aalbul.zio.telegram.test.BaseSpec
 
+import scala.concurrent.duration.DurationInt
+
 class SendVoiceSpec extends BaseSpec {
   trait Scope {
     val command: Command[Message] =
       SendVoice
         .of(chatId = "803", voice = idDescriptor("980008"))
+        .withMessageThreadId(37)
         .withCaption("my voice")
         .withParseMode(ParseMode.MarkdownV2)
         .withCaptionEntities(Seq(messageEntity1))
-        .withDuration(400)
+        .withDuration(400.seconds)
         .withDisableNotification(true)
         .withProtectContent(false)
         .withReplyToMessageId(50)
@@ -32,6 +35,7 @@ class SendVoiceSpec extends BaseSpec {
       "represent parameters as form data" in new Scope {
         command.parameters shouldBe MultipartBody.of(
           stringPart("chat_id", "803"),
+          stringPart("message_thread_id", "37"),
           stringPart("voice", "980008"),
           stringPart("caption", "my voice"),
           stringPart("parse_mode", "MarkdownV2"),

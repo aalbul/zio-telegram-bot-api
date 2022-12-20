@@ -48,24 +48,25 @@ trait Builders {
     photos = Seq(Seq(photoSize1), Seq(photoSize2))
   )
 
-  lazy val messageEntity1: MessageEntity = MessageEntity(
-    `type` = MessageEntityType.Pre,
-    offset = 10,
-    length = 500,
-    url = Some("https://someurl.com"),
-    user = Some(user1),
-    language = Some("js")
-  )
+  lazy val messageEntity1: MessageEntity = MessageEntity
+    .of(
+      `type` = MessageEntityType.Pre,
+      offset = 10,
+      length = 500
+    )
+    .withUrl("https://someurl.com")
+    .withUser(user1)
+    .withLanguage("js")
+    .withCustomEmojiId("emoji1")
 
-  lazy val callbackGame1: CallbackGame = CallbackGame()
+  lazy val callbackGame1: CallbackGame = CallbackGame.of()
 
   lazy val webAppInfo1: WebAppInfo = WebAppInfo.of(url = "https://webapp.org")
 
-  lazy val forceReplyMarkup1: ForceReply = ForceReply(
-    forceReply = true,
-    inputFieldPlaceholder = Some("some text"),
-    selective = Some(true)
-  )
+  lazy val forceReplyMarkup1: ForceReply = ForceReply
+    .of(forceReply = true)
+    .withInputFieldPlaceholder("some text")
+    .withSelective(true)
 
   lazy val loginUrl1: LoginUrl = LoginUrl
     .of("https://google.com/login")
@@ -73,56 +74,49 @@ trait Builders {
     .withForwardText("forward text")
     .withRequestWriteAccess(true)
 
-  lazy val keyboardButtonPollType1: KeyboardButtonPollType = KeyboardButtonPollType(PollType.Quiz)
+  lazy val keyboardButtonPollType1: KeyboardButtonPollType = KeyboardButtonPollType
+    .of(PollType.Quiz)
 
-  lazy val keyboardButton1: KeyboardButton = KeyboardButton(
-    text = "simple button",
-    requestContact = Some(true),
-    requestLocation = Some(false),
-    requestPoll = Some(keyboardButtonPollType1),
-    webApp = Some(webAppInfo1)
-  )
+  lazy val keyboardButton1: KeyboardButton = KeyboardButton
+    .of(text = "simple button")
+    .withRequestContact(true)
+    .withRequestLocation(false)
+    .withRequestPoll(keyboardButtonPollType1)
+    .withWebApp(webAppInfo1)
 
-  lazy val inlineKeyboardButton1: InlineKeyboardButton = InlineKeyboardButton(
-    text = "some button 1",
-    url = Some("https://google.com/url1"),
-    callbackData = Some("some data"),
-    webApp = Some(webAppInfo1),
-    loginUrl = Some(loginUrl1),
-    switchInlineQuery = Some("inline query 1"),
-    switchInlineQueryCurrentChat = Some("inline query current chat 1"),
-    callbackGame = Some(callbackGame1),
-    pay = Some(true)
-  )
+  lazy val inlineKeyboardButton1: InlineKeyboardButton = InlineKeyboardButton
+    .of(text = "some button 1")
+    .withUrl("https://google.com/url1")
+    .withCallbackData("some data")
+    .withWebApp(webAppInfo1)
+    .withLoginUrl(loginUrl1)
+    .withSwitchInlineQuery("inline query 1")
+    .withSwitchInlineQueryCurrentChat("inline query current chat 1")
+    .withCallbackGame(callbackGame1)
+    .withPay(true)
 
-  lazy val inlineKeyboardButton2: InlineKeyboardButton = InlineKeyboardButton(
-    text = "some button 2",
-    url = Some("https://google.com/url2"),
-    callbackData = Some("another data"),
-    webApp = None,
-    loginUrl = Some(loginUrl1),
-    switchInlineQuery = Some("inline query 2"),
-    switchInlineQueryCurrentChat = Some("inline query current chat 2"),
-    callbackGame = None,
-    pay = Some(false)
-  )
+  lazy val inlineKeyboardButton2: InlineKeyboardButton = InlineKeyboardButton
+    .of(text = "some button 2")
+    .withUrl("https://google.com/url2")
+    .withCallbackData("another data")
+    .withLoginUrl(loginUrl1)
+    .withSwitchInlineQuery("inline query 2")
+    .withSwitchInlineQueryCurrentChat("inline query current chat 2")
+    .withPay(false)
 
-  lazy val inlineKeyboardMarkup1: InlineKeyboardMarkup = InlineKeyboardMarkup(
-    Seq(Seq(inlineKeyboardButton1), Seq(inlineKeyboardButton2))
-  )
+  lazy val inlineKeyboardMarkup1: InlineKeyboardMarkup = InlineKeyboardMarkup
+    .of(Seq(Seq(inlineKeyboardButton1), Seq(inlineKeyboardButton2)))
 
-  lazy val replyKeyboardMarkup1: ReplyKeyboardMarkup = ReplyKeyboardMarkup(
-    keyboard = Seq(Seq(keyboardButton1)),
-    resizeKeyboard = Some(true),
-    oneTimeKeyboard = Some(false),
-    inputFieldPlaceholder = Some("type you data here"),
-    selective = Some(true)
-  )
+  lazy val replyKeyboardMarkup1: ReplyKeyboardMarkup = ReplyKeyboardMarkup
+    .of(keyboard = Seq(Seq(keyboardButton1)))
+    .withResizeKeyboard(true)
+    .withOneTimeKeyboard(false)
+    .withInputFieldPlaceholder("type you data here")
+    .withSelective(true)
 
-  lazy val replyKeyboardRemove1: ReplyKeyboardRemove = ReplyKeyboardRemove(
-    removeKeyboard = true,
-    selective = Some(true)
-  )
+  lazy val replyKeyboardRemove1: ReplyKeyboardRemove = ReplyKeyboardRemove
+    .of(removeKeyboard = true)
+    .withSelective(true)
 
   lazy val chat1: Chat = Chat.of(id = 81, `type` = ChatType.Supergroup)
 
@@ -130,34 +124,35 @@ trait Builders {
 
   lazy val chat3: Chat = Chat.of(id = 83, `type` = ChatType.Supergroup)
 
-  lazy val chat4: Chat = Chat(
-    id = 88,
-    `type` = ChatType.Channel,
-    title = Some("hello world"),
-    username = Some("user-1"),
-    firstName = Some("John"),
-    lastName = Some("Wick"),
-    isForum = Some(false),
-    photo = Some(chatPhoto1),
-    activeUsernames = Some(Seq("user-1", "user-2")),
-    emojiStatusCustomEmojiId = Some("emoji-id-1"),
-    bio = Some("some bio"),
-    hasPrivateForwards = Some(true),
-    hasRestrictedVoiceAndVideoMessages = Some(false),
-    joinToSendMessages = Some(true),
-    joinByRequest = Some(true),
-    description = Some("some description"),
-    inviteLink = Some("http://google.com/invite"),
-    pinnedMessage = Some(message1),
-    permissions = Some(chatPermissions1),
-    slowModeDelay = Some(5),
-    messageAutoDeleteTime = Some(10),
-    hasProtectedContent = Some(false),
-    stickerSetName = Some("sticker-set-1"),
-    canSetStickerSet = Some(true),
-    linkedChatId = Some(55),
-    location = Some(chatLocation1)
-  )
+  lazy val chat4: Chat = Chat
+    .of(
+      id = 88,
+      `type` = ChatType.Channel
+    )
+    .withTitle("hello world")
+    .withUsername("user-1")
+    .withFirstName("John")
+    .withLastName("Wick")
+    .withIsForum(false)
+    .withPhoto(chatPhoto1)
+    .withActiveUsernames(Seq("user-1", "user-2"))
+    .withEmojiStatusCustomEmojiId("emoji-id-1")
+    .withBio("some bio")
+    .withHasPrivateForwards(true)
+    .withHasRestrictedVoiceAndVideoMessages(false)
+    .withJoinToSendMessages(true)
+    .withJoinByRequest(true)
+    .withDescription("some description")
+    .withInviteLink("http://google.com/invite")
+    .withPinnedMessage(message1)
+    .withPermissions(chatPermissions1)
+    .withSlowModeDelay(5)
+    .withMessageAutoDeleteTime(10)
+    .withHasProtectedContent(false)
+    .withStickerSetName("sticker-set-1")
+    .withCanSetStickerSet(true)
+    .withLinkedChatId(55)
+    .withLocation(chatLocation1)
 
   lazy val instant1: Instant = Instant.parse("2022-06-12T10:15:30.00Z")
 
@@ -167,7 +162,7 @@ trait Builders {
 
   private val instant4: Instant = Instant.parse("2022-06-13T06:18:10.00Z")
 
-  lazy val messageId1: MessageId = MessageId(11)
+  lazy val messageId1: MessageId = MessageId.of(11)
 
   lazy val message1: Message = Message.of(messageId = 15, date = instant1, chat = chat1)
 
@@ -271,7 +266,6 @@ trait Builders {
 
   lazy val inputMediaPhoto1: InputMedia = InputMediaPhoto
     .of(pathDescriptor("/tmp/one.jpg"))
-    .withThumb(pathDescriptor("/tmp/photo_thumb.jpg"))
     .withCaption("my photo")
     .withParseMode(ParseMode.Markdown)
     .withCaptionEntities(Seq(messageEntity1))
@@ -287,229 +281,253 @@ trait Builders {
     .withDuration(980)
     .withSupportsStreaming(true)
 
-  lazy val file1: File =
-    File(fileId = "file-1", fileUniqueId = "unique-file-1", fileSize = Some(20), filePath = Some("file-path"))
+  lazy val file1: File = File
+    .of(fileId = "file-1", fileUniqueId = "unique-file-1")
+    .withFileSize(20)
+    .withFilePath("file-path")
 
-  lazy val file2: File = File(fileId = "file-2", fileUniqueId = "unique-file-2", fileSize = None, filePath = None)
+  lazy val file2: File = File
+    .of(fileId = "file-2", fileUniqueId = "unique-file-2")
 
-  lazy val chatPermissions1: ChatPermissions = ChatPermissions(
-    canSendMessages = Some(true),
-    canSendMediaMessages = Some(false),
-    canSendPolls = Some(true),
-    canSendOtherMessages = Some(false),
-    canAddWebPagePreviews = Some(true),
-    canChangeInfo = Some(false),
-    canInviteUsers = Some(false),
-    canPinMessages = Some(true),
-    canManageTopics = Some(true)
-  )
+  lazy val chatPermissions1: ChatPermissions = ChatPermissions
+    .of()
+    .withCanSendMessages(true)
+    .withCanSendMediaMessages(false)
+    .withCanSendPolls(true)
+    .withCanSendOtherMessages(false)
+    .withCanAddWebPagePreviews(true)
+    .withCanChangeInfo(false)
+    .withCanInviteUsers(false)
+    .withCanPinMessages(true)
+    .withCanManageTopics(true)
 
-  lazy val photoSize1: PhotoSize = PhotoSize(
-    fileId = "photo-size-1",
-    fileUniqueId = "unique-photo-size-1",
-    width = 300,
-    height = 200,
-    fileSize = Some(11)
-  )
+  lazy val photoSize1: PhotoSize = PhotoSize
+    .of(
+      fileId = "photo-size-1",
+      fileUniqueId = "unique-photo-size-1",
+      width = 300,
+      height = 200
+    )
+    .withFileSize(11)
 
-  lazy val photoSize2: PhotoSize = PhotoSize(
-    fileId = "photo-size-2",
-    fileUniqueId = "unique-photo-size-2",
-    width = 1300,
-    height = 500,
-    fileSize = Some(421)
-  )
+  lazy val photoSize2: PhotoSize = PhotoSize
+    .of(
+      fileId = "photo-size-2",
+      fileUniqueId = "unique-photo-size-2",
+      width = 1300,
+      height = 500
+    )
+    .withFileSize(421)
 
-  lazy val animation1: Animation = Animation(
-    fileId = "animation-file-1",
-    fileUniqueId = "unique-animation-file-1",
-    width = 640,
-    height = 480,
-    duration = 50,
-    thumb = Some(photoSize1),
-    fileName = Some("animation-file"),
-    mimeType = Some("image/gif"),
-    fileSize = Some(450)
-  )
+  lazy val animation1: Animation = Animation
+    .of(
+      fileId = "animation-file-1",
+      fileUniqueId = "unique-animation-file-1",
+      width = 640,
+      height = 480,
+      duration = 50.seconds
+    )
+    .withThumb(photoSize1)
+    .withFileName("animation-file")
+    .withMimeType("image/gif")
+    .withFileSize(450)
 
-  lazy val document1: Document = Document(
-    fileId = "document-file-1",
-    fileUniqueId = "unique-document-file-1",
-    thumb = Some(photoSize2),
-    fileName = Some("document-1"),
-    mimeType = Some("application/document"),
-    fileSize = Some(5000)
-  )
+  lazy val document1: Document = Document
+    .of(
+      fileId = "document-file-1",
+      fileUniqueId = "unique-document-file-1"
+    )
+    .withThumb(photoSize2)
+    .withFileName("document-1")
+    .withMimeType("application/document")
+    .withFileSize(5000)
 
-  lazy val audio1: Audio = Audio(
-    fileId = "audio-file-1",
-    fileUniqueId = "unique-audio-file-1",
-    duration = 422,
-    performer = Some("Amia Venera Landscape"),
-    title = Some("A New Aurora"),
-    fileName = Some("02 - A New Aurora.flac"),
-    mimeType = Some("audio/x-flac,audio/flac"),
-    fileSize = Some(300000000),
-    thumb = Some(photoSize1)
-  )
+  lazy val audio1: Audio = Audio
+    .of(
+      fileId = "audio-file-1",
+      fileUniqueId = "unique-audio-file-1",
+      duration = 422.seconds
+    )
+    .withPerformer("Amia Venera Landscape")
+    .withTitle("A New Aurora")
+    .withFileName("02 - A New Aurora.flac")
+    .withMimeType("audio/x-flac,audio/flac")
+    .withFileSize(300000000)
+    .withThumb(photoSize1)
 
-  lazy val contact1: Contact = Contact(
-    phoneNumber = "+31680822212",
-    firstName = "John",
-    lastName = Some("Wick"),
-    userId = Some(1),
-    vcard = Some("vcard")
-  )
+  lazy val contact1: Contact = Contact
+    .of(
+      phoneNumber = "+31680822212",
+      firstName = "John"
+    )
+    .withLastName("Wick")
+    .withUserId(1)
+    .withVcard("vcard")
 
-  lazy val dice1: Dice = Dice(
-    emoji = "🏀",
-    value = 2
-  )
+  lazy val dice1: Dice = Dice
+    .of(
+      emoji = "🏀",
+      value = 2
+    )
 
-  lazy val game1: Game = Game(
-    title = "Guess who",
-    description =
-      "Guess Who? is a two-player board game where players each guess the identity of the other's chosen character",
-    photo = Seq(photoSize1, photoSize2),
-    text = Some("Some text"),
-    textEntities = Some(Seq(messageEntity1)),
-    animation = Some(animation1)
-  )
+  lazy val game1: Game = Game
+    .of(
+      title = "Guess who",
+      description =
+        "Guess Who? is a two-player board game where players each guess the identity of the other's chosen character",
+      photo = Seq(photoSize1, photoSize2)
+    )
+    .withText("Some text")
+    .withTextEntities(Seq(messageEntity1))
+    .withAnimation(animation1)
 
-  lazy val location1: Location = Location(
-    longitude = 52.22,
-    latitude = 4.55,
-    horizontalAccuracy = Some(1.23),
-    livePeriod = Some(50),
-    heading = Some(23),
-    proximityAlertRadius = Some(51)
-  )
+  lazy val location1: Location = Location
+    .of(
+      longitude = 52.22,
+      latitude = 4.55,
+    )
+    .withHorizontalAccuracy(1.23)
+    .withLivePeriod(50)
+    .withHeading(23)
+    .withProximityAlertRadius(51)
 
-  lazy val pollOption1: PollOption = PollOption(text = "Apple", voterCount = 10)
-  lazy val pollOption2: PollOption = PollOption(text = "Peer", voterCount = 3)
-  lazy val pollOption3: PollOption = PollOption(text = "Watermelon", voterCount = 8)
+  lazy val pollOption1: PollOption = PollOption.of(text = "Apple", voterCount = 10)
+  lazy val pollOption2: PollOption = PollOption.of(text = "Peer", voterCount = 3)
+  lazy val pollOption3: PollOption = PollOption.of(text = "Watermelon", voterCount = 8)
 
-  lazy val poll1: Poll = Poll(
-    id = "poll-1",
-    question = "Favorite fruit",
-    options = Seq(pollOption1, pollOption2, pollOption3),
-    totalVoterCount = 21,
-    isClosed = true,
-    isAnonymous = false,
-    `type` = PollType.Quiz,
-    allowsMultipleAnswers = false,
-    correctOptionId = Some(0),
-    explanation = Some("Which is your favorite fruit of all time?"),
-    explanationEntities = Some(Seq(messageEntity1)),
-    openPeriod = Some(24),
-    closeDate = Some(500)
-  )
+  lazy val poll1: Poll = Poll
+    .of(
+      id = "poll-1",
+      question = "Favorite fruit",
+      options = Seq(pollOption1, pollOption2, pollOption3),
+      totalVoterCount = 21,
+      isClosed = true,
+      isAnonymous = false,
+      `type` = PollType.Quiz,
+      allowsMultipleAnswers = false
+    )
+    .withCorrectOptionId(0)
+    .withExplanation("Which is your favorite fruit of all time?")
+    .withExplanationEntities(Seq(messageEntity1))
+    .withOpenPeriod(24.seconds)
+    .withCloseDate(instant3)
 
-  lazy val pollAnswer1: PollAnswer = PollAnswer(
-    pollId = poll1.id,
-    user = user2,
-    optionIds = Seq(2, 3)
-  )
+  lazy val pollAnswer1: PollAnswer = PollAnswer
+    .of(
+      pollId = poll1.id,
+      user = user2,
+      optionIds = Seq(2, 3)
+    )
 
-  lazy val chatMember1: ChatMember = ChatMemberOwner(
-    user = user1,
-    isAnonymous = false,
-    customTitle = Some("title-1")
-  )
+  lazy val chatMember1: ChatMember = ChatMemberOwner
+    .of(
+      user = user1,
+      isAnonymous = false
+    )
+    .withCustomTitle("title-1")
 
-  lazy val chatMember2: ChatMember = ChatMemberLeft(user = user2)
+  lazy val chatMember2: ChatMember = ChatMemberLeft.of(user = user2)
 
-  lazy val chatMember3: ChatMember = ChatMemberAdministrator(
-    user = user1,
-    canBeEdited = true,
-    isAnonymous = false,
-    canManageChat = true,
-    canDeleteMessages = false,
-    canManageVideoChats = true,
-    canRestrictMembers = false,
-    canPromoteMembers = false,
-    canChangeInfo = true,
-    canInviteUsers = false,
-    canPostMessages = Some(true),
-    canEditMessages = Some(false),
-    canPinMessages = Some(true),
-    canManageTopics = Some(false),
-    customerTitle = Some("custom title")
-  )
+  lazy val chatMember3: ChatMember = ChatMemberAdministrator
+    .of(
+      user = user1,
+      canBeEdited = true,
+      isAnonymous = false,
+      canManageChat = true,
+      canDeleteMessages = false,
+      canManageVideoChats = true,
+      canRestrictMembers = false,
+      canPromoteMembers = false,
+      canChangeInfo = true,
+      canInviteUsers = false
+    )
+    .withCanPostMessages(true)
+    .withCanEditMessages(false)
+    .withCanPinMessages(true)
+    .withCanManageTopics(false)
+    .withCustomerTitle("custom title")
 
-  lazy val chatMember4: ChatMember = ChatMemberBanned(
-    user = user1,
-    untilDate = 30000
-  )
+  lazy val chatMember4: ChatMember = ChatMemberBanned
+    .of(
+      user = user1,
+      untilDate = 30000
+    )
 
-  lazy val chatMember5: ChatMember = ChatMemberMember(user = user1)
+  lazy val chatMember5: ChatMember = ChatMemberMember.of(user = user1)
 
-  lazy val chatMember6: ChatMember = ChatMemberRestricted(
-    user = user1,
-    isMember = true,
-    canChangeInfo = false,
-    canInviteUsers = true,
-    canPinMembers = false,
-    canSendMessages = true,
-    canSendMediaMessages = false,
-    canSendPolls = false,
-    canSendOtherMessages = true,
-    canAddWebPagePreviews = true,
-    untilDate = 50
-  )
+  lazy val chatMember6: ChatMember = ChatMemberRestricted
+    .of(
+      user = user1,
+      isMember = true,
+      canChangeInfo = false,
+      canInviteUsers = true,
+      canPinMembers = false,
+      canManageTopics = true,
+      canSendMessages = true,
+      canSendMediaMessages = false,
+      canSendPolls = false,
+      canSendOtherMessages = true,
+      canAddWebPagePreviews = true,
+      untilDate = 50
+    )
 
-  lazy val chatInviteLink1: ChatInviteLink = ChatInviteLink(
-    inviteLink = "http://google.com/invite",
-    creator = user1,
-    createsJoinRequest = true,
-    isPrimary = true,
-    isRevoked = false,
-    name = Some("invite-1"),
-    expirationDate = Some(instant4),
-    memberLimit = Some(22),
-    pendingJoinRequestCount = Option(6)
-  )
+  lazy val chatInviteLink1: ChatInviteLink = ChatInviteLink
+    .of(
+      inviteLink = "http://google.com/invite",
+      creator = user1,
+      createsJoinRequest = true,
+      isPrimary = true,
+      isRevoked = false
+    )
+    .withName("invite-1")
+    .withExpirationDate(instant4)
+    .withMemberLimit(22)
+    .withPendingJoinRequestCount(6)
 
-  lazy val chatMemberUpdated1: ChatMemberUpdated = ChatMemberUpdated(
-    chat = chat1,
-    from = user1,
-    date = instant2,
-    oldChatMember = chatMember1,
-    newChatMember = chatMember2,
-    inviteLink = Option(chatInviteLink1)
-  )
+  lazy val chatMemberUpdated1: ChatMemberUpdated = ChatMemberUpdated
+    .of(
+      chat = chat1,
+      from = user1,
+      date = instant2,
+      oldChatMember = chatMember1,
+      newChatMember = chatMember2
+    )
+    .withInviteLink(chatInviteLink1)
 
-  lazy val chatJoinRequest1: ChatJoinRequest = ChatJoinRequest(
-    chat = chat1,
-    from = user2,
-    date = instant4,
-    bio = Some("bio-1"),
-    inviteLink = Some(chatInviteLink1)
-  )
+  lazy val chatJoinRequest1: ChatJoinRequest = ChatJoinRequest
+    .of(
+      chat = chat1,
+      from = user2,
+      date = instant4
+    )
+    .withBio("bio-1")
+    .withInviteLink(chatInviteLink1)
 
-  lazy val maskPosition1: MaskPosition = MaskPosition(
-    point = MaskPointType.Forehead,
-    xShift = 10.2,
-    yShift = 5.4,
-    scale = 1.3
-  )
+  lazy val maskPosition1: MaskPosition = MaskPosition
+    .of(
+      point = MaskPointType.Forehead,
+      xShift = 10.2,
+      yShift = 5.4,
+      scale = 1.3
+    )
 
-  lazy val sticker1: Sticker = Sticker(
-    fileId = "sticker-1",
-    fileUniqueId = "unique-sticker-1",
-    `type` = StickerType.CustomEmoji,
-    width = 80,
-    height = 50,
-    isAnimated = true,
-    isVideo = false,
-    thumb = Some(photoSize1),
-    emoji = Some("🎰"),
-    setName = Some("set-1"),
-    premiumAnimation = Some(file1),
-    maskPosition = Some(maskPosition1),
-    customEmojiId = Some("custom-emoji-id-1"),
-    fileSize = Some(500)
-  )
+  lazy val sticker1: Sticker = Sticker
+    .of(
+      fileId = "sticker-1",
+      fileUniqueId = "unique-sticker-1",
+      `type` = StickerType.CustomEmoji,
+      width = 80,
+      height = 50,
+      isAnimated = true,
+      isVideo = false
+    )
+    .withThumb(photoSize1)
+    .withEmoji("🎰")
+    .withSetName("set-1")
+    .withPremiumAnimation(file1)
+    .withMaskPosition(maskPosition1)
+    .withCustomEmojiId("custom-emoji-id-1")
+    .withFileSize(500)
 
   lazy val venue1: Venue = Venue
     .of(
@@ -528,7 +546,7 @@ trait Builders {
       fileUniqueId = "unique-video-1",
       width = 640,
       height = 480,
-      duration = 15
+      duration = 15.seconds
     )
     .withThumb(photoSize1)
     .withFileName("video-1")
@@ -540,7 +558,7 @@ trait Builders {
       fileId = "video-note-1",
       fileUniqueId = "unique-video-note-1",
       length = 4000,
-      duration = 23
+      duration = 23.seconds
     )
     .withThumb(photoSize2)
     .withFileSize(64441)
@@ -549,27 +567,29 @@ trait Builders {
     .of(
       fileId = "voice-1",
       fileUniqueId = "unique-voice-1",
-      duration = 50
+      duration = 50.seconds
     )
     .withMimeType("audio/mpeg")
     .withFileSize(1355)
 
-  lazy val invoice1: Invoice = Invoice(
-    title = "Shopping",
-    description = "Your invoice",
-    startParameter = "param-1",
-    currency = "EUR",
-    totalAmount = 53
-  )
+  lazy val invoice1: Invoice = Invoice
+    .of(
+      title = "Shopping",
+      description = "Your invoice",
+      startParameter = "param-1",
+      currency = "EUR",
+      totalAmount = 53
+    )
 
-  lazy val shippingAddress1: ShippingAddress = ShippingAddress(
-    countryCode = "NL",
-    state = "Utrecht",
-    city = "Amersfoort",
-    streetLine1 = "Some Street 1",
-    streetLine2 = "Other",
-    postCode = "3821KL"
-  )
+  lazy val shippingAddress1: ShippingAddress = ShippingAddress
+    .of(
+      countryCode = "NL",
+      state = "Utrecht",
+      city = "Amersfoort",
+      streetLine1 = "Some Street 1",
+      streetLine2 = "Other",
+      postCode = "3821KL"
+    )
 
   lazy val orderInfo1: OrderInfo = OrderInfo
     .of()
@@ -589,70 +609,79 @@ trait Builders {
     .withOrderInfo(orderInfo1)
     .withShippingOptionId("option - 1")
 
-  lazy val encryptedCredentials1: EncryptedCredentials = EncryptedCredentials(
-    data = "data-1",
-    hash = "hash-1",
-    secret = "secret-1"
-  )
+  lazy val encryptedCredentials1: EncryptedCredentials = EncryptedCredentials
+    .of(
+      data = "data-1",
+      hash = "hash-1",
+      secret = "secret-1"
+    )
 
-  lazy val passportFile1: PassportFile = PassportFile(
-    fileId = "file-1",
-    fileUniqueId = "unique-file-1",
-    fileSize = 200,
-    fileDate = instant1
-  )
+  lazy val passportFile1: PassportFile = PassportFile
+    .of(
+      fileId = "file-1",
+      fileUniqueId = "unique-file-1",
+      fileSize = 200,
+      fileDate = instant1
+    )
 
-  lazy val passportFile2: PassportFile = PassportFile(
-    fileId = "file-2",
-    fileUniqueId = "unique-file-2",
-    fileSize = 150,
-    fileDate = instant2
-  )
+  lazy val passportFile2: PassportFile = PassportFile
+    .of(
+      fileId = "file-2",
+      fileUniqueId = "unique-file-2",
+      fileSize = 150,
+      fileDate = instant2
+    )
 
-  lazy val passportFile3: PassportFile = PassportFile(
-    fileId = "file-3",
-    fileUniqueId = "unique-file-3",
-    fileSize = 125,
-    fileDate = instant3
-  )
+  lazy val passportFile3: PassportFile = PassportFile
+    .of(
+      fileId = "file-3",
+      fileUniqueId = "unique-file-3",
+      fileSize = 125,
+      fileDate = instant3
+    )
 
-  lazy val passportFile4: PassportFile = PassportFile(
-    fileId = "file-4",
-    fileUniqueId = "unique-file-4",
-    fileSize = 63,
-    fileDate = instant4
-  )
+  lazy val passportFile4: PassportFile = PassportFile
+    .of(
+      fileId = "file-4",
+      fileUniqueId = "unique-file-4",
+      fileSize = 63,
+      fileDate = instant4
+    )
 
-  lazy val passportFile5: PassportFile = PassportFile(
-    fileId = "file-5",
-    fileUniqueId = "unique-file-5",
-    fileSize = 11,
-    fileDate = instant2
-  )
+  lazy val passportFile5: PassportFile = PassportFile
+    .of(
+      fileId = "file-5",
+      fileUniqueId = "unique-file-5",
+      fileSize = 11,
+      fileDate = instant2
+    )
 
-  lazy val encryptedPassportElement1: EncryptedPassportElement = EncryptedPassportElement(
-    `type` = PassportElementType.Address,
-    data = Some("address-1"),
-    phoneNumber = Some("+31630911234"),
-    email = Some("email@gmail.com"),
-    files = Some(Seq(passportFile1)),
-    frontSide = Some(passportFile2),
-    reverseSide = Some(passportFile3),
-    selfie = Some(passportFile4),
-    translation = Some(Seq(passportFile5)),
-    hash = "hash-1"
-  )
+  lazy val encryptedPassportElement1: EncryptedPassportElement = EncryptedPassportElement
+    .of(
+      `type` = PassportElementType.Address,
+      hash = "hash-1"
+    )
+    .withData("address-1")
+    .withPhoneNumber("+31630911234")
+    .withEmail("email@gmail.com")
+    .withFiles(Seq(passportFile1))
+    .withFrontSide(passportFile2)
+    .withReverseSide(passportFile3)
+    .withSelfie(passportFile4)
+    .withTranslation(Seq(passportFile5))
 
-  lazy val passportData1: PassportData = PassportData(
-    data = Seq(encryptedPassportElement1),
-    credentials = encryptedCredentials1
-  )
+  lazy val passportData1: PassportData = PassportData
+    .of(
+      data = Seq(encryptedPassportElement1),
+      credentials = encryptedCredentials1
+    )
 
-  lazy val proximityAlertTriggered1: ProximityAlertTriggered = ProximityAlertTriggered(
-    traveler = user1,
-    watcher = user2,
-    distance = 20
-  )
+  lazy val proximityAlertTriggered1: ProximityAlertTriggered = ProximityAlertTriggered
+    .of(
+      traveler = user1,
+      watcher = user2,
+      distance = 20
+    )
 
   lazy val videoChatScheduled1: VideoChatScheduled = VideoChatScheduled.of(startDate = instant4)
 
@@ -677,64 +706,71 @@ trait Builders {
 
   lazy val forumTopicReopened1: ForumTopicReopened = ForumTopicReopened.of()
 
-  lazy val inlineQuery1: InlineQuery = InlineQuery(
-    id = "query-1",
-    from = user1,
-    query = "test",
-    offset = "1",
-    chatType = Some(ChatType.Sender),
-    location = Some(location1)
-  )
+  lazy val inlineQuery1: InlineQuery = InlineQuery
+    .of(
+      id = "query-1",
+      from = user1,
+      query = "test",
+      offset = "1"
+    )
+    .withChatType(ChatType.Sender)
+    .withLocation(location1)
 
-  lazy val chatPhoto1: ChatPhoto = ChatPhoto(
-    smallFileId = "small-file-id-1",
-    smallFileUniqueId = "unique-small-file-id-1",
-    bigFileId = "big-file-id-1",
-    bigFileUniqueId = "unique-big-file-id-1"
-  )
+  lazy val chatPhoto1: ChatPhoto = ChatPhoto
+    .of(
+      smallFileId = "small-file-id-1",
+      smallFileUniqueId = "unique-small-file-id-1",
+      bigFileId = "big-file-id-1",
+      bigFileUniqueId = "unique-big-file-id-1"
+    )
 
-  lazy val chatLocation1: ChatLocation = ChatLocation(
-    location = location1,
-    address = "Jachthaven 1, 2172 JX Sassenheim"
-  )
+  lazy val chatLocation1: ChatLocation = ChatLocation
+    .of(
+      location = location1,
+      address = "Jachthaven 1, 2172 JX Sassenheim"
+    )
 
-  lazy val chosenInlineResult1: domain.ChosenInlineResult = domain.ChosenInlineResult(
-    resultId = "result-1",
-    from = user1,
-    location = Some(location1),
-    inlineMessageId = Some("message-1"),
-    query = "query-1"
-  )
+  lazy val chosenInlineResult1: domain.ChosenInlineResult = domain.ChosenInlineResult
+    .of(
+      resultId = "result-1",
+      from = user1,
+      query = "query-1"
+    )
+    .withLocation(location1)
+    .withInlineMessageId("message-1")
 
-  lazy val callbackQuery1: CallbackQuery = CallbackQuery(
-    id = "callback-1",
-    from = user1,
-    message = Some(message1),
-    inlineMessageId = Some("inline-message-1"),
-    chatInstance = "chat-1",
-    data = Some("data-1"),
-    gameShortName = Some("game-short-name")
-  )
+  lazy val callbackQuery1: CallbackQuery = CallbackQuery
+    .of(
+      id = "callback-1",
+      from = user1,
+      chatInstance = "chat-1"
+    )
+    .withMessage(message1)
+    .withInlineMessageId("inline-message-1")
+    .withData("data-1")
+    .withGameShortName("game-short-name")
 
-  lazy val shippingQuery1: ShippingQuery = ShippingQuery(
-    id = "shipping-query-1",
-    from = user1,
-    invoicePayload = "payload-1",
-    shippingAddress = shippingAddress1
-  )
+  lazy val shippingQuery1: ShippingQuery = ShippingQuery
+    .of(
+      id = "shipping-query-1",
+      from = user1,
+      invoicePayload = "payload-1",
+      shippingAddress = shippingAddress1
+    )
 
-  lazy val preCheckoutQuery1: PreCheckoutQuery = PreCheckoutQuery(
-    id = "pre-checkout-query-1",
-    from = user1,
-    currency = "USD",
-    totalAmount = 20,
-    invoicePayload = "payload-1",
-    shippingOptionId = Some("option-id-1"),
-    orderInfo = Some(orderInfo1)
-  )
+  lazy val preCheckoutQuery1: PreCheckoutQuery = PreCheckoutQuery
+    .of(
+      id = "pre-checkout-query-1",
+      from = user1,
+      currency = "USD",
+      totalAmount = 20,
+      invoicePayload = "payload-1"
+    )
+    .withShippingOptionId("option-id-1")
+    .withOrderInfo(orderInfo1)
 
   lazy val messageAutoDeleteTimerChanged1: MessageAutoDeleteTimerChanged =
-    MessageAutoDeleteTimerChanged(messageAutoDeleteTime = 30)
+    MessageAutoDeleteTimerChanged(messageAutoDeleteTime = 30.seconds)
 
   lazy val animationMessage1: Message = Message
     .of(messageId = 411, date = instant1, chat = chat1)

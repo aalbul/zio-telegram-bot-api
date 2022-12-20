@@ -1,5 +1,6 @@
 {
   "chat_id": "123",
+  "message_thread_id": 34,
   "latitude": 10.0,
   "longitude": 20.0,
   "title": "Aquario",

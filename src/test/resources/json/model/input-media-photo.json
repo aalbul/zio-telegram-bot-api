@@ -1,7 +1,6 @@
 {
   "type": "photo",
   "media": "attach:///tmp/one.jpg",
-  "thumb": "attach:///tmp/photo_thumb.jpg",
   "caption": "my photo",
   "parse_mode": "Markdown",
   "caption_entities": [
@@ -23,7 +22,8 @@
         "can_read_all_group_messages": true,
         "supports_inline_queries": false
       },
-      "language": "js"
+      "language": "js",
+      "custom_emoji_id": "emoji1"
     }
   ]
 }

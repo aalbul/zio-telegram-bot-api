@@ -5,6 +5,13 @@ import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodec
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 object Update {
+  implicit val updateJsonCodec: JsonValueCodec[Update] = JsonCodecMaker.make(
+    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
+  )
+
+  implicit val seqUpdateJsonCodec: JsonValueCodec[Seq[Update]] = JsonCodecMaker.make(
+    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
+  )
 
   /** Constructs minimal [[Update]]
     * @param updateId
@@ -32,14 +39,6 @@ object Update {
     myChatMember = None,
     chatMember = None,
     chatJoinRequest = None
-  )
-
-  implicit val updateJsonCodec: JsonValueCodec[Update] = JsonCodecMaker.make(
-    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
-  )
-
-  implicit val seqUpdateJsonCodec: JsonValueCodec[Seq[Update]] = JsonCodecMaker.make(
-    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
   )
 }
 

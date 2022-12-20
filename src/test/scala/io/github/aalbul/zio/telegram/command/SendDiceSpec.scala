@@ -10,6 +10,7 @@ class SendDiceSpec extends BaseSpec {
     val command: Command[Message] =
       SendDice
         .of("123")
+        .withMessageThreadId(28)
         .withEmoji(DiceType.SlotMachine)
         .withDisableNotification(false)
         .withProtectContent(true)
@@ -19,6 +20,7 @@ class SendDiceSpec extends BaseSpec {
 
     val payload: SendDicePayload = SendDicePayload(
       chatId = "123",
+      messageThreadId = Some(28),
       emoji = Some(DiceType.SlotMachine),
       disableNotification = Some(false),
       protectContent = Some(true),

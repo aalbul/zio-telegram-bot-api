@@ -10,6 +10,7 @@ class SendPhotoSpec extends BaseSpec {
     val command: Command[Message] =
       SendPhoto
         .of(chatId = "801", photo = idDescriptor("980006"))
+        .withMessageThreadId(32)
         .withCaption("my photo")
         .withParseMode(ParseMode.HTML)
         .withCaptionEntities(Seq(messageEntity1))
@@ -31,6 +32,7 @@ class SendPhotoSpec extends BaseSpec {
       "represent parameters as form data" in new Scope {
         command.parameters shouldBe MultipartBody.of(
           stringPart("chat_id", "801"),
+          stringPart("message_thread_id", "32"),
           stringPart("photo", "980006"),
           stringPart("caption", "my photo"),
           stringPart("parse_mode", "HTML"),

@@ -10,6 +10,7 @@ class SendVenueSpec extends BaseSpec {
     val command: Command[Message] =
       SendVenue
         .of(chatId = "123", latitude = 10, longitude = 20, title = "Aquario", "Street 1")
+        .withMessageThreadId(34)
         .withFoursquareId("223")
         .withFoursquareType("arts_entertainment/aquarium")
         .withGooglePlaceId("334")
@@ -22,6 +23,7 @@ class SendVenueSpec extends BaseSpec {
 
     val payload: SendVenuePayload = SendVenuePayload(
       chatId = "123",
+      messageThreadId = Some(34),
       latitude = 10,
       longitude = 20,
       title = "Aquario",

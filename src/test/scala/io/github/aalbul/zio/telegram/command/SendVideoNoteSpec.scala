@@ -5,12 +5,15 @@ import io.github.aalbul.zio.telegram.command.MultipartBody.{filePart, stringPart
 import io.github.aalbul.zio.telegram.domain.Message
 import io.github.aalbul.zio.telegram.test.BaseSpec
 
+import scala.concurrent.duration.DurationInt
+
 class SendVideoNoteSpec extends BaseSpec {
   trait Scope {
     val command: Command[Message] =
       SendVideoNote
         .of(chatId = "805", videoNote = idDescriptor("980009"))
-        .withDuration(670)
+        .withMessageThreadId(36)
+        .withDuration(670.seconds)
         .withLength(5600)
         .withThumb(pathDescriptor("/tmp/11.png"))
         .withDisableNotification(true)
@@ -31,6 +34,7 @@ class SendVideoNoteSpec extends BaseSpec {
       "represent parameters as form data" in new Scope {
         command.parameters shouldBe MultipartBody.of(
           stringPart("chat_id", "805"),
+          stringPart("message_thread_id", "36"),
           stringPart("video_note", "980009"),
           stringPart("duration", "670"),
           stringPart("length", "5600"),

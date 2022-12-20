@@ -21,6 +21,7 @@ class SendContactSpec extends BaseSpec {
     val command: Command[Message] =
       SendContact
         .of(chatId = "442", phoneNumber = "+31631234567", firstName = "Bjorn")
+        .withMessageThreadId(27)
         .withLastName("Jensen")
         .withVcard(vcard)
         .withDisableNotification(false)
@@ -31,6 +32,7 @@ class SendContactSpec extends BaseSpec {
 
     val payload: SendContactPayload = SendContactPayload(
       chatId = "442",
+      messageThreadId = Some(27),
       phoneNumber = "+31631234567",
       firstName = "Bjorn",
       lastName = Some("Jensen"),

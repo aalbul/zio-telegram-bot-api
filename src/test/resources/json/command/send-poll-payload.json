@@ -1,5 +1,6 @@
 {
   "chat_id": "441",
+  "message_thread_id": 33,
   "question": "Are you sure?",
   "options": [
     "Yes",
@@ -31,7 +32,8 @@
         "can_read_all_group_messages": true,
         "supports_inline_queries": false
       },
-      "language": "js"
+      "language": "js",
+      "custom_emoji_id": "emoji1"
     }
   ],
   "open_period": 100,

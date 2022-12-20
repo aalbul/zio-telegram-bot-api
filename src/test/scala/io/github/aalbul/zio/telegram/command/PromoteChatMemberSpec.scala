@@ -20,6 +20,7 @@ class PromoteChatMemberSpec extends BaseSpec {
         .withCanChangeInfo(true)
         .withCanInviteUsers(false)
         .withCanPinMessages(true)
+        .withCanManageTopics(true)
 
     val payload: PromoteChatMemberPayload = PromoteChatMemberPayload(
       chatId = "445",
@@ -34,7 +35,8 @@ class PromoteChatMemberSpec extends BaseSpec {
       canPromoteMembers = Some(false),
       canChangeInfo = Some(true),
       canInviteUsers = Some(false),
-      canPinMessages = Some(true)
+      canPinMessages = Some(true),
+      canManageTopics = Some(true)
     )
   }
 

@@ -4,6 +4,8 @@ import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
 import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodecMaker}
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
+import scala.concurrent.duration.Duration
+
 object VideoNote {
 
   /** Constructs minimal [[VideoNote]]
@@ -19,7 +21,7 @@ object VideoNote {
     * @return
     *   [[VideoNote]] builder
     */
-  def of(fileId: String, fileUniqueId: String, length: Int, duration: Int): VideoNote = VideoNote(
+  def of(fileId: String, fileUniqueId: String, length: Long, duration: Duration): VideoNote = VideoNote(
     fileId = fileId,
     fileUniqueId = fileUniqueId,
     length = length,
@@ -39,10 +41,10 @@ object VideoNote {
 case class VideoNote(
   fileId: String,
   fileUniqueId: String,
-  length: Int,
-  duration: Int,
+  length: Long,
+  duration: Duration,
   thumb: Option[PhotoSize],
-  fileSize: Option[Int]
+  fileSize: Option[Long]
 ) {
 
   /** Video thumbnail
@@ -51,5 +53,5 @@ case class VideoNote(
 
   /** File size in bytes
     */
-  def withFileSize(fileSize: Int): VideoNote = copy(fileSize = Some(fileSize))
+  def withFileSize(fileSize: Long): VideoNote = copy(fileSize = Some(fileSize))
 }

@@ -4,6 +4,7 @@ import com.github.plokhotnyuk.jsoniter_scala.core.writeToString
 import io.github.aalbul.zio.telegram.command.SendPoll.SendPollPayload
 import io.github.aalbul.zio.telegram.domain.{Message, ParseMode, PollType}
 import io.github.aalbul.zio.telegram.test.BaseSpec
+import org.scalatest.time.SpanSugar.convertIntToGrainOfTime
 
 import java.time.Instant
 
@@ -14,6 +15,7 @@ class SendPollSpec extends BaseSpec {
     val command: Command[Message] =
       SendPoll
         .of(chatId = "441", question = "Are you sure?", options = Seq("Yes", "No", "Not sure"))
+        .withMessageThreadId(33)
         .withIsAnonymous(false)
         .withType(PollType.Quiz)
         .withAllowsMultipleAnswers(true)
@@ -21,7 +23,7 @@ class SendPollSpec extends BaseSpec {
         .withExplanation("Some explanation")
         .withExplanationParseMode(ParseMode.MarkdownV2)
         .withExplanationEntities(Seq(messageEntity1))
-        .withOpenPeriod(100)
+        .withOpenPeriod(100.seconds)
         .withCloseDate(closeDate)
         .withIsClosed(false)
         .withDisableNotification(false)
@@ -32,6 +34,7 @@ class SendPollSpec extends BaseSpec {
 
     val payload: SendPollPayload = SendPollPayload(
       chatId = "441",
+      messageThreadId = Some(33),
       question = "Are you sure?",
       options = Seq("Yes", "No", "Not sure"),
       isAnonymous = Some(false),
@@ -41,7 +44,7 @@ class SendPollSpec extends BaseSpec {
       explanation = Some("Some explanation"),
       explanationParseMode = Some(ParseMode.MarkdownV2),
       explanationEntities = Some(Seq(messageEntity1)),
-      openPeriod = Some(100),
+      openPeriod = Some(100.seconds),
       closeDate = Some(closeDate),
       isClosed = Some(false),
       disableNotification = Some(false),

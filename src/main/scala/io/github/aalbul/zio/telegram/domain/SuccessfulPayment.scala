@@ -5,6 +5,9 @@ import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodec
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 object SuccessfulPayment {
+  implicit val successfulPaymentJsonCodec: JsonValueCodec[SuccessfulPayment] = JsonCodecMaker.make(
+    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
+  )
 
   /** Constructs minimal [[SuccessfulPayment]]
     * @param currency
@@ -25,7 +28,7 @@ object SuccessfulPayment {
     */
   def of(
     currency: String,
-    totalAmount: Int,
+    totalAmount: Long,
     invoicePayload: String,
     telegramPaymentChargeId: String,
     providerPaymentChargeId: String
@@ -38,16 +41,12 @@ object SuccessfulPayment {
     telegramPaymentChargeId = telegramPaymentChargeId,
     providerPaymentChargeId = providerPaymentChargeId
   )
-
-  implicit val successfulPaymentJsonCodec: JsonValueCodec[SuccessfulPayment] = JsonCodecMaker.make(
-    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
-  )
 }
 
 /** This object contains basic information about a successful payment. */
 case class SuccessfulPayment(
   currency: String,
-  totalAmount: Int,
+  totalAmount: Long,
   invoicePayload: String,
   shippingOptionId: Option[String],
   orderInfo: Option[OrderInfo],

@@ -3,6 +3,7 @@ package io.github.aalbul.zio.telegram.command
 import com.github.plokhotnyuk.jsoniter_scala.core.{writeToString, JsonValueCodec}
 
 import java.nio.file.{Path, Paths}
+import scala.concurrent.duration.Duration
 
 sealed trait ApiParameters
 case object NoParameters extends ApiParameters
@@ -24,6 +25,7 @@ object MultipartBody {
   def stringPart(name: String, value: String): StringPart = StringPart(name, value)
   def stringPart(name: String, value: Boolean): StringPart = StringPart(name, value.toString)
   def stringPart(name: String, value: Long): StringPart = StringPart(name, value.toString)
+  def stringPart(name: String, value: Duration): StringPart = StringPart(name, value.toSeconds.toString)
 }
 
 case class MultipartBody(parts: Seq[MultipartBodyPart]) extends ApiParameters {

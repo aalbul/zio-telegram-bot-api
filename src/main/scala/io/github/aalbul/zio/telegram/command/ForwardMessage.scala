@@ -14,6 +14,7 @@ object ForwardMessage {
 
   case class ForwardMessagePayload(
     chatId: String,
+    messageThreadId: Option[Long],
     fromChatId: String,
     messageId: Long,
     disableNotification: Option[Boolean],
@@ -34,6 +35,7 @@ object ForwardMessage {
   def of(messageId: Long, fromChatId: String, toChatId: String): ForwardMessage = ForwardMessage(
     ForwardMessagePayload(
       chatId = toChatId,
+      messageThreadId = None,
       fromChatId = fromChatId,
       messageId = messageId,
       disableNotification = None,
@@ -48,6 +50,12 @@ object ForwardMessage {
 case class ForwardMessage(payload: ForwardMessagePayload) extends Command[Message] {
   override val name: String = "forwardMessage"
   override def parameters: ApiParameters = JsonBody(payload)
+
+  /** Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+    */
+  def withMessageThreadId(messageThreadId: Long): ForwardMessage = copy(
+    payload.copy(messageThreadId = Some(messageThreadId))
+  )
 
   /** Sends the message [[https://telegram.org/blog/channels-2-0#silent-messages silently]]. Users will receive a
     * notification with no sound.

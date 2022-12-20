@@ -14,6 +14,7 @@ object SendDice {
 
   case class SendDicePayload(
     chatId: String,
+    messageThreadId: Option[Long],
     emoji: Option[DiceType],
     disableNotification: Option[Boolean],
     protectContent: Option[Boolean],
@@ -31,6 +32,7 @@ object SendDice {
   def of(chatId: String): SendDice = SendDice(
     SendDicePayload(
       chatId = chatId,
+      messageThreadId = None,
       emoji = None,
       disableNotification = None,
       protectContent = None,
@@ -48,6 +50,10 @@ case class SendDice(payload: SendDicePayload) extends Command[Message] {
   override val name: String = "sendDice"
 
   override def parameters: ApiParameters = JsonBody(payload)
+
+  /** Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+    */
+  def withMessageThreadId(messageThreadId: Long): SendDice = copy(payload.copy(messageThreadId = Some(messageThreadId)))
 
   /** Emoji on which the dice throw animation is based. Currently, must be one of “🎲”, “🎯”, “🏀”, “⚽”, “🎳”, or “🎰”.
     * Dice can have values 1-6 for “🎲”, “🎯” and “🎳”, values 1-5 for “🏀” and “⚽”, and values 1-64 for “🎰”. Defaults

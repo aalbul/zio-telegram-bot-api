@@ -4,7 +4,12 @@ import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
 import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodecMaker}
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
+import scala.concurrent.duration.Duration
+
 object Voice {
+  implicit val voiceJsonCodec: JsonValueCodec[Voice] = JsonCodecMaker.make(
+    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
+  )
 
   /** Constructs minimal [[Voice]]
     * @param fileId
@@ -17,16 +22,12 @@ object Voice {
     * @return
     *   [[Voice]] builder
     */
-  def of(fileId: String, fileUniqueId: String, duration: Int): Voice = Voice(
+  def of(fileId: String, fileUniqueId: String, duration: Duration): Voice = Voice(
     fileId = fileId,
     fileUniqueId = fileUniqueId,
     duration = duration,
     mimeType = None,
     fileSize = None
-  )
-
-  implicit val voiceJsonCodec: JsonValueCodec[Voice] = JsonCodecMaker.make(
-    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
   )
 }
 
@@ -35,7 +36,7 @@ object Voice {
 case class Voice(
   fileId: String,
   fileUniqueId: String,
-  duration: Int,
+  duration: Duration,
   mimeType: Option[String],
   fileSize: Option[Int]
 ) {

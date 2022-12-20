@@ -10,6 +10,7 @@ class SendAnimationSpec extends BaseSpec {
     val command: Command[Message] =
       SendAnimation
         .of(chatId = "5521", animation = urlDescriptor("https://google.com/image.gif"))
+        .withMessageThreadId(25)
         .withDuration(2000)
         .withWidth(1024)
         .withHeight(768)
@@ -35,6 +36,7 @@ class SendAnimationSpec extends BaseSpec {
       "represent parameters as form data" in new Scope {
         command.parameters shouldBe MultipartBody.of(
           stringPart("chat_id", "5521"),
+          stringPart("message_thread_id", "25"),
           stringPart("animation", "https://google.com/image.gif"),
           stringPart("duration", "2000"),
           stringPart("width", "1024"),

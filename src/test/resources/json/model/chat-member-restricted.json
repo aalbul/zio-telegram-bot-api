@@ -17,6 +17,7 @@
   "can_change_info": false,
   "can_invite_users": true,
   "can_pin_members": false,
+  "can_manage_topics": true,
   "can_send_messages": true,
   "can_send_media_messages": false,
   "can_send_polls": false,

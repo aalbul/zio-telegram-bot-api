@@ -19,6 +19,7 @@ object SendPhoto {
     */
   def of(chatId: String, photo: FileDescriptor): SendPhoto = new SendPhoto(
     chatId = chatId,
+    messageThreadId = None,
     photo = photo,
     caption = None,
     parseMode = None,
@@ -35,6 +36,7 @@ object SendPhoto {
   */
 case class SendPhoto(
   chatId: String,
+  messageThreadId: Option[Long],
   photo: FileDescriptor,
   caption: Option[String],
   parseMode: Option[ParseMode],
@@ -49,6 +51,7 @@ case class SendPhoto(
 
   override def parameters: ApiParameters = MultipartBody.ofOpt(
     Some(stringPart("chat_id", chatId)),
+    messageThreadId.map(stringPart("message_thread_id", _)),
     Some(photo.asMultipart("photo")),
     caption.map(stringPart("caption", _)),
     parseMode.map(mode => stringPart("parse_mode", mode.toString)),
@@ -59,6 +62,10 @@ case class SendPhoto(
     allowSendingWithoutReply.map(stringPart("allow_sending_without_reply", _)),
     replyMarkup.map(markup => stringPart("reply_markup", JsonBody(markup).toJson))
   )
+
+  /** Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+    */
+  def withMessageThreadId(messageThreadId: Long): SendPhoto = copy(messageThreadId = Some(messageThreadId))
 
   /** New caption for media, 0-1024 characters after entities parsing. If not specified, the original caption is kept
     */

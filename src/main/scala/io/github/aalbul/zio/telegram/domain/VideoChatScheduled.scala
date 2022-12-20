@@ -7,6 +7,9 @@ import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 import java.time.Instant
 
 object VideoChatScheduled {
+  implicit val videoChatScheduledJsonCodec: JsonValueCodec[VideoChatScheduled] = JsonCodecMaker.make(
+    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
+  )
 
   /** Constructs minimal [[VideoChatScheduled]]
     * @param startDate
@@ -16,10 +19,6 @@ object VideoChatScheduled {
     */
   def of(startDate: Instant): VideoChatScheduled = VideoChatScheduled(
     startDate = startDate
-  )
-
-  implicit val videoChatScheduledJsonCodec: JsonValueCodec[VideoChatScheduled] = JsonCodecMaker.make(
-    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
   )
 }
 

@@ -4,7 +4,7 @@ import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
 import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodecMaker}
 import io.github.aalbul.zio.telegram.command.PromoteChatMember.PromoteChatMemberPayload
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
-import codecs.boolean
+import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.codecs.boolean
 
 object PromoteChatMember {
   object PromoteChatMemberPayload {
@@ -25,7 +25,8 @@ object PromoteChatMember {
     canPromoteMembers: Option[Boolean],
     canChangeInfo: Option[Boolean],
     canInviteUsers: Option[Boolean],
-    canPinMessages: Option[Boolean]
+    canPinMessages: Option[Boolean],
+    canManageTopics: Option[Boolean]
   )
 
   /** Constructs minimal [[PromoteChatMember]] command
@@ -51,7 +52,8 @@ object PromoteChatMember {
       canPromoteMembers = None,
       canChangeInfo = None,
       canInviteUsers = None,
-      canPinMessages = None
+      canPinMessages = None,
+      canManageTopics = None
     )
   )
 }
@@ -123,4 +125,10 @@ case class PromoteChatMember(payload: PromoteChatMemberPayload) extends Command[
     */
   def withCanPinMessages(canPinMessages: Boolean): PromoteChatMember =
     copy(payload = payload.copy(canPinMessages = Some(canPinMessages)))
+
+  /** Pass True if the user is allowed to create, rename, close, and reopen forum topics, supergroups only
+    */
+  def withCanManageTopics(canManageTopics: Boolean): PromoteChatMember = copy(
+    payload.copy(canManageTopics = Some(canManageTopics))
+  )
 }

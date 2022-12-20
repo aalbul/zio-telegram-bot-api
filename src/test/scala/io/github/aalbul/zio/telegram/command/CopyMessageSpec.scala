@@ -9,6 +9,7 @@ class CopyMessageSpec extends BaseSpec {
   trait Scope {
     val command: Command[MessageId] = CopyMessage
       .of(chatId = "12554", "5578", "14339")
+      .withMessageThreadId(23)
       .withCaption("Copied message")
       .withParseMode(ParseMode.Markdown)
       .withCaptionEntities(Seq(messageEntity1))
@@ -20,6 +21,7 @@ class CopyMessageSpec extends BaseSpec {
 
     val payload: CopyMessagePayload = CopyMessagePayload(
       chatId = "12554",
+      messageThreadId = Some(23),
       fromChatId = "5578",
       messageId = "14339",
       caption = Some("Copied message"),

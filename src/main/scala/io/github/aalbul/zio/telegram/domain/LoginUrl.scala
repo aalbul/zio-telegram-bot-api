@@ -5,6 +5,9 @@ import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodec
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 object LoginUrl {
+  implicit val loginUrlJsonCodec: JsonValueCodec[LoginUrl] = JsonCodecMaker.make(
+    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
+  )
 
   /** Constructs minimal [[LoginUrl]]
     * @param url
@@ -20,10 +23,6 @@ object LoginUrl {
     forwardText = None,
     botUsername = None,
     requestWriteAccess = None
-  )
-
-  implicit val loginUrlJsonCodec: JsonValueCodec[LoginUrl] = JsonCodecMaker.make(
-    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
   )
 }
 

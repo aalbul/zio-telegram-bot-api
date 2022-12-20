@@ -11,5 +11,6 @@
   "can_promote_members": false,
   "can_change_info": true,
   "can_invite_users": false,
-  "can_pin_messages": true
+  "can_pin_messages": true,
+  "can_manage_topics": true
 }

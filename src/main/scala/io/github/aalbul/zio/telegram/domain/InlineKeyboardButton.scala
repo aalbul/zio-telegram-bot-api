@@ -5,6 +5,9 @@ import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodec
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 object InlineKeyboardButton {
+  implicit val inlineKeyboardButtonJsonCodec: JsonValueCodec[InlineKeyboardButton] = JsonCodecMaker.make(
+    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
+  )
 
   /** Constructs minimal [[InlineKeyboardButton]]
     *
@@ -23,10 +26,6 @@ object InlineKeyboardButton {
     switchInlineQueryCurrentChat = None,
     callbackGame = None,
     pay = None
-  )
-
-  implicit val inlineKeyboardButtonJsonCodec: JsonValueCodec[InlineKeyboardButton] = JsonCodecMaker.make(
-    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
   )
 }
 
@@ -92,7 +91,7 @@ case class InlineKeyboardButton(
     */
   def withCallbackGame(game: CallbackGame): InlineKeyboardButton = copy(callbackGame = Some(game))
 
-  /** Specify True, to send a Pay button.
+  /** Specify True, to send a [[https://core.telegram.org/bots/api#payments Pay button]].
     *
     * NOTE: This type of button must always be the first button in the first row and can only be used in invoice
     * messages.

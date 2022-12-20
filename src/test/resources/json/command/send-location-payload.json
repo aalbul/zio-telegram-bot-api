@@ -1,9 +1,10 @@
 {
   "chat_id": "853",
+  "message_thread_id": 30,
   "latitude": 20.86,
   "longitude": 11.23,
   "horizontal_accuracy": 1.35,
-  "live_period": 50,
+  "live_period": 80,
   "heading": 11,
   "proximity_alert_radius": 52,
   "disable_notification": true,

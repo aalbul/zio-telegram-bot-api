@@ -14,6 +14,7 @@ object SendContact {
 
   case class SendContactPayload(
     chatId: String,
+    messageThreadId: Option[Long],
     phoneNumber: String,
     firstName: String,
     lastName: Option[String],
@@ -38,6 +39,7 @@ object SendContact {
   def of(chatId: String, phoneNumber: String, firstName: String): SendContact = SendContact(
     SendContactPayload(
       chatId = chatId,
+      messageThreadId = None,
       phoneNumber = phoneNumber,
       firstName = firstName,
       lastName = None,
@@ -57,6 +59,12 @@ case class SendContact(payload: SendContactPayload) extends Command[Message] {
   override val name: String = "sendContact"
 
   override def parameters: ApiParameters = JsonBody(payload)
+
+  /** Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+    */
+  def withMessageThreadId(messageThreadId: Long): SendContact = copy(
+    payload.copy(messageThreadId = Some(messageThreadId))
+  )
 
   /** Contact's last name
     */

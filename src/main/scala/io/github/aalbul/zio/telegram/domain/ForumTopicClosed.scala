@@ -5,6 +5,9 @@ import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodec
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 object ForumTopicClosed {
+  implicit val forumTopicClosedJsonCodec: JsonValueCodec[ForumTopicClosed] = JsonCodecMaker.make(
+    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
+  )
 
   /** Constructs minimal [[ForumTopicClosed]]
     *
@@ -12,10 +15,6 @@ object ForumTopicClosed {
     *   [[ForumTopicClosed]] builder
     */
   def of(): ForumTopicClosed = ForumTopicClosed()
-
-  implicit val forumTopicClosedJsonCodec: JsonValueCodec[ForumTopicClosed] = JsonCodecMaker.make(
-    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
-  )
 }
 
 /** This object represents a service message about a forum topic closed in the chat. Currently holds no information.

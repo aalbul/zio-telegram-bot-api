@@ -10,6 +10,7 @@ class SendDocumentSpec extends BaseSpec {
     val command: Command[Message] =
       SendDocument
         .of(chatId = "5521", document = idDescriptor("980003"))
+        .withMessageThreadId(29)
         .withThumb(pathDescriptor("/tmp/5.png"))
         .withCaption("pdf document")
         .withParseMode(ParseMode.MarkdownV2)
@@ -33,6 +34,7 @@ class SendDocumentSpec extends BaseSpec {
       "represent parameters as form data" in new Scope {
         command.parameters shouldBe MultipartBody.of(
           stringPart("chat_id", "5521"),
+          stringPart("message_thread_id", "29"),
           stringPart("document", "980003"),
           filePart("thumb", "/tmp/5.png"),
           stringPart("caption", "pdf document"),

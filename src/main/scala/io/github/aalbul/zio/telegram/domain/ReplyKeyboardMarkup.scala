@@ -5,8 +5,12 @@ import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodec
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 object ReplyKeyboardMarkup {
+  implicit val replyKeyboardMarkupJsonCodec: JsonValueCodec[ReplyKeyboardMarkup] = JsonCodecMaker.make(
+    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
+  )
 
   /** Constructs minimal [[ReplyKeyboardMarkup]]
+    *
     * @param keyboard
     *   Array of button rows, each represented by an Array of [[KeyboardButton]] objects
     * @return
@@ -18,10 +22,6 @@ object ReplyKeyboardMarkup {
     oneTimeKeyboard = None,
     inputFieldPlaceholder = None,
     selective = None
-  )
-
-  implicit val replyKeyboardMarkupJsonCodec: JsonValueCodec[ReplyKeyboardMarkup] = JsonCodecMaker.make(
-    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
   )
 }
 

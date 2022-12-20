@@ -18,6 +18,7 @@ object SendAnimation {
     */
   def of(chatId: String, animation: FileDescriptor): SendAnimation = SendAnimation(
     chatId = chatId,
+    messageThreadId = None,
     animation = animation,
     duration = None,
     width = None,
@@ -40,6 +41,7 @@ object SendAnimation {
   */
 case class SendAnimation(
   chatId: String,
+  messageThreadId: Option[Long],
   animation: FileDescriptor,
   duration: Option[Long],
   width: Option[Long],
@@ -58,6 +60,7 @@ case class SendAnimation(
 
   override def parameters: ApiParameters = MultipartBody.ofOpt(
     Some(stringPart("chat_id", chatId)),
+    messageThreadId.map(stringPart("message_thread_id", _)),
     Some(animation.asMultipart("animation")),
     duration.map(stringPart("duration", _)),
     width.map(stringPart("width", _)),
@@ -72,6 +75,10 @@ case class SendAnimation(
     allowSendingWithoutReply.map(stringPart("allow_sending_without_reply", _)),
     replyMarkup.map(markup => stringPart("reply_markup", JsonBody(markup).toJson))
   )
+
+  /** Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+    */
+  def withMessageThreadId(messageThreadId: Long): SendAnimation = copy(messageThreadId = Some(messageThreadId))
 
   /** Duration of sent animation in seconds
     */

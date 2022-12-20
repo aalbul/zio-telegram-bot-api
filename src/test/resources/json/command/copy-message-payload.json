@@ -1,5 +1,6 @@
 {
   "chat_id": "12554",
+  "message_thread_id": 23,
   "from_chat_id": "5578",
   "message_id": "14339",
   "caption": "Copied message",
@@ -23,7 +24,8 @@
         "can_read_all_group_messages": true,
         "supports_inline_queries": false
       },
-      "language": "js"
+      "language": "js",
+      "custom_emoji_id": "emoji1"
     }
   ],
   "disable_notification": true,

@@ -10,6 +10,7 @@ class SendAudioSpec extends BaseSpec {
     val command: Command[Message] =
       SendAudio
         .of(chatId = "9921", audio = idDescriptor("980001"))
+        .withMessageThreadId(26)
         .withCaption("cool music")
         .withParseMode(ParseMode.HTML)
         .withCaptionEntities(Seq(messageEntity1))
@@ -35,6 +36,7 @@ class SendAudioSpec extends BaseSpec {
       "represent parameters as form data" in new Scope {
         command.parameters shouldBe MultipartBody.of(
           stringPart("chat_id", "9921"),
+          stringPart("message_thread_id", "26"),
           stringPart("audio", "980001"),
           stringPart("caption", "cool music"),
           stringPart("parse_mode", "HTML"),

@@ -14,6 +14,7 @@ object SendVenue {
 
   case class SendVenuePayload(
     chatId: String,
+    messageThreadId: Option[Long],
     latitude: Double,
     longitude: Double,
     title: String,
@@ -46,6 +47,7 @@ object SendVenue {
   def of(chatId: String, latitude: Double, longitude: Double, title: String, address: String): SendVenue = SendVenue(
     SendVenuePayload(
       chatId = chatId,
+      messageThreadId = None,
       latitude = latitude,
       longitude = longitude,
       title = title,
@@ -69,6 +71,12 @@ case class SendVenue(payload: SendVenuePayload) extends Command[Message] {
   override val name: String = "sendVenue"
 
   override def parameters: ApiParameters = JsonBody(payload)
+
+  /** Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+    */
+  def withMessageThreadId(messageThreadId: Long): SendVenue = copy(
+    payload.copy(messageThreadId = Some(messageThreadId))
+  )
 
   /** Foursquare identifier of the venue
     */

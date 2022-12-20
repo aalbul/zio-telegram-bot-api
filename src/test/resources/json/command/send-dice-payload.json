@@ -1,5 +1,6 @@
 {
   "chat_id": "123",
+  "message_thread_id": 28,
   "emoji": "🎰",
   "disable_notification": false,
   "protect_content": true,

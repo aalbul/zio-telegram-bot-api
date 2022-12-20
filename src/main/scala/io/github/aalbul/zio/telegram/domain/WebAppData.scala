@@ -5,6 +5,9 @@ import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodec
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 object WebAppData {
+  implicit val webAppDataJsonCodec: JsonValueCodec[WebAppData] = JsonCodecMaker.make(
+    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
+  )
 
   /** Constructs minimal [[WebAppData]]
     * @param data
@@ -18,10 +21,6 @@ object WebAppData {
   def of(data: String, buttonText: String): WebAppData = WebAppData(
     data = data,
     buttonText = buttonText
-  )
-
-  implicit val webAppDataJsonCodec: JsonValueCodec[WebAppData] = JsonCodecMaker.make(
-    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
   )
 }
 

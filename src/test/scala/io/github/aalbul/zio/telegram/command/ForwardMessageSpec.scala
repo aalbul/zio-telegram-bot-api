@@ -9,11 +9,13 @@ class ForwardMessageSpec extends BaseSpec {
   trait Scope {
     val command: Command[Message] = ForwardMessage
       .of(13, "5593", "9048")
+      .withMessageThreadId(24)
       .withDisableNotification(true)
       .withProtectContent(false)
 
     val payload: ForwardMessagePayload = ForwardMessagePayload(
       chatId = "9048",
+      messageThreadId = Some(24),
       fromChatId = "5593",
       messageId = 13,
       disableNotification = Some(true),

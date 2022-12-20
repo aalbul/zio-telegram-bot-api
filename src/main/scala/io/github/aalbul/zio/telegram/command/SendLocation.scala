@@ -6,6 +6,8 @@ import io.github.aalbul.zio.telegram.command.SendLocation.SendLocationPayload
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 import io.github.aalbul.zio.telegram.domain.{Markup, Message}
 
+import scala.concurrent.duration.Duration
+
 object SendLocation {
   object SendLocationPayload {
     implicit val sendLocationPayloadJsonCodec: JsonValueCodec[SendLocationPayload] =
@@ -14,10 +16,11 @@ object SendLocation {
 
   case class SendLocationPayload(
     chatId: String,
+    messageThreadId: Option[Long],
     latitude: Double,
     longitude: Double,
     horizontalAccuracy: Option[Double],
-    livePeriod: Option[Long],
+    livePeriod: Option[Duration],
     heading: Option[Long],
     proximityAlertRadius: Option[Long],
     disableNotification: Option[Boolean],
@@ -40,6 +43,7 @@ object SendLocation {
   def of(chatId: String, latitude: Double, longitude: Double): SendLocation = SendLocation(
     SendLocationPayload(
       chatId = chatId,
+      messageThreadId = None,
       latitude = latitude,
       longitude = longitude,
       horizontalAccuracy = None,
@@ -62,6 +66,12 @@ case class SendLocation(payload: SendLocationPayload) extends Command[Message] {
 
   override def parameters: ApiParameters = JsonBody(payload)
 
+  /** Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+    */
+  def withMessageThreadId(messageThreadId: Long): SendLocation = copy(
+    payload.copy(messageThreadId = Some(messageThreadId))
+  )
+
   /** The radius of uncertainty for the location, measured in meters; 0-1500
     */
   def withHorizontalAccuracy(accuracy: Double): SendLocation =
@@ -70,7 +80,7 @@ case class SendLocation(payload: SendLocationPayload) extends Command[Message] {
   /** Period in seconds for which the location will be updated (see
     * [[https://telegram.org/blog/live-locations Live Locations]], should be between 60 and 86400.
     */
-  def withLivePeriod(livePeriod: Long): SendLocation = copy(payload = payload.copy(livePeriod = Some(livePeriod)))
+  def withLivePeriod(livePeriod: Duration): SendLocation = copy(payload = payload.copy(livePeriod = Some(livePeriod)))
 
   /** For live locations, a direction in which the user is moving, in degrees. Must be between 1 and 360 if specified.
     */

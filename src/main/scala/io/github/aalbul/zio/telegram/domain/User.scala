@@ -5,6 +5,9 @@ import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodec
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 object User {
+  implicit val userJsonCodec: JsonValueCodec[User] = JsonCodecMaker.make(
+    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
+  )
 
   /** Constructs minimal [[User]]
     * @param id
@@ -30,10 +33,6 @@ object User {
     canJoinGroups = None,
     canReadAllGroupMessages = None,
     supportsInlineQueries = None
-  )
-
-  implicit val userJsonCodec: JsonValueCodec[User] = JsonCodecMaker.make(
-    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
   )
 }
 

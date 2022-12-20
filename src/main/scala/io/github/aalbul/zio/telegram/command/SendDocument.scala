@@ -17,6 +17,7 @@ object SendDocument {
     */
   def of(chatId: String, document: FileDescriptor): SendDocument = new SendDocument(
     chatId = chatId,
+    messageThreadId = None,
     document = document,
     thumb = None,
     caption = None,
@@ -36,6 +37,7 @@ object SendDocument {
   */
 case class SendDocument(
   chatId: String,
+  messageThreadId: Option[Long],
   document: FileDescriptor,
   thumb: Option[FileDescriptor],
   caption: Option[String],
@@ -52,6 +54,7 @@ case class SendDocument(
 
   override def parameters: ApiParameters = MultipartBody.ofOpt(
     Some(stringPart("chat_id", chatId)),
+    messageThreadId.map(stringPart("message_thread_id", _)),
     Some(document.asMultipart("document")),
     thumb.map(_.asMultipart("thumb")),
     caption.map(stringPart("caption", _)),
@@ -64,6 +67,10 @@ case class SendDocument(
     allowSendingWithoutReply.map(stringPart("allow_sending_without_reply", _)),
     replyMarkup.map(markup => stringPart("reply_markup", JsonBody(markup).toJson))
   )
+
+  /** Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+    */
+  def withMessageThreadId(messageThreadId: Long): SendDocument = copy(messageThreadId = Some(messageThreadId))
 
   /** Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The
     * thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed

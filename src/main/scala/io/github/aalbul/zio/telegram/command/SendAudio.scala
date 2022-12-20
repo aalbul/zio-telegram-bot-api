@@ -18,6 +18,7 @@ object SendAudio {
     */
   def of(chatId: String, audio: FileDescriptor): SendAudio = SendAudio(
     chatId = chatId,
+    messageThreadId = None,
     audio = audio,
     caption = None,
     parseMode = None,
@@ -42,6 +43,7 @@ object SendAudio {
   */
 case class SendAudio(
   chatId: String,
+  messageThreadId: Option[Long],
   audio: FileDescriptor,
   caption: Option[String],
   parseMode: Option[ParseMode],
@@ -60,6 +62,7 @@ case class SendAudio(
 
   override def parameters: ApiParameters = MultipartBody.ofOpt(
     Some(stringPart("chat_id", chatId)),
+    messageThreadId.map(stringPart("message_thread_id", _)),
     Some(audio.asMultipart("audio")),
     caption.map(stringPart("caption", _)),
     parseMode.map(mode => stringPart("parse_mode", mode.toString)),
@@ -74,6 +77,10 @@ case class SendAudio(
     allowSendingWithoutReply.map(stringPart("allow_sending_without_reply", _)),
     replyMarkup.map(markup => stringPart("reply_markup", JsonBody(markup).toJson))
   )
+
+  /** Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+    */
+  def withMessageThreadId(messageThreadId: Long): SendAudio = copy(messageThreadId = Some(messageThreadId))
 
   /** Audio caption, 0-1024 characters after entities parsing
     */

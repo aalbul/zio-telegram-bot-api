@@ -15,6 +15,7 @@ object CopyMessage {
 
   case class CopyMessagePayload(
     chatId: String,
+    messageThreadId: Option[Long],
     fromChatId: String,
     messageId: String,
     caption: Option[String],
@@ -41,6 +42,7 @@ object CopyMessage {
   def of(chatId: String, fromChatId: String, messageId: String): CopyMessage = CopyMessage(
     CopyMessagePayload(
       chatId = chatId,
+      messageThreadId = None,
       fromChatId = fromChatId,
       messageId = messageId,
       caption = None,
@@ -62,6 +64,12 @@ object CopyMessage {
 case class CopyMessage(payload: CopyMessagePayload) extends Command[MessageId] {
   override val name: String = "copyMessage"
   override def parameters: ApiParameters = JsonBody(payload)
+
+  /** Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+    */
+  def withMessageThreadId(messageThreadId: Long): CopyMessage = copy(
+    payload.copy(messageThreadId = Some(messageThreadId))
+  )
 
   /** New caption for media, 0-1024 characters after entities parsing. If not specified, the original caption is kept
     */

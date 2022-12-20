@@ -42,7 +42,7 @@ object JsonSerializationSupport {
   implicit val instantJsonCodec: JsonValueCodec[Instant] =
     codecs.long.imap(Instant.ofEpochSecond)(_.getEpochSecond)(null)
 
-  implicit val durationJsonCodec: JsonValueCodec[Duration] =
+  implicit val durationSecondsJsonCodec: JsonValueCodec[Duration] =
     codecs.long.imap[Duration](Duration.apply(_, TimeUnit.SECONDS))(_.toSeconds)(null)
 
   implicit class StringOps(string: String) {

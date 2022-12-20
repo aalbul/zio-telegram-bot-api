@@ -14,6 +14,7 @@ object SendMessage {
 
   case class SendMessagePayload(
     chatId: String,
+    messageThreadId: Option[Long],
     text: String,
     parseMode: Option[ParseMode],
     entities: Option[Seq[MessageEntity]],
@@ -36,6 +37,7 @@ object SendMessage {
   def of(chatId: String, text: String): SendMessage = SendMessage(
     SendMessagePayload(
       chatId = chatId,
+      messageThreadId = None,
       text = text,
       parseMode = None,
       entities = None,
@@ -60,6 +62,12 @@ case class SendMessage(payload: SendMessagePayload) extends Command[Message] {
     * more details.
     */
   def withParseMode(parseMode: ParseMode): SendMessage = copy(payload.copy(parseMode = Some(parseMode)))
+
+  /** Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+    */
+  def withMessageThreadId(messageThreadId: Long): SendMessage = copy(
+    payload.copy(messageThreadId = Some(messageThreadId))
+  )
 
   /** A list of special entities that appear in message text, which can be specified instead of parse_mode */
   def withEntities(entities: Seq[MessageEntity]): SendMessage = copy(payload.copy(entities = Some(entities)))

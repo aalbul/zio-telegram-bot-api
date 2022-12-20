@@ -3,6 +3,8 @@ package io.github.aalbul.zio.telegram.command
 import io.github.aalbul.zio.telegram.command.MultipartBody.stringPart
 import io.github.aalbul.zio.telegram.domain.*
 
+import scala.concurrent.duration.Duration
+
 object SendVideo {
 
   /** Constructs minimal [[SendVideo]] command
@@ -17,6 +19,7 @@ object SendVideo {
     */
   def of(chatId: String, video: FileDescriptor): SendVideo = new SendVideo(
     chatId = chatId,
+    messageThreadId = None,
     video = video,
     duration = None,
     width = None,
@@ -40,8 +43,9 @@ object SendVideo {
   */
 case class SendVideo(
   chatId: String,
+  messageThreadId: Option[Long],
   video: FileDescriptor,
-  duration: Option[Long],
+  duration: Option[Duration],
   width: Option[Long],
   height: Option[Long],
   thumb: Option[FileDescriptor],
@@ -59,6 +63,7 @@ case class SendVideo(
 
   override def parameters: ApiParameters = MultipartBody.ofOpt(
     Some(stringPart("chat_id", chatId)),
+    messageThreadId.map(stringPart("message_thread_id", _)),
     Some(video.asMultipart("video")),
     duration.map(stringPart("duration", _)),
     width.map(stringPart("width", _)),
@@ -74,9 +79,13 @@ case class SendVideo(
     replyMarkup.map(markup => stringPart("reply_markup", JsonBody(markup).toJson))
   )
 
+  /** Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+    */
+  def withMessageThreadId(messageThreadId: Long): SendVideo = copy(messageThreadId = Some(messageThreadId))
+
   /** Duration of sent video in seconds
     */
-  def withDuration(duration: Long): SendVideo = copy(duration = Some(duration))
+  def withDuration(duration: Duration): SendVideo = copy(duration = Some(duration))
 
   /** Video width
     */

@@ -18,6 +18,7 @@ class SendMediaGroupSpec extends BaseSpec {
             inputMediaVideo1
           )
         )
+        .withMessageThreadId(31)
         .withDisableNotification(true)
         .withProtectContent(false)
         .withReplyToMessageId(50)
@@ -35,6 +36,7 @@ class SendMediaGroupSpec extends BaseSpec {
       "represent parameters as form data" in new Scope {
         command.parameters shouldBe MultipartBody.of(
           stringPart("chat_id", "5526"),
+          stringPart("message_thread_id", "31"),
           stringPart("media", jsonResourceString("json/command/input-medias.json")),
           stringPart("disable_notification", "true"),
           stringPart("protect_content", "false"),
@@ -46,7 +48,6 @@ class SendMediaGroupSpec extends BaseSpec {
           filePart("/tmp/one.pdf", "/tmp/one.pdf"),
           filePart("/tmp/document_thumb.jpg", "/tmp/document_thumb.jpg"),
           filePart("/tmp/one.jpg", "/tmp/one.jpg"),
-          filePart("/tmp/photo_thumb.jpg", "/tmp/photo_thumb.jpg"),
           filePart("/tmp/one.mp4", "/tmp/one.mp4"),
           filePart("/tmp/video_thumb.jpg", "/tmp/video_thumb.jpg")
         )

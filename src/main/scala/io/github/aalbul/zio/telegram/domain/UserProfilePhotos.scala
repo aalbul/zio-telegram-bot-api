@@ -7,6 +7,9 @@ import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 /** This object represent a user's profile pictures.
   */
 object UserProfilePhotos {
+  implicit val userProfilePhotosJsonCodec: JsonValueCodec[UserProfilePhotos] = JsonCodecMaker.make(
+    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
+  )
 
   /** Constructs minimal [[UserProfilePhotos]]
     * @param totalCount
@@ -19,10 +22,6 @@ object UserProfilePhotos {
   def of(totalCount: Long, photos: Seq[Seq[PhotoSize]]): UserProfilePhotos = UserProfilePhotos(
     totalCount = totalCount,
     photos = photos
-  )
-
-  implicit val userProfilePhotosJsonCodec: JsonValueCodec[UserProfilePhotos] = JsonCodecMaker.make(
-    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
   )
 }
 

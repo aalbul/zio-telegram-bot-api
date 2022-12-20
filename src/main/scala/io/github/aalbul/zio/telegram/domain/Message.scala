@@ -7,6 +7,13 @@ import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 import java.time.Instant
 
 object Message {
+  implicit val messageJsonCodec: JsonValueCodec[Message] = JsonCodecMaker.make(
+    CodecMakerConfig
+      .withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
+      .withAllowRecursiveTypes(true)
+  )
+
+  implicit val seqMessageJsonCodec: JsonValueCodec[Seq[Message]] = JsonCodecMaker.make
 
   /** Constructs minimal [[Message]]
     * @param messageId
@@ -84,14 +91,6 @@ object Message {
     webAppData = None,
     replyMarkup = None
   )
-
-  implicit val messageJsonCodec: JsonValueCodec[Message] = JsonCodecMaker.make(
-    CodecMakerConfig
-      .withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
-      .withAllowRecursiveTypes(true)
-  )
-
-  implicit val seqMessageJsonCodec: JsonValueCodec[Seq[Message]] = JsonCodecMaker.make
 }
 
 /** This object represents a message. */
