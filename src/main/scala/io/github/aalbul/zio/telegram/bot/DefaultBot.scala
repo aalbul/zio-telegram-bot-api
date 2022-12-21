@@ -85,5 +85,6 @@ class DefaultBot extends Bot {
     DeclineChatJoinRequest.of(chatId, userId)
   override def setChatPhoto(chatId: String, photo: FileDescriptor): SetChatPhoto = SetChatPhoto.of(chatId, photo)
   override def deleteChatPhoto(chatId: String): DeleteChatPhoto = DeleteChatPhoto.of(chatId)
+  override def setChatTitle(chatId: String, title: String): SetChatTitle = SetChatTitle.of(chatId, title)
   override def getChat(chatId: String): GetChat = GetChat.of(chatId)
 }
