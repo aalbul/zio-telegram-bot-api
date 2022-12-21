@@ -95,4 +95,6 @@ class DefaultBot extends Bot {
   override def getChatAdministrators(chatId: String): GetChatAdministrators = GetChatAdministrators.of(chatId)
   override def getChatMemberCount(chatId: String): GetChatMemberCount = GetChatMemberCount.of(chatId)
   override def getChatMember(chatId: String, userId: Long): GetChatMember = GetChatMember.of(chatId, userId)
+  override def setChatStickerSet(chatId: String, stickerSetName: String): SetChatStickerSet =
+    SetChatStickerSet.of(chatId, stickerSetName)
 }
