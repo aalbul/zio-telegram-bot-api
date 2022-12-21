@@ -499,6 +499,18 @@ trait Bot {
     */
   def editChatInviteLink(chatId: String, inviteLink: String): EditChatInviteLink
 
+  /** Use this method to decline a chat join request. The bot must be an administrator in the chat for this to work and
+    * must have the can_invite_users administrator right. Returns True on success.
+    *
+    * @param chatId
+    *   Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    * @param userId
+    *   Unique identifier of the target user
+    * @return
+    *   [[DeclineChatJoinRequest]] builder
+    */
+  def declineChatJoinRequest(chatId: String, userId: Long): DeclineChatJoinRequest
+
   /** Use this method to revoke an invite link created by the bot. If the primary link is revoked, a new link is
     * automatically generated. The bot must be an administrator in the chat for this to work and must have the
     * appropriate administrator rights. Returns the revoked invite link as
@@ -512,11 +524,14 @@ trait Bot {
     */
   def revokeChatInviteLink(chatId: String, inviteLink: String): RevokeChatInviteLink
 
-  /**
-    * Use this method to approve a chat join request. The bot must be an administrator in the chat for this to work and must have the can_invite_users administrator right. Returns True on success.
-    * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-    * @param userId Unique identifier of the target user
-    * @return [[ApproveChatJoinRequest]] builder
+  /** Use this method to approve a chat join request. The bot must be an administrator in the chat for this to work and
+    * must have the can_invite_users administrator right. Returns True on success.
+    * @param chatId
+    *   Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    * @param userId
+    *   Unique identifier of the target user
+    * @return
+    *   [[ApproveChatJoinRequest]] builder
     */
   def approveChatJoinRequest(chatId: String, userId: Long): ApproveChatJoinRequest
 
