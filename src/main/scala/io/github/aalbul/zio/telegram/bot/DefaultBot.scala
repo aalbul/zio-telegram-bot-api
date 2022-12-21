@@ -90,5 +90,6 @@ class DefaultBot extends Bot {
   override def pinChatMessage(chatId: String, messageId: Long): PinChatMessage = PinChatMessage.of(chatId, messageId)
   override def unpinChatMessage(chatId: String): UnpinChatMessage = UnpinChatMessage.of(chatId)
   override def unpinAllChatMessages(chatId: String): UnpinAllChatMessages = UnpinAllChatMessages.of(chatId)
+  override def leaveChat(chatId: String): LeaveChat = LeaveChat.of(chatId)
   override def getChat(chatId: String): GetChat = GetChat.of(chatId)
 }
