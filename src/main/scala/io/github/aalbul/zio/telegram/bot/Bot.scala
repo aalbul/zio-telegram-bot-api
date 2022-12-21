@@ -512,6 +512,14 @@ trait Bot {
     */
   def revokeChatInviteLink(chatId: String, inviteLink: String): RevokeChatInviteLink
 
+  /**
+    * Use this method to approve a chat join request. The bot must be an administrator in the chat for this to work and must have the can_invite_users administrator right. Returns True on success.
+    * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    * @param userId Unique identifier of the target user
+    * @return [[ApproveChatJoinRequest]] builder
+    */
+  def approveChatJoinRequest(chatId: String, userId: Long): ApproveChatJoinRequest
+
   /** Use this method to get up to date information about the chat (current name of the user for one-on-one
     * conversations, current username of a user, group or channel, etc.). Returns a [[Chat]] object on success.
     *

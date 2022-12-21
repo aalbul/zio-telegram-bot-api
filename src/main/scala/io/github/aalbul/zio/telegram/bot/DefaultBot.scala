@@ -79,5 +79,7 @@ class DefaultBot extends Bot {
     EditChatInviteLink.of(chatId, inviteLink)
   override def revokeChatInviteLink(chatId: String, inviteLink: String): RevokeChatInviteLink =
     RevokeChatInviteLink.of(chatId, inviteLink)
+  override def approveChatJoinRequest(chatId: String, userId: Long): ApproveChatJoinRequest =
+    ApproveChatJoinRequest.of(chatId, userId)
   override def getChat(chatId: String): GetChat = GetChat.of(chatId)
 }
