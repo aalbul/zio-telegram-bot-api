@@ -606,6 +606,17 @@ trait Bot {
     */
   def unpinChatMessage(chatId: String): UnpinChatMessage
 
+  /** Use this method to clear the list of pinned messages in a chat. If the chat is not a private chat, the bot must be
+    * an administrator in the chat for this to work and must have the 'can_pin_messages' administrator right in a
+    * supergroup or 'can_edit_messages' administrator right in a channel. Returns True on success.
+    *
+    * @param chatId
+    *   Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    * @return
+    *   [[UnpinAllChatMessages]] builder
+    */
+  def unpinAllChatMessages(chatId: String): UnpinAllChatMessages
+
   /** Use this method to get up to date information about the chat (current name of the user for one-on-one
     * conversations, current username of a user, group or channel, etc.). Returns a [[Chat]] object on success.
     *
