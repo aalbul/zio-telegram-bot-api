@@ -1,3 +1,5 @@
 package io.github.aalbul.zio.telegram.syntax
 
-object all extends CommandSyntax with FileSyntax
+import io.github.aalbul.zio.telegram.serialization.DefaultJsonCodecs
+
+object all extends CommandSyntax with FileSyntax with DefaultJsonCodecs

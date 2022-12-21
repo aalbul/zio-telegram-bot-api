@@ -5,7 +5,6 @@ import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodec
 import io.github.aalbul.zio.telegram.command.SetChatPermissions.SetChatPermissionsPayload
 import io.github.aalbul.zio.telegram.domain.ChatPermissions
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
-import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.codecs.boolean
 
 object SetChatPermissions {
   object SetChatPermissionsPayload {

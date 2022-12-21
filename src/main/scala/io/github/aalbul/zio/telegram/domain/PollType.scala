@@ -12,5 +12,5 @@ object PollType extends Enum[PollType] {
 
   override def values: IndexedSeq[PollType] = findValues
 
-  implicit val pollTypeJsonCodec: JsonValueCodec[PollType] = codecs.makeEnumCodec(values)
+  implicit val pollTypeJsonCodec: JsonValueCodec[PollType] = makeEnumCodec(values)
 }

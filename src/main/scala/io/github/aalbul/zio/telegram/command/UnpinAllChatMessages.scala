@@ -3,7 +3,6 @@ package io.github.aalbul.zio.telegram.command
 import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
 import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodecMaker}
 import io.github.aalbul.zio.telegram.command.UnpinAllChatMessages.UnpinAllChatMessagesPayload
-import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.codecs.boolean
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 object UnpinAllChatMessages {

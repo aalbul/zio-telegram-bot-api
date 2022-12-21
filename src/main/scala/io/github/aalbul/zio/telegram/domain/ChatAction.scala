@@ -21,5 +21,5 @@ object ChatAction extends Enum[ChatAction] {
 
   override def values: IndexedSeq[ChatAction] = findValues
 
-  implicit lazy val chatActionJsonCodec: JsonValueCodec[ChatAction] = codecs.makeEnumCodec(values)
+  implicit lazy val chatActionJsonCodec: JsonValueCodec[ChatAction] = makeEnumCodec(values)
 }

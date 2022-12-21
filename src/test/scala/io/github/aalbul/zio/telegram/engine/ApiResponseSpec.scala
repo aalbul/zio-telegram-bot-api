@@ -1,7 +1,7 @@
 package io.github.aalbul.zio.telegram.engine
 
 import com.github.plokhotnyuk.jsoniter_scala.core.writeToString
-import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.codecs.string
+import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 import io.github.aalbul.zio.telegram.engine.ApiResponse.*
 import io.github.aalbul.zio.telegram.test.BaseSpec
 

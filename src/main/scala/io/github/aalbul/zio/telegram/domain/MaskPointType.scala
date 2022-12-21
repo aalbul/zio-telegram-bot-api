@@ -14,5 +14,5 @@ object MaskPointType extends Enum[MaskPointType] {
 
   override def values: IndexedSeq[MaskPointType] = findValues
 
-  implicit val markPointTypeJsonCodec: JsonValueCodec[MaskPointType] = codecs.makeEnumCodec(values)
+  implicit val markPointTypeJsonCodec: JsonValueCodec[MaskPointType] = makeEnumCodec(values)
 }

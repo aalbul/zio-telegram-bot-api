@@ -1,7 +1,7 @@
 package io.github.aalbul.zio.telegram.domain
 
 import com.github.plokhotnyuk.jsoniter_scala.core.{JsonReader, JsonValueCodec, JsonWriter}
-import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.codecs
+import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 import io.github.aalbul.zio.telegram.domain.Message.messageJsonCodec
 
 import scala.util.Try
@@ -12,7 +12,7 @@ object LiveLocationUpdateResult {
       override def decodeValue(in: JsonReader, default: LiveLocationUpdateResult): LiveLocationUpdateResult =
         Try {
           in.setMark()
-          codecs.boolean.decodeValue(in, false)
+          booleanJsonCodec.decodeValue(in, false)
         }.map(result => LiveLocationUpdateResult(message = None, inlineUpdated = result))
           .getOrElse {
             in.rollbackToMark()
@@ -24,7 +24,7 @@ object LiveLocationUpdateResult {
 
       override def encodeValue(x: LiveLocationUpdateResult, out: JsonWriter): Unit = x match {
         case LiveLocationUpdateResult(Some(message), _) => messageJsonCodec.encodeValue(message, out)
-        case _                                          => codecs.boolean.encodeValue(x.inlineUpdated, out)
+        case _                                          => booleanJsonCodec.encodeValue(x.inlineUpdated, out)
       }
 
       override def nullValue: LiveLocationUpdateResult = null

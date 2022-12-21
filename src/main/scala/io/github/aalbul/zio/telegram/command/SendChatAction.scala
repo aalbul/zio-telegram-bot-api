@@ -5,7 +5,6 @@ import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodec
 import io.github.aalbul.zio.telegram.command.SendChatAction.SendChatActionPayload
 import io.github.aalbul.zio.telegram.domain.ChatAction
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
-import codecs.boolean
 
 object SendChatAction {
   object SendChatActionPayload {

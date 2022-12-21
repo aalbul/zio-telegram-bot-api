@@ -1,7 +1,7 @@
 package io.github.aalbul.zio.telegram.command
 
 import io.github.aalbul.zio.telegram.command.MultipartBody.stringPart
-import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.codecs.boolean
+import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 object DeleteChatPhoto {
 

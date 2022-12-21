@@ -1,6 +1,6 @@
 package io.github.aalbul.zio.telegram.command
 
-import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.codecs.boolean
+import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 /** Use this method to log out from the cloud Bot API server before launching the bot locally. You must log out the bot
   * before running it locally, otherwise there is no guarantee that the bot will receive updates. After a successful

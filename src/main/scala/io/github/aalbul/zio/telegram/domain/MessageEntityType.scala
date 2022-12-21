@@ -27,5 +27,5 @@ object MessageEntityType extends Enum[MessageEntityType] {
 
   override def values: IndexedSeq[MessageEntityType] = findValues
 
-  implicit val messageEntityTypeJsonCodec: JsonValueCodec[MessageEntityType] = codecs.makeEnumCodec(values)
+  implicit val messageEntityTypeJsonCodec: JsonValueCodec[MessageEntityType] = makeEnumCodec(values)
 }

@@ -4,7 +4,6 @@ import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
 import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodecMaker}
 import io.github.aalbul.zio.telegram.command.ExportChatInviteLink.ExportChatInviteLinkPayload
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
-import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.codecs.string
 
 object ExportChatInviteLink {
   object ExportChatInviteLinkPayload {

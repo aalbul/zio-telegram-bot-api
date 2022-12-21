@@ -5,7 +5,6 @@ import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodec
 import io.github.aalbul.zio.telegram.command.RestrictChatMember.RestrictChatMemberPayload
 import io.github.aalbul.zio.telegram.domain.ChatPermissions
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
-import codecs.boolean
 
 import java.time.Instant
 

@@ -23,5 +23,5 @@ object PassportElementType extends Enum[PassportElementType] {
 
   override def values: IndexedSeq[PassportElementType] = findValues
 
-  implicit val passportElementTypeJsonCodec: JsonValueCodec[PassportElementType] = codecs.makeEnumCodec(values)
+  implicit val passportElementTypeJsonCodec: JsonValueCodec[PassportElementType] = makeEnumCodec(values)
 }

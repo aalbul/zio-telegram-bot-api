@@ -2,7 +2,7 @@ package io.github.aalbul.zio.telegram.domain
 
 import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
 import enumeratum.{EnumEntry, *}
-import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.codecs
+import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 sealed trait UpdateType extends EnumEntry
 
@@ -24,5 +24,5 @@ object UpdateType extends Enum[UpdateType] {
 
   override def values: IndexedSeq[UpdateType] = findValues
 
-  implicit val updateTypeJsonEncoder: JsonValueCodec[UpdateType] = codecs.makeEnumCodec(values)
+  implicit val updateTypeJsonEncoder: JsonValueCodec[UpdateType] = makeEnumCodec(values)
 }

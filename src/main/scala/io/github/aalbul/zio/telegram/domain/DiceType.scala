@@ -2,7 +2,7 @@ package io.github.aalbul.zio.telegram.domain
 
 import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
 import enumeratum.{EnumEntry, *}
-import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.codecs
+import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 sealed trait DiceType extends EnumEntry
 
@@ -16,7 +16,7 @@ object DiceType extends Enum[DiceType] {
 
   override def values: IndexedSeq[DiceType] = findValues
 
-  implicit lazy val diceTypeJsonCodec: JsonValueCodec[DiceType] = codecs.makeCodecFromRelations(
+  implicit lazy val diceTypeJsonCodec: JsonValueCodec[DiceType] = makeCodecFromRelations(
     "🎯" -> DirectHit,
     "🏀" -> Basketball,
     "⚽" -> Football,

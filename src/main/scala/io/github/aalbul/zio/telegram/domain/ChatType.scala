@@ -15,5 +15,5 @@ object ChatType extends Enum[ChatType] {
 
   override def values: IndexedSeq[ChatType] = findValues
 
-  implicit lazy val chatTypeJsonCodec: JsonValueCodec[ChatType] = codecs.makeEnumCodec(values)
+  implicit lazy val chatTypeJsonCodec: JsonValueCodec[ChatType] = makeEnumCodec(values)
 }
