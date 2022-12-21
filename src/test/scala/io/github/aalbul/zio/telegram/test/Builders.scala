@@ -769,6 +769,14 @@ trait Builders {
     .withShippingOptionId("option-id-1")
     .withOrderInfo(orderInfo1)
 
+  lazy val forumTopic1: ForumTopic = ForumTopic
+    .of(
+      messageThreadId = 21,
+      name = "General",
+      iconColor = 9367192
+    )
+    .withIconCustomEmojiId("emoji1")
+
   lazy val messageAutoDeleteTimerChanged1: MessageAutoDeleteTimerChanged =
     MessageAutoDeleteTimerChanged(messageAutoDeleteTime = 30.seconds)
 
