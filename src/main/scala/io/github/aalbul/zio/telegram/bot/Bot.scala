@@ -658,4 +658,17 @@ trait Bot {
     *   [[GetChatMemberCount]] builder
     */
   def getChatMemberCount(chatId: String): GetChatMemberCount
+
+  /** Use this method to get information about a member of a chat. Returns a
+    * [[https://core.telegram.org/bots/api#chatmember ChatMember]] object on success.
+    *
+    * @param chatId
+    *   Unique identifier for the target chat or username of the target supergroup or channel (in the format
+    *   \@channelusername)
+    * @param userId
+    *   Unique identifier of the target user
+    * @return
+    *   [[GetChatMember]] builder
+    */
+  def getChatMember(chatId: String, userId: Long): GetChatMember
 }
