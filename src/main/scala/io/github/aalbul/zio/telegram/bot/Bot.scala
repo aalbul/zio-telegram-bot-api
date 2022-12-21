@@ -499,6 +499,19 @@ trait Bot {
     */
   def editChatInviteLink(chatId: String, inviteLink: String): EditChatInviteLink
 
+  /** Use this method to revoke an invite link created by the bot. If the primary link is revoked, a new link is
+    * automatically generated. The bot must be an administrator in the chat for this to work and must have the
+    * appropriate administrator rights. Returns the revoked invite link as
+    * [[https://core.telegram.org/bots/api#chatinvitelink ChatInviteLink]] object.
+    * @param chatId
+    *   Unique identifier of the target chat or username of the target channel (in the format @channelusername)
+    * @param inviteLink
+    *   The invite link to revoke
+    * @return
+    *   [[RevokeChatInviteLink]] builder
+    */
+  def revokeChatInviteLink(chatId: String, inviteLink: String): RevokeChatInviteLink
+
   /** Use this method to get up to date information about the chat (current name of the user for one-on-one
     * conversations, current username of a user, group or channel, etc.). Returns a [[Chat]] object on success.
     *

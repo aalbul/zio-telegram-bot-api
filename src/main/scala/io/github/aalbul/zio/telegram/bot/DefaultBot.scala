@@ -77,5 +77,7 @@ class DefaultBot extends Bot {
   override def createChatInviteLink(chatId: String): CreateChatInviteLink = CreateChatInviteLink.of(chatId)
   override def editChatInviteLink(chatId: String, inviteLink: String): EditChatInviteLink =
     EditChatInviteLink.of(chatId, inviteLink)
+  override def revokeChatInviteLink(chatId: String, inviteLink: String): RevokeChatInviteLink =
+    RevokeChatInviteLink.of(chatId, inviteLink)
   override def getChat(chatId: String): GetChat = GetChat.of(chatId)
 }
