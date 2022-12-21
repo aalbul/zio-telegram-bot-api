@@ -9,6 +9,12 @@ object ChatMember {
     CodecMakerConfig
       .withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
       .withDiscriminatorFieldName(Some("status"))
+      .withRequireDiscriminatorFirst(false)
+  )
+
+  implicit val chatMemberSeqJsonCodec: JsonValueCodec[Seq[ChatMember]] = JsonCodecMaker.make(
+    CodecMakerConfig
+      .withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
   )
 }
 

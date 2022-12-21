@@ -637,4 +637,15 @@ trait Bot {
     *   [[GetChat]] builder
     */
   def getChat(chatId: String): GetChat
+
+  /** Use this method to get a list of administrators in a chat, which aren't bots. Returns an Array of
+    * [[https://core.telegram.org/bots/api#chatmember ChatMember]] objects.
+    *
+    * @param chatId
+    *   Unique identifier for the target chat or username of the target supergroup or channel (in the format
+    *   \@channelusername)
+    * @return
+    *   [[GetChatAdministrators]] builder
+    */
+  def getChatAdministrators(chatId: String): GetChatAdministrators
 }

@@ -1,5 +1,4 @@
 {
-  "status": "kicked",
   "user": {
     "id": 1,
     "is_bot": false,
@@ -13,5 +12,6 @@
     "can_read_all_group_messages": true,
     "supports_inline_queries": false
   },
+  "status": "kicked",
   "until_date": 30000
 }

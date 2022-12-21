@@ -7,8 +7,7 @@ import io.github.aalbul.zio.telegram.test.BaseSpec
 
 class GetChatSpec extends BaseSpec {
   trait Scope {
-    val command: Command[Chat] = GetChat.of("557")
-
+    val command: Command[Chat] = GetChat.of(chatId = "557")
     val payload: GetChatPayload = GetChatPayload(chatId = "557")
   }
 
