@@ -696,4 +696,12 @@ trait Bot {
     *   [[DeleteChatStickerSet]] builder
     */
   def deleteChatStickerSet(chatId: String): DeleteChatStickerSet
+
+  /** Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no
+    * parameters. Returns an Array of [[https://core.telegram.org/bots/api#sticker Sticker]] objects.
+    *
+    * @return
+    *   [[GetForumTopicIconStickers]] builder
+    */
+  def getForumTopicIconStickers: GetForumTopicIconStickers
 }

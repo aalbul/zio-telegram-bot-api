@@ -9,6 +9,10 @@ object Sticker {
     CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
   )
 
+  implicit val stickerSeqJsonCodec: JsonValueCodec[Seq[Sticker]] = JsonCodecMaker.make(
+    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
+  )
+
   /** Constructs minimal [[Sticker]]
     * @param fileId
     *   Identifier for this file, which can be used to download or reuse the file
