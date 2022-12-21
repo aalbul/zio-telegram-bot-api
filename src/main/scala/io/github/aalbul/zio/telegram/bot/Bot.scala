@@ -535,6 +535,19 @@ trait Bot {
     */
   def approveChatJoinRequest(chatId: String, userId: Long): ApproveChatJoinRequest
 
+  /** Use this method to set a new profile photo for the chat. Photos can't be changed for private chats. The bot must
+    * be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns True
+    * on success.
+    *
+    * @param chatId
+    *   Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    * @param photo
+    *   New chat photo, uploaded using multipart/form-data
+    * @return
+    *   [[SetChatPhoto]] builder
+    */
+  def setChatPhoto(chatId: String, photo: FileDescriptor): SetChatPhoto
+
   /** Use this method to get up to date information about the chat (current name of the user for one-on-one
     * conversations, current username of a user, group or channel, etc.). Returns a [[Chat]] object on success.
     *
