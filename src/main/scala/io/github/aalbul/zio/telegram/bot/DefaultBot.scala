@@ -87,5 +87,6 @@ class DefaultBot extends Bot {
   override def deleteChatPhoto(chatId: String): DeleteChatPhoto = DeleteChatPhoto.of(chatId)
   override def setChatTitle(chatId: String, title: String): SetChatTitle = SetChatTitle.of(chatId, title)
   override def setChatDescription(chatId: String): SetChatDescription = SetChatDescription.of(chatId)
+  override def pinChatMessage(chatId: String, messageId: Long): PinChatMessage = PinChatMessage.of(chatId, messageId)
   override def getChat(chatId: String): GetChat = GetChat.of(chatId)
 }
