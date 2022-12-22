@@ -100,4 +100,10 @@ class DefaultBot extends Bot {
   override def deleteChatStickerSet(chatId: String): DeleteChatStickerSet = DeleteChatStickerSet.of(chatId)
   override def getForumTopicIconStickers: GetForumTopicIconStickers = GetForumTopicIconStickers.of()
   override def createForumTopic(chatId: String, name: String): CreateForumTopic = CreateForumTopic.of(chatId, name)
+  override def editForumTopic(
+    chatId: String,
+    messageThreadId: Long,
+    name: String,
+    iconCustomEmojiId: String
+  ): EditForumTopic = EditForumTopic.of(chatId, messageThreadId, name, iconCustomEmojiId)
 }
