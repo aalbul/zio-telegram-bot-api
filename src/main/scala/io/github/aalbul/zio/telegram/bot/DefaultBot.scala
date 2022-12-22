@@ -106,4 +106,12 @@ class DefaultBot extends Bot {
     name: String,
     iconCustomEmojiId: String
   ): EditForumTopic = EditForumTopic.of(chatId, messageThreadId, name, iconCustomEmojiId)
+  override def closeForumTopic(chatId: String, messageThreadId: Long): CloseForumTopic =
+    CloseForumTopic.of(chatId, messageThreadId)
+  override def reopenForumTopic(chatId: String, messageThreadId: Long): ReopenForumTopic =
+    ReopenForumTopic.of(chatId, messageThreadId)
+  override def deleteForumTopic(chatId: String, messageThreadId: Long): DeleteForumTopic =
+    DeleteForumTopic.of(chatId, messageThreadId)
+  override def unpinAllForumTopicMessages(chatId: String, messageThreadId: Long): UnpinAllForumTopicMessages =
+    UnpinAllForumTopicMessages.of(chatId, messageThreadId)
 }

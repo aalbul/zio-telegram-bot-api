@@ -736,4 +736,55 @@ trait Bot {
     *   [[EditForumTopic]] builder
     */
   def editForumTopic(chatId: String, messageThreadId: Long, name: String, iconCustomEmojiId: String): EditForumTopic
+
+  /** Use this method to close an open topic in a forum supergroup chat. The bot must be an administrator in the chat
+    * for this to work and must have the can_manage_topics administrator rights, unless it is the creator of the topic.
+    * Returns True on success.
+    *
+    * @param chatId
+    *   Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+    * @param messageThreadId
+    *   Unique identifier for the target message thread of the forum topic
+    * @return
+    *   [[CloseForumTopic]] builder
+    */
+  def closeForumTopic(chatId: String, messageThreadId: Long): CloseForumTopic
+
+  /** Use this method to reopen a closed topic in a forum supergroup chat. The bot must be an administrator in the chat
+    * for this to work and must have the can_manage_topics administrator rights, unless it is the creator of the topic.
+    * Returns True on success.
+    *
+    * @param chatId
+    *   Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+    * @param messageThreadId
+    *   Unique identifier for the target message thread of the forum topic
+    * @return
+    *   [[ReopenForumTopic]] builder
+    */
+  def reopenForumTopic(chatId: String, messageThreadId: Long): ReopenForumTopic
+
+  /** Use this method to delete a forum topic along with all its messages in a forum supergroup chat. The bot must be an
+    * administrator in the chat for this to work and must have the can_delete_messages administrator rights. Returns
+    * True on success.
+    * @param chatId
+    *   Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+    * @param messageThreadId
+    *   Unique identifier for the target message thread of the forum topic
+    * @return
+    *   [[DeleteForumTopic]] builder
+    */
+  def deleteForumTopic(chatId: String, messageThreadId: Long): DeleteForumTopic
+
+  /** Use this method to clear the list of pinned messages in a forum topic. The bot must be an administrator in the
+    * chat for this to work and must have the can_pin_messages administrator right in the supergroup. Returns True on
+    * success.
+    *
+    * @param chatId
+    *   Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+    * @param messageThreadId
+    *   Unique identifier for the target message thread of the forum topic
+    * @return
+    *   [[UnpinAllForumTopicMessages]] builder
+    */
+  def unpinAllForumTopicMessages(chatId: String, messageThreadId: Long): UnpinAllForumTopicMessages
 }
