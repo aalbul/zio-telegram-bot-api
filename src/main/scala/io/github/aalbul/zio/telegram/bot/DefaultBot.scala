@@ -114,4 +114,6 @@ class DefaultBot extends Bot {
     DeleteForumTopic.of(chatId, messageThreadId)
   override def unpinAllForumTopicMessages(chatId: String, messageThreadId: Long): UnpinAllForumTopicMessages =
     UnpinAllForumTopicMessages.of(chatId, messageThreadId)
+  override def answerCallbackQuery(callbackQueryId: String): AnswerCallbackQuery =
+    AnswerCallbackQuery.of(callbackQueryId)
 }
