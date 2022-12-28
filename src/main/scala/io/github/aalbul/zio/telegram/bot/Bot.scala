@@ -806,6 +806,21 @@ trait Bot {
   /** Use this method to change the list of the bot's commands. See
     * [[https://core.telegram.org/bots/features#commands this manual]] for more details about bot commands. Returns True
     * on success.
+    *
+    * @param commands
+    *   A JSON-serialized list of bot commands to be set as the list of the bot's commands. At most 100 commands can be
+    *   specified.
+    * @return
+    *   [[AnswerCallbackQuery]] builder
     */
   def setMyCommands(commands: Seq[BotCommand]): SetMyCommands
+
+  /** Use this method to delete the list of the bot's commands for the given scope and user language. After deletion,
+    * [[https://core.telegram.org/bots/api#determining-list-of-commands higher level commands]] will be shown to
+    * affected users. Returns True on success.
+    *
+    * @return
+    *   [[DeleteMyCommands]] builder
+    */
+  def deleteMyCommands(): DeleteMyCommands
 }
