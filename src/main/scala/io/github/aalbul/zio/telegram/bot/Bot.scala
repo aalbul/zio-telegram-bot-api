@@ -49,6 +49,13 @@ trait Bot {
     */
   def setWebhook(url: String): SetWebhook
 
+  /** Use this method to remove webhook integration if you decide to switch back to
+    * [[https://core.telegram.org/bots/api#getupdates getUpdates]]. Returns True on success.
+    *
+    * @return [[DeleteWebhook]] builder
+    */
+  def deleteWebhook: DeleteWebhook
+
   /** A simple method for testing your bot's authentication token. Requires no parameters. Returns basic information
     * about the bot in form of a [[User]] object.
     * @return
