@@ -1,0 +1,16 @@
+{
+  "commands": [
+    {
+      "command": "some command",
+      "description": "some description"
+    },
+    {
+      "command": "second command",
+      "description": "second command description"
+    }
+  ],
+  "scope": {
+    "type": "all_private_chats"
+  },
+  "language_code": "EN"
+}

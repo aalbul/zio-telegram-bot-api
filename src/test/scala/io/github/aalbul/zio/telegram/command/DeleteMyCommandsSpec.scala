@@ -1,6 +1,7 @@
 package io.github.aalbul.zio.telegram.command
 
-import io.github.aalbul.zio.telegram.command.MultipartBody.stringPart
+import com.github.plokhotnyuk.jsoniter_scala.core.writeToString
+import io.github.aalbul.zio.telegram.command.DeleteMyCommands.DeleteMyCommandsPayload
 import io.github.aalbul.zio.telegram.domain.BotCommandScopeAllPrivateChats
 import io.github.aalbul.zio.telegram.test.BaseSpec
 
@@ -10,6 +11,10 @@ class DeleteMyCommandsSpec extends BaseSpec {
       .of()
       .withScope(BotCommandScopeAllPrivateChats.of())
       .withLanguageCode("EN")
+    val payload: DeleteMyCommandsPayload = DeleteMyCommandsPayload(
+      scope = Some(BotCommandScopeAllPrivateChats.of()),
+      languageCode = Some("EN")
+    )
   }
 
   "DeleteMyCommands" when {
@@ -20,11 +25,24 @@ class DeleteMyCommandsSpec extends BaseSpec {
     }
 
     "parameters" should {
-      "represent parameters as form data" in new Scope {
-        command.parameters shouldBe MultipartBody.of(
-          stringPart("scope", jsonResourceString("json/command/bot-command-scope.json")),
-          stringPart("language_code", "EN")
-        )
+      "represent parameters as json" in new Scope {
+        command.parameters shouldBe JsonBody(payload)
+      }
+    }
+
+    "DeleteMyCommandsPayload" should {
+      "encoder" should {
+        "encode payload to json" in new Scope {
+          writeToString(payload) should matchJsonResource("json/command/delete-my-commands-payload.json")
+        }
+      }
+
+      "decoder" should {
+        "decode payload from json" in new Scope {
+          jsonResourceAs[DeleteMyCommandsPayload](
+            "json/command/delete-my-commands-payload.json"
+          ) shouldBe payload
+        }
       }
     }
   }

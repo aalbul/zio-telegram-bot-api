@@ -1,9 +1,18 @@
 package io.github.aalbul.zio.telegram.command
 
-import io.github.aalbul.zio.telegram.command.MultipartBody.stringPart
+import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
+import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodecMaker}
+import io.github.aalbul.zio.telegram.command.GetFile.GetFilePayload
 import io.github.aalbul.zio.telegram.domain.File
 
 object GetFile {
+
+  object GetFilePayload {
+    implicit val getFilePayloadJsonCodec: JsonValueCodec[GetFilePayload] =
+      JsonCodecMaker.make(CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2))
+  }
+
+  case class GetFilePayload(fileId: String)
 
   /** Constructs minimal [[GetFile]] command
     * @param fileId
@@ -11,7 +20,7 @@ object GetFile {
     * @return
     *   [[GetFile]] builder
     */
-  def of(fileId: String): GetFile = GetFile(fileId)
+  def of(fileId: String): GetFile = GetFile(GetFilePayload(fileId))
 }
 
 /** Use this method to get basic information about a file and prepare it for downloading. For the moment, bots can
@@ -23,8 +32,7 @@ object GetFile {
   * Note: This function may not preserve the original file name and MIME type. You should save the file's MIME type and
   * name (if available) when the File object is received.
   */
-case class GetFile(fileId: String) extends Command[File] {
+case class GetFile(payload: GetFilePayload) extends Command[File] {
   override val name: String = "getFile"
-
-  override def parameters: ApiParameters = MultipartBody.of(stringPart("file_id", fileId))
+  override def parameters: ApiParameters = JsonBody(payload)
 }
