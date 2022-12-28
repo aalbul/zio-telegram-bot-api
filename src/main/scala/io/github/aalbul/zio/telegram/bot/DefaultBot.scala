@@ -119,4 +119,5 @@ class DefaultBot extends Bot {
   override def setMyCommands(commands: Seq[BotCommand]): SetMyCommands = SetMyCommands.of(commands)
   override def deleteMyCommands(): DeleteMyCommands = DeleteMyCommands.of()
   override def getMyCommands(): GetMyCommands = GetMyCommands.of()
+  override def setChatMenuButton(): SetChatMenuButton = SetChatMenuButton.of()
 }

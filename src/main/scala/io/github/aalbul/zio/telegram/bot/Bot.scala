@@ -828,7 +828,16 @@ trait Bot {
     * Array of [[https://core.telegram.org/bots/api#botcommand BotCommand]] objects. If commands aren't set, an empty
     * list is returned.
     *
-    * @return [[GetMyCommands]] builder
+    * @return
+    *   [[GetMyCommands]] builder
     */
   def getMyCommands(): GetMyCommands
+
+  /** Use this method to change the bot's menu button in a private chat, or the default menu button. Returns True on
+    * success.
+    *
+    * @return
+    *   [[SetChatMenuButton]] builder
+    */
+  def setChatMenuButton(): SetChatMenuButton
 }

@@ -490,6 +490,12 @@ trait Builders {
 
   lazy val botCommandScope7: BotCommandScope = BotCommandScopeChatMember.of(chatId = "513", userId = 221)
 
+  lazy val menuButton1: MenuButton = MenuButtonCommands.of()
+
+  lazy val menuButton2: MenuButton = MenuButtonWebApp.of(text = "button text", webApp = webAppInfo1)
+
+  lazy val menuButton3: MenuButton = MenuButtonDefault.of()
+
   lazy val chatInviteLink1: ChatInviteLink = ChatInviteLink
     .of(
       inviteLink = "http://google.com/invite",
