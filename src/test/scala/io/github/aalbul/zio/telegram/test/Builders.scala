@@ -509,6 +509,22 @@ trait Builders {
     .withMemberLimit(22)
     .withPendingJoinRequestCount(6)
 
+  lazy val chatAdministratorRights1: ChatAdministratorRights = ChatAdministratorRights
+    .of(
+      isAnonymous = true,
+      canManageChat = false,
+      canDeleteMessages = true,
+      canManageVideoChats = false,
+      canRestrictMembers = true,
+      canPromoteMembers = false,
+      canChangeInfo = true,
+      canInviteUsers = false
+    )
+    .withCanPostMessages(true)
+    .withCanEditMessages(false)
+    .withCanPinMessages(true)
+    .withCanManageTopics(false)
+
   lazy val chatMemberUpdated1: ChatMemberUpdated = ChatMemberUpdated
     .of(
       chat = chat1,

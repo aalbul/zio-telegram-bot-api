@@ -848,4 +848,21 @@ trait Bot {
     *   [[GetChatMenuButton]] builder
     */
   def getChatMenuButton(): GetChatMenuButton
+
+  /** Use this method to change the default administrator rights requested by the bot when it's added as an
+    * administrator to groups or channels. These rights will be suggested to users, but they are are free to modify the
+    * list before adding the bot. Returns True on success.
+    *
+    * @return
+    *   [[SetMyDefaultAdministratorRights]] builder
+    */
+  def setMyDefaultAdministratorRights(): SetMyDefaultAdministratorRights
+
+  /** Use this method to get the current default administrator rights of the bot. Returns
+    * [[https://core.telegram.org/bots/api#chatadministratorrights ChatAdministratorRights]] on success.
+    *
+    * @return
+    *   [[GetMyDefaultAdministratorRights]] builder
+    */
+  def getMyDefaultAdministratorRights(): GetMyDefaultAdministratorRights
 }
