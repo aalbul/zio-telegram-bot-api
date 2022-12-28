@@ -8,6 +8,47 @@ import zio.stream.ZStream
 
 trait Bot {
 
+  /** Use this method to receive incoming updates using long polling
+    * ([[https://en.wikipedia.org/wiki/Push_technology#Long_polling wiki]]). Returns an Array of
+    * [[https://core.telegram.org/bots/api#update Update]] objects.
+    *
+    * Notes:
+    *   - \1. This method will not work if an outgoing webhook is set up.
+    *   - 2. In order to avoid getting duplicate updates, recalculate offset after each server response.
+    *
+    * @return
+    *   [[GetUpdates]] builder
+    */
+  def getUpdates: GetUpdates
+
+  /** Use this method to specify a URL and receive incoming updates via an outgoing webhook. Whenever there is an update
+    * for the bot, we will send an HTTPS POST request to the specified URL, containing a JSON-serialized
+    * [[https://core.telegram.org/bots/api#update Update]]. In case of an unsuccessful request, we will give up after a
+    * reasonable amount of attempts. Returns True on success.
+    *
+    * If you'd like to make sure that the webhook was set by you, you can specify secret data in the parameter
+    * secret_token. If specified, the request will contain a header “X-Telegram-Bot-Api-Secret-Token” with the secret
+    * token as content.
+    *
+    * Notes
+    *
+    *   - \1. You will not be able to receive updates using [[https://core.telegram.org/bots/api#getupdates getUpdates]]
+    *     for as long as an outgoing webhook is set up.
+    *   - 2. To use a self-signed certificate, you need to upload your
+    *     [[https://core.telegram.org/bots/self-signed public key certificate]] using certificate parameter. Please
+    *     upload as InputFile, sending a String will not work.
+    *   - 3. Ports currently supported for webhooks: 443, 80, 88, 8443.
+    *
+    * If you're having any trouble setting up webhooks, please check out this
+    * [[https://core.telegram.org/bots/webhooks amazing guide to webhooks]].
+    *
+    * @param url
+    *   HTTPS URL to send updates to. Use an empty string to remove webhook integration
+    * @return
+    *   [[SetWebhook]] builder
+    */
+  def setWebhook(url: String): SetWebhook
+
   /** A simple method for testing your bot's authentication token. Requires no parameters. Returns basic information
     * about the bot in form of a [[User]] object.
     * @return

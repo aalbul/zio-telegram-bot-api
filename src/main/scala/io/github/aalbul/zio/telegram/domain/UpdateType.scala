@@ -1,6 +1,7 @@
 package io.github.aalbul.zio.telegram.domain
 
 import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
+import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodecMaker}
 import enumeratum.{EnumEntry, *}
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
@@ -25,4 +26,6 @@ object UpdateType extends Enum[UpdateType] {
   override def values: IndexedSeq[UpdateType] = findValues
 
   implicit val updateTypeJsonEncoder: JsonValueCodec[UpdateType] = makeEnumCodec(values)
+  implicit val updateTypeSeqJsonEncoder: JsonValueCodec[Seq[UpdateType]] =
+    JsonCodecMaker.make(CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2))
 }

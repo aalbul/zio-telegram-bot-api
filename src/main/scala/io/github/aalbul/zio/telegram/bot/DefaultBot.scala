@@ -12,6 +12,8 @@ object DefaultBot {
 }
 
 class DefaultBot extends Bot {
+  override def getUpdates: GetUpdates = GetUpdates.of
+  override def setWebhook(url: String): SetWebhook = SetWebhook.of(url)
   override def getMe: GetMe = new GetMe
   override def logOut: LogOut = new LogOut
   override def close: Close = new Close
