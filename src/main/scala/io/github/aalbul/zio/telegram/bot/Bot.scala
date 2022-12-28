@@ -823,4 +823,12 @@ trait Bot {
     *   [[DeleteMyCommands]] builder
     */
   def deleteMyCommands(): DeleteMyCommands
+
+  /** Use this method to get the current list of the bot's commands for the given scope and user language. Returns an
+    * Array of [[https://core.telegram.org/bots/api#botcommand BotCommand]] objects. If commands aren't set, an empty
+    * list is returned.
+    *
+    * @return [[GetMyCommands]] builder
+    */
+  def getMyCommands(): GetMyCommands
 }

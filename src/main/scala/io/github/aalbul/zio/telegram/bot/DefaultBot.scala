@@ -118,4 +118,5 @@ class DefaultBot extends Bot {
     AnswerCallbackQuery.of(callbackQueryId)
   override def setMyCommands(commands: Seq[BotCommand]): SetMyCommands = SetMyCommands.of(commands)
   override def deleteMyCommands(): DeleteMyCommands = DeleteMyCommands.of()
+  override def getMyCommands(): GetMyCommands = GetMyCommands.of()
 }
