@@ -1,0 +1,14 @@
+{
+  "url": "https://google.com/webhook",
+  "has_custom_certificate": true,
+  "pending_update_count": 6,
+  "ip_address": "192.168.2.1",
+  "last_error_date": 1655028930,
+  "last_error_message": "something went wrong",
+  "last_synchronization_error_date": 1655100911,
+  "max_connections": 25,
+  "allowed_updates": [
+    "message",
+    "poll"
+  ]
+}

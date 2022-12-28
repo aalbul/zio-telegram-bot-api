@@ -26,6 +26,6 @@ object UpdateType extends Enum[UpdateType] {
   override def values: IndexedSeq[UpdateType] = findValues
 
   implicit val updateTypeJsonEncoder: JsonValueCodec[UpdateType] = makeEnumCodec(values)
-  implicit val updateTypeSeqJsonEncoder: JsonValueCodec[Seq[UpdateType]] =
+  implicit val updateTypeSetJsonEncoder: JsonValueCodec[Set[UpdateType]] =
     JsonCodecMaker.make(CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2))
 }

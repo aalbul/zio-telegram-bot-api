@@ -49,7 +49,7 @@ case class SetWebhook(
   certificate: Option[FileDescriptor],
   ipAddress: Option[String],
   maxConnections: Option[Long],
-  allowedUpdates: Option[Seq[UpdateType]],
+  allowedUpdates: Option[Set[UpdateType]],
   dropPendingUpdates: Option[Boolean],
   secretToken: Option[String]
 ) extends Command[Boolean] {
@@ -86,7 +86,7 @@ case class SetWebhook(
     * be used. Please note that this parameter doesn't affect updates created before the call to the setWebhook, so
     * unwanted updates may be received for a short period of time.
     */
-  def withAllowedUpdates(allowedUpdates: Seq[UpdateType]): SetWebhook = copy(allowedUpdates = Some(allowedUpdates))
+  def withAllowedUpdates(allowedUpdates: Set[UpdateType]): SetWebhook = copy(allowedUpdates = Some(allowedUpdates))
 
   /** Pass True to drop all pending updates
     */

@@ -810,6 +810,15 @@ trait Builders {
     .withShippingOptionId("option-id-1")
     .withOrderInfo(orderInfo1)
 
+  lazy val webhookInfo1: WebhookInfo = WebhookInfo
+    .of(url = "https://google.com/webhook", hasCustomCertificate = true, pendingUpdateCount = 6)
+    .withIpAddress("192.168.2.1")
+    .withLastErrorDate(instant1)
+    .withLastErrorMessage("something went wrong")
+    .withLastSynchronizationErrorDate(instant3)
+    .withMaxConnections(25)
+    .withAllowedUpdates(Set(UpdateType.Message, UpdateType.Poll))
+
   lazy val forumTopic1: ForumTopic = ForumTopic
     .of(
       messageThreadId = 21,

@@ -13,7 +13,7 @@ class SetWebhookSpec extends BaseSpec {
         .withCertificate(pathDescriptor("/tmp/cert.pem"))
         .withIpAddress("192.168.2.1")
         .withMaxConnections(25)
-        .withAllowedUpdates(Seq(UpdateType.Message, UpdateType.Poll))
+        .withAllowedUpdates(Set(UpdateType.Message, UpdateType.Poll))
         .withDropPendingUpdates(true)
         .withSecretToken("token-1")
   }
