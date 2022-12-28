@@ -26,6 +26,7 @@ object MultipartBody {
   def stringPart(name: String, value: Boolean): StringPart = StringPart(name, value.toString)
   def stringPart(name: String, value: Long): StringPart = StringPart(name, value.toString)
   def stringPart(name: String, value: Duration): StringPart = StringPart(name, value.toSeconds.toString)
+  def stringPart[T: JsonValueCodec](name: String, value: T): StringPart = StringPart(name, JsonBody(value).toJson)
 }
 
 case class MultipartBody(parts: Seq[MultipartBodyPart]) extends ApiParameters {

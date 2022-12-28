@@ -355,6 +355,11 @@ trait Builders {
     .withFileSize(300000000)
     .withThumb(photoSize1)
 
+  lazy val botCommand1: BotCommand = BotCommand.of(command = "some command", description = "some description")
+
+  lazy val botCommand2: BotCommand =
+    BotCommand.of(command = "second command", description = "second command description")
+
   lazy val contact1: Contact = Contact
     .of(
       phoneNumber = "+31680822212",
@@ -470,6 +475,20 @@ trait Builders {
       canAddWebPagePreviews = true,
       untilDate = 50
     )
+
+  lazy val botCommandScope1: BotCommandScope = BotCommandScopeDefault.of()
+
+  lazy val botCommandScope2: BotCommandScope = BotCommandScopeAllPrivateChats.of()
+
+  lazy val botCommandScope3: BotCommandScope = BotCommandScopeAllGroupChats.of()
+
+  lazy val botCommandScope4: BotCommandScope = BotCommandScopeAllChatAdministrators.of()
+
+  lazy val botCommandScope5: BotCommandScope = BotCommandScopeChat.of(chatId = "512")
+
+  lazy val botCommandScope6: BotCommandScope = BotCommandScopeChatAdministrators.of(chatId = "513")
+
+  lazy val botCommandScope7: BotCommandScope = BotCommandScopeChatMember.of(chatId = "513", userId = 221)
 
   lazy val chatInviteLink1: ChatInviteLink = ChatInviteLink
     .of(

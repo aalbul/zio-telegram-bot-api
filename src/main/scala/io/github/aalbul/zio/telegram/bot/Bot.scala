@@ -802,4 +802,10 @@ trait Bot {
     *   [[AnswerCallbackQuery]] builder
     */
   def answerCallbackQuery(callbackQueryId: String): AnswerCallbackQuery
+
+  /** Use this method to change the list of the bot's commands. See
+    * [[https://core.telegram.org/bots/features#commands this manual]] for more details about bot commands. Returns True
+    * on success.
+    */
+  def setMyCommands(commands: Seq[BotCommand]): SetMyCommands
 }

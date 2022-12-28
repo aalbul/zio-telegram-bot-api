@@ -55,12 +55,12 @@ case class SendPhoto(
     Some(photo.asMultipart("photo")),
     caption.map(stringPart("caption", _)),
     parseMode.map(mode => stringPart("parse_mode", mode.toString)),
-    captionEntities.map(entities => stringPart("caption_entities", JsonBody(entities).toJson)),
+    captionEntities.map(stringPart("caption_entities", _)),
     disableNotification.map(stringPart("disable_notification", _)),
     protectContent.map(stringPart("protect_content", _)),
     replyToMessageId.map(stringPart("reply_to_message_id", _)),
     allowSendingWithoutReply.map(stringPart("allow_sending_without_reply", _)),
-    replyMarkup.map(markup => stringPart("reply_markup", JsonBody(markup).toJson))
+    replyMarkup.map(stringPart("reply_markup", _))
   )
 
   /** Unique identifier for the target message thread (topic) of the forum; for forum supergroups only

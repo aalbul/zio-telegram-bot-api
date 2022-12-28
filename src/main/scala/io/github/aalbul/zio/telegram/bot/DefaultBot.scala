@@ -116,4 +116,5 @@ class DefaultBot extends Bot {
     UnpinAllForumTopicMessages.of(chatId, messageThreadId)
   override def answerCallbackQuery(callbackQueryId: String): AnswerCallbackQuery =
     AnswerCallbackQuery.of(callbackQueryId)
+  override def setMyCommands(commands: Seq[BotCommand]): SetMyCommands = SetMyCommands.of(commands)
 }

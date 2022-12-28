@@ -50,7 +50,7 @@ case class SendMediaGroup(
       .ofOpt(
         Some(stringPart("chat_id", chatId)),
         messageThreadId.map(stringPart("message_thread_id", _)),
-        Some(stringPart("media", JsonBody(media).toJson)),
+        Some(stringPart("media", media)),
         disableNotification.map(stringPart("disable_notification", _)),
         protectContent.map(stringPart("protect_content", _)),
         replyToMessageId.map(stringPart("reply_to_message_id", _)),
