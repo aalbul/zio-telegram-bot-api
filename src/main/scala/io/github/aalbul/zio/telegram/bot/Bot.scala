@@ -840,4 +840,12 @@ trait Bot {
     *   [[SetChatMenuButton]] builder
     */
   def setChatMenuButton(): SetChatMenuButton
+
+  /** Use this method to get the current value of the bot's menu button in a private chat, or the default menu button.
+    * Returns [[https://core.telegram.org/bots/api#menubutton MenuButton]] on success.
+    *
+    * @return
+    *   [[GetChatMenuButton]] builder
+    */
+  def getChatMenuButton(): GetChatMenuButton
 }
