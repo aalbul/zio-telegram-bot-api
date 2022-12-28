@@ -13,7 +13,7 @@ object ChatPermissions {
     * @return
     *   [[ChatPermissions]] builder
     */
-  def of(): ChatPermissions = ChatPermissions(
+  def of: ChatPermissions = ChatPermissions(
     canSendMessages = None,
     canSendMediaMessages = None,
     canSendPolls = None,

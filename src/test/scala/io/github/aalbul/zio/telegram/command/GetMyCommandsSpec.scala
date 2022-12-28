@@ -8,11 +8,11 @@ import io.github.aalbul.zio.telegram.test.BaseSpec
 class GetMyCommandsSpec extends BaseSpec {
   trait Scope {
     val command: Command[Seq[BotCommand]] = GetMyCommands
-      .of()
-      .withScope(BotCommandScopeAllPrivateChats.of())
+      .of
+      .withScope(BotCommandScopeAllPrivateChats.of)
       .withLanguageCode("EN")
     val payload: GetMyCommandsPayload = GetMyCommandsPayload(
-      scope = Some(BotCommandScopeAllPrivateChats.of()),
+      scope = Some(BotCommandScopeAllPrivateChats.of),
       languageCode = Some("EN")
     )
   }

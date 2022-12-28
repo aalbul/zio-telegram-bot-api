@@ -21,7 +21,7 @@ object BotCommandScopeDefault {
     * @return
     *   [[BotCommandScopeDefault]] builder
     */
-  def of(): BotCommandScope = BotCommandScopeDefault()
+  def of: BotCommandScope = BotCommandScopeDefault()
 }
 
 /** Represents the default [[https://core.telegram.org/bots/api#botcommandscope scope]] of bot commands. Default
@@ -38,7 +38,7 @@ object BotCommandScopeAllPrivateChats {
     * @return
     *   [[BotCommandScopeAllPrivateChats]] builder
     */
-  def of(): BotCommandScope = BotCommandScopeAllPrivateChats()
+  def of: BotCommandScope = BotCommandScopeAllPrivateChats()
 }
 
 /** Represents the [[https://core.telegram.org/bots/api#botcommandscope scope]] of bot commands, covering all private
@@ -54,7 +54,7 @@ object BotCommandScopeAllGroupChats {
     * @return
     *   [[BotCommandScopeAllGroupChats]] builder
     */
-  def of(): BotCommandScope = BotCommandScopeAllGroupChats()
+  def of: BotCommandScope = BotCommandScopeAllGroupChats()
 }
 
 /** Represents the [[https://core.telegram.org/bots/api#botcommandscope scope]] of bot commands, covering all group and
@@ -70,7 +70,7 @@ object BotCommandScopeAllChatAdministrators {
     * @return
     *   [[BotCommandScopeAllChatAdministrators]] builder
     */
-  def of(): BotCommandScope = BotCommandScopeAllChatAdministrators()
+  def of: BotCommandScope = BotCommandScopeAllChatAdministrators()
 }
 
 /** Represents the [[https://core.telegram.org/bots/api#botcommandscope scope]] of bot commands, covering all group and

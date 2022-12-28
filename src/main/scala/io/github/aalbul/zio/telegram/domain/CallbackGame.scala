@@ -13,7 +13,7 @@ object CallbackGame {
     * @return
     *   [[CallbackGame]] builder
     */
-  def of(): CallbackGame = CallbackGame()
+  def of: CallbackGame = CallbackGame()
 }
 
 /** A placeholder, currently holds no information. Use [[https://t.me/botfather BotFather]] to set up your game.

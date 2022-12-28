@@ -18,7 +18,7 @@ object SetChatMenuButton {
     * @return
     *   [[SetChatMenuButton]] builder
     */
-  def of(): SetChatMenuButton = SetChatMenuButton(SetChatMenuButtonPayload(chatId = None, menuButton = None))
+  def of: SetChatMenuButton = SetChatMenuButton(SetChatMenuButtonPayload(chatId = None, menuButton = None))
 }
 
 /** Use this method to change the bot's menu button in a private chat, or the default menu button. Returns True on

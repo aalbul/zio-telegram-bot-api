@@ -7,7 +7,7 @@ import io.github.aalbul.zio.telegram.test.BaseSpec
 class SetMyDefaultAdministratorRightsSpec extends BaseSpec {
   trait Scope {
     val command: Command[Boolean] = SetMyDefaultAdministratorRights
-      .of()
+      .of
       .withRights(chatAdministratorRights1)
       .withForChannels(true)
     val payload: SetMyDefaultAdministratorRightsPayload = SetMyDefaultAdministratorRightsPayload(

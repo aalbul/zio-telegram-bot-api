@@ -9,11 +9,11 @@ class SetMyCommandsSpec extends BaseSpec {
   trait Scope {
     val command: Command[Boolean] = SetMyCommands
       .of(Seq(botCommand1, botCommand2))
-      .withScope(BotCommandScopeAllPrivateChats.of())
+      .withScope(BotCommandScopeAllPrivateChats.of)
       .withLanguageCode("EN")
     val payload: SetMyCommandsPayload = SetMyCommandsPayload(
       commands = Seq(botCommand1, botCommand2),
-      scope = Some(BotCommandScopeAllPrivateChats.of()),
+      scope = Some(BotCommandScopeAllPrivateChats.of),
       languageCode = Some("EN")
     )
   }

@@ -19,7 +19,7 @@ object DeleteMyCommands {
     * @return
     *   [[DeleteMyCommands]] builder
     */
-  def of(): DeleteMyCommands = DeleteMyCommands(DeleteMyCommandsPayload(scope = None, languageCode = None))
+  def of: DeleteMyCommands = DeleteMyCommands(DeleteMyCommandsPayload(scope = None, languageCode = None))
 }
 
 case class DeleteMyCommands(payload: DeleteMyCommandsPayload) extends Command[Boolean] {

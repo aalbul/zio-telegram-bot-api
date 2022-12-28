@@ -14,9 +14,9 @@ object DefaultBot {
 class DefaultBot extends Bot {
   override def getUpdates: GetUpdates = GetUpdates.of
   override def setWebhook(url: String): SetWebhook = SetWebhook.of(url)
-  override def getMe: GetMe = new GetMe
-  override def logOut: LogOut = new LogOut
-  override def close: Close = new Close
+  override def getMe: GetMe = GetMe.of
+  override def logOut: LogOut = LogOut.of
+  override def close: Close = Close.of
   override def streamUpdates(
     chunkSize: Long = 100L,
     allowedTypes: Set[UpdateType]
@@ -100,7 +100,7 @@ class DefaultBot extends Bot {
   override def setChatStickerSet(chatId: String, stickerSetName: String): SetChatStickerSet =
     SetChatStickerSet.of(chatId, stickerSetName)
   override def deleteChatStickerSet(chatId: String): DeleteChatStickerSet = DeleteChatStickerSet.of(chatId)
-  override def getForumTopicIconStickers: GetForumTopicIconStickers = GetForumTopicIconStickers.of()
+  override def getForumTopicIconStickers: GetForumTopicIconStickers = GetForumTopicIconStickers.of
   override def createForumTopic(chatId: String, name: String): CreateForumTopic = CreateForumTopic.of(chatId, name)
   override def editForumTopic(
     chatId: String,
@@ -119,10 +119,10 @@ class DefaultBot extends Bot {
   override def answerCallbackQuery(callbackQueryId: String): AnswerCallbackQuery =
     AnswerCallbackQuery.of(callbackQueryId)
   override def setMyCommands(commands: Seq[BotCommand]): SetMyCommands = SetMyCommands.of(commands)
-  override def deleteMyCommands(): DeleteMyCommands = DeleteMyCommands.of()
-  override def getMyCommands(): GetMyCommands = GetMyCommands.of()
-  override def setChatMenuButton(): SetChatMenuButton = SetChatMenuButton.of()
-  override def getChatMenuButton(): GetChatMenuButton = GetChatMenuButton.of()
-  override def setMyDefaultAdministratorRights(): SetMyDefaultAdministratorRights = SetMyDefaultAdministratorRights.of()
-  override def getMyDefaultAdministratorRights(): GetMyDefaultAdministratorRights = GetMyDefaultAdministratorRights.of()
+  override def deleteMyCommands: DeleteMyCommands = DeleteMyCommands.of
+  override def getMyCommands: GetMyCommands = GetMyCommands.of
+  override def setChatMenuButton: SetChatMenuButton = SetChatMenuButton.of
+  override def getChatMenuButton: GetChatMenuButton = GetChatMenuButton.of
+  override def setMyDefaultAdministratorRights: SetMyDefaultAdministratorRights = SetMyDefaultAdministratorRights.of
+  override def getMyDefaultAdministratorRights: GetMyDefaultAdministratorRights = GetMyDefaultAdministratorRights.of
 }

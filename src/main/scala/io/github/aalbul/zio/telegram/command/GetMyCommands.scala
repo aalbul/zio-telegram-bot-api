@@ -18,7 +18,7 @@ object GetMyCommands {
     * @return
     *   [[GetMyCommands]] builder
     */
-  def of(): GetMyCommands = GetMyCommands(GetMyCommandsPayload(scope = None, languageCode = None))
+  def of: GetMyCommands = GetMyCommands(GetMyCommandsPayload(scope = None, languageCode = None))
 }
 
 /** Use this method to get the current list of the bot's commands for the given scope and user language. Returns an

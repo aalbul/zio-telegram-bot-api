@@ -8,7 +8,7 @@ object GetForumTopicIconStickers {
     * @return
     *   [[GetForumTopicIconStickers]] builder
     */
-  def of(): GetForumTopicIconStickers = new GetForumTopicIconStickers
+  def of: GetForumTopicIconStickers = new GetForumTopicIconStickers
 }
 
 /** Use this method to get custom emoji stickers, which can be used as a forum topic icon by any user. Requires no

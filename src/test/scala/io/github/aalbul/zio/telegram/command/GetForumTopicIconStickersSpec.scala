@@ -5,7 +5,7 @@ import io.github.aalbul.zio.telegram.test.BaseSpec
 
 class GetForumTopicIconStickersSpec extends BaseSpec {
   trait Scope {
-    val command: Command[Seq[Sticker]] = GetForumTopicIconStickers.of()
+    val command: Command[Seq[Sticker]] = GetForumTopicIconStickers.of
   }
 
   "GetForumTopicIconStickers" when {

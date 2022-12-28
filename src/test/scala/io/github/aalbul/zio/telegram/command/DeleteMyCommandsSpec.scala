@@ -8,11 +8,11 @@ import io.github.aalbul.zio.telegram.test.BaseSpec
 class DeleteMyCommandsSpec extends BaseSpec {
   trait Scope {
     val command: Command[Boolean] = DeleteMyCommands
-      .of()
-      .withScope(BotCommandScopeAllPrivateChats.of())
+      .of
+      .withScope(BotCommandScopeAllPrivateChats.of)
       .withLanguageCode("EN")
     val payload: DeleteMyCommandsPayload = DeleteMyCommandsPayload(
-      scope = Some(BotCommandScopeAllPrivateChats.of()),
+      scope = Some(BotCommandScopeAllPrivateChats.of),
       languageCode = Some("EN")
     )
   }

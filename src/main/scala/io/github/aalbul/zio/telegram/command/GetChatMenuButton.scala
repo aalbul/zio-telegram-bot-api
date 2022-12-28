@@ -17,7 +17,7 @@ object GetChatMenuButton {
     * @return
     *   [[GetChatMenuButton]] builder
     */
-  def of(): GetChatMenuButton = GetChatMenuButton(GetChatMenuButtonPayload(chatId = None))
+  def of: GetChatMenuButton = GetChatMenuButton(GetChatMenuButtonPayload(chatId = None))
 }
 
 case class GetChatMenuButton(payload: GetChatMenuButtonPayload) extends Command[MenuButton] {

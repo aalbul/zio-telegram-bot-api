@@ -14,7 +14,7 @@ object ForumTopicReopened {
     * @return
     *   [[ForumTopicReopened]] builder
     */
-  def of(): ForumTopicReopened = ForumTopicReopened()
+  def of: ForumTopicReopened = ForumTopicReopened()
 }
 
 /** This object represents a service message about a forum topic reopened in the chat. Currently holds no information.

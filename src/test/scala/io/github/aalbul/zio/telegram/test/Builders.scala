@@ -59,7 +59,7 @@ trait Builders {
     .withLanguage("js")
     .withCustomEmojiId("emoji1")
 
-  lazy val callbackGame1: CallbackGame = CallbackGame.of()
+  lazy val callbackGame1: CallbackGame = CallbackGame.of
 
   lazy val webAppInfo1: WebAppInfo = WebAppInfo.of(url = "https://webapp.org")
 
@@ -290,7 +290,7 @@ trait Builders {
     .of(fileId = "file-2", fileUniqueId = "unique-file-2")
 
   lazy val chatPermissions1: ChatPermissions = ChatPermissions
-    .of()
+    .of
     .withCanSendMessages(true)
     .withCanSendMediaMessages(false)
     .withCanSendPolls(true)
@@ -476,13 +476,13 @@ trait Builders {
       untilDate = 50
     )
 
-  lazy val botCommandScope1: BotCommandScope = BotCommandScopeDefault.of()
+  lazy val botCommandScope1: BotCommandScope = BotCommandScopeDefault.of
 
-  lazy val botCommandScope2: BotCommandScope = BotCommandScopeAllPrivateChats.of()
+  lazy val botCommandScope2: BotCommandScope = BotCommandScopeAllPrivateChats.of
 
-  lazy val botCommandScope3: BotCommandScope = BotCommandScopeAllGroupChats.of()
+  lazy val botCommandScope3: BotCommandScope = BotCommandScopeAllGroupChats.of
 
-  lazy val botCommandScope4: BotCommandScope = BotCommandScopeAllChatAdministrators.of()
+  lazy val botCommandScope4: BotCommandScope = BotCommandScopeAllChatAdministrators.of
 
   lazy val botCommandScope5: BotCommandScope = BotCommandScopeChat.of(chatId = "512")
 
@@ -490,11 +490,11 @@ trait Builders {
 
   lazy val botCommandScope7: BotCommandScope = BotCommandScopeChatMember.of(chatId = "513", userId = 221)
 
-  lazy val menuButton1: MenuButton = MenuButtonCommands.of()
+  lazy val menuButton1: MenuButton = MenuButtonCommands.of
 
   lazy val menuButton2: MenuButton = MenuButtonWebApp.of(text = "button text", webApp = webAppInfo1)
 
-  lazy val menuButton3: MenuButton = MenuButtonDefault.of()
+  lazy val menuButton3: MenuButton = MenuButtonDefault.of
 
   lazy val chatInviteLink1: ChatInviteLink = ChatInviteLink
     .of(
@@ -633,7 +633,7 @@ trait Builders {
     )
 
   lazy val orderInfo1: OrderInfo = OrderInfo
-    .of()
+    .of
     .withName("John Wick")
     .withEmail("jwick@google.com")
     .withPhoneNumber("+312345689")
@@ -726,7 +726,7 @@ trait Builders {
 
   lazy val videoChatScheduled1: VideoChatScheduled = VideoChatScheduled.of(startDate = instant4)
 
-  lazy val videoChatStarted1: VideoChatStarted = VideoChatStarted.of()
+  lazy val videoChatStarted1: VideoChatStarted = VideoChatStarted.of
 
   lazy val videoChatEnded1: VideoChatEnded = VideoChatEnded.of(duration = 10.minutes)
 
@@ -743,9 +743,9 @@ trait Builders {
     .of(name = "topic-1", iconColor = 255)
     .withIconCustomEmojiId("emoji-1")
 
-  lazy val forumTopicClosed1: ForumTopicClosed = ForumTopicClosed.of()
+  lazy val forumTopicClosed1: ForumTopicClosed = ForumTopicClosed.of
 
-  lazy val forumTopicReopened1: ForumTopicReopened = ForumTopicReopened.of()
+  lazy val forumTopicReopened1: ForumTopicReopened = ForumTopicReopened.of
 
   lazy val inlineQuery1: InlineQuery = InlineQuery
     .of(

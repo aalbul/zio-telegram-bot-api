@@ -20,7 +20,7 @@ object MenuButtonCommands {
     * @return
     *   [[MenuButtonCommands]] builder
     */
-  def of(): MenuButton = MenuButtonCommands()
+  def of: MenuButton = MenuButtonCommands()
 }
 
 /** Represents a menu button, which opens the bot's list of commands.
@@ -54,7 +54,7 @@ object MenuButtonDefault {
     * @return
     *   [[MenuButtonDefault]] builder
     */
-  def of(): MenuButton = MenuButtonDefault()
+  def of: MenuButton = MenuButtonDefault()
 }
 
 /** Describes that no specific value for the menu button was set.

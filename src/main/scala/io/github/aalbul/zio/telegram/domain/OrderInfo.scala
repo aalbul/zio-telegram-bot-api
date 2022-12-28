@@ -10,7 +10,7 @@ object OrderInfo {
     * @return
     *   [[OrderInfo]] builder
     */
-  def of(): OrderInfo = OrderInfo(name = None, phoneNumber = None, email = None, shippingAddress = None)
+  def of: OrderInfo = OrderInfo(name = None, phoneNumber = None, email = None, shippingAddress = None)
 
   implicit val orderInfoJsonCodec: JsonValueCodec[OrderInfo] = JsonCodecMaker.make(
     CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)

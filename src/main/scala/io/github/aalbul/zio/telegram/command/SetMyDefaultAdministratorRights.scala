@@ -21,7 +21,7 @@ object SetMyDefaultAdministratorRights {
     * @return
     *   [[SetMyDefaultAdministratorRights]] builder
     */
-  def of(): SetMyDefaultAdministratorRights = SetMyDefaultAdministratorRights(
+  def of: SetMyDefaultAdministratorRights = SetMyDefaultAdministratorRights(
     SetMyDefaultAdministratorRightsPayload(rights = None, forChannels = None)
   )
 }

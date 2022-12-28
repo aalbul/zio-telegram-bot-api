@@ -863,7 +863,7 @@ trait Bot {
     * @return
     *   [[DeleteMyCommands]] builder
     */
-  def deleteMyCommands(): DeleteMyCommands
+  def deleteMyCommands: DeleteMyCommands
 
   /** Use this method to get the current list of the bot's commands for the given scope and user language. Returns an
     * Array of [[https://core.telegram.org/bots/api#botcommand BotCommand]] objects. If commands aren't set, an empty
@@ -872,7 +872,7 @@ trait Bot {
     * @return
     *   [[GetMyCommands]] builder
     */
-  def getMyCommands(): GetMyCommands
+  def getMyCommands: GetMyCommands
 
   /** Use this method to change the bot's menu button in a private chat, or the default menu button. Returns True on
     * success.
@@ -880,7 +880,7 @@ trait Bot {
     * @return
     *   [[SetChatMenuButton]] builder
     */
-  def setChatMenuButton(): SetChatMenuButton
+  def setChatMenuButton: SetChatMenuButton
 
   /** Use this method to get the current value of the bot's menu button in a private chat, or the default menu button.
     * Returns [[https://core.telegram.org/bots/api#menubutton MenuButton]] on success.
@@ -888,7 +888,7 @@ trait Bot {
     * @return
     *   [[GetChatMenuButton]] builder
     */
-  def getChatMenuButton(): GetChatMenuButton
+  def getChatMenuButton: GetChatMenuButton
 
   /** Use this method to change the default administrator rights requested by the bot when it's added as an
     * administrator to groups or channels. These rights will be suggested to users, but they are are free to modify the
@@ -897,7 +897,7 @@ trait Bot {
     * @return
     *   [[SetMyDefaultAdministratorRights]] builder
     */
-  def setMyDefaultAdministratorRights(): SetMyDefaultAdministratorRights
+  def setMyDefaultAdministratorRights: SetMyDefaultAdministratorRights
 
   /** Use this method to get the current default administrator rights of the bot. Returns
     * [[https://core.telegram.org/bots/api#chatadministratorrights ChatAdministratorRights]] on success.
@@ -905,5 +905,5 @@ trait Bot {
     * @return
     *   [[GetMyDefaultAdministratorRights]] builder
     */
-  def getMyDefaultAdministratorRights(): GetMyDefaultAdministratorRights
+  def getMyDefaultAdministratorRights: GetMyDefaultAdministratorRights
 }

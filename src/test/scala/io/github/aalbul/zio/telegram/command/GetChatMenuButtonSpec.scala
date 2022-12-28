@@ -9,7 +9,7 @@ class GetChatMenuButtonSpec extends BaseSpec {
   trait Scope {
     val command: Command[MenuButton] =
       GetChatMenuButton
-        .of()
+        .of
         .withChatId("554")
 
     val payload: GetChatMenuButtonPayload = GetChatMenuButtonPayload(chatId = Some("554"))

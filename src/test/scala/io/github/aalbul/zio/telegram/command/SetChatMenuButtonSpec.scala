@@ -8,7 +8,7 @@ class SetChatMenuButtonSpec extends BaseSpec {
   trait Scope {
     val command: Command[Boolean] =
       SetChatMenuButton
-        .of()
+        .of
         .withChatId("553")
         .withMenuButton(menuButton1)
 

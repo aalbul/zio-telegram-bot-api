@@ -13,7 +13,7 @@ object VideoChatStarted {
     * @return
     *   [[VideoChatStarted]] builder
     */
-  def of(): VideoChatStarted = VideoChatStarted()
+  def of: VideoChatStarted = VideoChatStarted()
 }
 
 /** This object represents a service message about a video chat started in the chat. Currently holds no information.
