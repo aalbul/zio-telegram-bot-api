@@ -1,0 +1,79 @@
+{
+  "chat_id": "51",
+  "message_thread_id": 11,
+  "title": "invoice title",
+  "description": "invoice description",
+  "payload": "invoice payload",
+  "provider_token": "provider-token-1",
+  "currency": "USD",
+  "prices": [
+    {
+      "label": "some label",
+      "amount": 225
+    }
+  ],
+  "max_tip_amount": 20,
+  "suggested_tip_amounts": [
+    5,
+    10,
+    15,
+    20
+  ],
+  "start_parameter": "start-param",
+  "provider_data": "provider-data",
+  "photo_url": "https://google.com/photo.jpg",
+  "photo_size": 102,
+  "photo_width": 1024,
+  "photo_height": 768,
+  "need_name": true,
+  "need_phone_number": false,
+  "need_email": true,
+  "need_shipping_address": false,
+  "send_phone_number_to_provider": true,
+  "send_email_to_provider": false,
+  "is_flexible": true,
+  "disable_notification": false,
+  "protect_content": true,
+  "reply_to_message_id": 22,
+  "allow_sending_without_reply": false,
+  "reply_markup": {
+    "inline_keyboard": [
+      [
+        {
+          "text": "some button 1",
+          "url": "https://google.com/url1",
+          "callback_data": "some data",
+          "web_app": {
+            "url": "https://webapp.org"
+          },
+          "login_url": {
+            "url": "https://google.com/login",
+            "forward_text": "forward text",
+            "bot_username": "bot-1",
+            "request_write_access": true
+          },
+          "switch_inline_query": "inline query 1",
+          "switch_inline_query_current_chat": "inline query current chat 1",
+          "callback_game": {},
+          "pay": true
+        }
+      ],
+      [
+        {
+          "text": "some button 2",
+          "url": "https://google.com/url2",
+          "callback_data": "another data",
+          "login_url": {
+            "url": "https://google.com/login",
+            "forward_text": "forward text",
+            "bot_username": "bot-1",
+            "request_write_access": true
+          },
+          "switch_inline_query": "inline query 2",
+          "switch_inline_query_current_chat": "inline query current chat 2",
+          "pay": false
+        }
+      ]
+    ]
+  }
+}

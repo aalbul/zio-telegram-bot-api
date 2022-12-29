@@ -950,4 +950,37 @@ trait Bot {
     *   [[AnswerWebAppQuery]] builder
     */
   def answerWebAppQuery(webAppQueryId: String, result: InlineQueryResult): AnswerWebAppQuery
+
+  /** Use this method to send invoices. On success, the sent [[https://core.telegram.org/bots/api#message Message]] is
+    * returned.
+    *
+    * @param chatId
+    *   Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    * @param title
+    *   Product name, 1-32 characters
+    * @param description
+    *   Product description, 1-255 characters
+    * @param payload
+    *   Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal
+    *   processes.
+    * @param providerToken
+    *   Payment provider token, obtained via [[https://t.me/botfather @BotFather]]
+    * @param currency
+    *   Three-letter ISO 4217 currency code, see
+    *   [[https://core.telegram.org/bots/payments#supported-currencies more on currencies]]
+    * @param prices
+    *   Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost,
+    *   delivery tax, bonus, etc.)
+    * @return
+    *   [[SendInvoice]] builder
+    */
+  def sendInvoice(
+    chatId: String,
+    title: String,
+    description: String,
+    payload: String,
+    providerToken: String,
+    currency: String,
+    prices: Seq[LabeledPrice]
+  ): SendInvoice
 }

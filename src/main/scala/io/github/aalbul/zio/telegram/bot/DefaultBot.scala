@@ -131,4 +131,13 @@ class DefaultBot extends Bot {
     AnswerInlineQuery.of(inlineQueryId, results)
   override def answerWebAppQuery(webAppQueryId: String, result: InlineQueryResult): AnswerWebAppQuery =
     AnswerWebAppQuery.of(webAppQueryId, result)
+  override def sendInvoice(
+    chatId: String,
+    title: String,
+    description: String,
+    payload: String,
+    providerToken: String,
+    currency: String,
+    prices: Seq[LabeledPrice]
+  ): SendInvoice = SendInvoice.of(chatId, title, description, payload, providerToken, currency, prices)
 }
