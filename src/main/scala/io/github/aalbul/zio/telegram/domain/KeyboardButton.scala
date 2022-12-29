@@ -5,6 +5,9 @@ import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodec
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
 
 object KeyboardButton {
+  implicit val keyboardButtonJsonCodec: JsonValueCodec[KeyboardButton] = JsonCodecMaker.make(
+    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
+  )
 
   /** Constructs minimal [[KeyboardButton]]
     *
@@ -20,10 +23,6 @@ object KeyboardButton {
     requestLocation = None,
     requestPoll = None,
     webApp = None
-  )
-
-  implicit val keyboardButtonJsonCodec: JsonValueCodec[KeyboardButton] = JsonCodecMaker.make(
-    CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2)
   )
 }
 

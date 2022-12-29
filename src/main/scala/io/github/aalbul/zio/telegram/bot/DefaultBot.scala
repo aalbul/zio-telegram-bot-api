@@ -127,4 +127,6 @@ class DefaultBot extends Bot {
   override def getChatMenuButton: GetChatMenuButton = GetChatMenuButton.of
   override def setMyDefaultAdministratorRights: SetMyDefaultAdministratorRights = SetMyDefaultAdministratorRights.of
   override def getMyDefaultAdministratorRights: GetMyDefaultAdministratorRights = GetMyDefaultAdministratorRights.of
+  override def answerInlineQuery(inlineQueryId: String, results: Seq[InlineQueryResult]): AnswerInlineQuery =
+    AnswerInlineQuery.of(inlineQueryId, results)
 }

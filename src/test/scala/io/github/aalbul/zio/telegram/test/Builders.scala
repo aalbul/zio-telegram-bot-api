@@ -236,6 +236,268 @@ trait Builders {
     .withWebAppData(webAppData1)
     .withReplyMarkup(inlineKeyboardMarkup1)
 
+  lazy val inputMessageContent1: InputMessageContent = InputTextMessageContent
+    .of("text message")
+    .withParseMode(ParseMode.HTML)
+    .withEntities(Seq(messageEntity1))
+    .withDisableWebPagePreview(true)
+
+  lazy val inputMessageContent2: InputMessageContent = InputLocationMessageContent
+    .of(latitude = 53.12, longitude = 25.51)
+    .withHorizontalAccuracy(13.23)
+    .withLivePeriod(2.minutes)
+    .withHeading(57)
+    .withProximityAlertRadius(13)
+
+  lazy val inputMessageContent3: InputMessageContent = InputVenueMessageContent
+    .of(longitude = 52.22, latitude = 4.55, title = "NEMO Science Museum", address = "Oosterdok 2, 1011 VX Amsterdam")
+    .withFoursquareId("fsq1")
+    .withFoursquareType("fsq-t-1")
+    .withGooglePlaceId("gpi1")
+    .withGooglePlaceType("gp-t-1")
+
+  lazy val inputMessageContent4: InputMessageContent = InputContactMessageContent
+    .of(phoneNumber = "+31680822212", firstName = "John")
+    .withLastName("Wick")
+    .withVcard("vcard")
+
+  lazy val inputMessageContent5: InputMessageContent = InputInvoiceMessageContent
+    .of(
+      title = "invoice one",
+      description = "my very first invoice",
+      payload = "invoice payload",
+      providerToken = "provider-token-1",
+      currency = "USD",
+      prices = Seq(labeledPrice1)
+    )
+    .withMaxTipAmount(10)
+    .withSuggestedTipAmounts(Seq(5, 8, 10))
+    .withProviderData("some provider data")
+    .withPhotoUrl("https://google.com/photo.jpg")
+    .withPhotoSize(231)
+    .withPhotoWidth(640)
+    .withPhotoHeight(480)
+    .withNeedName(true)
+    .withNeedPhoneNumber(true)
+    .withNeedEmail(true)
+    .withNeedShippingAddress(true)
+    .withSendPhoneNumberToProvider(false)
+    .withSendEmailToProvider(true)
+    .withIsFlexible(true)
+
+  lazy val inlineQueryResult1: InlineQueryResult = InlineQueryResultCachedAudio
+    .of(id = "22", audioFileId = "audio-file-1")
+    .withCaption("my audio file")
+    .withParseMode(ParseMode.Markdown)
+    .withCaptionEntities(Seq(messageEntity1))
+    .withReplyMarkup(inlineKeyboardMarkup1)
+    .withInputMessageContent(inputMessageContent3)
+
+  lazy val inlineQueryResult2: InlineQueryResult = InlineQueryResultCachedDocument
+    .of(id = "23", title = "some document", documentFileId = "document-file-1")
+    .withDescription("document description")
+    .withCaption("document caption")
+    .withParseMode(ParseMode.Markdown)
+    .withCaptionEntities(Seq(messageEntity1))
+    .withReplyMarkup(inlineKeyboardMarkup1)
+    .withInputMessageContent(inputMessageContent3)
+
+  lazy val inlineQueryResult3: InlineQueryResult = InlineQueryResultCachedGif
+    .of(id = "24", gifFileId = "gif-file-1")
+    .withTitle("gif title")
+    .withCaption("gif caption")
+    .withParseMode(ParseMode.Markdown)
+    .withCaptionEntities(Seq(messageEntity1))
+    .withReplyMarkup(inlineKeyboardMarkup1)
+    .withInputMessageContent(inputMessageContent1)
+
+  lazy val inlineQueryResult4: InlineQueryResult = InlineQueryResultCachedMpeg4Gif
+    .of(id = "25", mpeg4FileId = "mpeg-4-file-1")
+    .withTitle("mpeg 4 title")
+    .withCaption("mpeg 4 caption")
+    .withParseMode(ParseMode.Markdown)
+    .withCaptionEntities(Seq(messageEntity1))
+    .withReplyMarkup(inlineKeyboardMarkup1)
+    .withInputMessageContent(inputMessageContent1)
+
+  lazy val inlineQueryResult5: InlineQueryResult = InlineQueryResultCachedPhoto
+    .of(id = "27", photoFileId = "photo-file-1")
+    .withTitle("photo title")
+    .withDescription("photo description")
+    .withCaption("photo caption")
+    .withParseMode(ParseMode.Markdown)
+    .withCaptionEntities(Seq(messageEntity1))
+    .withReplyMarkup(inlineKeyboardMarkup1)
+    .withInputMessageContent(inputMessageContent1)
+
+  lazy val inlineQueryResult6: InlineQueryResult = InlineQueryResultCachedSticker
+    .of(id = "28", stickerFileId = "sticker-file-1")
+    .withReplyMarkup(inlineKeyboardMarkup1)
+    .withInputMessageContent(inputMessageContent1)
+
+  lazy val inlineQueryResult7: InlineQueryResult = InlineQueryResultCachedVideo
+    .of(id = "29", videoFileId = "video-file-1", title = "video file")
+    .withDescription("video description")
+    .withCaption("video caption")
+    .withParseMode(ParseMode.Markdown)
+    .withCaptionEntities(Seq(messageEntity1))
+    .withReplyMarkup(inlineKeyboardMarkup1)
+    .withInputMessageContent(inputMessageContent1)
+
+  lazy val inlineQueryResult8: InlineQueryResult = InlineQueryResultCachedVoice
+    .of(id = "30", voiceFileId = "voice-file-1", title = "voice file")
+    .withCaption("voice caption")
+    .withParseMode(ParseMode.Markdown)
+    .withCaptionEntities(Seq(messageEntity1))
+    .withReplyMarkup(inlineKeyboardMarkup1)
+    .withInputMessageContent(inputMessageContent1)
+
+  lazy val inlineQueryResult9: InlineQueryResult = InlineQueryResultArticle
+    .of(id = "31", title = "article", inputMessageContent = inputMessageContent2)
+    .withReplyMarkup(inlineKeyboardMarkup1)
+    .withUrl("https://google.com/article")
+    .withHideUrl(true)
+    .withDescription("article description")
+    .withThumbUrl("https://google.com/article_thumb.jpg")
+    .withThumbWidth(300)
+    .withThumbHeight(200)
+
+  lazy val inlineQueryResult10: InlineQueryResult = InlineQueryResultAudio
+    .of(id = "32", audioUrl = "https://google.com/audio.mp3", title = "audio file")
+    .withCaption("audio caption")
+    .withParseMode(ParseMode.Markdown)
+    .withCaptionEntities(Seq(messageEntity1))
+    .withPerformer("some performer")
+    .withAudioDuration(50.seconds)
+    .withReplyMarkup(inlineKeyboardMarkup1)
+    .withInputMessageContent(inputMessageContent1)
+
+  lazy val inlineQueryResult11: InlineQueryResult = InlineQueryResultContact
+    .of(id = "33", phoneNumber = "+31680822212", firstName = "John")
+    .withLastName("Wick")
+    .withVcard("vcard")
+    .withReplyMarkup(inlineKeyboardMarkup1)
+    .withInputMessageContent(inputMessageContent1)
+    .withThumbUrl("https://google.com/contact_thumb.jpeg")
+    .withThumbWidth(250)
+    .withThumbHeight(130)
+
+  lazy val inlineQueryResult12: InlineQueryResult = InlineQueryResultGame
+    .of(id = "34", gameShortName = "my game")
+    .withReplyMarkup(inlineKeyboardMarkup1)
+
+  lazy val inlineQueryResult13: InlineQueryResult = InlineQueryResultDocument
+    .of(
+      id = "35",
+      title = "document title",
+      documentUrl = "https://google.com/document.pdf",
+      mimeType = "application/pdf"
+    )
+    .withCaption("document caption")
+    .withParseMode(ParseMode.Markdown)
+    .withCaptionEntities(Seq(messageEntity1))
+    .withDescription("document description")
+    .withReplyMarkup(inlineKeyboardMarkup1)
+    .withInputMessageContent(inputMessageContent1)
+    .withThumbUrl("https://google.com/document_thumb.jpeg")
+    .withThumbWidth(210)
+    .withThumbHeight(100)
+
+  lazy val inlineQueryResult14: InlineQueryResult = InlineQueryResultGif
+    .of(id = "36", gifUrl = "https://google.com/animation.gif", thumbUrl = "https://google.com/animation_thumb.jpeg")
+    .withGifWidth(640)
+    .withGifHeight(480)
+    .withGifDuration(55.seconds)
+    .withThumbMimeType("image/jpeg")
+    .withTitle("gif title")
+    .withCaption("gif title")
+    .withParseMode(ParseMode.Markdown)
+    .withCaptionEntities(Seq(messageEntity1))
+    .withReplyMarkup(inlineKeyboardMarkup1)
+    .withInputMessageContent(inputMessageContent1)
+
+  lazy val inlineQueryResult15: InlineQueryResult = InlineQueryResultLocation
+    .of(id = "37", longitude = 52.22, latitude = 4.55, title = "some location")
+    .withHorizontalAccuracy(12.43)
+    .withLivePeriod(10.minutes)
+    .withHeading(21)
+    .withProximityAlertRadius(11)
+    .withReplyMarkup(inlineKeyboardMarkup1)
+    .withInputMessageContent(inputMessageContent1)
+    .withThumbUrl("https://google.com/location_thumb.jpeg")
+    .withThumbWidth(210)
+    .withThumbHeight(100)
+
+  lazy val inlineQueryResult16: InlineQueryResult = InlineQueryResultMpeg4Gif
+    .of(id = "38", mpeg4Url = "https://google.com/video.mpeg", thumbUrl = "https://google.com/video_thumb.jpeg")
+    .withMpeg4Width(1024)
+    .withMpeg4Height(768)
+    .withMpeg4Duration(130.seconds)
+    .withThumbMimeType("image/jpeg")
+    .withTitle("video title")
+    .withCaption("video caption")
+    .withParseMode(ParseMode.Markdown)
+    .withCaptionEntities(Seq(messageEntity1))
+    .withReplyMarkup(inlineKeyboardMarkup1)
+    .withInputMessageContent(inputMessageContent1)
+
+  lazy val inlineQueryResult17: InlineQueryResult = InlineQueryResultPhoto
+    .of(id = "39", photoUrl = "https://google.com/photo.jpeg", thumbUrl = "https://google.com/photo_thumb.jpeg")
+    .withPhotoWidth(5000)
+    .withPhotoHeight(2500)
+    .withTitle("photo title")
+    .withDescription("photo description")
+    .withCaption("photo description")
+    .withParseMode(ParseMode.Markdown)
+    .withCaptionEntities(Seq(messageEntity1))
+    .withReplyMarkup(inlineKeyboardMarkup1)
+    .withInputMessageContent(inputMessageContent1)
+
+  lazy val inlineQueryResult18: InlineQueryResult = InlineQueryResultVenue
+    .of(
+      id = "40",
+      longitude = 52.22,
+      latitude = 4.55,
+      title = "NEMO Science Museum",
+      address = "Oosterdok 2, 1011 VX Amsterdam"
+    )
+    .withFoursquareId("fsq1")
+    .withFoursquareType("fsq-t-1")
+    .withGooglePlaceId("gpi1")
+    .withGooglePlaceType("gp-t-1")
+    .withReplyMarkup(inlineKeyboardMarkup1)
+    .withInputMessageContent(inputMessageContent1)
+    .withThumbUrl("https://google.com/venue.jpeg")
+    .withThumbWidth(200)
+    .withThumbHeight(110)
+
+  lazy val inlineQueryResult19: InlineQueryResult = InlineQueryResultVideo
+    .of(
+      id = "41",
+      videoUrl = "https://google.com/video.mp4",
+      mimeType = "video/mp4",
+      thumbUrl = "https://google.com/video_thumb.jpeg",
+      title = "video title"
+    )
+    .withCaption("video caption")
+    .withParseMode(ParseMode.Markdown)
+    .withCaptionEntities(Seq(messageEntity1))
+    .withVideoWidth(1024)
+    .withVideoHeight(768)
+    .withVideoDuration(12.seconds)
+    .withDescription("video description")
+    .withReplyMarkup(inlineKeyboardMarkup1)
+    .withInputMessageContent(inputMessageContent1)
+
+  lazy val inlineQueryResult20: InlineQueryResult = InlineQueryResultVoice
+    .of(id = "42", voiceUrl = "https://google.com/voice.mp3", title = "voice title")
+    .withCaption("voice caption")
+    .withParseMode(ParseMode.Markdown)
+    .withCaptionEntities(Seq(messageEntity1))
+    .withVoiceDuration(55.seconds)
+    .withReplyMarkup(inlineKeyboardMarkup1)
+    .withInputMessageContent(inputMessageContent1)
+
   lazy val inputMediaAnimation1: InputMedia = InputMediaAnimation
     .of(pathDescriptor("/tmp/one.gif"))
     .withThumb(urlDescriptor("https://google.com/animation_thumb.jpg"))
@@ -289,8 +551,7 @@ trait Builders {
   lazy val file2: File = File
     .of(fileId = "file-2", fileUniqueId = "unique-file-2")
 
-  lazy val chatPermissions1: ChatPermissions = ChatPermissions
-    .of
+  lazy val chatPermissions1: ChatPermissions = ChatPermissions.of
     .withCanSendMessages(true)
     .withCanSendMediaMessages(false)
     .withCanSendPolls(true)
@@ -622,6 +883,8 @@ trait Builders {
       totalAmount = 53
     )
 
+  lazy val labeledPrice1: LabeledPrice = LabeledPrice.of(label = "some label", amount = 225)
+
   lazy val shippingAddress1: ShippingAddress = ShippingAddress
     .of(
       countryCode = "NL",
@@ -632,8 +895,7 @@ trait Builders {
       postCode = "3821KL"
     )
 
-  lazy val orderInfo1: OrderInfo = OrderInfo
-    .of
+  lazy val orderInfo1: OrderInfo = OrderInfo.of
     .withName("John Wick")
     .withEmail("jwick@google.com")
     .withPhoneNumber("+312345689")

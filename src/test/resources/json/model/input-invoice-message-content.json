@@ -1,0 +1,31 @@
+{
+  "title": "invoice one",
+  "description": "my very first invoice",
+  "payload": "invoice payload",
+  "provider_token": "provider-token-1",
+  "currency": "USD",
+  "prices": [
+    {
+      "label": "some label",
+      "amount": 225
+    }
+  ],
+  "max_tip_amount": 10,
+  "suggested_tip_amounts": [
+    5,
+    8,
+    10
+  ],
+  "provider_data": "some provider data",
+  "photo_url": "https://google.com/photo.jpg",
+  "photo_size": 231,
+  "photo_width": 640,
+  "photo_height": 480,
+  "need_name": true,
+  "need_phone_number": true,
+  "need_email": true,
+  "need_shipping_address": true,
+  "send_phone_number_to_provider": false,
+  "send_email_to_provider": true,
+  "is_flexible": true
+}

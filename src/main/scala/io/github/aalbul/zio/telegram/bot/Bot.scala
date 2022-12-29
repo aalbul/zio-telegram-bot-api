@@ -923,4 +923,17 @@ trait Bot {
     *   [[GetMyDefaultAdministratorRights]] builder
     */
   def getMyDefaultAdministratorRights: GetMyDefaultAdministratorRights
+
+  /** Use this method to send answers to an inline query. On success, True is returned. No more than 50 results per
+    * query are allowed.
+    *
+    * @param inlineQueryId
+    *   Unique identifier for the answered query
+    * @param results
+    *   A JSON-serialized array of results for the inline query
+    *
+    * @return
+    *   [[AnswerInlineQuery]] builder
+    */
+  def answerInlineQuery(inlineQueryId: String, results: Seq[InlineQueryResult]): AnswerInlineQuery
 }
