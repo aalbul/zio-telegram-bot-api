@@ -936,4 +936,18 @@ trait Bot {
     *   [[AnswerInlineQuery]] builder
     */
   def answerInlineQuery(inlineQueryId: String, results: Seq[InlineQueryResult]): AnswerInlineQuery
+
+  /** Use this method to set the result of an interaction with a [[https://core.telegram.org/bots/webapps Web App]] and
+    * send a corresponding message on behalf of the user to the chat from which the query originated. On success, a
+    * [[https://core.telegram.org/bots/api#sentwebappmessage SentWebAppMessage]] object is returned.
+    *
+    * @param webAppQueryId
+    *   Unique identifier for the query to be answered
+    * @param result
+    *   A JSON-serialized object describing the message to be sent
+    *
+    * @return
+    *   [[AnswerWebAppQuery]] builder
+    */
+  def answerWebAppQuery(webAppQueryId: String, result: InlineQueryResult): AnswerWebAppQuery
 }

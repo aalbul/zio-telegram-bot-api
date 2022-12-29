@@ -129,4 +129,6 @@ class DefaultBot extends Bot {
   override def getMyDefaultAdministratorRights: GetMyDefaultAdministratorRights = GetMyDefaultAdministratorRights.of
   override def answerInlineQuery(inlineQueryId: String, results: Seq[InlineQueryResult]): AnswerInlineQuery =
     AnswerInlineQuery.of(inlineQueryId, results)
+  override def answerWebAppQuery(webAppQueryId: String, result: InlineQueryResult): AnswerWebAppQuery =
+    AnswerWebAppQuery.of(webAppQueryId, result)
 }

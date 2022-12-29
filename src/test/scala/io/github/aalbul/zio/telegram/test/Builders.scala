@@ -118,6 +118,10 @@ trait Builders {
     .of(removeKeyboard = true)
     .withSelective(true)
 
+  lazy val sentWebAppMessage1: SentWebAppMessage = SentWebAppMessage
+    .of
+    .withInlineMessageId("inline-message-id")
+
   lazy val chat1: Chat = Chat.of(id = 81, `type` = ChatType.Supergroup)
 
   lazy val chat2: Chat = Chat.of(id = 82, `type` = ChatType.Private)
