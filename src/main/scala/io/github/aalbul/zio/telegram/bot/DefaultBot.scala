@@ -140,4 +140,12 @@ class DefaultBot extends Bot {
     currency: String,
     prices: Seq[LabeledPrice]
   ): SendInvoice = SendInvoice.of(chatId, title, description, payload, providerToken, currency, prices)
+  override def createInvoiceLink(
+    title: String,
+    description: String,
+    payload: String,
+    providerToken: String,
+    currency: String,
+    prices: Seq[LabeledPrice]
+  ): CreateInvoiceLink = CreateInvoiceLink.of(title, description, payload, providerToken, currency, prices)
 }

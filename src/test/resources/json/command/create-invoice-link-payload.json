@@ -1,0 +1,32 @@
+{
+  "title": "invoice title",
+  "description": "invoice description",
+  "payload": "invoice payload",
+  "provider_token": "provider-token-1",
+  "currency": "USD",
+  "prices": [
+    {
+      "label": "some label",
+      "amount": 225
+    }
+  ],
+  "max_tip_amount": 20,
+  "suggested_tip_amounts": [
+    5,
+    10,
+    15,
+    20
+  ],
+  "provider_data": "provider-data",
+  "photo_url": "https://google.com/photo.jpg",
+  "photo_size": 102,
+  "photo_width": 1024,
+  "photo_height": 768,
+  "need_name": true,
+  "need_phone_number": false,
+  "need_email": true,
+  "need_shipping_address": false,
+  "send_phone_number_to_provider": true,
+  "send_email_to_provider": false,
+  "is_flexible": true
+}

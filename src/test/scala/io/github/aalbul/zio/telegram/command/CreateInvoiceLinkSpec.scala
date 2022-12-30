@@ -1,16 +1,14 @@
 package io.github.aalbul.zio.telegram.command
 
 import com.github.plokhotnyuk.jsoniter_scala.core.writeToString
-import io.github.aalbul.zio.telegram.command.SendInvoice.SendInvoicePayload
-import io.github.aalbul.zio.telegram.domain.Message
+import io.github.aalbul.zio.telegram.command.CreateInvoiceLink.CreateInvoiceLinkPayload
 import io.github.aalbul.zio.telegram.test.BaseSpec
 
-class SendInvoiceSpec extends BaseSpec {
+class CreateInvoiceLinkSpec extends BaseSpec {
   trait Scope {
-    val command: Command[Message] =
-      SendInvoice
+    val command: Command[String] =
+      CreateInvoiceLink
         .of(
-          chatId = "51",
           title = "invoice title",
           description = "invoice description",
           payload = "invoice payload",
@@ -18,10 +16,8 @@ class SendInvoiceSpec extends BaseSpec {
           currency = "USD",
           prices = Seq(labeledPrice1)
         )
-        .withMessageThreadId(11)
         .withMaxTipAmount(20)
         .withSuggestedTipAmounts(Seq(5, 10, 15, 20))
-        .withStartParameter("start-param")
         .withProviderData("provider-data")
         .withPhotoUrl("https://google.com/photo.jpg")
         .withPhotoSize(102)
@@ -34,15 +30,8 @@ class SendInvoiceSpec extends BaseSpec {
         .withSendPhoneNumberToProvider(true)
         .withSendEmailToProvider(false)
         .withIsFlexible(true)
-        .withDisableNotification(false)
-        .withProtectContent(true)
-        .withReplyToMessageId(22)
-        .withAllowSendingWithoutReply(false)
-        .withReplyMarkup(inlineKeyboardMarkup1)
 
-    val payload: SendInvoicePayload = SendInvoicePayload(
-      chatId = "51",
-      messageThreadId = Some(11),
+    val payload: CreateInvoiceLinkPayload = CreateInvoiceLinkPayload(
       title = "invoice title",
       description = "invoice description",
       payload = "invoice payload",
@@ -51,7 +40,6 @@ class SendInvoiceSpec extends BaseSpec {
       prices = Seq(labeledPrice1),
       maxTipAmount = Some(20),
       suggestedTipAmounts = Some(Seq(5, 10, 15, 20)),
-      startParameter = Some("start-param"),
       providerData = Some("provider-data"),
       photoUrl = Some("https://google.com/photo.jpg"),
       photoSize = Some(102),
@@ -63,19 +51,14 @@ class SendInvoiceSpec extends BaseSpec {
       needShippingAddress = Some(false),
       sendPhoneNumberToProvider = Some(true),
       sendEmailToProvider = Some(false),
-      isFlexible = Some(true),
-      disableNotification = Some(false),
-      protectContent = Some(true),
-      replyToMessageId = Some(22),
-      allowSendingWithoutReply = Some(false),
-      replyMarkup = Some(inlineKeyboardMarkup1)
+      isFlexible = Some(true)
     )
   }
 
-  "SendInvoice" when {
+  "CreateInvoiceLink" when {
     "name" should {
       "have proper name" in new Scope {
-        command.name shouldBe "sendInvoice"
+        command.name shouldBe "createInvoiceLink"
       }
     }
 
@@ -85,16 +68,16 @@ class SendInvoiceSpec extends BaseSpec {
       }
     }
 
-    "SendInvoicePayload" should {
+    "CreateInvoiceLinkPayload" should {
       "encoder" should {
         "encode payload to json" in new Scope {
-          writeToString(payload) should matchJsonResource("json/command/send-invoice-payload.json")
+          writeToString(payload) should matchJsonResource("json/command/create-invoice-link-payload.json")
         }
       }
 
       "decoder" should {
         "decode payload from json" in new Scope {
-          jsonResourceAs[SendInvoicePayload]("json/command/send-invoice-payload.json") shouldBe payload
+          jsonResourceAs[CreateInvoiceLinkPayload]("json/command/create-invoice-link-payload.json") shouldBe payload
         }
       }
     }
