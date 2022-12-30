@@ -9,7 +9,7 @@ class EditMessageLiveLocationSpec extends BaseSpec {
   trait Scope {
     val command: Command[MessageOrInlineMessageUpdateResult] =
       EditMessageLiveLocation
-        .of(20, 30)
+        .of(latitude = 20, longitude = 30)
         .withChatId("345")
         .withMessageId(889)
         .withInlineMessageId("456")

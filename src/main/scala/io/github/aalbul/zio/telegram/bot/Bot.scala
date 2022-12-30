@@ -924,6 +924,17 @@ trait Bot {
     */
   def getMyDefaultAdministratorRights: GetMyDefaultAdministratorRights
 
+  /** Use this method to edit text and [[https://core.telegram.org/bots/api#games game]] messages. On success, if the
+    * edited message is not an inline message, the edited [[https://core.telegram.org/bots/api#message Message]] is
+    * returned, otherwise True is returned.
+    *
+    * @param text
+    *   New text of the message, 1-4096 characters after entities parsing
+    * @return
+    *   [[EditMessageText]] builder
+    */
+  def editMessageText(text: String): EditMessageText
+
   /** Use this method to send answers to an inline query. On success, True is returned. No more than 50 results per
     * query are allowed.
     *
