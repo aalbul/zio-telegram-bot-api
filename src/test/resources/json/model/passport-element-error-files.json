@@ -1,0 +1,9 @@
+{
+  "source": "files",
+  "type": "utility_bill",
+  "file_hashes": [
+    "file-hash-1",
+    "file-hash-2"
+  ],
+  "message": "is invalid"
+}

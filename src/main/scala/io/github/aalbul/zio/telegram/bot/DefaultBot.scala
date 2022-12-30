@@ -152,4 +152,6 @@ class DefaultBot extends Bot {
     AnswerShippingQuery.of(shippingQueryId, ok)
   override def answerPreCheckoutQuery(preCheckoutQueryId: String, ok: Boolean): AnswerPreCheckoutQuery =
     AnswerPreCheckoutQuery.of(preCheckoutQueryId, ok)
+  override def setPassportDataErrors(userId: Long, errors: Seq[PassportElementError]): SetPassportDataErrors =
+    SetPassportDataErrors.of(userId, errors)
 }

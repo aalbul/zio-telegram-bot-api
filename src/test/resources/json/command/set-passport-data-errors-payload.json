@@ -1,0 +1,17 @@
+{
+  "user_id": 52,
+  "errors": [
+    {
+      "source": "front_side",
+      "type": "driver_license",
+      "file_hash": "file-hash-1",
+      "message": "driver license is expired"
+    },
+    {
+      "source": "translation_file",
+      "type": "rental_agreement",
+      "file_hash": "file-hash-1",
+      "message": "is overdue"
+    }
+  ]
+}

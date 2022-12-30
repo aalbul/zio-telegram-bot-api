@@ -985,6 +985,62 @@ trait Builders {
       credentials = encryptedCredentials1
     )
 
+  lazy val passportElementError1: PassportElementError = PassportElementErrorDataField
+    .of(
+      `type` = PassportElementType.Passport,
+      fieldName = "address",
+      dataHash = "data-hash-1",
+      message = "this field is required"
+    )
+
+  lazy val passportElementError2: PassportElementError = PassportElementErrorFrontSide.of(
+    `type` = PassportElementType.DriverLicense,
+    fileHash = "file-hash-1",
+    message = "driver license is expired"
+  )
+
+  lazy val passportElementError3: PassportElementError = PassportElementErrorReverseSide.of(
+    `type` = PassportElementType.IdentityCard,
+    fileHash = "file-hash-1",
+    message = "identity card is missing"
+  )
+
+  lazy val passportElementError4: PassportElementError = PassportElementErrorSelfie.of(
+    `type` = PassportElementType.InternalPassport,
+    fileHash = "file-hash-1",
+    message = "incorrect photo size"
+  )
+
+  lazy val passportElementError5: PassportElementError = PassportElementErrorFile.of(
+    `type` = PassportElementType.BankStatement,
+    fileHash = "file-hash-1",
+    message = "cannot be found"
+  )
+
+  lazy val passportElementError6: PassportElementError = PassportElementErrorFiles.of(
+    `type` = PassportElementType.UtilityBill,
+    fileHashes = Seq("file-hash-1", "file-hash-2"),
+    message = "is invalid"
+  )
+
+  lazy val passportElementError7: PassportElementError = PassportElementErrorTranslationFile.of(
+    `type` = PassportElementType.RentalAgreement,
+    fileHash = "file-hash-1",
+    message = "is overdue"
+  )
+
+  lazy val passportElementError8: PassportElementError = PassportElementErrorTranslationFiles.of(
+    `type` = PassportElementType.TemporaryRegistration,
+    fileHashes = Seq("file-hash-1"),
+    message = "is outdated"
+  )
+
+  lazy val passportElementError9: PassportElementError = PassportElementErrorUnspecified.of(
+    `type` = PassportElementType.Address,
+    elementHash = "element-hash-1",
+    message = "is wrong"
+  )
+
   lazy val proximityAlertTriggered1: ProximityAlertTriggered = ProximityAlertTriggered
     .of(
       traveler = user1,
