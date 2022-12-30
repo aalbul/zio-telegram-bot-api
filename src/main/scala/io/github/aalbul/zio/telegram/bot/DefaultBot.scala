@@ -154,4 +154,5 @@ class DefaultBot extends Bot {
     AnswerPreCheckoutQuery.of(preCheckoutQueryId, ok)
   override def setPassportDataErrors(userId: Long, errors: Seq[PassportElementError]): SetPassportDataErrors =
     SetPassportDataErrors.of(userId, errors)
+  override def sendGame(chatId: Long, gameShortName: String): SendGame = SendGame.of(chatId, gameShortName)
 }

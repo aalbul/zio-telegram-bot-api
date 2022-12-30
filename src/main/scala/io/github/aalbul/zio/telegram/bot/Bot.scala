@@ -1058,4 +1058,17 @@ trait Bot {
     *   [[SetPassportDataErrors]] builder
     */
   def setPassportDataErrors(userId: Long, errors: Seq[PassportElementError]): SetPassportDataErrors
+
+  /** Use this method to send a game. On success, the sent [[https://core.telegram.org/bots/api#message Message]] is
+    * returned.
+    *
+    * @param chatId
+    *   Unique identifier for the target chat
+    * @param gameShortName
+    *   Short name of the game, serves as the unique identifier for the game. Set up your games via
+    *   [[https://t.me/botfather @BotFather]].
+    * @return
+    *   [[SendGame]] builder
+    */
+  def sendGame(chatId: Long, gameShortName: String): SendGame
 }
