@@ -156,4 +156,5 @@ class DefaultBot extends Bot {
     SetPassportDataErrors.of(userId, errors)
   override def sendGame(chatId: Long, gameShortName: String): SendGame = SendGame.of(chatId, gameShortName)
   override def setGameScore(userId: Long, score: Long): SetGameScore = SetGameScore.of(userId, score)
+  override def getGameHighScores(userId: Long): GetGameHighScores = GetGameHighScores.of(userId)
 }

@@ -74,6 +74,9 @@ trait Builders {
     .withForwardText("forward text")
     .withRequestWriteAccess(true)
 
+  lazy val gameHighScore1: GameHighScore = GameHighScore
+    .of(position = 22, user = user1, score = 56)
+
   lazy val keyboardButtonPollType1: KeyboardButtonPollType = KeyboardButtonPollType
     .of(PollType.Quiz)
 
