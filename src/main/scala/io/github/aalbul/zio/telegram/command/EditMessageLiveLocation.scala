@@ -4,7 +4,7 @@ import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
 import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodecMaker}
 import io.github.aalbul.zio.telegram.command.EditMessageLiveLocation.EditMessageLiveLocationPayload
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
-import io.github.aalbul.zio.telegram.domain.{InlineKeyboardMarkup, LiveLocationUpdateResult, Message}
+import io.github.aalbul.zio.telegram.domain.{InlineKeyboardMarkup, Message, MessageOrInlineMessageUpdateResult}
 
 object EditMessageLiveLocation {
   object EditMessageLiveLocationPayload {
@@ -51,7 +51,8 @@ object EditMessageLiveLocation {
   * explicitly disabled by a call to [[StopMessageLiveLocation]]. On success, if the edited message is not an inline
   * message, the edited [[Message]] is returned, otherwise ''True'' is returned.
   */
-case class EditMessageLiveLocation(payload: EditMessageLiveLocationPayload) extends Command[LiveLocationUpdateResult] {
+case class EditMessageLiveLocation(payload: EditMessageLiveLocationPayload)
+  extends Command[MessageOrInlineMessageUpdateResult] {
   override val name: String = "editMessageLiveLocation"
 
   override def parameters: ApiParameters = JsonBody(payload)

@@ -4,7 +4,7 @@ import com.github.plokhotnyuk.jsoniter_scala.core.JsonValueCodec
 import com.github.plokhotnyuk.jsoniter_scala.macros.{CodecMakerConfig, JsonCodecMaker}
 import io.github.aalbul.zio.telegram.command.StopMessageLiveLocation.StopMessageLiveLocationPayload
 import io.github.aalbul.zio.telegram.domain.JsonSerializationSupport.*
-import io.github.aalbul.zio.telegram.domain.{InlineKeyboardMarkup, LiveLocationUpdateResult, Message}
+import io.github.aalbul.zio.telegram.domain.{InlineKeyboardMarkup, Message, MessageOrInlineMessageUpdateResult}
 
 object StopMessageLiveLocation {
   object StopMessageLiveLocationPayload {
@@ -31,7 +31,8 @@ object StopMessageLiveLocation {
 /** Use this method to stop updating a live location message before ''live_period'' expires. On success, if the message
   * is not an inline message, the edited [[Message]] is returned, otherwise ''True'' is returned.
   */
-case class StopMessageLiveLocation(payload: StopMessageLiveLocationPayload) extends Command[LiveLocationUpdateResult] {
+case class StopMessageLiveLocation(payload: StopMessageLiveLocationPayload)
+  extends Command[MessageOrInlineMessageUpdateResult] {
   override val name: String = "stopMessageLiveLocation"
 
   override def parameters: ApiParameters = JsonBody(payload)

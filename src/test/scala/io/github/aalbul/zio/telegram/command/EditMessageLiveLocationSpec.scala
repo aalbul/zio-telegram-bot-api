@@ -2,12 +2,12 @@ package io.github.aalbul.zio.telegram.command
 
 import com.github.plokhotnyuk.jsoniter_scala.core.writeToString
 import io.github.aalbul.zio.telegram.command.EditMessageLiveLocation.EditMessageLiveLocationPayload
-import io.github.aalbul.zio.telegram.domain.LiveLocationUpdateResult
+import io.github.aalbul.zio.telegram.domain.MessageOrInlineMessageUpdateResult
 import io.github.aalbul.zio.telegram.test.BaseSpec
 
 class EditMessageLiveLocationSpec extends BaseSpec {
   trait Scope {
-    val command: Command[LiveLocationUpdateResult] =
+    val command: Command[MessageOrInlineMessageUpdateResult] =
       EditMessageLiveLocation
         .of(20, 30)
         .withChatId("345")

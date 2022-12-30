@@ -3,12 +3,12 @@ package io.github.aalbul.zio.telegram.domain
 import com.github.plokhotnyuk.jsoniter_scala.core.{readFromString, writeToString}
 import io.github.aalbul.zio.telegram.test.BaseSpec
 
-class LiveLocationUpdateResultSpec extends BaseSpec {
-  "LiveLocationUpdateResult" when {
+class MessageOrInlineMessageUpdateResultSpec extends BaseSpec {
+  "MessageOrInlineMessageUpdateResult" when {
     "encoder" should {
       "encode inline message updated result to json" in {
         writeToString(
-          LiveLocationUpdateResult(
+          MessageOrInlineMessageUpdateResult(
             message = None,
             inlineUpdated = true
           )
@@ -17,7 +17,7 @@ class LiveLocationUpdateResultSpec extends BaseSpec {
 
       "encode message updated result to json" in {
         writeToString(
-          LiveLocationUpdateResult(
+          MessageOrInlineMessageUpdateResult(
             message = Some(message1),
             inlineUpdated = false
           )
@@ -27,14 +27,14 @@ class LiveLocationUpdateResultSpec extends BaseSpec {
 
     "decoder" should {
       "decode inline message updated result from json" in {
-        readFromString[LiveLocationUpdateResult]("true") shouldBe LiveLocationUpdateResult(
+        readFromString[MessageOrInlineMessageUpdateResult]("true") shouldBe MessageOrInlineMessageUpdateResult(
           message = None,
           inlineUpdated = true
         )
       }
 
       "decode message updated result from json" in {
-        jsonResourceAs[LiveLocationUpdateResult]("json/model/message.json") shouldBe LiveLocationUpdateResult(
+        jsonResourceAs[MessageOrInlineMessageUpdateResult]("json/model/message.json") shouldBe MessageOrInlineMessageUpdateResult(
           message = Some(message1),
           inlineUpdated = false
         )
