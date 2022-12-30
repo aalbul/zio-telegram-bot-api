@@ -1012,4 +1012,18 @@ trait Bot {
     currency: String,
     prices: Seq[LabeledPrice]
   ): CreateInvoiceLink
+
+  /** If you sent an invoice requesting a shipping address and the parameter is_flexible was specified, the Bot API will
+    * send an [[https://core.telegram.org/bots/api#update Update]] with a shipping_query field to the bot. Use this
+    * method to reply to shipping queries. On success, True is returned.
+    *
+    * @param shippingQueryId
+    *   Unique identifier for the query to be answered
+    * @param ok
+    *   Pass True if delivery to the specified address is possible and False if there are any problems (for example, if
+    *   delivery to the specified address is not possible)
+    * @return
+    *   [[AnswerShippingQuery]] builder
+    */
+  def answerShippingQuery(shippingQueryId: String, ok: Boolean): AnswerShippingQuery
 }

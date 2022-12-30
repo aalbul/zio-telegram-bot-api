@@ -118,8 +118,7 @@ trait Builders {
     .of(removeKeyboard = true)
     .withSelective(true)
 
-  lazy val sentWebAppMessage1: SentWebAppMessage = SentWebAppMessage
-    .of
+  lazy val sentWebAppMessage1: SentWebAppMessage = SentWebAppMessage.of
     .withInlineMessageId("inline-message-id")
 
   lazy val chat1: Chat = Chat.of(id = 81, `type` = ChatType.Supergroup)
@@ -898,6 +897,9 @@ trait Builders {
       streetLine2 = "Other",
       postCode = "3821KL"
     )
+
+  lazy val shippingOption1: ShippingOption = ShippingOption
+    .of(id = "shipping-option-1", title = "shipping option title", prices = Seq(labeledPrice1))
 
   lazy val orderInfo1: OrderInfo = OrderInfo.of
     .withName("John Wick")

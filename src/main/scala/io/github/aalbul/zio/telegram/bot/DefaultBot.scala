@@ -148,4 +148,6 @@ class DefaultBot extends Bot {
     currency: String,
     prices: Seq[LabeledPrice]
   ): CreateInvoiceLink = CreateInvoiceLink.of(title, description, payload, providerToken, currency, prices)
+  override def answerShippingQuery(shippingQueryId: String, ok: Boolean): AnswerShippingQuery =
+    AnswerShippingQuery.of(shippingQueryId, ok)
 }

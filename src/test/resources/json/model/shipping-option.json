@@ -1,0 +1,10 @@
+{
+  "id": "shipping-option-1",
+  "title": "shipping option title",
+  "prices": [
+    {
+      "label": "some label",
+      "amount": 225
+    }
+  ]
+}
