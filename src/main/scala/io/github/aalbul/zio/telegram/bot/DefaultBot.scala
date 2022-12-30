@@ -150,4 +150,6 @@ class DefaultBot extends Bot {
   ): CreateInvoiceLink = CreateInvoiceLink.of(title, description, payload, providerToken, currency, prices)
   override def answerShippingQuery(shippingQueryId: String, ok: Boolean): AnswerShippingQuery =
     AnswerShippingQuery.of(shippingQueryId, ok)
+  override def answerPreCheckoutQuery(preCheckoutQueryId: String, ok: Boolean): AnswerPreCheckoutQuery =
+    AnswerPreCheckoutQuery.of(preCheckoutQueryId, ok)
 }

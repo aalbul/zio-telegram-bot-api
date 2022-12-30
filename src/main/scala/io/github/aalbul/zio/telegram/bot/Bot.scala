@@ -1026,4 +1026,19 @@ trait Bot {
     *   [[AnswerShippingQuery]] builder
     */
   def answerShippingQuery(shippingQueryId: String, ok: Boolean): AnswerShippingQuery
+
+  /** Once the user has confirmed their payment and shipping details, the Bot API sends the final confirmation in the
+    * form of an [[https://core.telegram.org/bots/api#update Update]] with the field pre_checkout_query. Use this method
+    * to respond to such pre-checkout queries. On success, True is returned. Note: The Bot API must receive an answer
+    * within 10 seconds after the pre-checkout query was sent.
+    *
+    * @param preCheckoutQueryId
+    *   Unique identifier for the query to be answered
+    * @param ok
+    *   Specify True if everything is alright (goods are available, etc.) and the bot is ready to proceed with the
+    *   order. Use False if there are any problems.
+    * @return
+    *   [[AnswerPreCheckoutQuery]] builder
+    */
+  def answerPreCheckoutQuery(preCheckoutQueryId: String, ok: Boolean): AnswerPreCheckoutQuery
 }

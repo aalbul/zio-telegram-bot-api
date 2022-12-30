@@ -1,0 +1,5 @@
+{
+  "pre_checkout_query_id": "query-1",
+  "ok": false,
+  "error_message": "some error"
+}

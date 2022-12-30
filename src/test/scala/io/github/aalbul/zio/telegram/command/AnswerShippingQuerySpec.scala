@@ -2,6 +2,7 @@ package io.github.aalbul.zio.telegram.command
 
 import com.github.plokhotnyuk.jsoniter_scala.core.writeToString
 import io.github.aalbul.zio.telegram.command.AnswerShippingQuery.AnswerShippingQueryPayload
+import io.github.aalbul.zio.telegram.command.DeleteChatStickerSet.DeleteChatStickerSetPayload
 import io.github.aalbul.zio.telegram.test.BaseSpec
 
 class AnswerShippingQuerySpec extends BaseSpec {
@@ -36,6 +37,14 @@ class AnswerShippingQuerySpec extends BaseSpec {
       "encoder" should {
         "encode payload to json" in new Scope {
           writeToString(payload) should matchJsonResource("json/command/answer-shipping-query-payload.json")
+        }
+      }
+
+      "decoder" should {
+        "decode payload from json" in new Scope {
+          jsonResourceAs[AnswerShippingQueryPayload](
+            "json/command/answer-shipping-query-payload.json"
+          ) shouldBe payload
         }
       }
     }
