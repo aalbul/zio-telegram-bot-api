@@ -28,6 +28,7 @@ object SendVideo {
     caption = None,
     parseMode = None,
     captionEntities = None,
+    hasSpoiler = None,
     supportsStreaming = None,
     disableNotification = None,
     protectContent = None,
@@ -52,6 +53,7 @@ case class SendVideo(
   caption: Option[String],
   parseMode: Option[ParseMode],
   captionEntities: Option[Seq[MessageEntity]],
+  hasSpoiler: Option[Boolean],
   supportsStreaming: Option[Boolean],
   disableNotification: Option[Boolean],
   protectContent: Option[Boolean],
@@ -72,6 +74,7 @@ case class SendVideo(
     caption.map(stringPart("caption", _)),
     parseMode.map(mode => stringPart("parse_mode", mode.toString)),
     captionEntities.map(stringPart("caption_entities", _)),
+    hasSpoiler.map(stringPart("has_spoiler", _)),
     disableNotification.map(stringPart("disable_notification", _)),
     protectContent.map(stringPart("protect_content", _)),
     replyToMessageId.map(stringPart("reply_to_message_id", _)),
@@ -118,6 +121,10 @@ case class SendVideo(
     */
   def withCaptionEntities(captionEntities: Seq[MessageEntity]): SendVideo =
     copy(captionEntities = Some(captionEntities))
+
+  /** Pass True if the video needs to be covered with a spoiler animation
+    */
+  def withHasSpoiler(hasSpoiler: Boolean): SendVideo = copy(hasSpoiler = Some(hasSpoiler))
 
   /** Pass ''True'', if the uploaded video is suitable for streaming
     */

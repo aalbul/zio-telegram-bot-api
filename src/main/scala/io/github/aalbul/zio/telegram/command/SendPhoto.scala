@@ -24,6 +24,7 @@ object SendPhoto {
     caption = None,
     parseMode = None,
     captionEntities = None,
+    hasSpoiler = None,
     disableNotification = None,
     protectContent = None,
     replyToMessageId = None,
@@ -41,6 +42,7 @@ case class SendPhoto(
   caption: Option[String],
   parseMode: Option[ParseMode],
   captionEntities: Option[Seq[MessageEntity]],
+  hasSpoiler: Option[Boolean],
   disableNotification: Option[Boolean],
   protectContent: Option[Boolean],
   replyToMessageId: Option[Long],
@@ -56,6 +58,7 @@ case class SendPhoto(
     caption.map(stringPart("caption", _)),
     parseMode.map(mode => stringPart("parse_mode", mode.toString)),
     captionEntities.map(stringPart("caption_entities", _)),
+    hasSpoiler.map(stringPart("has_spoiler", _)),
     disableNotification.map(stringPart("disable_notification", _)),
     protectContent.map(stringPart("protect_content", _)),
     replyToMessageId.map(stringPart("reply_to_message_id", _)),
@@ -81,6 +84,10 @@ case class SendPhoto(
     */
   def withCaptionEntities(captionEntities: Seq[MessageEntity]): SendPhoto =
     copy(captionEntities = Some(captionEntities))
+
+  /** Pass True if the photo needs to be covered with a spoiler animation
+    */
+  def withHasSpoiler(hasSpoiler: Boolean): SendPhoto = copy(hasSpoiler = Some(hasSpoiler))
 
   /** Sends the message [[https://telegram.org/blog/channels-2-0#silent-messages silently]]. Users will receive a
     * notification with no sound.

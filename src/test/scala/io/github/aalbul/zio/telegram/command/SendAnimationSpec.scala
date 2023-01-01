@@ -18,6 +18,7 @@ class SendAnimationSpec extends BaseSpec {
         .withCaption("funny image")
         .withParseMode(ParseMode.MarkdownV2)
         .withCaptionEntities(Seq(messageEntity1))
+        .withHasSpoiler(true)
         .withDisableNotification(true)
         .withProtectContent(false)
         .withReplyToMessageId(50)
@@ -45,6 +46,7 @@ class SendAnimationSpec extends BaseSpec {
           stringPart("caption", "funny image"),
           stringPart("parse_mode", "MarkdownV2"),
           stringPart("caption_entities", jsonResourceString("json/command/caption-entities.json")),
+          stringPart("has_spoiler", "true"),
           stringPart("disable_notification", "true"),
           stringPart("protect_content", "false"),
           stringPart("reply_to_message_id", "50"),

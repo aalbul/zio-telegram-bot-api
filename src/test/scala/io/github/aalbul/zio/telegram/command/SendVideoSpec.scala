@@ -20,6 +20,7 @@ class SendVideoSpec extends BaseSpec {
         .withCaption("my video")
         .withParseMode(ParseMode.MarkdownV2)
         .withCaptionEntities(Seq(messageEntity1))
+        .withHasSpoiler(true)
         .withSupportsStreaming(true)
         .withDisableNotification(true)
         .withProtectContent(false)
@@ -48,6 +49,7 @@ class SendVideoSpec extends BaseSpec {
           stringPart("caption", "my video"),
           stringPart("parse_mode", "MarkdownV2"),
           stringPart("caption_entities", jsonResourceString("json/command/caption-entities.json")),
+          stringPart("has_spoiler", "true"),
           stringPart("disable_notification", "true"),
           stringPart("protect_content", "false"),
           stringPart("reply_to_message_id", "50"),
