@@ -997,6 +997,21 @@ trait Bot {
     */
   def deleteMessage(chatId: String, messageId: Long): DeleteMessage
 
+  /** Use this method to send static .WEBP, [[https://telegram.org/blog/animated-stickers animated]] .TGS, or
+    * [[https://telegram.org/blog/video-stickers-better-reactions video]] .WEBM stickers. On success, the sent
+    * [[https://core.telegram.org/bots/api#message Message]] is returned.
+    *
+    * @param chatId
+    *   Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+    * @param sticker
+    *   Sticker to send. Pass a file_id as String to send a file that exists on the Telegram servers (recommended), pass
+    *   an HTTP URL as a String for Telegram to get a .WEBP file from the Internet, or upload a new one using
+    *   multipart/form-data. [[https://core.telegram.org/bots/api#sending-files More information on Sending Files »]]
+    * @return
+    *   [[SendSticker]] builder
+    */
+  def sendSticker(chatId: String, sticker: FileDescriptor): SendSticker
+
   /** Use this method to send answers to an inline query. On success, True is returned. No more than 50 results per
     * query are allowed.
     *

@@ -133,6 +133,7 @@ class DefaultBot extends Bot {
   override def editMessageReplyMarkup: EditMessageReplyMarkup = EditMessageReplyMarkup.of
   override def stopPoll(chatId: String, messageId: Long): StopPoll = StopPoll.of(chatId, messageId)
   override def deleteMessage(chatId: String, messageId: Long): DeleteMessage = DeleteMessage.of(chatId, messageId)
+  override def sendSticker(chatId: String, sticker: FileDescriptor): SendSticker = SendSticker.of(chatId, sticker)
   override def answerInlineQuery(inlineQueryId: String, results: Seq[InlineQueryResult]): AnswerInlineQuery =
     AnswerInlineQuery.of(inlineQueryId, results)
   override def answerWebAppQuery(webAppQueryId: String, result: InlineQueryResult): AnswerWebAppQuery =
