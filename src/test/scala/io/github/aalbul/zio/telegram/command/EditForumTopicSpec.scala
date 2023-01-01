@@ -7,9 +7,16 @@ import io.github.aalbul.zio.telegram.test.BaseSpec
 class EditForumTopicSpec extends BaseSpec {
   trait Scope {
     val command: Command[Boolean] =
-      EditForumTopic.of(chatId = "412", messageThreadId = 112, name = "General", iconCustomEmojiId = "emoji1")
-    val payload: EditForumTopicPayload =
-      EditForumTopicPayload(chatId = "412", messageThreadId = 112, name = "General", iconCustomEmojiId = "emoji1")
+      EditForumTopic
+        .of(chatId = "412", messageThreadId = 112)
+        .withName("General")
+        .withIconCustomEmojiId("emoji1")
+    val payload: EditForumTopicPayload = EditForumTopicPayload(
+      chatId = "412",
+      messageThreadId = 112,
+      name = Some("General"),
+      iconCustomEmojiId = Some("emoji1")
+    )
   }
 
   "EditForumTopic" when {

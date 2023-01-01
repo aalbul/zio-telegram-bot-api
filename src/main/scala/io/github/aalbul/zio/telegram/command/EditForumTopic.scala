@@ -11,7 +11,12 @@ object EditForumTopic {
       JsonCodecMaker.make(CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2))
   }
 
-  case class EditForumTopicPayload(chatId: String, messageThreadId: Long, name: String, iconCustomEmojiId: String)
+  case class EditForumTopicPayload(
+    chatId: String,
+    messageThreadId: Long,
+    name: Option[String],
+    iconCustomEmojiId: Option[String]
+  )
 
   /** Constructs minimal [[EditForumTopic]] command
     * @param chatId
@@ -27,13 +32,13 @@ object EditForumTopic {
     * @return
     *   [[EditForumTopic]] builder
     */
-  def of(chatId: String, messageThreadId: Long, name: String, iconCustomEmojiId: String): EditForumTopic =
+  def of(chatId: String, messageThreadId: Long): EditForumTopic =
     EditForumTopic(
       EditForumTopicPayload(
         chatId = chatId,
         messageThreadId = messageThreadId,
-        name = name,
-        iconCustomEmojiId = iconCustomEmojiId
+        name = None,
+        iconCustomEmojiId = None
       )
     )
 }
@@ -45,4 +50,16 @@ object EditForumTopic {
 case class EditForumTopic(payload: EditForumTopicPayload) extends Command[Boolean] {
   override val name: String = "editForumTopic"
   override def parameters: ApiParameters = JsonBody(payload)
+
+  /** New topic name, 0-128 characters. If not specified or empty, the current name of the topic will be kept
+    */
+  def withName(name: String): EditForumTopic = copy(payload.copy(name = Some(name)))
+
+  /** New unique identifier of the custom emoji shown as the topic icon. Use
+    * [[https://core.telegram.org/bots/api#getforumtopiciconstickers getForumTopicIconStickers]] to get all allowed
+    * custom emoji identifiers. Pass an empty string to remove the icon. If not specified, the current icon will be kept
+    */
+  def withIconCustomEmojiId(iconCustomEmojiId: String): EditForumTopic = copy(
+    payload.copy(iconCustomEmojiId = Some(iconCustomEmojiId))
+  )
 }
