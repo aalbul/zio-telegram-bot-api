@@ -1066,6 +1066,22 @@ trait Bot {
     */
   def createNewStickerSet(userId: Long, name: String, title: String, emojis: String): CreateNewStickerSet
 
+  /** Use this method to add a new sticker to a set created by the bot. You must use exactly one of the fields
+    * png_sticker, tgs_sticker, or webm_sticker. Animated stickers can be added to animated sticker sets and only to
+    * them. Animated sticker sets can have up to 50 stickers. Static sticker sets can have up to 120 stickers. Returns
+    * True on success.
+    *
+    * @param userId
+    *   User identifier of sticker set owner
+    * @param name
+    *   Sticker set name
+    * @param emojis
+    *   One or more emoji corresponding to the sticker
+    * @return
+    *   [[AddStickerToSet]] builder
+    */
+  def addStickerToSet(userId: Long, name: String, emojis: String): AddStickerToSet
+
   /** Use this method to send answers to an inline query. On success, True is returned. No more than 50 results per
     * query are allowed.
     *

@@ -141,6 +141,8 @@ class DefaultBot extends Bot {
     UploadStickerFile.of(userId, pngSticker)
   override def createNewStickerSet(userId: Long, name: String, title: String, emojis: String): CreateNewStickerSet =
     CreateNewStickerSet.of(userId, name, title, emojis)
+  override def addStickerToSet(userId: Long, name: String, emojis: String): AddStickerToSet =
+    AddStickerToSet.of(userId, name, emojis)
   override def answerInlineQuery(inlineQueryId: String, results: Seq[InlineQueryResult]): AnswerInlineQuery =
     AnswerInlineQuery.of(inlineQueryId, results)
   override def answerWebAppQuery(webAppQueryId: String, result: InlineQueryResult): AnswerWebAppQuery =
