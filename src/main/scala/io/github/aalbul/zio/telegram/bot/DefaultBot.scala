@@ -145,6 +145,7 @@ class DefaultBot extends Bot {
     AddStickerToSet.of(userId, name, emojis)
   override def setStickerPositionInSet(sticker: String, position: Long): SetStickerPositionInSet =
     SetStickerPositionInSet.of(sticker, position)
+  override def deleteStickerFromSet(sticker: String): DeleteStickerFromSet = DeleteStickerFromSet.of(sticker)
   override def answerInlineQuery(inlineQueryId: String, results: Seq[InlineQueryResult]): AnswerInlineQuery =
     AnswerInlineQuery.of(inlineQueryId, results)
   override def answerWebAppQuery(webAppQueryId: String, result: InlineQueryResult): AnswerWebAppQuery =

@@ -1093,6 +1093,15 @@ trait Bot {
     */
   def setStickerPositionInSet(sticker: String, position: Long): SetStickerPositionInSet
 
+  /** Use this method to delete a sticker from a set created by the bot. Returns True on success.
+    *
+    * @param sticker
+    *   File identifier of the sticker
+    * @return
+    *   [[DeleteStickerFromSet]] builder
+    */
+  def deleteStickerFromSet(sticker: String): DeleteStickerFromSet
+
   /** Use this method to send answers to an inline query. On success, True is returned. No more than 50 results per
     * query are allowed.
     *
