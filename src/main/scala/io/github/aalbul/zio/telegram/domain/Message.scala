@@ -58,6 +58,7 @@ object Message {
     voice = None,
     caption = None,
     captionEntities = None,
+    hasMediaSpoiler = None,
     contact = None,
     dice = None,
     game = None,
@@ -127,6 +128,7 @@ case class Message(
   voice: Option[Voice],
   caption: Option[String],
   captionEntities: Option[Seq[MessageEntity]],
+  hasMediaSpoiler: Option[Boolean],
   contact: Option[Contact],
   dice: Option[Dice],
   game: Option[Game],
@@ -267,6 +269,10 @@ case class Message(
   /** For messages with a caption, special entities like usernames, URLs, bot commands, etc. that appear in the caption
     */
   def withCaptionEntities(entities: Seq[MessageEntity]): Message = copy(captionEntities = Some(entities))
+
+  /** True, if the message media is covered by a spoiler animation
+    */
+  def withHasMediaSpoiler(hasMediaSpoiler: Boolean): Message = copy(hasMediaSpoiler = Some(hasMediaSpoiler))
 
   /** Message is a shared contact, information about the contact */
   def withContact(contact: Contact): Message = copy(contact = Some(contact))

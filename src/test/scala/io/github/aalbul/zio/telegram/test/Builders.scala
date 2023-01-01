@@ -210,6 +210,7 @@ trait Builders {
     .withVoice(voice1)
     .withCaption("caption-1")
     .withCaptionEntities(Seq(messageEntity1))
+    .withHasMediaSpoiler(true)
     .withContact(contact1)
     .withDice(dice1)
     .withGame(game1)

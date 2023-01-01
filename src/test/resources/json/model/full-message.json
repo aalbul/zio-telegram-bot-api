@@ -253,6 +253,7 @@
       "custom_emoji_id": "emoji1"
     }
   ],
+  "has_media_spoiler":  true,
   "contact": {
     "phone_number": "+31680822212",
     "first_name": "John",
