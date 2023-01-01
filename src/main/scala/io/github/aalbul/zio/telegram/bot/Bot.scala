@@ -1012,6 +1012,16 @@ trait Bot {
     */
   def sendSticker(chatId: String, sticker: FileDescriptor): SendSticker
 
+  /** Use this method to get a sticker set. On success, a [[https://core.telegram.org/bots/api#stickerset StickerSet]]
+    * object is returned.
+    *
+    * @param name
+    *   Name of the sticker set
+    * @return
+    *   [[GetStickerSet]] builder
+    */
+  def getStickerSet(name: String): GetStickerSet
+
   /** Use this method to send answers to an inline query. On success, True is returned. No more than 50 results per
     * query are allowed.
     *

@@ -837,6 +837,17 @@ trait Builders {
     .withCustomEmojiId("custom-emoji-id-1")
     .withFileSize(500)
 
+  lazy val stickerSet1: StickerSet = StickerSet
+    .of(
+      name = "sticker-set-1",
+      title = "sticker set one",
+      stickerType = StickerType.CustomEmoji,
+      isAnimated = true,
+      isVideo = false,
+      stickers = Seq(sticker1)
+    )
+    .withThumb(photoSize1)
+
   lazy val venue1: Venue = Venue
     .of(
       location = location1,
