@@ -29,7 +29,8 @@
         "language": "js",
         "custom_emoji_id": "emoji1"
       }
-    ]
+    ],
+    "has_spoiler": true
   },
   "reply_markup": {
     "inline_keyboard": [
