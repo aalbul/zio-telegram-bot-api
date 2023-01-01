@@ -1102,6 +1102,18 @@ trait Bot {
     */
   def deleteStickerFromSet(sticker: String): DeleteStickerFromSet
 
+  /** Use this method to set the thumbnail of a sticker set. Animated thumbnails can be set for animated sticker sets
+    * only. Video thumbnails can be set only for video sticker sets only. Returns True on success.
+    *
+    * @param name
+    *   Sticker set name
+    * @param userId
+    *   User identifier of the sticker set owner
+    * @return
+    *   [[SetStickerSetThumb]] builder
+    */
+  def setStickerSetThumb(name: String, userId: Long): SetStickerSetThumb
+
   /** Use this method to send answers to an inline query. On success, True is returned. No more than 50 results per
     * query are allowed.
     *
