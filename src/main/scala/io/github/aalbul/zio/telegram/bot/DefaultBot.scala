@@ -135,6 +135,8 @@ class DefaultBot extends Bot {
   override def deleteMessage(chatId: String, messageId: Long): DeleteMessage = DeleteMessage.of(chatId, messageId)
   override def sendSticker(chatId: String, sticker: FileDescriptor): SendSticker = SendSticker.of(chatId, sticker)
   override def getStickerSet(name: String): GetStickerSet = GetStickerSet.of(name)
+  override def getCustomEmojiStickers(customEmojiIds: Seq[String]): GetCustomEmojiStickers =
+    GetCustomEmojiStickers.of(customEmojiIds)
   override def answerInlineQuery(inlineQueryId: String, results: Seq[InlineQueryResult]): AnswerInlineQuery =
     AnswerInlineQuery.of(inlineQueryId, results)
   override def answerWebAppQuery(webAppQueryId: String, result: InlineQueryResult): AnswerWebAppQuery =

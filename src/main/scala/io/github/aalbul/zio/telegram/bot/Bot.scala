@@ -1022,6 +1022,16 @@ trait Bot {
     */
   def getStickerSet(name: String): GetStickerSet
 
+  /** Use this method to get information about custom emoji stickers by their identifiers. Returns an Array of
+    * [[https://core.telegram.org/bots/api#sticker Sticker]] objects.
+    *
+    * @param customEmojiIds
+    *   List of custom emoji identifiers. At most 200 custom emoji identifiers can be specified.
+    * @return
+    *   [[GetCustomEmojiStickers]] builder
+    */
+  def getCustomEmojiStickers(customEmojiIds: Seq[String]): GetCustomEmojiStickers
+
   /** Use this method to send answers to an inline query. On success, True is returned. No more than 50 results per
     * query are allowed.
     *
