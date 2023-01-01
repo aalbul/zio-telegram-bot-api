@@ -42,7 +42,8 @@ object InputMediaAnimation {
     captionEntities = None,
     width = None,
     height = None,
-    duration = None
+    duration = None,
+    hasSpoiler = None
   )
 }
 
@@ -57,7 +58,8 @@ case class InputMediaAnimation(
   captionEntities: Option[Seq[MessageEntity]],
   width: Option[Long],
   height: Option[Long],
-  duration: Option[Long]
+  duration: Option[Long],
+  hasSpoiler: Option[Boolean]
 ) extends InputMedia {
 
   /** Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The
@@ -93,6 +95,10 @@ case class InputMediaAnimation(
   /** Animation duration in seconds
     */
   def withDuration(duration: Long): InputMediaAnimation = copy(duration = Some(duration))
+
+  /** Pass True if the animation needs to be covered with a spoiler animation
+    */
+  def withHasSpoiler(hasSpoiler: Boolean): InputMediaAnimation = copy(hasSpoiler = Some(hasSpoiler))
 }
 
 object InputMediaAudio {
@@ -244,7 +250,8 @@ object InputMediaPhoto {
     media = media,
     caption = None,
     parseMode = None,
-    captionEntities = None
+    captionEntities = None,
+    hasSpoiler = None
   )
 }
 
@@ -255,7 +262,8 @@ case class InputMediaPhoto(
   media: FileDescriptor,
   caption: Option[String],
   parseMode: Option[ParseMode],
-  captionEntities: Option[Seq[MessageEntity]]
+  captionEntities: Option[Seq[MessageEntity]],
+  hasSpoiler: Option[Boolean]
 ) extends InputMedia {
   override val thumb: Option[FileDescriptor] = None
 
@@ -271,6 +279,10 @@ case class InputMediaPhoto(
   /** List of special entities that appear in the caption, which can be specified instead of parse_mode
     */
   def withCaptionEntities(entities: Seq[MessageEntity]): InputMediaPhoto = copy(captionEntities = Some(entities))
+
+  /** Pass True if the photo needs to be covered with a spoiler animation
+    */
+  def withHasSpoiler(hasSpoiler: Boolean): InputMediaPhoto = copy(hasSpoiler = Some(hasSpoiler))
 }
 
 object InputMediaVideo {
@@ -293,7 +305,8 @@ object InputMediaVideo {
     width = None,
     height = None,
     duration = None,
-    supportsStreaming = None
+    supportsStreaming = None,
+    hasSpoiler = None
   )
 }
 
@@ -309,7 +322,8 @@ case class InputMediaVideo(
   width: Option[Long],
   height: Option[Long],
   duration: Option[Long],
-  supportsStreaming: Option[Boolean]
+  supportsStreaming: Option[Boolean],
+  hasSpoiler: Option[Boolean]
 ) extends InputMedia {
 
   /** Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The
@@ -349,4 +363,8 @@ case class InputMediaVideo(
   /** Pass True if the uploaded video is suitable for streaming
     */
   def withSupportsStreaming(supports: Boolean): InputMediaVideo = copy(supportsStreaming = Some(supports))
+
+  /** Pass True if the video needs to be covered with a spoiler animation
+    */
+  def withHasSpoiler(hasSpoiler: Boolean): InputMediaVideo = copy(hasSpoiler = Some(hasSpoiler))
 }

@@ -514,6 +514,7 @@ trait Builders {
     .withWidth(1024)
     .withHeight(769)
     .withDuration(346)
+    .withHasSpoiler(true)
 
   lazy val inputMediaAudio1: InputMedia = InputMediaAudio
     .of(pathDescriptor("/tmp/one.mp3"))
@@ -538,6 +539,7 @@ trait Builders {
     .withCaption("my photo")
     .withParseMode(ParseMode.Markdown)
     .withCaptionEntities(Seq(messageEntity1))
+    .withHasSpoiler(true)
 
   lazy val inputMediaVideo1: InputMedia = InputMediaVideo
     .of(pathDescriptor("/tmp/one.mp4"))
@@ -549,6 +551,7 @@ trait Builders {
     .withHeight(1080)
     .withDuration(980)
     .withSupportsStreaming(true)
+    .withHasSpoiler(true)
 
   lazy val file1: File = File
     .of(fileId = "file-1", fileUniqueId = "unique-file-1")

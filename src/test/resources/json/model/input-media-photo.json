@@ -25,5 +25,6 @@
       "language": "js",
       "custom_emoji_id": "emoji1"
     }
-  ]
+  ],
+  "has_spoiler": true
 }
