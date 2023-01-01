@@ -137,6 +137,8 @@ class DefaultBot extends Bot {
   override def getStickerSet(name: String): GetStickerSet = GetStickerSet.of(name)
   override def getCustomEmojiStickers(customEmojiIds: Seq[String]): GetCustomEmojiStickers =
     GetCustomEmojiStickers.of(customEmojiIds)
+  override def uploadStickerFile(userId: Long, pngSticker: FileDescriptor): UploadStickerFile =
+    UploadStickerFile.of(userId, pngSticker)
   override def answerInlineQuery(inlineQueryId: String, results: Seq[InlineQueryResult]): AnswerInlineQuery =
     AnswerInlineQuery.of(inlineQueryId, results)
   override def answerWebAppQuery(webAppQueryId: String, result: InlineQueryResult): AnswerWebAppQuery =

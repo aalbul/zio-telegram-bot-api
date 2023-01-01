@@ -1032,6 +1032,21 @@ trait Bot {
     */
   def getCustomEmojiStickers(customEmojiIds: Seq[String]): GetCustomEmojiStickers
 
+  /** Use this method to upload a .PNG file with a sticker for later use in createNewStickerSet and addStickerToSet
+    * methods (can be used multiple times). Returns the uploaded [[https://core.telegram.org/bots/api#file File]] on
+    * success.
+    *
+    * @param userId
+    *   User identifier of sticker file owner
+    * @param pngSticker
+    *   PNG image with the sticker, must be up to 512 kilobytes in size, dimensions must not exceed 512px, and either
+    *   width or height must be exactly 512px.
+    *   [[https://core.telegram.org/bots/api#sending-files More information on Sending Files »]]
+    * @return
+    *   [[UploadStickerFile]] builder
+    */
+  def uploadStickerFile(userId: Long, pngSticker: FileDescriptor): UploadStickerFile
+
   /** Use this method to send answers to an inline query. On success, True is returned. No more than 50 results per
     * query are allowed.
     *
