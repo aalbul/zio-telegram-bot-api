@@ -1082,6 +1082,17 @@ trait Bot {
     */
   def addStickerToSet(userId: Long, name: String, emojis: String): AddStickerToSet
 
+  /** Use this method to move a sticker in a set created by the bot to a specific position. Returns True on success.
+    *
+    * @param sticker
+    *   File identifier of the sticker
+    * @param position
+    *   New sticker position in the set, zero-based
+    * @return
+    *   [[SetStickerPositionInSet]] builder
+    */
+  def setStickerPositionInSet(sticker: String, position: Long): SetStickerPositionInSet
+
   /** Use this method to send answers to an inline query. On success, True is returned. No more than 50 results per
     * query are allowed.
     *
