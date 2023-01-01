@@ -18,6 +18,7 @@ object ReplyKeyboardMarkup {
     */
   def of(keyboard: Seq[Seq[KeyboardButton]]): ReplyKeyboardMarkup = ReplyKeyboardMarkup(
     keyboard = keyboard,
+    isPersistent = None,
     resizeKeyboard = None,
     oneTimeKeyboard = None,
     inputFieldPlaceholder = None,
@@ -30,11 +31,17 @@ object ReplyKeyboardMarkup {
   */
 case class ReplyKeyboardMarkup(
   keyboard: Seq[Seq[KeyboardButton]],
+  isPersistent: Option[Boolean],
   resizeKeyboard: Option[Boolean],
   oneTimeKeyboard: Option[Boolean],
   inputFieldPlaceholder: Option[String],
   selective: Option[Boolean]
 ) extends Markup {
+
+  /** Requests clients to always show the keyboard when the regular keyboard is hidden. Defaults to false, in which case
+    * the custom keyboard can be hidden and opened with a keyboard icon.
+    */
+  def withIsPersistent(isPersistent: Boolean): ReplyKeyboardMarkup = copy(isPersistent = Some(isPersistent))
 
   /** Requests clients to resize the keyboard vertically for optimal fit (e.g., make the keyboard smaller if there are
     * just two rows of buttons). Defaults to ''false'', in which case the custom keyboard is always of the same height

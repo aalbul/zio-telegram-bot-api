@@ -112,6 +112,7 @@ trait Builders {
 
   lazy val replyKeyboardMarkup1: ReplyKeyboardMarkup = ReplyKeyboardMarkup
     .of(keyboard = Seq(Seq(keyboardButton1)))
+    .withIsPersistent(true)
     .withResizeKeyboard(true)
     .withOneTimeKeyboard(false)
     .withInputFieldPlaceholder("type you data here")
