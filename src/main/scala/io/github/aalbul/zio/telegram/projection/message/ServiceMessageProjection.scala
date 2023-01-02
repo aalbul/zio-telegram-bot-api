@@ -27,7 +27,11 @@ object ServiceMessageProjection {
     MessageProjector[WebAppDataMessage],
     MessageProjector[ForumTopicCreatedMessage],
     MessageProjector[ForumTopicClosedMessage],
-    MessageProjector[ForumTopicReopenedMessage]
+    MessageProjector[ForumTopicEditedMessage],
+    MessageProjector[ForumTopicReopenedMessage],
+    MessageProjector[GeneralForumTopicHiddenMessage],
+    MessageProjector[GeneralForumTopicUnhiddenMessage],
+    MessageProjector[WriteAccessAllowedMessage]
   ).reduce(_ <+> _)
 }
 

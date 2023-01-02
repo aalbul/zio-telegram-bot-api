@@ -232,11 +232,14 @@ trait Builders {
     .withInvoice(invoice1)
     .withSuccessfulPayment(successfulPayment1)
     .withConnectedWebsite("http://website.com")
+    .withWriteAccessAllowed(writeAccessAllowed1)
     .withPassportData(passportData1)
     .withProximityAlertTriggered(proximityAlertTriggered1)
     .withForumTopicCreated(forumTopicCreated1)
     .withForumTopicClosed(forumTopicClosed1)
+    .withForumTopicEdited(forumTopicEdited1)
     .withForumTopicReopened(forumTopicReopened1)
+    .withGeneralForumTopicHidden(generalForumTopicHidden1)
     .withVideoChatScheduled(videoChatScheduled1)
     .withVideoChatStarted(videoChatStarted1)
     .withVideoChatEnded(videoChatEnded1)
@@ -1088,7 +1091,17 @@ trait Builders {
 
   lazy val forumTopicClosed1: ForumTopicClosed = ForumTopicClosed.of
 
+  lazy val forumTopicEdited1: ForumTopicEdited = ForumTopicEdited.of
+    .withName("topic-1")
+    .withIconCustomEmojiId("emoji-1")
+
   lazy val forumTopicReopened1: ForumTopicReopened = ForumTopicReopened.of
+
+  lazy val generalForumTopicHidden1: GeneralForumTopicHidden = GeneralForumTopicHidden.of
+
+  lazy val generalForumTopicUnhidden1: GeneralForumTopicUnhidden = GeneralForumTopicUnhidden.of
+
+  lazy val writeAccessAllowed1: WriteAccessAllowed = WriteAccessAllowed.of
 
   lazy val inlineQuery1: InlineQuery = InlineQuery
     .of(
@@ -1372,6 +1385,26 @@ trait Builders {
     .withFrom(user1)
     .withForumTopicReopened(forumTopicReopened1)
 
+  lazy val forumTopicEditedMessage1: Message = Message
+    .of(messageId = 450, date = instant3, chat = chat2)
+    .withFrom(user2)
+    .withForumTopicEdited(forumTopicEdited1)
+
+  lazy val generalForumTopicHiddenMessage1: Message = Message
+    .of(messageId = 451, date = instant1, chat = chat1)
+    .withFrom(user1)
+    .withGeneralForumTopicHidden(generalForumTopicHidden1)
+
+  lazy val generalForumTopicUnhiddenMessage1: Message = Message
+    .of(messageId = 452, date = instant1, chat = chat1)
+    .withFrom(user1)
+    .withGeneralForumTopicUnhidden(generalForumTopicUnhidden1)
+
+  lazy val writeAccessAllowedMessage1: Message = Message
+    .of(messageId = 452, date = instant1, chat = chat1)
+    .withFrom(user1)
+    .withWriteAccessAllowed(writeAccessAllowed1)
+
   lazy val allMessages: Set[Message] = Set(
     animationMessage1,
     audioMessage1,
@@ -1411,7 +1444,11 @@ trait Builders {
     webAppDataMessage1,
     forumTopicCreatedMessage1,
     forumTopicClosedMessage1,
-    forumTopicReopenedMessage1
+    forumTopicEditedMessage1,
+    forumTopicReopenedMessage1,
+    generalForumTopicHiddenMessage1,
+    generalForumTopicUnhiddenMessage1,
+    writeAccessAllowedMessage1
   )
 
   lazy val updateTextMessage1: Update = Update.of(updateId = 66).withMessage(textMessage1)
@@ -1699,6 +1736,18 @@ trait Builders {
 
   lazy val forumTopicReopenedProjection: UpdateProjection =
     ForumTopicReopenedMessage(Data.of(forumTopicReopenedMessage1).get, forumTopicReopened1)
+
+  lazy val forumTopicEditedProjection: UpdateProjection =
+    ForumTopicEditedMessage(Data.of(forumTopicEditedMessage1).get, forumTopicEdited1)
+
+  lazy val generalForumTopicHiddenMessageProjection: UpdateProjection =
+    GeneralForumTopicHiddenMessage(Data.of(generalForumTopicHiddenMessage1).get, generalForumTopicHidden1)
+
+  lazy val generalForumTopicUnhiddenMessageProjection: UpdateProjection =
+    GeneralForumTopicUnhiddenMessage(Data.of(generalForumTopicUnhiddenMessage1).get, generalForumTopicUnhidden1)
+
+  lazy val writeAccessAllowedMessageProjection: UpdateProjection =
+    WriteAccessAllowedMessage(Data.of(writeAccessAllowedMessage1).get, writeAccessAllowed1)
 
   lazy val failureApiResponse1: ApiResponse[String] = FailureApiResponse(
     ok = false,

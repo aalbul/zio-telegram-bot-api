@@ -1,11 +1,6 @@
 {
   "message_id": 19,
   "message_thread_id": 22,
-  "date": 1655100911,
-  "chat": {
-    "id": 82,
-    "type": "private"
-  },
   "from": {
     "id": 1,
     "is_bot": false,
@@ -20,6 +15,11 @@
     "supports_inline_queries": false
   },
   "sender_chat": {
+    "id": 82,
+    "type": "private"
+  },
+  "date": 1655100911,
+  "chat": {
     "id": 82,
     "type": "private"
   },
@@ -162,7 +162,7 @@
   "sticker": {
     "file_id": "sticker-1",
     "file_unique_id": "unique-sticker-1",
-    "type":  "custom_emoji",
+    "type": "custom_emoji",
     "width": 80,
     "height": 50,
     "is_animated": true,
@@ -253,7 +253,7 @@
       "custom_emoji_id": "emoji1"
     }
   ],
-  "has_media_spoiler":  true,
+  "has_media_spoiler": true,
   "contact": {
     "phone_number": "+31680822212",
     "first_name": "John",
@@ -466,12 +466,11 @@
     "currency": "EUR",
     "total_amount": 53,
     "invoice_payload": "payload - 1",
-    "telegram_payment_charge_id": "charge - 1",
-    "provider_payment_charge_id": "provider payment - 1",
+    "shipping_option_id": "option - 1",
     "order_info": {
       "name": "John Wick",
-      "email": "jwick@google.com",
       "phone_number": "+312345689",
+      "email": "jwick@google.com",
       "shipping_address": {
         "country_code": "NL",
         "state": "Utrecht",
@@ -481,9 +480,11 @@
         "post_code": "3821KL"
       }
     },
-    "shipping_option_id": "option - 1"
+    "telegram_payment_charge_id": "charge - 1",
+    "provider_payment_charge_id": "provider payment - 1"
   },
   "connected_website": "http://website.com",
+  "write_access_allowed": {},
   "passport_data": {
     "data": [
       {
@@ -569,7 +570,12 @@
     "icon_custom_emoji_id": "emoji-1"
   },
   "forum_topic_closed": {},
+  "forum_topic_edited": {
+    "name": "topic-1",
+    "icon_custom_emoji_id": "emoji-1"
+  },
   "forum_topic_reopened": {},
+  "general_forum_topic_hidden": {},
   "video_chat_scheduled": {
     "start_date": 1655101090
   },
@@ -629,8 +635,7 @@
           },
           "switch_inline_query": "inline query 1",
           "switch_inline_query_current_chat": "inline query current chat 1",
-          "callback_game": {
-          },
+          "callback_game": {},
           "pay": true
         }
       ],

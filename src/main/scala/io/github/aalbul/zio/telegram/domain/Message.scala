@@ -80,11 +80,15 @@ object Message {
     invoice = None,
     successfulPayment = None,
     connectedWebsite = None,
+    writeAccessAllowed = None,
     passportData = None,
     proximityAlertTriggered = None,
     forumTopicCreated = None,
+    forumTopicEdited = None,
     forumTopicClosed = None,
     forumTopicReopened = None,
+    generalForumTopicHidden = None,
+    generalForumTopicUnhidden = None,
     videoChatScheduled = None,
     videoChatStarted = None,
     videoChatEnded = None,
@@ -150,11 +154,15 @@ case class Message(
   invoice: Option[Invoice],
   successfulPayment: Option[SuccessfulPayment],
   connectedWebsite: Option[String],
+  writeAccessAllowed: Option[WriteAccessAllowed],
   passportData: Option[PassportData],
   proximityAlertTriggered: Option[ProximityAlertTriggered],
   forumTopicCreated: Option[ForumTopicCreated],
   forumTopicClosed: Option[ForumTopicClosed],
+  forumTopicEdited: Option[ForumTopicEdited],
   forumTopicReopened: Option[ForumTopicReopened],
+  generalForumTopicHidden: Option[GeneralForumTopicHidden],
+  generalForumTopicUnhidden: Option[GeneralForumTopicUnhidden],
   videoChatScheduled: Option[VideoChatScheduled],
   videoChatStarted: Option[VideoChatStarted],
   videoChatEnded: Option[VideoChatEnded],
@@ -365,6 +373,11 @@ case class Message(
     */
   def withConnectedWebsite(website: String): Message = copy(connectedWebsite = Some(website))
 
+  /** Service message: the user allowed the bot added to the attachment menu to write messages
+    */
+  def withWriteAccessAllowed(writeAccessAllowed: WriteAccessAllowed): Message =
+    copy(writeAccessAllowed = Some(writeAccessAllowed))
+
   /** Telegram Passport data */
   def withPassportData(data: PassportData): Message = copy(passportData = Some(data))
 
@@ -379,9 +392,24 @@ case class Message(
   def withForumTopicClosed(forumTopicClosed: ForumTopicClosed): Message =
     copy(forumTopicClosed = Some(forumTopicClosed))
 
+  /** Service message: forum topic edited
+    */
+  def withForumTopicEdited(forumTopicEdited: ForumTopicEdited): Message =
+    copy(forumTopicEdited = Some(forumTopicEdited))
+
   /** Service message: forum topic reopened */
   def withForumTopicReopened(forumTopicReopened: ForumTopicReopened): Message =
     copy(forumTopicReopened = Some(forumTopicReopened))
+
+  /** Service message: the 'General' forum topic hidden
+    */
+  def withGeneralForumTopicHidden(generalForumTopicHidden: GeneralForumTopicHidden): Message =
+    copy(generalForumTopicHidden = Some(generalForumTopicHidden))
+
+  /** Service message: the 'General' forum topic unhidden
+    */
+  def withGeneralForumTopicUnhidden(generalForumTopicUnhidden: GeneralForumTopicUnhidden): Message =
+    copy(generalForumTopicUnhidden = Some(generalForumTopicUnhidden))
 
   /** Service message: video chat scheduled */
   def withVideoChatScheduled(scheduled: VideoChatScheduled): Message = copy(videoChatScheduled = Some(scheduled))
