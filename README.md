@@ -2,7 +2,7 @@
 
 ## API
 
-Currently supported version is: 5.3
+Currently supported version is: 5.4
 
 ## Releasing
 
