@@ -114,6 +114,12 @@ class DefaultBot extends Bot {
     DeleteForumTopic.of(chatId, messageThreadId)
   override def unpinAllForumTopicMessages(chatId: String, messageThreadId: Long): UnpinAllForumTopicMessages =
     UnpinAllForumTopicMessages.of(chatId, messageThreadId)
+  override def editGeneralForumTopic(chatId: String, name: String): EditGeneralForumTopic =
+    EditGeneralForumTopic.of(chatId, name)
+  override def closeGeneralForumTopic(chatId: String): CloseGeneralForumTopic = CloseGeneralForumTopic.of(chatId)
+  override def reopenGeneralForumTopic(chatId: String): ReopenGeneralForumTopic = ReopenGeneralForumTopic.of(chatId)
+  override def hideGeneralForumTopic(chatId: String): HideGeneralForumTopic = HideGeneralForumTopic.of(chatId)
+  override def unhideGeneralForumTopic(chatId: String): UnhideGeneralForumTopic = UnhideGeneralForumTopic.of(chatId)
   override def answerCallbackQuery(callbackQueryId: String): AnswerCallbackQuery =
     AnswerCallbackQuery.of(callbackQueryId)
   override def setMyCommands(commands: Seq[BotCommand]): SetMyCommands = SetMyCommands.of(commands)

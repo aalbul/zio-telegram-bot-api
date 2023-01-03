@@ -840,6 +840,61 @@ trait Bot {
     */
   def unpinAllForumTopicMessages(chatId: String, messageThreadId: Long): UnpinAllForumTopicMessages
 
+  /** Use this method to edit the name of the 'General' topic in a forum supergroup chat. The bot must be an
+    * administrator in the chat for this to work and must have can_manage_topics administrator rights. Returns True on
+    * success.
+    *
+    * @param chatId
+    *   Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+    * @param name
+    *   New topic name, 1-128 characters
+    * @return
+    *   [[EditGeneralForumTopic]] builder
+    */
+  def editGeneralForumTopic(chatId: String, name: String): EditGeneralForumTopic
+
+  /** Use this method to close an open 'General' topic in a forum supergroup chat. The bot must be an administrator in
+    * the chat for this to work and must have the can_manage_topics administrator rights. Returns True on success.
+    *
+    * @param chatId
+    *   Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+    * @return
+    *   [[CloseGeneralForumTopic]] builder
+    */
+  def closeGeneralForumTopic(chatId: String): CloseGeneralForumTopic
+
+  /** Use this method to reopen a closed 'General' topic in a forum supergroup chat. The bot must be an administrator in
+    * the chat for this to work and must have the can_manage_topics administrator rights. The topic will be
+    * automatically unhidden if it was hidden. Returns True on success.
+    *
+    * @param chatId
+    *   Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+    * @return
+    *   [[ReopenGeneralForumTopic]] builder
+    */
+  def reopenGeneralForumTopic(chatId: String): ReopenGeneralForumTopic
+
+  /** Use this method to hide the 'General' topic in a forum supergroup chat. The bot must be an administrator in the
+    * chat for this to work and must have the can_manage_topics administrator rights. The topic will be automatically
+    * closed if it was open. Returns True on success.
+    *
+    * @param chatId
+    *   Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+    * @return
+    *   [[HideGeneralForumTopic]] builder
+    */
+  def hideGeneralForumTopic(chatId: String): HideGeneralForumTopic
+
+  /** Use this method to unhide the 'General' topic in a forum supergroup chat. The bot must be an administrator in the
+    * chat for this to work and must have the can_manage_topics administrator rights. Returns True on success.
+    *
+    * @param chatId
+    *   Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+    * @return
+    *   [[UnhideGeneralForumTopic]] builder
+    */
+  def unhideGeneralForumTopic(chatId: String): UnhideGeneralForumTopic
+
   /** Use this method to send answers to callback queries sent from
     * [[https://core.telegram.org/bots/features#inline-keyboards inline keyboards]]. The answer will be displayed to the
     * user as a notification at the top of the chat screen or as an alert. On success, True is returned.
