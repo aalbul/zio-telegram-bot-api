@@ -12,7 +12,7 @@ object SendChatAction {
       JsonCodecMaker.make(CodecMakerConfig.withFieldNameMapper(JsonCodecMaker.enforce_snake_case2))
   }
 
-  case class SendChatActionPayload(chatId: String, action: ChatAction)
+  case class SendChatActionPayload(chatId: String, messageThreadId: Option[Long], action: ChatAction)
 
   /** Constructs minimal [[SendChatAction]] command
     * @param chatId
@@ -32,7 +32,7 @@ object SendChatAction {
     *   [[SendChatAction]] builder
     */
   def of(chatId: String, action: ChatAction): SendChatAction = SendChatAction(
-    SendChatActionPayload(chatId = chatId, action = action)
+    SendChatActionPayload(chatId = chatId, messageThreadId = None, action = action)
   )
 }
 
@@ -50,4 +50,10 @@ case class SendChatAction(payload: SendChatActionPayload) extends Command[Boolea
   override val name: String = "sendChatAction"
 
   override def parameters: ApiParameters = JsonBody(payload)
+
+  /** Unique identifier for the target message thread; supergroups only
+    */
+  def withMessageThreadId(messageThreadId: Long): SendChatAction = copy(
+    payload.copy(messageThreadId = Some(messageThreadId))
+  )
 }

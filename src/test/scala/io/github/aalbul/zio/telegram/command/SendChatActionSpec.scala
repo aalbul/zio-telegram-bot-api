@@ -7,8 +7,14 @@ import io.github.aalbul.zio.telegram.test.BaseSpec
 
 class SendChatActionSpec extends BaseSpec {
   trait Scope {
-    val command: Command[Boolean] = SendChatAction.of(chatId = "21", action = ChatAction.ChooseSticker)
-    val payload: SendChatActionPayload = SendChatActionPayload(chatId = "21", action = ChatAction.ChooseSticker)
+    val command: Command[Boolean] = SendChatAction
+      .of(chatId = "21", action = ChatAction.ChooseSticker)
+      .withMessageThreadId(55)
+    val payload: SendChatActionPayload = SendChatActionPayload(
+      chatId = "21",
+      messageThreadId = Some(55),
+      action = ChatAction.ChooseSticker
+    )
   }
 
   "SendChatAction" when {
