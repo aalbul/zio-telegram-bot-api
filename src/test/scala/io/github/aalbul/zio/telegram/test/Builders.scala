@@ -155,6 +155,8 @@ trait Builders {
     .withPermissions(chatPermissions1)
     .withSlowModeDelay(5)
     .withMessageAutoDeleteTime(10)
+    .withHasAggressiveAntiSpamEnabled(true)
+    .withHasHiddenMembers(true)
     .withHasProtectedContent(false)
     .withStickerSetName("sticker-set-1")
     .withCanSetStickerSet(true)

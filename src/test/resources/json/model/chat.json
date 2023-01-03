@@ -12,7 +12,10 @@
     "big_file_id": "big-file-id-1",
     "big_file_unique_id": "unique-big-file-id-1"
   },
-  "active_usernames": ["user-1", "user-2"],
+  "active_usernames": [
+    "user-1",
+    "user-2"
+  ],
   "emoji_status_custom_emoji_id": "emoji-id-1",
   "bio": "some bio",
   "has_private_forwards": true,
@@ -42,6 +45,8 @@
   },
   "slow_mode_delay": 5,
   "message_auto_delete_time": 10,
+  "has_aggressive_anti_spam_enabled": true,
+  "has_hidden_members": true,
   "has_protected_content": false,
   "sticker_set_name": "sticker-set-1",
   "can_set_sticker_set": true,

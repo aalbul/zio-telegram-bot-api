@@ -43,6 +43,8 @@ object Chat {
     permissions = None,
     slowModeDelay = None,
     messageAutoDeleteTime = None,
+    hasAggressiveAntiSpamEnabled = None,
+    hasHiddenMembers = None,
     hasProtectedContent = None,
     stickerSetName = None,
     canSetStickerSet = None,
@@ -75,6 +77,8 @@ case class Chat(
   permissions: Option[ChatPermissions],
   slowModeDelay: Option[Long],
   messageAutoDeleteTime: Option[Long],
+  hasAggressiveAntiSpamEnabled: Option[Boolean],
+  hasHiddenMembers: Option[Boolean],
   hasProtectedContent: Option[Boolean],
   stickerSetName: Option[String],
   canSetStickerSet: Option[Boolean],
@@ -175,6 +179,17 @@ case class Chat(
     */
   def withMessageAutoDeleteTime(messageAutoDeleteTime: Long): Chat =
     copy(messageAutoDeleteTime = Some(messageAutoDeleteTime))
+
+  /** True, if aggressive anti-spam checks are enabled in the supergroup. The field is only available to chat
+    * administrators. Returned only in [[https://core.telegram.org/bots/api#getchat getChat]].
+    */
+  def withHasAggressiveAntiSpamEnabled(hasAggressiveAntiSpamEnabled: Boolean): Chat =
+    copy(hasAggressiveAntiSpamEnabled = Some(hasAggressiveAntiSpamEnabled))
+
+  /** True, if non-administrators can only get the list of bots and administrators in the chat. Returned only in
+    * [[https://core.telegram.org/bots/api#getchat getChat]].
+    */
+  def withHasHiddenMembers(hasHiddenMembers: Boolean): Chat = copy(hasHiddenMembers = Some(hasHiddenMembers))
 
   /** True, if messages from the chat can't be forwarded to other chats. Returned only in
     * [[https://core.telegram.org/bots/api#getchat getChat]].
